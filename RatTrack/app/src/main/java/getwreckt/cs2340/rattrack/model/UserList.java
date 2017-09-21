@@ -17,10 +17,12 @@ public class UserList {
             throw new IllegalArgumentException("The username you provided has already been taken.");
         }
     }
+
     public boolean loginCheck(String user, String pass) {
         return userList.containsKey(user) && (userList.get(user).equals(pass));
     }
     public boolean userIsTaken(String user) {
         return userList.containsKey(user);
     }
+
 }

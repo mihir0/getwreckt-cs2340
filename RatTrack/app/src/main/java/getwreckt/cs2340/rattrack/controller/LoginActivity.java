@@ -32,7 +32,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import getwreckt.cs2340.rattrack.model.User;
+import getwreckt.cs2340.rattrack.model.UserList;
 import getwreckt.cs2340.rattrack.R;
+
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -173,7 +176,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        } else if (!isUserValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
@@ -192,14 +195,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    private boolean isEmailValid(String email) {
+    private boolean isUserValid(String user) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return user.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return (password.length() > 3);
     }
 
     /**
