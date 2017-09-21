@@ -5,12 +5,12 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:paddingTop="200px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="200px"
         android:text="Welcome"
         android:textAlignment="center"
-        android:textColor="0"
+        android:textColor="#000000"
         android:textSize="60sp" />
 
     <Button
