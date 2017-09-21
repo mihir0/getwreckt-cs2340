@@ -1,4 +1,4 @@
-package getwreckt.cs2340.rattrack;
+package getwreckt.cs2340.rattrack.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -31,6 +31,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import getwreckt.cs2340.rattrack.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
