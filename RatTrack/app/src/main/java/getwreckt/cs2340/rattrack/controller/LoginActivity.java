@@ -2,7 +2,11 @@ package getwreckt.cs2340.rattrack.controller;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+
 import getwreckt.cs2340.rattrack.R;
+import getwreckt.cs2340.rattrack.model.*;
 
 
 
@@ -11,9 +15,15 @@ import getwreckt.cs2340.rattrack.R;
  */
 
 public class LoginActivity extends AppCompatActivity {
+
+    private EditText passField;
+    private AutoCompleteTextView userField;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
+
+
 }
