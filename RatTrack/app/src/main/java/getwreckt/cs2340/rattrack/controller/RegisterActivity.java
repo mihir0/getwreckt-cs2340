@@ -51,17 +51,25 @@ public class RegisterActivity extends AppCompatActivity {
                         InAppActivity.class);
                 String username = userField.getText().toString();
                 String password = passField.getText().toString();
+                if (!isValidUserPass(username, password)) {
+                    til.setError("A valid username and password are required");
+                } else {
 
-                try {
-                    UserList.addUser(username, password);
-                    startActivity(toInAppScreen);
+                    try {
+                        UserList.addUser(username, password);
+                        startActivity(toInAppScreen);
 
-                } catch (IllegalArgumentException iae) {
-                    til.setError("Invalid username or password. Try Again.");
+                    } catch (IllegalArgumentException iae) {
+                        til.setError(iae.getMessage());
+                    }
                 }
 
             }
         });
 
+    }
+
+    public boolean isValidUserPass(String user, String pass) {
+        return !pass.equals("") && !pass.equals("");
     }
 }
