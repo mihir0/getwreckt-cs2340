@@ -18,7 +18,8 @@ public class UserList {
         }
     }
 
-    public static boolean loginCheck(String user, String pass) {
+
+    public static boolean userPassMatch(String user, String pass) {
         return userList.containsKey(user) && (userList.get(user).equals(pass));
     }
     public static boolean userIsTaken(String user) {
