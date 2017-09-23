@@ -6,7 +6,7 @@ package getwreckt.cs2340.rattrack.model;
 
 public class Model {
     private static final Model _instance = new Model();
-    private static Model getInstance() {return _instance;}
+    public static Model getInstance() {return _instance;}
     private Model() {
         loadDummyData();
     }
