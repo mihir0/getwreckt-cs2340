@@ -3,6 +3,7 @@ package getwreckt.cs2340.rattrack.controller;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 
 import getwreckt.cs2340.rattrack.R;
@@ -18,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText passField;
     private AutoCompleteTextView userField;
+    private Button loginButn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
