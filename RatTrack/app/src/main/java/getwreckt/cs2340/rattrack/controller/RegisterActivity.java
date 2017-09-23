@@ -62,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(toInAppScreen);
 
                 } catch (IllegalArgumentException iae) {
-                    til.setError("Invalid username or password. Try Again.");
+                    til.setError(iae.getMessage());
                 }
 
             }
