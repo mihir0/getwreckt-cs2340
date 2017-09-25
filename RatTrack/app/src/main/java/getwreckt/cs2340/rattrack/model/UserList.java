@@ -1,5 +1,6 @@
 package getwreckt.cs2340.rattrack.model;
 import java.util.HashMap;
+import java.lang.Long
 
 import java.util.Map;
 
@@ -8,11 +9,11 @@ import java.util.Map;
  */
 
 public class UserList {
-    private static Map<String, String> userList = new HashMap<>();
+    private static Map<String, Long> userList = new HashMap<>();
 
     public static void addUser(String user, String pass) {
         if (!userIsTaken(user)) {
-            userList.put(user, pass);
+            userList.put(user, CryptHash.hash(pass));
         } else {
             throw new IllegalArgumentException("The username you provided has already been taken.");
         }
@@ -20,7 +21,7 @@ public class UserList {
 
 
     public static boolean userPassMatch(String user, String pass) {
-        return userList.containsKey(user) && (userList.get(user).equals(pass));
+        return userList.containsKey(user) && (userList.get(user).equals(CryptHash.hash(pass)));
     }
     public static boolean userIsTaken(String user) {
         return userList.containsKey(user);

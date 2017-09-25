@@ -5,7 +5,7 @@ package getwreckt.cs2340.rattrack.model;
  */
 
 public class CryptHash {
-    public static long hash(String input) {
+    public static Long hash(String input) {
         long answer = 0;
         for (int i = 0; i < input.length(); i++) {
             answer *= 128;

@@ -12,7 +12,7 @@ public class Model {
     }
 
     private void loadDummyData() {
-        UserList.addUser("user", "pass");
+        UserList.addUser("user", CryptHash.hash("pass"));
     }
 
 }
