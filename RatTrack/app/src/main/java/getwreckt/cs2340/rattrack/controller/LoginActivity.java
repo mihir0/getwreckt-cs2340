@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent toInAppScreen = new Intent(LoginActivity.this,
                         InAppActivity.class);
                 String username = userField.getText().toString();
-                String password = passField.getText().toString();
+                String password = CryptHash.hash(passField.getText().toString());
                 if (UserList.userPassMatch(username, password)){
                     startActivity(toInAppScreen);
                 } else {

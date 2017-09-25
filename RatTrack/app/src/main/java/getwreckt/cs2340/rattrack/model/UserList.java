@@ -9,9 +9,9 @@ import java.util.Map;
  */
 
 public class UserList {
-    private static Map<String, Long> userList = new HashMap<>();
+    private static Map<String, String> userList = new HashMap<>();
 
-    public static void addUser(String user, Long pass) {
+    public static void addUser(String user, String pass) {
         if (!userIsTaken(user)) {
             userList.put(user, pass);
         } else {
@@ -21,7 +21,7 @@ public class UserList {
 
 
     public static boolean userPassMatch(String user, String pass) {
-        return userList.containsKey(user) && (userList.get(user).equals(CryptHash.hash(pass)));
+        return userList.containsKey(user) && (userList.get(user).equals(pass));
     }
     public static boolean userIsTaken(String user) {
         return userList.containsKey(user);
