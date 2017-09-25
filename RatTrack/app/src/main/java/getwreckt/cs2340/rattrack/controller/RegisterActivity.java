@@ -70,6 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean isValidUserPass(String user, Long pass) {
-        return !pass.equals("") && !pass.equals(0l);
+        return !user.equals("") && !pass.equals(CryptHash.hash(""));
     }
 }
