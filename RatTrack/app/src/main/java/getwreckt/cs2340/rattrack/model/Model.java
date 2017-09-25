@@ -12,7 +12,7 @@ public class Model {
     }
 
     private void loadDummyData() {
-        UserList.addUser("user", "password");
+        UserList.addUser("user", "pass");
     }
 
 }
