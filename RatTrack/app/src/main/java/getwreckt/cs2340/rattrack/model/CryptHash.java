@@ -11,5 +11,6 @@ public class CryptHash {
             answer *= 128;
             answer += (long)input.charAt(i);
         }
+        return answer;
     }
 }

@@ -1,6 +1,6 @@
 package getwreckt.cs2340.rattrack.model;
 import java.util.HashMap;
-import java.lang.Long
+import java.lang.Long;
 
 import java.util.Map;
 
@@ -11,9 +11,9 @@ import java.util.Map;
 public class UserList {
     private static Map<String, Long> userList = new HashMap<>();
 
-    public static void addUser(String user, String pass) {
+    public static void addUser(String user, Long pass) {
         if (!userIsTaken(user)) {
-            userList.put(user, CryptHash.hash(pass));
+            userList.put(user, pass);
         } else {
             throw new IllegalArgumentException("The username you provided has already been taken.");
         }

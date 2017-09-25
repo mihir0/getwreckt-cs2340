@@ -51,12 +51,12 @@ public class RegisterActivity extends AppCompatActivity {
                         InAppActivity.class);
                 String username = userField.getText().toString();
                 String password = passField.getText().toString();
-                if (!isValidUserPass(username, password)) {
+                if (!isValidUserPass(username, CryptHash.hash(password))) {
                     til.setError("A valid username and password are required");
                 } else {
 
                     try {
-                        UserList.addUser(username, password);
+                        UserList.addUser(username, CryptHash.hash(password));
                         startActivity(toInAppScreen);
 
                     } catch (IllegalArgumentException iae) {
@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public boolean isValidUserPass(String user, String pass) {
-        return !pass.equals("") && !pass.equals("");
+    public boolean isValidUserPass(String user, Long pass) {
+        return !pass.equals("") && !pass.equals(0l);
     }
 }
