@@ -50,13 +50,13 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent toInAppScreen = new Intent(RegisterActivity.this,
                         InAppActivity.class);
                 String username = userField.getText().toString();
-                String password = passField.getText().toString();
-                if (!isValidUserPass(username, CryptHash.hash(password))) {
+                Long password = CryptHash.hash(passField.getText().toString());
+                if (!isValidUserPass(username, password)) {
                     til.setError("A valid username and password are required");
                 } else {
 
                     try {
-                        UserList.addUser(username, CryptHash.hash(password));
+                        UserList.addUser(username, password);
                         startActivity(toInAppScreen);
 
                     } catch (IllegalArgumentException iae) {

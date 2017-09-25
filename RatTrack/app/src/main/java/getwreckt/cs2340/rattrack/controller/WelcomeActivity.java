@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import getwreckt.cs2340.rattrack.R;
+import getwreckt.cs2340.rattrack.model.CryptHash;
+import getwreckt.cs2340.rattrack.model.UserList;
 
 /**
  * Created by maya v on 9/21/2017.
@@ -23,6 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         initLogin();
         initRegister();
+        UserList.addUser("user", CryptHash.hash("pass"));
     }
 
     public void initLogin() {
