@@ -6,12 +6,9 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.util.Log;
 import android.view.View;
 import android.content.Intent;
-
-import java.util.IllegalFormatCodePointException;
 
 import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.*;
@@ -26,7 +23,6 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText passField;
     private Button registerButn;
     private TextInputLayout til;
-    private User _user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onRegPressed() {
         Log.d("Register", "Register new user");
-        Model model = Model.getInstance();
 
         registerButn = (Button) findViewById(R.id.register);
         registerButn.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent toInAppScreen = new Intent(RegisterActivity.this,
                         InAppActivity.class);
                 String username = userField.getText().toString();
-                String password = passField.getText().toString();
+                String password = CryptHash.hash(passField.getText().toString());
                 if (!isValidUserPass(username, password)) {
                     til.setError("A valid username and password are required");
                 } else {
@@ -75,6 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean isValidUserPass(String user, String pass) {
-        return !pass.equals("") && !pass.equals("");
+        return !user.equals("") && !pass.equals(CryptHash.hash(""));
     }
 }

@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 
 import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.*;
@@ -22,10 +21,11 @@ import getwreckt.cs2340.rattrack.model.*;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText passField;
+    private TextInputEditText passField;
     private AutoCompleteTextView userField;
     private Button loginButn;
     private TextInputLayout passTil;
+    private User _user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
          */
 
         userField = (AutoCompleteTextView) findViewById(R.id.username);
-        passField = (EditText) findViewById(R.id.password);
+        passField = (TextInputEditText) findViewById(R.id.password);
         passTil = (TextInputLayout) findViewById(R.id.pass_text_input_layout);
         onLoginPressed();
     }
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent toInAppScreen = new Intent(LoginActivity.this,
                         InAppActivity.class);
                 String username = userField.getText().toString();
-                String password = passField.getText().toString();
+                String password = CryptHash.hash(passField.getText().toString());
                 if (UserList.userPassMatch(username, password)){
                     startActivity(toInAppScreen);
                 } else {
