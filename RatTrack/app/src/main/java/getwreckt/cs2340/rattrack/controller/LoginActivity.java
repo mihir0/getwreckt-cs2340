@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginPressed() {
+        Model model = Model.getInstance();
         Log.d("Login", "Login returning user");
 
         loginButn = (Button) findViewById(R.id.login_button);
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent toInAppScreen = new Intent(LoginActivity.this,
                         InAppActivity.class);
                 String username = userField.getText().toString();
-                String password = CryptHash.hash(passField.getText().toString());
+                String password = passField.getText().toString();
                 if (UserList.userPassMatch(username, password)){
                     startActivity(toInAppScreen);
                 } else {

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import getwreckt.cs2340.rattrack.R;
-import getwreckt.cs2340.rattrack.model.CryptHash;
 import getwreckt.cs2340.rattrack.model.UserList;
 
 /**
