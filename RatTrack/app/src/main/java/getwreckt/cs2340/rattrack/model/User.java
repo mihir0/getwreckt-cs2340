@@ -5,8 +5,7 @@ package getwreckt.cs2340.rattrack.model;
  */
 
 public class User {
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String userName;
     private String pass;
 
@@ -15,12 +14,12 @@ public class User {
         this.pass = pass;
     }
 
-    public User(String firstName, String lastName, String userName, String pass) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String fullName, String userName, String pass) {
+        this.fullName = fullName;
         this.userName = userName;
         this.pass = pass;
     }
+
     public String getUserName() {
         return this.userName;
     }
@@ -37,11 +36,12 @@ public class User {
         this.pass = pass;
     }
 
-    public String getFirstName() {return this.firstName;}
+    public String getFullName() {
+        return this.fullName;
+    }
 
-    public void setFirstName(String firstName) {this.firstName = firstName;}
-
-    public String getLastName() {return this.lastName;}
-
-    public void setLastName(String lastName) {this.lastName = lastName;}
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 }
+
