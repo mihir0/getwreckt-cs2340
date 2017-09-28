@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent toInAppScreen = new Intent(RegisterActivity.this,
                         InAppActivity.class);
                 String username = userField.getText().toString();
-                String password = CryptHash.hash(passField.getText().toString());
+                String password = passField.getText().toString();
                 if (!isValidUserPass(username, password)) {
                     til.setError("A valid username and password are required");
                 } else {
@@ -70,6 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean isValidUserPass(String user, String pass) {
-        return !user.equals("") && !pass.equals(CryptHash.hash(""));
+        return !user.equals("") && !pass.equals("");
     }
 }
