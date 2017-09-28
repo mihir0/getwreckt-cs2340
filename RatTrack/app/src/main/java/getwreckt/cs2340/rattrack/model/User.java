@@ -9,6 +9,7 @@ public class User {
     private String userName;
     private String pass;
     public User(String userName, String pass) {
+        this.fullName = "";
         this.userName = userName;
         this.pass = pass;
     }
