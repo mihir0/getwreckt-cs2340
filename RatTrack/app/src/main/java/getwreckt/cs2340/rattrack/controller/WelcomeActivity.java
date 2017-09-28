@@ -25,7 +25,6 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         initLogin();
         initRegister();
-        UserList.addUser("user", CryptHash.hash("pass"));
     }
 
     public void initLogin() {
