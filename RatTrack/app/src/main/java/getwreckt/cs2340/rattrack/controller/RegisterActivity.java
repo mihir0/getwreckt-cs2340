@@ -81,7 +81,13 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
 
                     try {
-                        UserList.addUser(username, password);
+                        User user;
+                        if (userType.equals("Admin")) {
+                            user = new Admin(username, password);
+                        } else {
+                            user = new User(username, password);
+                        }
+                        UserList.addUser(user);
                         startActivity(toInAppScreen);
 
                     } catch (IllegalArgumentException iae) {
