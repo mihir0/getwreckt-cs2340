@@ -10,9 +10,14 @@ public class Model {
     private Model() {
         loadDummyData();
     }
+    private User currentUser;
 
     private void loadDummyData() {
         UserList.addUser("user", "password");
     }
+
+    private User getCurrentUser() {return this.currentUser;}
+
+    private void setCurrentUser(User currentUser) {this.currentUser = currentUser;}
 
 }
