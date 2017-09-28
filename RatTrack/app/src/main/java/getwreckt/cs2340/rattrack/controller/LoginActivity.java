@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText passField;
     private AutoCompleteTextView userField;
     private Button loginButn;
+    private Button cancelButn;
     private TextInputLayout passTil;
     private User _user;
 
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         passField = (TextInputEditText) findViewById(R.id.password);
         passTil = (TextInputLayout) findViewById(R.id.pass_text_input_layout);
         onLoginPressed();
+        onCancelPressed();
     }
 
     public void onLoginPressed() {
@@ -60,6 +62,17 @@ public class LoginActivity extends AppCompatActivity {
                     passTil.setError("Invalid username or password. Try Again.");
                 }
             }
+        });
+    }
+
+    public void onCancelPressed() {
+        cancelButn = (Button) findViewById(R.id.cancel_button);
+        cancelButn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+
         });
     }
 
