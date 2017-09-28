@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.StringBuilderPrinter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.util.Log;
 import android.view.View;
 import android.content.Intent;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
+import java.util.ArrayList;
+
 
 import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.*;
@@ -22,6 +27,9 @@ public class RegisterActivity extends AppCompatActivity {
     private AutoCompleteTextView userField;
     private TextInputEditText passField;
     private Button registerButn;
+    private Button cancelButn;
+    private Spinner userTypeSpinner;
+
     private TextInputLayout til;
 
     @Override
@@ -37,7 +45,22 @@ public class RegisterActivity extends AppCompatActivity {
         passField = (TextInputEditText) findViewById(R.id.password);
         til = (TextInputLayout) findViewById(R.id.text_input_layout);
 
+        userTypeSpinner = (Spinner) findViewById(R.id.user_type_spinner);
+
+        /*
+          Set up the adapter to display the user types in the spinner
+         */
+
+        ArrayList<String> userTypes = new ArrayList<String>();
+        userTypes.add("User");
+        userTypes.add("Admin");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, userTypes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        userTypeSpinner.setAdapter(adapter);
+
         onRegPressed();
+        onCancelPressed();
     }
 
     public void onRegPressed() {
@@ -51,6 +74,8 @@ public class RegisterActivity extends AppCompatActivity {
                         InAppActivity.class);
                 String username = userField.getText().toString();
                 String password = passField.getText().toString();
+                String userType = userTypeSpinner.getSelectedItem().toString();
+
                 if (!isValidUserPass(username, password)) {
                     til.setError("A valid username and password are required");
                 } else {
@@ -67,6 +92,17 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onCancelPressed() {
+        cancelButn = (Button) findViewById(R.id.cancel);
+        cancelButn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegisterActivity.super.finish();
+            }
+
+        });
     }
 
     public boolean isValidUserPass(String user, String pass) {
