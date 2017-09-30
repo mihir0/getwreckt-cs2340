@@ -13,7 +13,6 @@ import java.util.Map;
 
         public static void addUser(User user) {
             if (!userIsTaken(user.getUserName())) {
-
                 userList.put(user.getUserName(), user);
             } else {
                 throw new IllegalArgumentException("The username you provided has already been taken.");
