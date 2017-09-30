@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.util.Log;
 import android.view.View;
 import android.content.Intent;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import getwreckt.cs2340.rattrack.model.*;
 public class RegisterActivity extends AppCompatActivity {
 
     private AutoCompleteTextView userField;
+    private EditText fullNameField;
     private TextInputEditText passField;
     private Button registerButn;
     private Button cancelButn;
