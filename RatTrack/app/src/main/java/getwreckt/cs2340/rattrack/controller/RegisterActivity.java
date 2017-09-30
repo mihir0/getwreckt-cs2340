@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.util.Log;
 import android.view.View;
 import android.content.Intent;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private AutoCompleteTextView userField;
     private TextInputEditText passField;
+    private EditText fullNameField;
     private Button registerButn;
     private Button cancelButn;
     private Spinner userTypeSpinner;
@@ -41,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
          * Grab dialog widgets
          */
 
+        fullNameField = (EditText) findViewById(R.id.full_name);
         userField = (AutoCompleteTextView) findViewById(R.id.username);
         passField = (TextInputEditText) findViewById(R.id.password);
         til = (TextInputLayout) findViewById(R.id.text_input_layout);
@@ -72,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent toInAppScreen = new Intent(RegisterActivity.this,
                         InAppActivity.class);
+                String fullName = fullNameField.getText().toString();
                 String username = userField.getText().toString();
                 String password = passField.getText().toString();
                 String userType = userTypeSpinner.getSelectedItem().toString();
@@ -83,12 +87,13 @@ public class RegisterActivity extends AppCompatActivity {
                     try {
                         User user;
                         if (userType.equals("Admin")) {
-                            user = new Admin(username, password);
+                            user = new Admin(fullName, username, password);
                         } else {
-                            user = new User(username, password);
+                            user = new User(fullName, username, password);
                         }
                         UserList.addUser(user);
                         Model.getInstance().setCurrentUser(user);
+
                         startActivity(toInAppScreen);
 
                     } catch (IllegalArgumentException iae) {

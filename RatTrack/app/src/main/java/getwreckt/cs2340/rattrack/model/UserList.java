@@ -13,13 +13,8 @@ import java.util.Map;
 
         public static void addUser(User user) {
             if (!userIsTaken(user.getUserName())) {
-                // assigns u to either an Admin object, or User object depending
-                // on whether user is an instance of Admin or User
 
-                User u = user instanceof Admin ?
-                          new Admin(user.getUserName(), user.getPass())
-                        : new User(user.getUserName(), user.getPass());
-                userList.put(user.getUserName(), u);
+                userList.put(user.getUserName(), user);
             } else {
                 throw new IllegalArgumentException("The username you provided has already been taken.");
             }
