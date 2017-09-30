@@ -90,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                             user = new User(username, password);
                         }
                         UserList.addUser(user);
+                        Model.getInstance().setCurrentUser(user);
                         startActivity(toInAppScreen);
 
                     } catch (IllegalArgumentException iae) {
