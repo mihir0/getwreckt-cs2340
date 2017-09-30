@@ -17,15 +17,15 @@ import java.util.Map;
                 // on whether user is an instance of Admin or User
 
                 User u = user instanceof Admin ?
-                          new Admin(user.getUserName(), user.getPass())
-                        : new User(user.getUserName(), user.getPass());
+                          new Admin(user.getFullName(), user.getUserName(), user.getPass())
+                        : new User(user.getFullName(), user.getUserName(), user.getPass());
                 userList.put(user.getUserName(), u);
             } else {
                 throw new IllegalArgumentException("The username you provided has already been taken.");
             }
         }
 
-        public static User getUser (String username) {
+        public static User getUser(String username) {
             return userList.get(username);
         }
 

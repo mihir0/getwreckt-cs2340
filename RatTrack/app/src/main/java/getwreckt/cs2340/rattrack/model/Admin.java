@@ -5,7 +5,7 @@ package getwreckt.cs2340.rattrack.model;
  */
 
 public class Admin extends User {
-    public Admin(String username, String password) {
-        super(username, password);
+    public Admin(String fullName, String username, String password) {
+        super(fullName, username, password);
     }
 }

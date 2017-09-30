@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         /**
          * Grab dialog widgets
          */
-
+        fullNameField = (EditText) findViewById(R.id.full_name);
         userField = (AutoCompleteTextView) findViewById(R.id.username);
         passField = (TextInputEditText) findViewById(R.id.password);
         til = (TextInputLayout) findViewById(R.id.text_input_layout);
@@ -74,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent toInAppScreen = new Intent(RegisterActivity.this,
                         InAppActivity.class);
+                String fullName = fullNameField.getText().toString();
                 String username = userField.getText().toString();
                 String password = passField.getText().toString();
                 String userType = userTypeSpinner.getSelectedItem().toString();
@@ -85,9 +86,9 @@ public class RegisterActivity extends AppCompatActivity {
                     try {
                         User user;
                         if (userType.equals("Admin")) {
-                            user = new Admin(username, password);
+                            user = new Admin(fullName, username, password);
                         } else {
-                            user = new User(username, password);
+                            user = new User(fullName, username, password);
                         }
                         UserList.addUser(user);
                         Model.getInstance().setCurrentUser(user);
