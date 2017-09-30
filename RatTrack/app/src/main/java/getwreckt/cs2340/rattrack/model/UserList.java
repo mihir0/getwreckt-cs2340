@@ -25,6 +25,9 @@ import java.util.Map;
             }
         }
 
+        public static User getUser (String username) {
+            return userList.get(username);
+        }
 
         public static boolean userPassMatch(String user, String pass) {
             return userList.containsKey(user) && (userList.get(user).getPass().equals(pass));

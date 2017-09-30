@@ -16,8 +16,8 @@ public class Model {
         UserList.addUser(new User("user", "password"));
     }
 
-    private User getCurrentUser() {return this.currentUser;}
+    public User getCurrentUser() {return this.currentUser;}
 
-    private void setCurrentUser(User currentUser) {this.currentUser = currentUser;}
+    public void setCurrentUser(User currentUser) {this.currentUser = currentUser;}
 
 }

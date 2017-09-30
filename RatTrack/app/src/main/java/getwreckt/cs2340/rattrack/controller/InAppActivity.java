@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import getwreckt.cs2340.rattrack.model.Model;
 
 /**
  * Created by maya v on 9/21/2017.
@@ -22,7 +23,8 @@ public class InAppActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inapp);
         text = (TextView) findViewById(R.id.textView);
-        String strLine = "Hello! You are now logged in!";
+        String strLine = "Hello, " + Model.getInstance().getCurrentUser().getFullName()
+                + ", You are now logged in!";
         text.setText(strLine);
 
         logoutButn = (Button) findViewById(R.id.logout);

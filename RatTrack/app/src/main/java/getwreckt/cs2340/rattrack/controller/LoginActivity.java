@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginPressed() {
-        Model model = Model.getInstance();
+        final Model MODEL = Model.getInstance();
         Log.d("Login", "Login returning user");
 
         loginButn = (Button) findViewById(R.id.login_button);
@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = userField.getText().toString();
                 String password = passField.getText().toString();
                 if (UserList.userPassMatch(username, password)){
+                    MODEL.setCurrentUser(UserList.getUser(username));
                     startActivity(toInAppScreen);
                 } else {
                     passTil.setError("Invalid username or password. Try Again.");
