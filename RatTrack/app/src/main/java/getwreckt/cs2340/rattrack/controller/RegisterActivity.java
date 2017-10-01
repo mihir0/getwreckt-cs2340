@@ -65,6 +65,9 @@ public class RegisterActivity extends AppCompatActivity {
         onCancelPressed();
     }
 
+    /**
+     * Adds a new user to the UserList class.
+     */
     public void onRegPressed() {
         Log.d("Register", "Register new user");
 
@@ -105,6 +108,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Cancels registration
+     */
     public void onCancelPressed() {
         cancelButn = (Button) findViewById(R.id.cancel);
         cancelButn.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +122,12 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Checks whether {@code user} and {@code pass} are nonempty strings
+     * @param user the username to check
+     * @param pass the password to check
+     * @return whether {@code user} and {@code pass} are not empty strings
+     */
     public boolean isValidUserPass(String user, String pass) {
         return !user.equals("") && !pass.equals("");
     }

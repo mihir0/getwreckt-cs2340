@@ -26,6 +26,9 @@ public class WelcomeActivity extends AppCompatActivity {
         initRegister();
     }
 
+    /**
+     * Creates the login button.
+     */
     public void initLogin() {
         loginBut = (Button) findViewById(R.id.login);
         loginBut.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +41,9 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Creates the register button.
+     */
     public void initRegister() {
         registerBut = (Button) findViewById(R.id.register);
         registerBut.setOnClickListener(new View.OnClickListener() {

@@ -33,9 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /**
-         * Grab dialog widgets
-         */
+        //Grab dialog widgets
 
         userField = (AutoCompleteTextView) findViewById(R.id.username);
         passField = (TextInputEditText) findViewById(R.id.password);
@@ -44,6 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         onCancelPressed();
     }
 
+    /**
+     * Logs into the system and changes to the inapp view.
+     */
     public void onLoginPressed() {
 
         Log.d("Login", "Login returning user");
@@ -67,6 +68,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Cancels the login attempt and goes back to the welcome view
+     */
     public void onCancelPressed() {
         cancelButn = (Button) findViewById(R.id.cancel_button);
         cancelButn.setOnClickListener(new View.OnClickListener() {
