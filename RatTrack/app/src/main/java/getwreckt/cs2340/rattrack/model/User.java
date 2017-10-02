@@ -18,7 +18,17 @@ public class User {
      * @param pass the password for the user
      */
     public User(String userName, String pass) {
-        this.fullName = "Default Name";
+        this("Default Name", userName, pass);
+    }
+
+    /**
+     * Creates a user with full name {@code fullName}, username {@userName}, and password {@code pass}.
+     * @param fullName the first and last name of the new user
+     * @param userName the username of the new user
+     * @param pass the password of the new user
+     */
+    public User(String fullName, String userName, String pass) {
+        this.fullName = fullName;
         this.userName = userName;
         this.pass = pass;
 
@@ -38,15 +48,11 @@ public class User {
     }
 
     /**
-     * Creates a user with full name {@code fullName}, username {@userName}, and password {@code pass}.
-     * @param fullName the first and last name of the new user
-     * @param userName the username of the new user
-     * @param pass the password of the new user
+     * Salt of the user
+     * @return salt of the user
      */
-    public User(String fullName, String userName, String pass) {
-        this.fullName = fullName;
-        this.userName = userName;
-        this.pass = pass;
+    public String getSalt() {
+        return this.salt;
     }
 
     /**
