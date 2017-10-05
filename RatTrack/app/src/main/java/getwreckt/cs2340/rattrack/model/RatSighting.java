@@ -7,6 +7,7 @@ package getwreckt.cs2340.rattrack.model;
 public class RatSighting {
     private String uniqueKey;
     private String date;
+    private String zip;
     private String typeLocation;
     private String address;
     private String borough;
@@ -14,11 +15,12 @@ public class RatSighting {
     private String longitude;
 
     public RatSighting(String uniqueKey, String date, String typeLocation,
-                       String address, String borough, String latitude,
+                       String zip, String address, String borough, String latitude,
                        String longitude) {
         this.uniqueKey = uniqueKey;
         this.date = date;
         this.typeLocation = typeLocation;
+        this.zip = zip;
         this.address = address;
         this.borough = borough;
         this.latitude = latitude;

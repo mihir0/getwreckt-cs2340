@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
 import getwreckt.cs2340.rattrack.R;
 
 /**
@@ -15,6 +17,7 @@ import getwreckt.cs2340.rattrack.R;
 
 public class Model {
     private static final Model _instance = new Model();
+    private static ArrayList<RatSighting> ratSightings = new ArrayList<>();
 
     /**
      * The private Model instance.
@@ -63,6 +66,8 @@ public class Model {
                 String[] sightData = line.split(",");
 
                 //add new Sighting to list of sightings
+                ratSightings.add(new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
+                        sightData[15], sightData[23], sightData[24], sightData[25]));
 
             }
             br.close();
