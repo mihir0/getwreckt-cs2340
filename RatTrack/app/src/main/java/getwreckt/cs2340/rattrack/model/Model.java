@@ -3,11 +3,14 @@ package getwreckt.cs2340.rattrack.model;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import getwreckt.cs2340.rattrack.R;
 
@@ -54,16 +57,18 @@ public class Model {
     public void setCurrentUser(User currentUser) {this.currentUser = currentUser;}
 
     public void readCSVFile(InputStream is) {
-
+        Log.d("Model", "READING CSV FILE");
+        Log.println(Log.INFO, "Starting", "READING CSV FILE");
+        /*
         try {
-            //InputStream is = getResources().openRawResource(R.raw.Rat_Sightings);
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-
             String line;
             br.readLine(); //get rid of header line
-            while((line = br.readLine()) != null) {
+            while(((line = br.readLine()) != null) && line.length()!=0) {
                 Log.d("Model", line);
+                Log.println(Log.INFO, "Model", line);
                 String[] sightData = line.split(",");
+
 
                 //add new Sighting to list of sightings
                 ratSightings.add(new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
@@ -75,6 +80,19 @@ public class Model {
         } catch (IOException e) {
             Log.e("Model", "error reading csv data");
         }
+        */
+        File file = new File("rat_sightings.csv");
+        try {
+            Scanner scanner = new Scanner(file);
+            scanner.nextLine();
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                Log.println(Log.INFO, "Line", line);
+            }
+        } catch (FileNotFoundException e) {
+
+        }
+
     }
 
 }
