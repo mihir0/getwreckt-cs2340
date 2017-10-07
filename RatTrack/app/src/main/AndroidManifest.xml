@@ -10,29 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="getwreckt.cs2340.rattrack.controller.WelcomeActivity"
+            android:name=".controller.WelcomeActivity"
             android:label="RatTrack"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="getwreckt.cs2340.rattrack.controller.LoginActivity"
+            android:name=".controller.LoginActivity"
             android:label="LogIn"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
-            android:name="getwreckt.cs2340.rattrack.controller.RegisterActivity"
+            android:name=".controller.RegisterActivity"
             android:label="Register"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
-            android:name="getwreckt.cs2340.rattrack.controller.InAppActivity"
+            android:name=".controller.InAppActivity"
             android:label="InApp"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

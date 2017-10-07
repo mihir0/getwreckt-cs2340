@@ -5,6 +5,7 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -59,14 +60,14 @@ public class Model {
     public void readCSVFile(InputStream is) {
         Log.d("Model", "READING CSV FILE");
         Log.println(Log.INFO, "Starting", "READING CSV FILE");
-        /*
+
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String line;
             br.readLine(); //get rid of header line
             while(((line = br.readLine()) != null) && line.length()!=0) {
-                Log.d("Model", line);
-                Log.println(Log.INFO, "Model", line);
+                //Log.d("Model", line);
+                //Log.println(Log.INFO, "Model", line);
                 String[] sightData = line.split(",");
 
 
@@ -76,11 +77,12 @@ public class Model {
 
             }
             br.close();
-
+            Log.d("Model", ratSightings.get(ratSightings.size() - 1).getUniqueKey());
         } catch (IOException e) {
             Log.e("Model", "error reading csv data");
         }
-        */
+
+        /*
         File file = new File("rat_sightings.csv");
         try {
             Scanner scanner = new Scanner(file);
@@ -92,6 +94,27 @@ public class Model {
         } catch (FileNotFoundException e) {
 
         }
+        */
+    /*
+        File file = new File("rat_sightings.csv");
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = "";
+            while(((line = br.readLine()) != null) && line.length()!=0) {
+                Log.d("Model", line);
+                Log.println(Log.INFO, "Model", line);
+                String[] sightData = line.split(",");
+
+                //add new Sighting to list of sightings
+                ratSightings.add(new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
+                        sightData[15], sightData[23], sightData[24], sightData[25]));
+
+            }
+            br.close();
+        } catch (IOException e) {
+            Log.e("Model", "error reading csv data");
+        }
+    */
 
     }
 
