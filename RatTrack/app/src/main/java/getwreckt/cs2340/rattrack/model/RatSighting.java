@@ -1,5 +1,8 @@
 package getwreckt.cs2340.rattrack.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Patel on 10/5/2017.
  */
@@ -86,5 +89,10 @@ public class RatSighting {
     }
     public void setZip(String zip){
         this.zip = zip;
+    }
+
+    @Override
+    public String toString() {
+        return uniqueKey + ": " + date + " " + city;
     }
 }
