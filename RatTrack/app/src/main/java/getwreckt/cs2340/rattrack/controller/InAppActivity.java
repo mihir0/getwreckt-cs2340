@@ -50,11 +50,6 @@ public class InAppActivity extends AppCompatActivity {
                 InputStream is = getResources().openRawResource(R.raw.rat_sightings);
                 Model.getInstance().readCSVFile(is);
 
-                /*
-                Intent toRatsScreen = new Intent(InAppActivity.this,
-                        RatsActivity.class);
-                startActivity(toRatsScreen);
-                */
             }
         });
 

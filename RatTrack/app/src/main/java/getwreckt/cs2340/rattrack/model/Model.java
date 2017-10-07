@@ -66,56 +66,16 @@ public class Model {
             String line;
             br.readLine(); //get rid of header line
             while(((line = br.readLine()) != null) && line.length()!=0) {
-                //Log.d("Model", line);
-                //Log.println(Log.INFO, "Model", line);
                 String[] sightData = line.split(",");
-
-
                 //add new Sighting to list of sightings
+
                 ratSightings.add(new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
                         sightData[15], sightData[23], sightData[24], sightData[25]));
-
             }
             br.close();
             Log.d("Model", ratSightings.get(ratSightings.size() - 1).getUniqueKey());
         } catch (IOException e) {
             Log.e("Model", "error reading csv data");
         }
-
-        /*
-        File file = new File("rat_sightings.csv");
-        try {
-            Scanner scanner = new Scanner(file);
-            scanner.nextLine();
-            while (scanner.hasNext()) {
-                String line = scanner.nextLine();
-                Log.println(Log.INFO, "Line", line);
-            }
-        } catch (FileNotFoundException e) {
-
-        }
-        */
-    /*
-        File file = new File("rat_sightings.csv");
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String line = "";
-            while(((line = br.readLine()) != null) && line.length()!=0) {
-                Log.d("Model", line);
-                Log.println(Log.INFO, "Model", line);
-                String[] sightData = line.split(",");
-
-                //add new Sighting to list of sightings
-                ratSightings.add(new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
-                        sightData[15], sightData[23], sightData[24], sightData[25]));
-
-            }
-            br.close();
-        } catch (IOException e) {
-            Log.e("Model", "error reading csv data");
-        }
-    */
-
     }
-
 }
