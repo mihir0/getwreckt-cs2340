@@ -70,9 +70,10 @@ public class Model {
                 //add new Sighting to list of sightings
 
                 ratSightings.add(new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
-                        sightData[15], sightData[23], sightData[24], sightData[25]));
+                        sightData[9], sightData[16], sightData[23], sightData[24], sightData[25]));
             }
             br.close();
+            Log.d("Model", ratSightings.get(0).getUniqueKey());
             Log.d("Model", ratSightings.get(ratSightings.size() - 1).getUniqueKey());
         } catch (IOException e) {
             Log.e("Model", "error reading csv data");

@@ -10,18 +10,20 @@ public class RatSighting {
     private String zip;
     private String typeLocation;
     private String address;
+    private String city;
     private String borough;
     private String latitude;
     private String longitude;
 
     public RatSighting(String uniqueKey, String date, String typeLocation,
-                       String zip, String address, String borough, String latitude,
+                       String zip, String address, String city, String borough, String latitude,
                        String longitude) {
         this.uniqueKey = uniqueKey;
         this.date = date;
         this.typeLocation = typeLocation;
         this.zip = zip;
         this.address = address;
+        this.city = city;
         this.borough = borough;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -54,6 +56,9 @@ public class RatSighting {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String getCity() {return this.city;}
+    public void setCity(String city) {this.city = city;}
 
     public String getBorough() {
         return this.borough;
