@@ -75,4 +75,11 @@ public class RatSighting {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
+
+    public String getZip() {
+        return this.zip;
+    }
+    public void setZip(String zip){
+        this.zip = zip;
+    }
 }
