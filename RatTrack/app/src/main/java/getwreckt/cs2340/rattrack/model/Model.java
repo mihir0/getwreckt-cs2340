@@ -21,7 +21,7 @@ import getwreckt.cs2340.rattrack.R;
 
 public class Model {
     private static final Model _instance = new Model();
-    private static ArrayList<RatSighting> ratSightings = new ArrayList<>();
+    public static ArrayList<RatSighting> ratSightings = new ArrayList<>();
 
     /**
      * The private Model instance.
@@ -65,7 +65,7 @@ public class Model {
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String line;
             br.readLine(); //get rid of header line
-            while(((line = br.readLine()) != null) && line.length()!=0) {
+            while(((line = br.readLine()) != null) && line.length() != 0) {
                 String[] sightData = line.split(",");
                 //add new Sighting to list of sightings
 

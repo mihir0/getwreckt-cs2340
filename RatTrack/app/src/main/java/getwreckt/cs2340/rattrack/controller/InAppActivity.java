@@ -49,11 +49,25 @@ public class InAppActivity extends AppCompatActivity {
                 Log.println(Log.INFO, "CLICK", "Button is clicked!");
                 InputStream is = getResources().openRawResource(R.raw.rat_sightings);
                 Model.getInstance().readCSVFile(is);
+                Intent toSightingsListView = new Intent(InAppActivity.this,
+                        RatSightingListActivity.class);
+                startActivity(toSightingsListView);
+
 
             }
         });
 
 
+    }
+
+
+    public void onLoadButtonPressed(View view) {
+        Log.println(Log.INFO, "CLICK", "Button is clicked!");
+        InputStream is = getResources().openRawResource(R.raw.rat_sightings);
+        Model.getInstance().readCSVFile(is);
+        Intent toSightingsListView = new Intent(InAppActivity.this,
+                RatSightingListActivity.class);
+        startActivity(toSightingsListView);
     }
 }
 
