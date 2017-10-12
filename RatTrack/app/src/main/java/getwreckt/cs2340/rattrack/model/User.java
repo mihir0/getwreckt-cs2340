@@ -1,5 +1,7 @@
 package getwreckt.cs2340.rattrack.model;
 
+import java.security.SecureRandom;
+
 /**
  * Created by Patel on 9/21/2017.
  */
@@ -8,6 +10,7 @@ public class User {
     private String fullName;
     private String userName;
     private String pass;
+    private String salt;
 
     /**
      * Create a User with username {@code userName} and password {@code pass}.
@@ -15,9 +18,7 @@ public class User {
      * @param pass the password for the user
      */
     public User(String userName, String pass) {
-        this.fullName = "Default Name";
-        this.userName = userName;
-        this.pass = pass;
+        this("Default Name", userName, pass);
     }
 
     /**
@@ -30,6 +31,28 @@ public class User {
         this.fullName = fullName;
         this.userName = userName;
         this.pass = pass;
+
+        SecureRandom rand = new SecureRandom();
+        byte[] bytes = new byte[20];
+        rand.nextBytes(bytes);
+        StringBuffer hexString = new StringBuffer();
+
+        for (int i = 0; i < bytes.length; i++) {
+            String hex = Integer.toHexString(0xff & bytes[i]);
+            if(hex.length() == 1) hexString.append('0');
+            hexString.append(hex);
+        }
+
+        this.salt = hexString.toString();
+        this.pass = CryptHash.hash(pass + this.salt);
+    }
+
+    /**
+     * Salt of the user
+     * @return salt of the user
+     */
+    public String getSalt() {
+        return this.salt;
     }
 
     /**
