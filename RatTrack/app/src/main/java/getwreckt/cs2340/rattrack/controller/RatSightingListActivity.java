@@ -84,6 +84,19 @@ public class RatSightingListActivity extends AppCompatActivity {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent toSightingDetail = new Intent(context, SightingDetailActivity.class);
+
+                    toSightingDetail.putExtra("SIGHTING", holder.mItem);
+
+                    context.startActivity(toSightingDetail);
+                }
+            });
+
+            /** set up when we optimize for tablets
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     if (mTwoPane) {
 //                        Bundle arguments = new Bundle();
 //                        arguments.putInt(DataItemDetailFragment.ARG_ITEM_ID, holder.mItem.getId());
@@ -102,6 +115,7 @@ public class RatSightingListActivity extends AppCompatActivity {
                     }
                 }
             });
+             **/
         }
 
         @Override
