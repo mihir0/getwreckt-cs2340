@@ -36,6 +36,7 @@ public class InAppActivity extends AppCompatActivity {
         logoutButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Model.getInstance().setCurrentUser(null);
                 Intent toWelcomeScreen = new Intent(InAppActivity.this,
                         WelcomeActivity.class);
                 startActivity(toWelcomeScreen);

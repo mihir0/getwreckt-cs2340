@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by Patel on 10/5/2017.
  */
 
-public class RatSighting {
+public class RatSighting implements Parcelable {
     private String uniqueKey;
     private String date;
     private String zip;
@@ -31,6 +31,41 @@ public class RatSighting {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    private RatSighting(Parcel in) {
+        uniqueKey = in.readString();
+        date = in.readString();
+        typeLocation = in.readString();
+        zip = in.readString();
+        address = in.readString();
+        city = in.readString();
+        borough = in.readString();
+        latitude = in.readString();
+        longitude = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(uniqueKey);
+        dest.writeString(date);
+        dest.writeString(typeLocation);
+        dest.writeString(zip);
+        dest.writeString(address);
+        dest.writeString(city);
+        dest.writeString(borough);
+        dest.writeString(latitude);
+        dest.writeString(longitude);
+    }
+
+    public static final Parcelable.Creator<RatSighting> CREATOR
+            = new Parcelable.Creator<RatSighting>() {
+        public RatSighting createFromParcel (Parcel in) {return new RatSighting(in);}
+
+        public RatSighting[] newArray(int size) {return new RatSighting[size];}
+    };
+
+    @Override
+    public int describeContents() {return 0;}
 
     public String getUniqueKey() {
         return this.uniqueKey;
@@ -93,6 +128,6 @@ public class RatSighting {
 
     @Override
     public String toString() {
-        return uniqueKey + ": " + date + " " + city;
+        return date + " " + uniqueKey;
     }
 }

@@ -40,7 +40,8 @@ public class UserList {
      *         is {@code pass}
      */
     public static boolean userPassMatch(String user, String pass) {
-        return userList.containsKey(user) && (userList.get(user).getPass().equals(pass));
+        return userList.containsKey(user)
+                && (userList.get(user).getPass().equals(CryptHash.hash(pass + userList.get(user).getSalt())));
     }
 
     /**

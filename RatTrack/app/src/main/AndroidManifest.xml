@@ -22,18 +22,22 @@
         <activity
             android:name=".controller.LoginActivity"
             android:label="LogIn"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".controller.RegisterActivity"
             android:label="Register"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".controller.InAppActivity"
             android:label="InApp"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".controller.RatSightingListActivity"
             android:label="Sightings"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.SightingDetailActivity"
+            android:label="Sighting Detail"
             android:theme="@style/AppTheme" />
     </application>
 

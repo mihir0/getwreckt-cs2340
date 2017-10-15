@@ -22,6 +22,7 @@ import getwreckt.cs2340.rattrack.R;
 public class Model {
     private static final Model _instance = new Model();
     public static ArrayList<RatSighting> ratSightings = new ArrayList<>();
+    private RatSighting currentSighting;
 
     /**
      * The private Model instance.
@@ -42,7 +43,7 @@ public class Model {
      * Adds a sample user to the Model.
      */
     private void loadDummyData() {
-        UserList.addUser(new User("user", "password"));
+        UserList.addUser(new User("user", "pass"));
     }
 
     /**
@@ -56,6 +57,10 @@ public class Model {
      * @param currentUser the user to set as the current user
      */
     public void setCurrentUser(User currentUser) {this.currentUser = currentUser;}
+
+    public RatSighting getCurrentSighting() {return this.currentSighting;}
+
+    public void setCurrentSighting(RatSighting sighting) {this.currentSighting = sighting;}
 
     public void readCSVFile(InputStream is) {
         Log.d("Model", "READING CSV FILE");
