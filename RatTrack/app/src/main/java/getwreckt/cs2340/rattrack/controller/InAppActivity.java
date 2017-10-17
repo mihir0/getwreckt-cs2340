@@ -20,7 +20,8 @@ import getwreckt.cs2340.rattrack.model.Model;
 public class InAppActivity extends AppCompatActivity {
 
     private Button logoutButn;
-    private Button startButn;
+    private Button startButn; //view rats button
+    private Button makeSightingButn;
     private TextView text;
 
     @Override
@@ -43,6 +44,7 @@ public class InAppActivity extends AppCompatActivity {
             }
         });
 
+        //view rat button
         startButn = (Button) findViewById(R.id.btn_start);
         startButn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,11 +55,19 @@ public class InAppActivity extends AppCompatActivity {
                 Intent toSightingsListView = new Intent(InAppActivity.this,
                         RatSightingListActivity.class);
                 startActivity(toSightingsListView);
-
-
             }
         });
 
+        makeSightingButn = (Button) findViewById(R.id.make_sighting);
+        makeSightingButn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.println(Log.INFO, "CLICK", "Make sighting button clicked");
+                Intent toMakeSighting = new Intent(InAppActivity.this,
+                        MakeSightingActivity.class);
+                startActivity(toMakeSighting);
+            }
+        });
 
     }
 

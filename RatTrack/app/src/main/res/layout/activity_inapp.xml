@@ -27,4 +27,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Rats" />
+
+    <Button
+        android:id="@+id/make_sighting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Make Rat Sighting" />
 </LinearLayout>
