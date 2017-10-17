@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,9 @@ import getwreckt.cs2340.rattrack.model.*;
 public class RatSightingListActivity extends AppCompatActivity {
 
     private boolean mTwoPane;
+    private FloatingActionButton scrollTopBtn;
+    private FloatingActionButton scrollBottomBtn;
+    private LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +52,30 @@ public class RatSightingListActivity extends AppCompatActivity {
 //        }
         //Grab dialog widgets
 
+        scrollTopBtn = (FloatingActionButton) findViewById(R.id.scroll_to_top);
+        scrollBottomBtn = (FloatingActionButton) findViewById(R.id.scroll_to_bottom);
+
+        scrollTopBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+            public void onClick(View v) {
+               layoutManager.scrollToPosition(0);
+           }
+        });
+
+        scrollBottomBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutManager.scrollToPosition(Model.ratSightings.size() - 1);
+            }
+        });
+
     }
 
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(Model.ratSightings));
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
     }

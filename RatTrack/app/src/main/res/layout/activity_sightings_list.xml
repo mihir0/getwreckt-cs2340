@@ -15,5 +15,29 @@
             layout="@layout/sightings_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/scroll_to_bottom"
+            android:layout_width="89dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:fabSize="mini"
+            app:srcCompat="@android:drawable/arrow_down_float" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/scroll_to_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="60dp"
+            android:clickable="true"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:fabSize="mini"
+            app:srcCompat="@android:drawable/arrow_up_float" />
     </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>
