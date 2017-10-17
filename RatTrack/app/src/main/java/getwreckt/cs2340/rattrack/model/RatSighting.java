@@ -17,6 +17,7 @@ public class RatSighting implements Parcelable {
     private String borough;
     private String latitude;
     private String longitude;
+    private String time;
 
     public RatSighting(String uniqueKey, String date, String typeLocation,
                        String zip, String address, String city, String borough, String latitude,
@@ -30,6 +31,22 @@ public class RatSighting implements Parcelable {
         this.borough = borough;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.time = "n/a";
+    }
+
+    public RatSighting(String date, String time, String address,
+                                   String borough, String typeLocation,
+                                   String latitude, String longitude, String uniqueKey) {
+        this.date = date;
+        this.time = time;
+        this.address = address;
+        this.borough = borough;
+        this.typeLocation = typeLocation;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.city = "n/a";
+        this.zip = "n/a";
+        this.uniqueKey = uniqueKey;
     }
 
     private RatSighting(Parcel in) {
@@ -42,6 +59,7 @@ public class RatSighting implements Parcelable {
         borough = in.readString();
         latitude = in.readString();
         longitude = in.readString();
+        time = in.readString();
     }
 
     @Override
@@ -55,6 +73,7 @@ public class RatSighting implements Parcelable {
         dest.writeString(borough);
         dest.writeString(latitude);
         dest.writeString(longitude);
+        dest.writeString(time);
     }
 
     public static final Parcelable.Creator<RatSighting> CREATOR
