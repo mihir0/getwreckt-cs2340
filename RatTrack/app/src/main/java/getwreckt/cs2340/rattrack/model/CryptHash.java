@@ -8,6 +8,10 @@ import java.security.SecureRandom;
  */
 
 public class CryptHash {
+    /**
+     * Hashes a string input (username in our case) to a hex value
+     * @param input the username of the new Admin
+     */
     public static String hash(String input) {
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

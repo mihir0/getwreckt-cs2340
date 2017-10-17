@@ -58,10 +58,23 @@ public class Model {
      */
     public void setCurrentUser(User currentUser) {this.currentUser = currentUser;}
 
+    /**
+     * Current sighting being viewed
+     * @return current sighting
+     */
     public RatSighting getCurrentSighting() {return this.currentSighting;}
 
+    /**
+     * Sets the current sighting to the sighting given
+     * @param sighting the sighting to set as the current sighting
+     */
     public void setCurrentSighting(RatSighting sighting) {this.currentSighting = sighting;}
 
+    /**
+     * Reads a given CSV file and makes a new RatSighting from its values. New RatSighting is
+     * put into an ArrayList of all the rat sightings provided in the CSV file.
+     * @param is the input stream of the content of the CSV file
+     */
     public void readCSVFile(InputStream is) {
         Log.d("Model", "READING CSV FILE");
         Log.println(Log.INFO, "Starting", "READING CSV FILE");
