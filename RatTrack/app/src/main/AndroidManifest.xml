@@ -39,6 +39,10 @@
             android:name=".controller.SightingDetailActivity"
             android:label="Sighting Detail"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.MakeSightingActivity"
+            android:label="Sighting Detail"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
