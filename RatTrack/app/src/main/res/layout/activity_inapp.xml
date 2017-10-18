@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="getwreckt.cs2340.rattrack.controller.InAppActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="100dp"
+        android:text="You are now logged in!"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="60sp" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Rats" />
+
+    <Button
+        android:id="@+id/make_sighting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Make Rat Sighting" />
+</LinearLayout>
