@@ -9,28 +9,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Date of Incident"
         android:inputType="date"
-        android:paddingBottom="20dp"
-        android:text="Date of Incident" />
+        android:paddingBottom="20dp" />
 
     <EditText
         android:id="@+id/time_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Time of Incident"
         android:inputType="time"
-        android:paddingBottom="20dp"
-        android:text="Time of Incident" />
+        android:paddingBottom="20dp" />
 
     <EditText
         android:id="@+id/address_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Address of Incident"
         android:inputType="textPostalAddress"
         android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:text="Address of Incident" />
+        android:paddingTop="20dp" />
 
     <Spinner
         android:id="@+id/borough_input"
