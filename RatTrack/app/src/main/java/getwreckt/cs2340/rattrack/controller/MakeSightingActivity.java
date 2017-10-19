@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,9 +41,15 @@ public class MakeSightingActivity extends AppCompatActivity {
     private EditText longtudeField;
     private Button makeBtn;
     private RatSighting _sighting;
+    private DatabaseReference mDataRef;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mAuth = FirebaseAuth.getInstance();
+        mDataRef = FirebaseDatabase.getInstance().getReference();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_sighting);
 
@@ -107,6 +117,8 @@ public class MakeSightingActivity extends AppCompatActivity {
                         _sighting = new RatSighting(date, time, address,
                                 borough, typeLocation,
                                 latitude, longitude, uniqueKey);
+
+                        mDataRef.child("ratsightings").child(_sighting.getUniqueKey()).setValue(_sighting);
 
                         startActivity(toInAppScreen);
 
