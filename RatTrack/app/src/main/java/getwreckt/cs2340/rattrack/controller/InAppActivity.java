@@ -82,7 +82,6 @@ public class InAppActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.println(Log.INFO, "CLICK", "Button is clicked!");
                 InputStream is = getResources().openRawResource(R.raw.rat_sightings);
-                Model.readCSVFile(is);
                 Intent toSightingsListView = new Intent(InAppActivity.this,
                         RatSightingListActivity.class);
                 startActivity(toSightingsListView);

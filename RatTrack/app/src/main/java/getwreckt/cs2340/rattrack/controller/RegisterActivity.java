@@ -54,8 +54,6 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDataRef;
 
-    private TextInputLayout til;
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -74,7 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
         fullNameField = (EditText) findViewById(R.id.full_name);
         userField = (AutoCompleteTextView) findViewById(R.id.username);
         passField = (TextInputEditText) findViewById(R.id.password);
-        til = (TextInputLayout) findViewById(R.id.text_input_layout);
 
         userTypeSpinner = (Spinner) findViewById(R.id.user_type_spinner);
 

@@ -24,7 +24,22 @@
             android:ems="10"
             android:hint="Full Name"
             android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="user@example.com"
+            android:inputType="textEmailAddress" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="user@example.com"
+            android:inputType="textPassword" />
 
+        <!--
         <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -58,7 +73,7 @@
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
-
+        -->
         <Spinner
             android:id="@+id/user_type_spinner"
             android:layout_width="match_parent"
