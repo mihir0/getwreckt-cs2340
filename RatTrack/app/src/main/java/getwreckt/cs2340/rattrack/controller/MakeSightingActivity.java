@@ -57,7 +57,6 @@ public class MakeSightingActivity extends AppCompatActivity {
         timeField = (EditText) findViewById(R.id.time_input);
         addrField = (EditText) findViewById(R.id.address_input);
 
-        //change to text input if it's easier
         boroughSpinner = (Spinner) findViewById(R.id.borough_input);
         typeLocationSpinner = (Spinner) findViewById(R.id.typeLocation_input);
 
@@ -68,8 +67,34 @@ public class MakeSightingActivity extends AppCompatActivity {
         makeBtn = (Button) findViewById(R.id.make_button);
 
         ArrayList<RatSighting> sightings = Model.ratSightings;
+
         ArrayList<String> boroughs = new ArrayList<>();
+        boroughs.add("Bronx");
+        boroughs.add("Brooklyn");
+        boroughs.add("Manhattan");
+        boroughs.add("Queens");
+        boroughs.add("Staten Island");
+
         ArrayList<String> typeLocations = new ArrayList<>();
+        typeLocations.add("1-2 Family Dwelling");
+        typeLocations.add("1-2 Family Mixed Use Building");
+        typeLocations.add("3+ Family Apt. Building");
+        typeLocations.add("3+ Family Mixed Use Building");
+        typeLocations.add("Commercial Building");
+        typeLocations.add("Construction Site");
+        typeLocations.add("Day Care/Nursery");
+        typeLocations.add("Government Building");
+        typeLocations.add("Hospital");
+        typeLocations.add("Office Building");
+        typeLocations.add("Other (Explain Below)");
+        typeLocations.add("Parking Lot/Garage");
+        typeLocations.add("Public Garden");
+        typeLocations.add("Public Stairs");
+        typeLocations.add("School/Pre-School");
+        typeLocations.add("Single Room Occupancy (SRO)");
+        typeLocations.add("Summer Camp");
+        typeLocations.add("Vacant Building");
+        typeLocations.add("Vacant Lot");
 
         for (RatSighting r: sightings) {
             if (!boroughs.contains(r.getBorough())) {
@@ -85,7 +110,7 @@ public class MakeSightingActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, typeLocations);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        boroughSpinner.setAdapter(adapter);
+        typeLocationSpinner.setAdapter(adapter);
 
         onMakeButtonPressed();
 
