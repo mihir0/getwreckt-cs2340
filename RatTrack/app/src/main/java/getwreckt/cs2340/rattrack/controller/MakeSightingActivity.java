@@ -135,7 +135,7 @@ public class MakeSightingActivity extends AppCompatActivity {
                 String uniqueKey = Model.ratSightings.size() + "";
                 if (!isValidSighting(date, time, address, borough, typeLocation,
                         latitude, longitude, uniqueKey)) {
-                    dateField.setError("A valid username and password are required");
+                    dateField.setError("Must fill all fields with valid sighting details.");
                 } else {
 
                     try {
