@@ -251,6 +251,17 @@ public class Date implements Comparable<Date> {
         }
     }
 
+    /**
+    private int getMeridiemHour() {
+
+    }
+
+
+    public String getTime() {
+
+    }
+     **/
+
     //same form as CSV file
     public String toString() {
         String meridiem; //the M in AM and PM

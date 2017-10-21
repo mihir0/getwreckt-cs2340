@@ -19,6 +19,9 @@ public class RatSighting implements Parcelable {
     private String longitude;
     private String time;
 
+    private User owner;
+    private boolean isFlagged;
+
     public RatSighting() { }
 
     /**

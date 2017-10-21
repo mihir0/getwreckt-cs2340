@@ -5,4 +5,13 @@ package getwreckt.cs2340.rattrack.model;
  */
 
 public class Location {
+    private String zip;
+    private String typeLocation;
+    private String address;
+    private String city;
+    private String borough;
+    private String latitude;
+    private String longitude;
+
+
 }
