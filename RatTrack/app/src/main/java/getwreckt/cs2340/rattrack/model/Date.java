@@ -1,5 +1,8 @@
 package getwreckt.cs2340.rattrack.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by maya v on 10/20/2017.
  */
@@ -20,6 +23,25 @@ public class Date {
         //data string is orginally of the form "month/date/year hour:minute:second AM/PM"
         //example: "9/5/2012 12:00:00 AM"
 
+    }
+
+    public List<RatSighting> dateFilter(int amount, String timeChunk, Date currentDate) {
+
+
+        if (timeChunk.equals("Months")) {
+            for (RatSighting r: Model.ratSightings) {
+                String[] date = r.getDate().split("/");
+
+            }
+
+        } else if (timeChunk.equals("Days")) {
+
+        } else if (timeChunk.equals("Hours")) {
+
+        } else if (timeChunk.equals("Years")) {
+
+        }
+        return new ArrayList<RatSighting>();
     }
 
     /** constructor for in app date input
