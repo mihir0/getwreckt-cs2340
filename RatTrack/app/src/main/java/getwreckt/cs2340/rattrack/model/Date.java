@@ -251,10 +251,17 @@ public class Date implements Comparable<Date> {
         }
     }
 
+    //same form as CSV file
     public String toString() {
         String meridiem; //the M in AM and PM
 
-        if (isPM) { meridiem = "PM"; } else { meridiem = "AM"; }
+        if (isPM) {
+            meridiem = "PM";
+            hour -= 12;
+        } else {
+            meridiem = "AM";
+            if (hour == 0) { hour = 12; }
+        }
 
         return "" + month + "/" + date + "/" + year + " " + hour + ":" + minute + ":" + second + " "
                 + meridiem;
