@@ -2,6 +2,7 @@ package getwreckt.cs2340.rattrack.model;
 
 
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by maya v on 10/20/2017.
@@ -23,10 +24,44 @@ public class Date implements Comparable<Date> {
     //constructor for NYC database date string
     public Date(String data) {
         //data string is orginally of the form "month/date/year hour:minute:second AM/PM"
-        //example: "9/5/2012 12:00:00 AM"
-        String dataInput = data;
+        //example: "9/5/2012 12:00:00 AM
 
+        //get month
+        String dataInput = data.substring(0, data.indexOf("/"));
+        this.month = Integer.parseInt(dataInput);
 
+        data = data.substring(data.indexOf("/") + 1);
+
+        //get date
+        dataInput = data.substring(0, data.indexOf("/"));
+        this.date = Integer.parseInt(dataInput);
+
+        data = data.substring(data.indexOf("/") + 1);
+
+        //get year
+        dataInput = data.substring(0, data.indexOf(" "));
+        this.year = Integer.parseInt(dataInput);
+
+        data = data.substring(data.indexOf(" ") + 1);
+
+        //get hour
+        dataInput = data.substring(0, data.indexOf(":"));
+        setHour(Integer.parseInt(dataInput));
+
+        data = data.substring(data.indexOf(":") + 1);
+
+        //get minute
+        dataInput = data.substring(0, data.indexOf(":"));
+        this.minute = Integer.parseInt(dataInput);
+
+        data = data.substring(data.indexOf(":") + 1);
+
+        //get second
+        dataInput = data.substring(0, data.indexOf(" "));
+        this.second = Integer.parseInt(dataInput);
+
+        data = data.substring(data.indexOf(" ") + 1);
+        setIsPM(data);
     }
 
     /** constructor for in app date input
@@ -58,7 +93,7 @@ public class Date implements Comparable<Date> {
     }
 
     public int getYear() {
-        return this.year = year;
+        return this.year;
     }
 
     public void setYear(int year) {
@@ -100,8 +135,19 @@ public class Date implements Comparable<Date> {
         this.isPM = value;
     }
 
+    public void setIsPM(String meridiem) {
+        this.isPM = false;
+        if (meridiem.equals("PM")) {
+            this.isPM = true;
+        }
+    }
+
     public void setSecond(int second) {
         this.second = second;
+    }
+
+    public String getSystemString() {
+        return this.systemString;
     }
 
     private String generateSystemString(int month, int date, int year, int hour, boolean isPM,
@@ -116,9 +162,6 @@ public class Date implements Comparable<Date> {
 
         if (date < 10) { dateStr = "0" + date; } else { dateStr = "" + date; }
 
-        //military time conversion to facilitate date comparison
-        if (isPM) { hour += 12; } else if (hour == 12) { hour = 0; }
-
         if (hour < 10) { hourStr = "0" + hour; } else { hourStr = "" + hour; }
 
         if (minute < 10) { minuteStr = "0" + minute; } else { minuteStr = "" + minute; }
@@ -131,11 +174,11 @@ public class Date implements Comparable<Date> {
         return result;
     }
 
+    //descending order on system generated strings
     @Override
     public int compareTo(Date other) {
-        return this.systemString.compareTo(other.systemString);
+        return other.getSystemString().compareTo(this.systemString);
     }
-
 
     //custom comparators
     //date ordering goes: year, month, date, hour, minute, second
@@ -162,6 +205,7 @@ public class Date implements Comparable<Date> {
         }
     };
 
+    //hour in military time
     public static Comparator<Date> HourComparator = new Comparator<Date>() {
         @Override
         public int compare(Date d1, Date d2) {
@@ -182,6 +226,30 @@ public class Date implements Comparable<Date> {
             return d2.getSecond() - d1.getSecond();
         }
     };
+
+    public class DateChainedComparator implements Comparator<Date> {
+        private List<Comparator<Date>> listComparators;
+
+        public DateChainedComparator() {
+            this.listComparators.add(YearComparator);
+            this.listComparators.add(MonthComparator);
+            this.listComparators.add(DateComparator);
+            this.listComparators.add(HourComparator);
+            this.listComparators.add(MinuteComparator);
+            this.listComparators.add(SecondComparator);
+        }
+
+        @Override
+        public int compare(Date d1, Date d2) {
+            for (Comparator<Date> comparator: listComparators) {
+                int result = comparator.compare(d1, d2);
+                if (result != 0) {
+                    return result;
+                }
+            }
+            return 0;
+        }
+    }
 
     public String toString() {
         String meridiem; //the M in AM and PM
