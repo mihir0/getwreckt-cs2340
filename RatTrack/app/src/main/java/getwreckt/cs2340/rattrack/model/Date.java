@@ -2,7 +2,6 @@ package getwreckt.cs2340.rattrack.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Created by maya v on 10/20/2017.
  */
