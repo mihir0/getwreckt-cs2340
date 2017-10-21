@@ -11,6 +11,7 @@ public class User {
     private String userName;
     private String userType;
     private Boolean signedIn;
+    private int totalSightings = 0;
 
     public User() {}
 
@@ -108,6 +109,14 @@ public class User {
      */
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public int getTotalSightings() {
+        return this.totalSightings;
+    }
+
+    public void addSighting() {
+        this.totalSightings++;
     }
 }
 
