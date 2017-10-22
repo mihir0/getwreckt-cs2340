@@ -40,11 +40,17 @@ public class RatSightingListActivity extends AppCompatActivity {
     private boolean mTwoPane;
     private FloatingActionButton scrollTopBtn;
     private FloatingActionButton scrollBottomBtn;
+    private FloatingActionButton scrollUpBtn;
+    private FloatingActionButton scrollDownBtn;
     private LinearLayoutManager layoutManager;
+    private int position;
+    private List<RatSighting> valuesToShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        position = 0;
+        valuesToShow = new ArrayList<>();
         setContentView(R.layout.activity_sightings_list);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.sightings_list);
 
@@ -54,42 +60,73 @@ public class RatSightingListActivity extends AppCompatActivity {
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
 
-
-
-        scrollTopBtn = (FloatingActionButton) findViewById(R.id.scroll_to_top);
-        scrollBottomBtn = (FloatingActionButton) findViewById(R.id.scroll_to_bottom);
-
-        scrollTopBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutManager.scrollToPosition(0);
-            }
-        });
-
-        scrollBottomBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutManager.scrollToPosition(Model.ratSightings.size() - 1);
-            }
-        });
-
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<RatSighting> mValues;
-
-        public SimpleItemRecyclerViewAdapter(DatabaseReference ref) {
-            mValues = new ArrayList<>();
+        public SimpleItemRecyclerViewAdapter(final DatabaseReference ref) {
             ref.child("ratsightings").addValueEventListener(new ValueEventListener() {
                 public void onDataChange(DataSnapshot snapshot) {
-                    mValues.clear();
+                    Model.ratSightings.clear();
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                         RatSighting ratSighting = postSnapshot.getValue(RatSighting.class);
-                        mValues.add(ratSighting);
+                        Model.ratSightings.add(ratSighting);
                     }
+                    ref.child("ratsightings").keepSynced(true);
+                    valuesToShow = Model.ratSightings.subList((position / 10) * 10, (position / 10) * 10 + 10);
                     notifyDataSetChanged();
+
+
+                    scrollTopBtn = (FloatingActionButton) findViewById(R.id.scroll_to_top);
+                    scrollBottomBtn = (FloatingActionButton) findViewById(R.id.scroll_to_bottom);
+
+                    scrollTopBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            position = 0;
+                            valuesToShow = Model.ratSightings.subList((position / 10) * 10, (position / 10) * 10 + 10);
+                            notifyDataSetChanged();
+                            layoutManager.scrollToPosition(0);
+                        }
+                    });
+
+                    scrollBottomBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            position = Model.ratSightings.size() - 1;
+                            valuesToShow = Model.ratSightings.subList((position / 10) * 10, (position / 10) * 10 + 10);
+                            notifyDataSetChanged();
+                            layoutManager.scrollToPosition(Model.ratSightings.size() - 1);
+                        }
+                    });
+
+                    scrollUpBtn = (FloatingActionButton) findViewById(R.id.scroll_up);
+                    scrollDownBtn = (FloatingActionButton) findViewById(R.id.scroll_down);
+
+                    scrollUpBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            position = position - 10 < 0 ?
+                                    0 :
+                                    position - 10;
+                            valuesToShow = Model.ratSightings.subList((position / 10) * 10, (position / 10) * 10 + 10);
+                            notifyDataSetChanged();
+                            layoutManager.scrollToPosition(position);
+                        }
+                    });
+
+                    scrollDownBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            position = position + 10 > Model.ratSightings.size() - 1 ?
+                                    Model.ratSightings.size() - 1 :
+                                    position + 10;
+                            valuesToShow = Model.ratSightings.subList((position / 10) * 10, (position / 10) * 10 + 10);
+                            notifyDataSetChanged();
+                            layoutManager.scrollToPosition(position);
+                        }
+                    });
                 }
 
                 @Override
@@ -108,9 +145,9 @@ public class RatSightingListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).getUniqueKey());
-            holder.mContentView.setText(mValues.get(position).getCity());
+            holder.mItem = valuesToShow.get(position);
+            holder.mIdView.setText(valuesToShow.get(position).getUniqueKey());
+            holder.mContentView.setText(valuesToShow.get(position).getCity());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,7 +156,6 @@ public class RatSightingListActivity extends AppCompatActivity {
                     Intent toSightingDetail = new Intent(context, SightingDetailActivity.class);
 
                     toSightingDetail.putExtra("SIGHTING", holder.mItem);
-
                     context.startActivity(toSightingDetail);
                 }
             });
@@ -128,7 +164,7 @@ public class RatSightingListActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return mValues.size();
+            return valuesToShow.size();
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {

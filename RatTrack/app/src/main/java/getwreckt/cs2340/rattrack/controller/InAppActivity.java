@@ -81,7 +81,7 @@ public class InAppActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.println(Log.INFO, "CLICK", "Button is clicked!");
-                InputStream is = getResources().openRawResource(R.raw.rat_sightings);
+                //InputStream is = getResources().openRawResource(R.raw.rat_sightings);
                 Intent toSightingsListView = new Intent(InAppActivity.this,
                         RatSightingListActivity.class);
                 startActivity(toSightingsListView);

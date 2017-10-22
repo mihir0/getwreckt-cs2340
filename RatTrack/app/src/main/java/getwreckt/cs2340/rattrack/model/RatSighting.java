@@ -23,7 +23,7 @@ public class RatSighting implements Parcelable {
     public RatSighting() { }
 
     /**
-     * Creates a new Admin, which is a User with special privileges, with
+     * Creates a new RatSighting with
      * username {@code username} and password {@code password}.
      * @param uniqueKey the unique id of the new sighting
      * @param date the date of the sighting

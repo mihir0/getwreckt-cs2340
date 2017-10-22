@@ -136,12 +136,9 @@ public class MakeSightingActivity extends AppCompatActivity {
 
                 String borough = boroughSpinner.getSelectedItem().toString();
                 String typeLocation = typeLocationSpinner.getSelectedItem().toString();
-
-
                // String uniqueKey = Model.ratSightings.size() + "";
 
                 String uniqueKey = numberOfSightings + time + "";
-
 
                 if (!isValidSighting(date, time, address, borough, typeLocation,
                         latitude, longitude, uniqueKey)) {
