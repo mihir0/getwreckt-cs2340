@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class RatSighting implements Parcelable {
     private String uniqueKey;
-    private String date;
+    private Date date;
     private String zip;
     private String typeLocation;
     private String address;
@@ -25,10 +25,9 @@ public class RatSighting implements Parcelable {
     public RatSighting() { }
 
     /**
-     * Creates a new Admin, which is a User with special privileges, with
-     * username {@code username} and password {@code password}.
+     * Creates a new RatSighting using the passed parameters
      * @param uniqueKey the unique id of the new sighting
-     * @param date the date of the sighting
+     * @param date the string date of the sighting
      * @param typeLocation the type of location
      * @param zip the zip of location
      * @param address the address of th sighting
@@ -41,7 +40,7 @@ public class RatSighting implements Parcelable {
                        String zip, String address, String city, String borough, String latitude,
                        String longitude) {
         this.uniqueKey = uniqueKey;
-        this.date = date;
+        this.date = new Date(date);
         this.typeLocation = typeLocation;
         this.zip = zip;
         this.address = address;
@@ -49,12 +48,11 @@ public class RatSighting implements Parcelable {
         this.borough = borough;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.time = "n/a";
     }
 
     /**
-     * Creates a new Admin, which is a User with special privileges, with
-     * username {@code username} and password {@code password}.
+     * Creates a new RatSighting using only date, address, borough, location type, key, and gps
+     * coordinates
      * @param uniqueKey the unique id of the new sighting
      * @param date the date of the sighting
      * @param typeLocation the type of location
@@ -63,11 +61,10 @@ public class RatSighting implements Parcelable {
      * @param latitude the latitude of the sighting
      * @param longitude the longitude of the sighting
      */
-    public RatSighting(String date, String time, String address,
+    public RatSighting(String date, String address,
                                    String borough, String typeLocation,
                                    String latitude, String longitude, String uniqueKey) {
-        this.date = date;
-        this.time = time;
+        this.date = new Date(date);
         this.address = address;
         this.borough = borough;
         this.typeLocation = typeLocation;
@@ -80,7 +77,7 @@ public class RatSighting implements Parcelable {
 
     private RatSighting(Parcel in) {
         uniqueKey = in.readString();
-        date = in.readString();
+        date = in.readParcelable(Date.class.getClassLoader());
         typeLocation = in.readString();
         zip = in.readString();
         address = in.readString();
@@ -94,7 +91,7 @@ public class RatSighting implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(uniqueKey);
-        dest.writeString(date);
+        dest.writeParcelable(date, flags);
         dest.writeString(typeLocation);
         dest.writeString(zip);
         dest.writeString(address);
