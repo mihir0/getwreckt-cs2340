@@ -8,6 +8,7 @@ import java.security.SecureRandom;
 
 public class User {
     private String fullName;
+    //public String userName;
     private String userName;
     private String userType;
     private Boolean signedIn;
@@ -19,6 +20,7 @@ public class User {
      * @param userName the username for the user
      */
     public User(String userName) {
+
         this("Default Name", userName);
     }
 
@@ -45,6 +47,8 @@ public class User {
         this.userType = userType;
         this.signedIn = true;
     }
+
+
 
     /**
      * Username of the user
@@ -83,6 +87,7 @@ public class User {
      * @return username of the user
      */
     public Boolean getSignedIn() {
+
         return this.signedIn;
     }
 

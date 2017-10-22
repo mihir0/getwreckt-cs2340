@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 
 public class RatSighting implements Parcelable {
+
     private String uniqueKey;
     private String date;
     private String zip;

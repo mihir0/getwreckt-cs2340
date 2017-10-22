@@ -44,6 +44,8 @@ public class MakeSightingActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
     private FirebaseAuth mAuth;
 
+    public static int numberOfSightings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -67,6 +69,7 @@ public class MakeSightingActivity extends AppCompatActivity {
         makeBtn = (Button) findViewById(R.id.make_button);
 
         ArrayList<RatSighting> sightings = Model.ratSightings;
+
 
         ArrayList<String> boroughs = new ArrayList<>();
         boroughs.add("Bronx");
@@ -124,6 +127,7 @@ public class MakeSightingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent toInAppScreen = new Intent(MakeSightingActivity.this,
                         InAppActivity.class);
+
                 String date = dateField.getText().toString();
                 String time = timeField.getText().toString();
                 String address = addrField.getText().toString();
@@ -132,7 +136,13 @@ public class MakeSightingActivity extends AppCompatActivity {
 
                 String borough = boroughSpinner.getSelectedItem().toString();
                 String typeLocation = typeLocationSpinner.getSelectedItem().toString();
-                String uniqueKey = Model.ratSightings.size() + "";
+
+
+               // String uniqueKey = Model.ratSightings.size() + "";
+
+                String uniqueKey = numberOfSightings + time + "";
+
+
                 if (!isValidSighting(date, time, address, borough, typeLocation,
                         latitude, longitude, uniqueKey)) {
                     dateField.setError("Must fill all fields with valid sighting details.");
@@ -142,6 +152,9 @@ public class MakeSightingActivity extends AppCompatActivity {
                         _sighting = new RatSighting(date, time, address,
                                 borough, typeLocation,
                                 latitude, longitude, uniqueKey);
+
+
+                        numberOfSightings++;
 
                         mDataRef.child("ratsightings").child(_sighting.getUniqueKey()).setValue(_sighting);
 
