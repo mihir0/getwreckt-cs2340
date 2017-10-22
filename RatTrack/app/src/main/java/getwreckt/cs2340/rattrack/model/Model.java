@@ -36,4 +36,6 @@ public class Model {
 
     public static User getCurrentUser() { return currentUser; }
     public static User setCurrentUser(User user) { return currentUser = user; }
+
+    public static ArrayList<RatSighting> mValues = new ArrayList<>();
 }
