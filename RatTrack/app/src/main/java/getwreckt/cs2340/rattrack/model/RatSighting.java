@@ -131,14 +131,14 @@ public class RatSighting implements Parcelable {
      * Gets the date of a sighting
      * @return the date of a sighting
      */
-    public String getDate() {
+    public Date getDate() {
         return this.date;
     }
     /**
      * Sets the date to the given date.
      * @param date the date to set
      */
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

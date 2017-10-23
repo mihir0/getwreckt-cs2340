@@ -5,6 +5,7 @@ package getwreckt.cs2340.rattrack.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -117,7 +118,7 @@ public class Date implements Comparable<Date>, Parcelable {
 
         ArrayList<RatSighting> dateFilteredRatSightings = new ArrayList<>();
         for (RatSighting r: Model.ratSightings) {
-            String date = r.getDate();
+            String date = r.getDate().toString();
             String mdy = date.split(" ")[0];
             String hms = date.split(" ")[1];
             String h = hms.split(":")[0];
@@ -310,6 +311,12 @@ public class Date implements Comparable<Date>, Parcelable {
             this.listComparators.add(SecondComparator);
         }
 
+        public DateChainedComparator(Comparator<Date> ... comparators) {
+            for (Comparator<Date> comparator: comparators) {
+                listComparators.add(comparator);
+            }
+        }
+
         @Override
         public int compare(Date d1, Date d2) {
             for (Comparator<Date> comparator: listComparators) {
@@ -362,7 +369,7 @@ public class Date implements Comparable<Date>, Parcelable {
         dest.writeInt(hour);
         dest.writeInt(minute);
         dest.writeInt(second);
-        dest.writeByte((byte) (isPM ? 1 : 0));
+        dest.writeInt(isPM ? 1 : 0);
         dest.writeString(meridiem);
         dest.writeString(systemString);
     }
@@ -372,6 +379,9 @@ public class Date implements Comparable<Date>, Parcelable {
 
         public Date[] newArray(int size) {return new Date[size];}
     };
+
+    @Override
+    public int describeContents() {return 0;}
 
     public String toString() {
         return getCalendarDate() + " " + getTime();
