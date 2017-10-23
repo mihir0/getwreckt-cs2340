@@ -1,7 +1,10 @@
 package getwreckt.cs2340.rattrack.model;
 
 
-import java.text.DateFormat;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -14,7 +17,7 @@ import java.util.Locale;
  * Created by maya v on 10/20/2017.
  */
 
-public class Date implements Comparable<Date> {
+public class Date implements Comparable<Date>, Parcelable {
     private int month;
     private int date;
     private int year;
@@ -24,6 +27,7 @@ public class Date implements Comparable<Date> {
     private int second;
 
     private boolean isPM; //for changing to military time
+    private String meridiem; //the M in AM and PM
 
     private String systemString; //for natural ordering
 
@@ -67,6 +71,7 @@ public class Date implements Comparable<Date> {
         this.second = Integer.parseInt(dataInput);
 
         data = data.substring(data.indexOf(" ") + 1);
+        setMeridiem(data);
         setIsPM(data);
     }
 
@@ -196,6 +201,10 @@ public class Date implements Comparable<Date> {
         return this.second;
     }
 
+    public void setSecond(int second) {
+        this.second = second;
+    }
+
     public boolean getIsPM() {
         return this.isPM;
     }
@@ -205,14 +214,19 @@ public class Date implements Comparable<Date> {
     }
 
     public void setIsPM(String meridiem) {
-        this.isPM = false;
-        if (meridiem.equals("PM")) {
-            this.isPM = true;
-        }
+        this.isPM = meridiem.equals("PM");
     }
 
-    public void setSecond(int second) {
-        this.second = second;
+    public String getMeridiem() {
+        return this.meridiem;
+    }
+
+    public void setMeridiem(String meridiem) {
+        this.meridiem = meridiem;
+    }
+
+    private String digitToString(int digit) {
+        return (digit < 10) ? ("0" + digit) : ("" + digit);
     }
 
     public String getSystemString() {
@@ -221,26 +235,14 @@ public class Date implements Comparable<Date> {
 
     private String generateSystemString(int month, int date, int year, int hour, boolean isPM,
                                         int minute, int second) {
-        String monthStr;
-        String dateStr;
-        String hourStr;
-        String minuteStr;
-        String secondStr;
+        String monthStr = digitToString(month);
+        String dateStr = digitToString(date);
+        String hourStr  = digitToString(hour);
+        String minuteStr = digitToString(minute);
+        String secondStr = digitToString(second);
 
-        if (month < 10) {monthStr = "0" + month; } else { monthStr = "" + month; }
-
-        if (date < 10) { dateStr = "0" + date; } else { dateStr = "" + date; }
-
-        if (hour < 10) { hourStr = "0" + hour; } else { hourStr = "" + hour; }
-
-        if (minute < 10) { minuteStr = "0" + minute; } else { minuteStr = "" + minute; }
-
-        if (second < 10) { secondStr = "0" + second; } else { secondStr = "" + second; }
-
-        String result = "" + year + "-" + monthStr + "-" + dateStr + " " + hourStr + ":" +
-                minuteStr + ":" + secondStr;
-
-        return result;
+        return "" + year + "-" + monthStr + "-" + dateStr + " " + hourStr + ":" + minuteStr + ":"
+                + secondStr;
     }
 
     //descending order on system generated strings
@@ -297,7 +299,7 @@ public class Date implements Comparable<Date> {
     };
 
     public class DateChainedComparator implements Comparator<Date> {
-        private List<Comparator<Date>> listComparators;
+        private List<Comparator<Date>> listComparators = new ArrayList<Comparator<Date>>();
 
         public DateChainedComparator() {
             this.listComparators.add(YearComparator);
@@ -320,30 +322,58 @@ public class Date implements Comparable<Date> {
         }
     }
 
-    /**
     private int getMeridiemHour() {
-
+        if (isPM) {
+            return hour - 12;
+        } else {
+            if (hour == 0) { return 12; }
+        }
+        return hour;
     }
-
 
     public String getTime() {
-
+        return "" + digitToString(getMeridiemHour()) + ":" + digitToString(this.minute) + ":"
+                + digitToString(this.second) + " " + meridiem;
     }
-     **/
 
-    //same form as CSV file
+    public String getCalendarDate() {
+        return "" + digitToString(this.month) + "-" + digitToString(this.date)
+                + digitToString(this.year);
+    }
+
+    //Parcelable implementation
+    private Date(Parcel in) {
+        month = in.readInt();
+        date = in.readInt();
+        year = in.readInt();
+        hour = in.readInt();
+        minute = in.readInt();
+        second = in.readInt();
+        isPM = in.readByte() != 0;
+        meridiem = in.readString();
+        systemString = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(month);
+        dest.writeInt(date);
+        dest.writeInt(year);
+        dest.writeInt(hour);
+        dest.writeInt(minute);
+        dest.writeInt(second);
+        dest.writeByte((byte) (isPM ? 1 : 0));
+        dest.writeString(meridiem);
+        dest.writeString(systemString);
+    }
+
+    public static final Parcelable.Creator<Date> CREATOR = new Parcelable.Creator<Date>() {
+        public Date createFromParcel (Parcel in) {return new Date(in);}
+
+        public Date[] newArray(int size) {return new Date[size];}
+    };
+
     public String toString() {
-        String meridiem; //the M in AM and PM
-
-        if (isPM) {
-            meridiem = "PM";
-            hour -= 12;
-        } else {
-            meridiem = "AM";
-            if (hour == 0) { hour = 12; }
-        }
-
-        return "" + month + "/" + date + "/" + year + " " + hour + ":" + minute + ":" + second + " "
-                + meridiem;
+        return getCalendarDate() + " " + getTime();
     }
 }
