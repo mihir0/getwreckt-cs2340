@@ -43,13 +43,12 @@ public class RatSightingListActivity extends AppCompatActivity {
     private FloatingActionButton scrollUpBtn;
     private FloatingActionButton scrollDownBtn;
     private LinearLayoutManager layoutManager;
-    private int position;
+    private static int position = 0;
     private List<RatSighting> valuesToShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        position = 0;
         valuesToShow = new ArrayList<>();
         setContentView(R.layout.activity_sightings_list);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.sightings_list);
@@ -60,6 +59,12 @@ public class RatSightingListActivity extends AppCompatActivity {
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
 
+    }
+
+    private int endIndex(int position) {
+        return position + 10 > Model.ratSightings.size() ?
+                Model.ratSightings.size() :
+                position + 10;
     }
 
     public class SimpleItemRecyclerViewAdapter
@@ -74,7 +79,7 @@ public class RatSightingListActivity extends AppCompatActivity {
                         Model.ratSightings.add(ratSighting);
                     }
                     ref.child("ratsightings").keepSynced(true);
-                    valuesToShow = Model.ratSightings.subList((position / 10) * 10, (position / 10) * 10 + 10);
+                    valuesToShow = Model.ratSightings.subList(position, endIndex(position));
                     notifyDataSetChanged();
 
 
@@ -85,19 +90,19 @@ public class RatSightingListActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             position = 0;
-                            valuesToShow = Model.ratSightings.subList((position / 10) * 10, (position / 10) * 10 + 10);
+                            valuesToShow = Model.ratSightings.subList(position, endIndex(position));
                             notifyDataSetChanged();
-                            layoutManager.scrollToPosition(0);
+                            layoutManager.scrollToPosition(position);
                         }
                     });
 
                     scrollBottomBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            position = Model.ratSightings.size() - 1;
-                            valuesToShow = Model.ratSightings.subList((position / 10) * 10, (position / 10) * 10 + 10);
+                            position = Model.ratSightings.size() / 10 * 10;
+                            valuesToShow = Model.ratSightings.subList(position, endIndex(position));
                             notifyDataSetChanged();
-                            layoutManager.scrollToPosition(Model.ratSightings.size() - 1);
+                            layoutManager.scrollToPosition(position);
                         }
                     });
 
@@ -110,7 +115,7 @@ public class RatSightingListActivity extends AppCompatActivity {
                             position = position - 10 < 0 ?
                                     0 :
                                     position - 10;
-                            valuesToShow = Model.ratSightings.subList((position / 10) * 10, (position / 10) * 10 + 10);
+                            valuesToShow = Model.ratSightings.subList(position, endIndex(position));
                             notifyDataSetChanged();
                             layoutManager.scrollToPosition(position);
                         }
@@ -119,10 +124,10 @@ public class RatSightingListActivity extends AppCompatActivity {
                     scrollDownBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            position = position + 10 > Model.ratSightings.size() - 1 ?
-                                    Model.ratSightings.size() - 1 :
+                            position = position + 10 > Model.ratSightings.size() ?
+                                    position :
                                     position + 10;
-                            valuesToShow = Model.ratSightings.subList((position / 10) * 10, (position / 10) * 10 + 10);
+                            valuesToShow = Model.ratSightings.subList(position, endIndex(position));
                             notifyDataSetChanged();
                             layoutManager.scrollToPosition(position);
                         }
