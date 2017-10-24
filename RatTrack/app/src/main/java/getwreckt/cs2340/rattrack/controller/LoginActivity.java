@@ -36,7 +36,10 @@ import getwreckt.cs2340.rattrack.model.*;
 public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText passField;
-    private AutoCompleteTextView userField;
+
+    public AutoCompleteTextView userField;
+
+    //private AutoCompleteTextView userField;
     private Button loginButn;
     private Button cancelButn;
     private TextInputLayout passTil;
@@ -60,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         onLoginPressed();
         onCancelPressed();
     }
+
 
     /**
      * Logs into the system and changes to the inapp view.

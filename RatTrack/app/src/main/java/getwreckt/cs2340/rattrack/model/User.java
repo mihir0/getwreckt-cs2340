@@ -11,7 +11,7 @@ public class User {
     private String userName;
     private String userType;
     private Boolean signedIn;
-    private int totalSightings = 0;
+    private int sightings = 0;
 
     public User() {}
 
@@ -20,6 +20,7 @@ public class User {
      * @param userName the username for the user
      */
     public User(String userName) {
+
         this("Default Name", userName);
     }
 
@@ -84,6 +85,7 @@ public class User {
      * @return username of the user
      */
     public Boolean getSignedIn() {
+
         return this.signedIn;
     }
 
@@ -111,12 +113,16 @@ public class User {
         this.fullName = fullName;
     }
 
-    public int getTotalSightings() {
-        return this.totalSightings;
+    public int getSightings() {
+        return sightings;
     }
 
-    public void addSighting() {
-        this.totalSightings++;
+    public void setSightings(int sightings) {
+        this.sightings = sightings;
+    }
+
+    public void sightingMade() {
+        this.sightings++;
     }
 }
 

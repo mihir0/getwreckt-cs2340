@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 
 public class RatSighting implements Parcelable {
+
     private String uniqueKey;
     private Date date;
     private String zip;
@@ -17,15 +18,14 @@ public class RatSighting implements Parcelable {
     private String borough;
     private String latitude;
     private String longitude;
-    private String time;
-
     private User owner;
     private boolean isFlagged;
 
     public RatSighting() { }
 
     /**
-     * Creates a new RatSighting using the passed parameters
+     * Creates a new RatSighting with
+     * username {@code username} and password {@code password}.
      * @param uniqueKey the unique id of the new sighting
      * @param date the string date of the sighting
      * @param typeLocation the type of location
@@ -51,8 +51,34 @@ public class RatSighting implements Parcelable {
     }
 
     /**
-     * Creates a new RatSighting using only date, address, borough, location type, key, and gps
-     * coordinates
+     * Creates a new RatSighting with
+     * username {@code username} and password {@code password}.
+     * @param date the date of the sighting
+     * @param typeLocation the type of location
+     * @param zip the zip of location
+     * @param address the address of th sighting
+     * @param city the city of the sighting
+     * @param borough the borough of the sighting
+     * @param latitude the latitude of the sighting
+     * @param longitude the longitude of the sighting
+     */
+    public RatSighting(Date date, String typeLocation,
+                       String zip, String address, String city, String borough, String latitude,
+                       String longitude) {
+        this.date = date;
+        this.typeLocation = typeLocation;
+        this.zip = zip;
+        this.address = address;
+        this.city = city;
+        this.borough = borough;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.uniqueKey = this.generateUniqueKey();
+    }
+
+    /**
+     * Creates new RatSighting without city or zip known
+>>>>>>> cc51000ba90009ddf8bad5fa953bcb7774be89c5
      * @param uniqueKey the unique id of the new sighting
      * @param date the date of the sighting
      * @param typeLocation the type of location
@@ -85,7 +111,6 @@ public class RatSighting implements Parcelable {
         borough = in.readString();
         latitude = in.readString();
         longitude = in.readString();
-        time = in.readString();
     }
 
     @Override
@@ -99,7 +124,6 @@ public class RatSighting implements Parcelable {
         dest.writeString(borough);
         dest.writeString(latitude);
         dest.writeString(longitude);
-        dest.writeString(time);
     }
 
     public static final Parcelable.Creator<RatSighting> CREATOR
@@ -241,6 +265,18 @@ public class RatSighting implements Parcelable {
      */
     public void setZip(String zip){
         this.zip = zip;
+    }
+
+    private User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    private String generateUniqueKey() {
+        return getOwner().getUserName() + this.date + getOwner().getSightings();
     }
 
     @Override
