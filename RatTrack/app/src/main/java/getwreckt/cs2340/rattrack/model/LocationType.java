@@ -23,7 +23,8 @@ public enum LocationType {
     SRO ("Single Room Occupancy (SRO)"),
     SUMMER_CAMP ("Summer Camp"),
     VACANT_BLDNG ("Vacant Building"),
-    VACANT_LOT ("Vacant Lot");
+    VACANT_LOT ("Vacant Lot"),
+    UNKNOWN ("Unknown");
 
     private String name;
 

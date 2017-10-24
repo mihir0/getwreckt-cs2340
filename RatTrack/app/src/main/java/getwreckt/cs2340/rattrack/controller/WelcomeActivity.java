@@ -50,6 +50,8 @@ public class WelcomeActivity extends AppCompatActivity {
             startActivity(toInAppScreen);
         }
 
+        mDataRef.child("ratsightings").setValue(null);
+
     }
 
     /**

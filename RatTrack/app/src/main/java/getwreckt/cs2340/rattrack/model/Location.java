@@ -16,7 +16,7 @@ public class Location implements Parcelable {
     private String latitude;
     private String longitude;
 
-    public Location(String zip, LocationType typeLocation, String address, String city,
+    public Location(LocationType typeLocation, String address, String city, String zip,
                     Borough borough, String latitude, String longitude) {
         this.zip = zip;
         this.typeLocation = typeLocation;
