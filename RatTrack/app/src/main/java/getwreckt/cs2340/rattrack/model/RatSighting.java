@@ -18,7 +18,7 @@ public class RatSighting implements Parcelable {
     private String borough;
     private String latitude;
     private String longitude;
-    private String time;
+    private User owner;
 
     public RatSighting() { }
 
@@ -47,12 +47,36 @@ public class RatSighting implements Parcelable {
         this.borough = borough;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.time = "n/a";
     }
 
     /**
-     * Creates a new Admin, which is a User with special privileges, with
+     * Creates a new RatSighting with
      * username {@code username} and password {@code password}.
+     * @param date the date of the sighting
+     * @param typeLocation the type of location
+     * @param zip the zip of location
+     * @param address the address of th sighting
+     * @param city the city of the sighting
+     * @param borough the borough of the sighting
+     * @param latitude the latitude of the sighting
+     * @param longitude the longitude of the sighting
+     */
+    public RatSighting(String date, String typeLocation,
+                       String zip, String address, String city, String borough, String latitude,
+                       String longitude) {
+        this.date = date;
+        this.typeLocation = typeLocation;
+        this.zip = zip;
+        this.address = address;
+        this.city = city;
+        this.borough = borough;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.uniqueKey = this.generateUniqueKey();
+    }
+
+    /**
+     * Creates new RatSighting without city or zip known
      * @param uniqueKey the unique id of the new sighting
      * @param date the date of the sighting
      * @param typeLocation the type of location
@@ -61,11 +85,10 @@ public class RatSighting implements Parcelable {
      * @param latitude the latitude of the sighting
      * @param longitude the longitude of the sighting
      */
-    public RatSighting(String date, String time, String address,
+    public RatSighting(String date, String address,
                                    String borough, String typeLocation,
                                    String latitude, String longitude, String uniqueKey) {
         this.date = date;
-        this.time = time;
         this.address = address;
         this.borough = borough;
         this.typeLocation = typeLocation;
@@ -86,7 +109,6 @@ public class RatSighting implements Parcelable {
         borough = in.readString();
         latitude = in.readString();
         longitude = in.readString();
-        time = in.readString();
     }
 
     @Override
@@ -100,7 +122,6 @@ public class RatSighting implements Parcelable {
         dest.writeString(borough);
         dest.writeString(latitude);
         dest.writeString(longitude);
-        dest.writeString(time);
     }
 
     public static final Parcelable.Creator<RatSighting> CREATOR
@@ -242,6 +263,18 @@ public class RatSighting implements Parcelable {
      */
     public void setZip(String zip){
         this.zip = zip;
+    }
+
+    private User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    private String generateUniqueKey() {
+        return getOwner().getUserName() + this.date + getOwner().getSightings();
     }
 
     @Override

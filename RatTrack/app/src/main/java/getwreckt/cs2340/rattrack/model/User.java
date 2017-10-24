@@ -8,10 +8,10 @@ import java.security.SecureRandom;
 
 public class User {
     private String fullName;
-    //public String userName;
     private String userName;
     private String userType;
     private Boolean signedIn;
+    private int sightings = 0;
 
     public User() {}
 
@@ -113,6 +113,18 @@ public class User {
      */
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public int getSightings() {
+        return sightings;
+    }
+
+    public void setSightings(int sightings) {
+        this.sightings = sightings;
+    }
+
+    public void sightingMade() {
+        this.sightings++;
     }
 }
 

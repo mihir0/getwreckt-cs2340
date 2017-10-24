@@ -34,6 +34,8 @@ public class MakeSightingActivity extends AppCompatActivity {
     private EditText dateField;
     private EditText timeField;
     private EditText addrField;
+    private EditText cityField;
+    private EditText zipField;
     private Spinner boroughSpinner;
     private Spinner typeLocationSpinner;
     private TextView coordinates;
@@ -58,6 +60,8 @@ public class MakeSightingActivity extends AppCompatActivity {
         dateField = (EditText) findViewById(R.id.date_input);
         timeField = (EditText) findViewById(R.id.time_input);
         addrField = (EditText) findViewById(R.id.address_input);
+        cityField = (EditText) findViewById(R.id.city_input);
+        zipField = (EditText) findViewById(R.id.zip_input);
 
         boroughSpinner = (Spinner) findViewById(R.id.borough_input);
         typeLocationSpinner = (Spinner) findViewById(R.id.typeLocation_input);
@@ -107,11 +111,12 @@ public class MakeSightingActivity extends AppCompatActivity {
                 typeLocations.add(r.getTypeLocation());
             }
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, boroughs);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,
+                boroughs);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         boroughSpinner.setAdapter(adapter);
 
-        adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, typeLocations);
+        adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, typeLocations);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeLocationSpinner.setAdapter(adapter);
 
@@ -131,6 +136,8 @@ public class MakeSightingActivity extends AppCompatActivity {
                 String date = dateField.getText().toString();
                 String time = timeField.getText().toString();
                 String address = addrField.getText().toString();
+                String city = cityField.getText().toString();
+                String zip = zipField.getText().toString();
                 String latitude = latitudeField.getText().toString();
                 String longitude = longtudeField.getText().toString();
 
@@ -140,7 +147,7 @@ public class MakeSightingActivity extends AppCompatActivity {
 
                 String uniqueKey = numberOfSightings + time + "";
 
-                if (!isValidSighting(date, time, address, borough, typeLocation,
+                if (!isValidSighting(date, address, city, zip, borough, typeLocation,
                         latitude, longitude, uniqueKey)) {
                     dateField.setError("Must fill all fields with valid sighting details.");
                 } else {
@@ -170,14 +177,13 @@ public class MakeSightingActivity extends AppCompatActivity {
     /**
      * Checks whether {@code user} and {@code pass} are nonempty strings
      * @param address the username to check
-     * @param time the password to check
      * @return whether {@code user} and {@code pass} are not empty strings
      */
-    public boolean isValidSighting(String date, String time, String address,
+    public boolean isValidSighting(String date, String address, String city, String zip,
                                    String borough, String typeLocation,
                                    String latitude, String longitude,
                                    String uniqueKey) {
-        return !date.equals("") && !time.equals("") && !address.equals("")
+        return !date.equals("") && !address.equals("")
                 && !address.equals("") && !borough.equals("") && !typeLocation.equals("")
                 && !latitude.equals("") && !longitude.equals("") && !uniqueKey.equals("");
     }
