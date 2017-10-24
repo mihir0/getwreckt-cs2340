@@ -2,6 +2,7 @@ package getwreckt.cs2340.rattrack.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 /**
  * Created by Patel on 10/5/2017.
@@ -61,9 +62,10 @@ public class RatSighting implements Parcelable {
      * @param latitude the latitude of the sighting
      * @param longitude the longitude of the sighting
      */
-    public RatSighting(String date, String typeLocation,
-                       String zip, String address, String city, String borough, String latitude,
-                       String longitude) {
+    public RatSighting(User owner, String date, String typeLocation, String zip, String address,
+                       String city, String borough, String latitude, String longitude) {
+        this.owner = owner;
+        Log.d("UserNull RatSighting", owner.getUserName());
         this.date = date;
         this.typeLocation = typeLocation;
         this.zip = zip;
@@ -72,7 +74,7 @@ public class RatSighting implements Parcelable {
         this.borough = borough;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.uniqueKey = this.generateUniqueKey();
+        this.uniqueKey = generateUniqueKey();
     }
 
     /**
@@ -274,7 +276,11 @@ public class RatSighting implements Parcelable {
     }
 
     private String generateUniqueKey() {
-        return getOwner().getUserName() + this.date + getOwner().getSightings();
+        String uname = Model.getCurrentUser().getUserName();
+        String user = uname.substring(0, uname.indexOf('.')) + uname.substring(uname.indexOf('.')
+                + 1);
+        owner.sightingMade();
+        return user + this.date + getOwner().getSightings();
     }
 
     @Override

@@ -48,7 +48,8 @@ public class InAppActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (mAuth.getCurrentUser() != null) {
-                    Model.setCurrentUser(dataSnapshot.child(mAuth.getCurrentUser().getUid()).getValue(User.class));
+                    Model.setCurrentUser(dataSnapshot.child(mAuth.getCurrentUser().getUid())
+                            .getValue(User.class));
                     updateUI(mAuth.getCurrentUser());
                 }
             }

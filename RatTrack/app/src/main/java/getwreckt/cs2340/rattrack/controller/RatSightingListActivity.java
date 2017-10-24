@@ -95,7 +95,7 @@ public class RatSightingListActivity extends AppCompatActivity {
                             layoutManager.scrollToPosition(position);
                         }
                     });
-
+                    
                     scrollBottomBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

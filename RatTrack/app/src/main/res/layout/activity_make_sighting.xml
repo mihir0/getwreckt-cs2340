@@ -11,7 +11,9 @@
         android:ems="10"
         android:hint="Date of Incident"
         android:inputType="date"
-        android:paddingBottom="20dp" />
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp" />
 
     <EditText
         android:id="@+id/time_input"
@@ -20,7 +22,9 @@
         android:ems="10"
         android:hint="Time of Incident"
         android:inputType="time"
-        android:paddingBottom="20dp" />
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp" />
 
     <EditText
         android:id="@+id/address_input"
@@ -28,17 +32,19 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Address of Incident"
-        android:inputType="textPostalAddress"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp" />
+        android:inputType="text"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp" />
 
     <EditText
         android:id="@+id/city_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="City"
-        android:inputType="textMultiLine"
+        android:inputType="text"
         android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
         android:paddingTop="10dp"
         android:textSize="18sp" />
 
@@ -49,6 +55,7 @@
         android:hint="Zip Code"
         android:inputType="number"
         android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
         android:paddingTop="10dp"
         android:textSize="18sp" />
 
@@ -58,12 +65,19 @@
         android:layout_height="wrap_content"
         android:paddingBottom="20dp" />
 
+    <Spinner
+        android:id="@+id/typeLocation_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/coordinates_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:paddingBottom="20dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
         android:text="Coordinates"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
@@ -72,24 +86,26 @@
         android:id="@+id/latitude_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/make_button"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Latitude"
         android:inputType="number"
         android:paddingBottom="20dp"
-        android:layout_below="@+id/make_button"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp" />
+        android:paddingLeft="5dp" />
 
     <EditText
         android:id="@+id/longitude_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:hint="Longitude"
         android:inputType="number"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="26dp" />
+        android:paddingLeft="5dp" />
 
     <Button
         android:id="@+id/make_button"
@@ -98,6 +114,6 @@
         android:text="Make Sighting"
         android:layout_above="@+id/longitude_input"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="79dp" />
+        android:layout_marginBottom="5dp" />
 
 </LinearLayout>

@@ -46,8 +46,6 @@ public class MakeSightingActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
     private FirebaseAuth mAuth;
 
-    public static int numberOfSightings;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -76,6 +74,7 @@ public class MakeSightingActivity extends AppCompatActivity {
 
 
         ArrayList<String> boroughs = new ArrayList<>();
+        boroughs.add("Unknown");
         boroughs.add("Bronx");
         boroughs.add("Brooklyn");
         boroughs.add("Manhattan");
@@ -83,6 +82,7 @@ public class MakeSightingActivity extends AppCompatActivity {
         boroughs.add("Staten Island");
 
         ArrayList<String> typeLocations = new ArrayList<>();
+        typeLocations.add("Unknown");
         typeLocations.add("1-2 Family Dwelling");
         typeLocations.add("1-2 Family Mixed Use Building");
         typeLocations.add("3+ Family Apt. Building");
@@ -103,14 +103,6 @@ public class MakeSightingActivity extends AppCompatActivity {
         typeLocations.add("Vacant Building");
         typeLocations.add("Vacant Lot");
 
-        for (RatSighting r: sightings) {
-            if (!boroughs.contains(r.getBorough())) {
-                boroughs.add(r.getBorough());
-            }
-            if (!typeLocations.contains(r.getTypeLocation())) {
-                typeLocations.add(r.getTypeLocation());
-            }
-        }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,
                 boroughs);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -143,22 +135,17 @@ public class MakeSightingActivity extends AppCompatActivity {
 
                 String borough = boroughSpinner.getSelectedItem().toString();
                 String typeLocation = typeLocationSpinner.getSelectedItem().toString();
-               // String uniqueKey = Model.ratSightings.size() + "";
 
-                String uniqueKey = numberOfSightings + time + "";
-
-                if (!isValidSighting(date, address, city, zip, borough, typeLocation,
-                        latitude, longitude, uniqueKey)) {
+                if (!isValidSighting(date, typeLocation, zip, address, city, borough, latitude,
+                        longitude)) {
                     dateField.setError("Must fill all fields with valid sighting details.");
                 } else {
 
                     try {
-                        _sighting = new RatSighting(date, time, address,
-                                borough, typeLocation,
-                                latitude, longitude, uniqueKey);
+                        _sighting = new RatSighting(Model.getCurrentUser(), date, typeLocation, zip,
+                                address, city, borough, latitude, longitude);
 
-
-                        numberOfSightings++;
+                        Log.d("UserNull MakeSighting", Model.getCurrentUser().getUserName());
 
                         mDataRef.child("ratsightings").child(_sighting.getUniqueKey()).setValue(_sighting);
 
@@ -180,11 +167,10 @@ public class MakeSightingActivity extends AppCompatActivity {
      * @return whether {@code user} and {@code pass} are not empty strings
      */
     public boolean isValidSighting(String date, String address, String city, String zip,
-                                   String borough, String typeLocation,
-                                   String latitude, String longitude,
-                                   String uniqueKey) {
+                                   String borough, String typeLocation, String latitude,
+                                   String longitude) {
         return !date.equals("") && !address.equals("")
                 && !address.equals("") && !borough.equals("") && !typeLocation.equals("")
-                && !latitude.equals("") && !longitude.equals("") && !uniqueKey.equals("");
+                && !latitude.equals("") && !longitude.equals("");
     }
 }
