@@ -18,22 +18,39 @@ import java.util.ArrayList;
 
 /**
  * Created by aguy on 10/8/17.
+ * Model Facade. Instantiated on startup. Keeps track of the current user. Holds the list of
+ * all RatSightings.
  */
 
 public class Model {
     private Model _model = new Model();
     public static ArrayList<RatSighting> ratSightings = new ArrayList<>();
+    private static User currentUser;
 
     private static DatabaseReference mDataRef;
     private static FirebaseAuth mAuth;
 
+    /**
+     * Creates a new instance of model. Sets the Current instance of the Database and author.
+     */
     private Model() {
         mDataRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
     }
 
-    private static User currentUser;
+    /**
+     * returns the logged in user
+     * @return Logged in user
+     */
+    public static User getCurrentUser() {
+        return currentUser;
+    }
 
-    public static User getCurrentUser() { return currentUser; }
-    public static void setCurrentUser(User user) { currentUser = user; }
+    /**
+     * Sets the Model's current user to passed in user
+     * @param user logged in user
+     */
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
 }
