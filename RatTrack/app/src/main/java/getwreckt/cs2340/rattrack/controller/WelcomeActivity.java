@@ -39,7 +39,8 @@ public class WelcomeActivity extends AppCompatActivity {
         initLogin();
         initRegister();
         mAuth = FirebaseAuth.getInstance();
-        if (!persistenceEnabled) {
+        //mAuth.signOut(); For debugging purposes
+        if (persistenceEnabled) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             persistenceEnabled = false;
         }
