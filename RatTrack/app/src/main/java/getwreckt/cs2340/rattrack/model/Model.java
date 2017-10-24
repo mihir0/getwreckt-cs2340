@@ -36,4 +36,6 @@ public class Model {
 
     public static User getCurrentUser() { return currentUser; }
     public static void setCurrentUser(User user) { currentUser = user; }
+
+    public static boolean persistenceEnabled = true;
 }
