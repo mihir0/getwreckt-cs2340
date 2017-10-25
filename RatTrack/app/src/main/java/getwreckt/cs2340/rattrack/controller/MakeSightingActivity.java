@@ -140,7 +140,6 @@ public class MakeSightingActivity extends AppCompatActivity {
                         longitude)) {
                     dateField.setError("Must fill all fields with valid sighting details.");
                 } else {
-
                     try {
                         _sighting = new RatSighting(Model.getCurrentUser(), date, typeLocation, zip,
                                 address, city, borough, latitude, longitude);
@@ -155,10 +154,8 @@ public class MakeSightingActivity extends AppCompatActivity {
                         dateField.setError(iae.getMessage());
                     }
                 }
-
             }
         });
-
     }
 
     /**

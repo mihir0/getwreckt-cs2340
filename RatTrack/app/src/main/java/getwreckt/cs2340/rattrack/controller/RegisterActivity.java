@@ -118,6 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            Model.setCurrentUser(u);
                             mDataRef.child("users").child(mAuth.getCurrentUser().getUid()).setValue(u);
                             updateUI(mAuth.getCurrentUser());
                         } else {
@@ -125,7 +126,6 @@ public class RegisterActivity extends AppCompatActivity {
                             alertDialogBuilder.setMessage(task.getException().toString().split(": ")[1]);
                             AlertDialog alertDialog = alertDialogBuilder.create();
                             alertDialog.show();
-                            int i = 0;
                         }
                     }
                 });

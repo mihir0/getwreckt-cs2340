@@ -47,4 +47,6 @@ public class Model {
      * @param user the current user logged in on a particular device
      */
     public static void setCurrentUser(User user) { currentUser = user; }
+
+    public static boolean persistenceEnabled = true;
 }

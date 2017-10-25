@@ -38,11 +38,11 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         initLogin();
         initRegister();
-        mAuth = FirebaseAuth.getInstance();
-        if (!persistenceEnabled) {
+        if (Model.persistenceEnabled) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            persistenceEnabled = false;
+            Model.persistenceEnabled = false;
         }
+        mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
         if (mAuth.getCurrentUser() != null) {
             Intent toInAppScreen = new Intent(WelcomeActivity.this,
