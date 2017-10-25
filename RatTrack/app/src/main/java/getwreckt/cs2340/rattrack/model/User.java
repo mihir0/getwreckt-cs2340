@@ -90,7 +90,6 @@ public class User {
 
         return this.signedIn;
     }
-
     /**
      * Set username of User to {@code userName}
      * @param signedIn the username to change
@@ -115,16 +114,29 @@ public class User {
         this.fullName = fullName;
     }
 
+    /**
+     * Get number of sightings of user
+     * @return number of sightings user has made
+     */
     public int getSightings() {
         return sightings;
     }
-
+    /**
+     * Set number of sightings of user
+     * @param sightings number sightings user has made
+     */
     public void setSightings(int sightings) {
         this.sightings = sightings;
     }
 
+    /**
+     * increments number of sightings user has made
+     *
+     */
     public void sightingMade() {
         this.sightings++;
     }
+
+
 }
 

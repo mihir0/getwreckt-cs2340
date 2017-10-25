@@ -27,13 +27,24 @@ public class Model {
     private static DatabaseReference mDataRef;
     private static FirebaseAuth mAuth;
 
+    /**
+     * constructor for a model
+     */
     private Model() {
         mDataRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
     }
 
     private static User currentUser;
-
+    /**
+     * get the current user
+     * @return user currently logged in on a particular device
+     */
     public static User getCurrentUser() { return currentUser; }
+
+    /**
+     * Set the current user
+     * @param user the current user logged in on a particular device
+     */
     public static void setCurrentUser(User user) { currentUser = user; }
 }
