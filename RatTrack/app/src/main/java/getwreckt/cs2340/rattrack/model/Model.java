@@ -31,7 +31,7 @@ public class Model {
     private static FirebaseAuth mAuth;
 
     /**
-     * Creates a new instance of model. Sets the Current instance of the Database and author.
+     * constructor for a model
      */
     private Model() {
         mDataRef = FirebaseDatabase.getInstance().getReference();

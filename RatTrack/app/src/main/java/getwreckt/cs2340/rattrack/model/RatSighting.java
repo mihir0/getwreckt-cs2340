@@ -21,6 +21,9 @@ public class RatSighting implements Parcelable {
     private String longitude;
     private User owner;
 
+    /**
+     * no arg constructor of a rat sighting
+     */
     public RatSighting() { }
 
     /**
@@ -100,7 +103,10 @@ public class RatSighting implements Parcelable {
         this.zip = "n/a";
         this.uniqueKey = uniqueKey;
     }
-
+    /**
+     * Creates new RatSighting without city or zip known
+     * @param in the unique id of the new sighting
+     */
     private RatSighting(Parcel in) {
         uniqueKey = in.readString();
         date = in.readString();
@@ -267,14 +273,25 @@ public class RatSighting implements Parcelable {
         this.zip = zip;
     }
 
+    /**
+     * Gets the owner of the sighting
+     * @return the owner
+     */
     private User getOwner() {
         return owner;
     }
-
+    /**
+     * Sets the owner
+     * @param owner the zip to set
+     */
     public void setOwner(User owner) {
         this.owner = owner;
     }
 
+    /**
+     * makes a unique key for a new sighting
+     * @return the new key
+     */
     private String generateUniqueKey() {
         String uname = Model.getCurrentUser().getUserName();
         String user = uname.substring(0, uname.indexOf('.')) + uname.substring(uname.indexOf('.')

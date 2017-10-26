@@ -113,24 +113,23 @@ public class User {
     }
 
     /**
-     * Retrieves the total rat sightings made by this user
-     * @return total rat RatSightings
+     * Get number of sightings of user
+     * @return number of sightings user has made
      */
     public int getSightings() {
         return sightings;
     }
-
-
     /**
-     * sets the total sights to passed in argument
-     * @param sightings total number of sightings made
+     * Set number of sightings of user
+     * @param sightings number sightings user has made
      */
     public void setSightings(int sightings) {
         this.sightings = sightings;
     }
 
     /**
-     * Increments this user's total sightings by 1
+     * increments number of sightings user has made
+     *
      */
     public void sightingMade() {
         this.sightings++;
