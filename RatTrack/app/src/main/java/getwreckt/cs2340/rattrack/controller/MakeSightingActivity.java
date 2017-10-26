@@ -102,7 +102,7 @@ public class MakeSightingActivity extends AppCompatActivity {
         typeLocations.add("Summer Camp");
         typeLocations.add("Vacant Building");
         typeLocations.add("Vacant Lot");
-
+/**
         for (RatSighting r: sightings) {
             if (!boroughs.contains(r.getBorough())) {
                 boroughs.add(r.getBorough());
@@ -111,6 +111,8 @@ public class MakeSightingActivity extends AppCompatActivity {
                 typeLocations.add(r.getTypeLocation());
             }
         }
+
+ **/
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,
                 boroughs);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -50,7 +50,8 @@ public class WelcomeActivity extends AppCompatActivity {
             startActivity(toInAppScreen);
         }
 
-        mDataRef.child("ratsightings").setValue(null);
+        //deletes ratsightings?
+        //mDataRef.child("ratsightings").setValue(null);
 
     }
 
