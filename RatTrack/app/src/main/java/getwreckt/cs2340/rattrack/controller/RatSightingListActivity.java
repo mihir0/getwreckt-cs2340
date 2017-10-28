@@ -62,8 +62,8 @@ public class RatSightingListActivity extends AppCompatActivity {
     }
 
     private int endIndex(int position) {
-        return position + 10 > Model.ratSightings.size() ?
-                Model.ratSightings.size() :
+        return position + 10 > SightingManager.ratSightings.size() ?
+                SightingManager.ratSightings.size() :
                 position + 10;
     }
 
@@ -73,13 +73,13 @@ public class RatSightingListActivity extends AppCompatActivity {
         public SimpleItemRecyclerViewAdapter(final DatabaseReference ref) {
             ref.child("ratsightings").addValueEventListener(new ValueEventListener() {
                 public void onDataChange(DataSnapshot snapshot) {
-                    Model.ratSightings.clear();
+                    SightingManager.ratSightings.clear();
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                         RatSighting ratSighting = postSnapshot.getValue(RatSighting.class);
-                        Model.ratSightings.add(ratSighting);
+                        SightingManager.ratSightings.add(ratSighting);
                     }
                     ref.child("ratsightings").keepSynced(true);
-                    valuesToShow = Model.ratSightings.subList(position, endIndex(position));
+                    valuesToShow = SightingManager.ratSightings.subList(position, endIndex(position));
                     notifyDataSetChanged();
 
 
@@ -90,7 +90,7 @@ public class RatSightingListActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             position = 0;
-                            valuesToShow = Model.ratSightings.subList(position, endIndex(position));
+                            valuesToShow = SightingManager.ratSightings.subList(position, endIndex(position));
                             notifyDataSetChanged();
                             layoutManager.scrollToPosition(position);
                         }
@@ -99,8 +99,8 @@ public class RatSightingListActivity extends AppCompatActivity {
                     scrollBottomBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            position = Model.ratSightings.size() / 10 * 10;
-                            valuesToShow = Model.ratSightings.subList(position, endIndex(position));
+                            position = SightingManager.ratSightings.size() / 10 * 10;
+                            valuesToShow = SightingManager.ratSightings.subList(position, endIndex(position));
                             notifyDataSetChanged();
                             layoutManager.scrollToPosition(position);
                         }
@@ -115,7 +115,7 @@ public class RatSightingListActivity extends AppCompatActivity {
                             position = position - 10 < 0 ?
                                     0 :
                                     position - 10;
-                            valuesToShow = Model.ratSightings.subList(position, endIndex(position));
+                            valuesToShow = SightingManager.ratSightings.subList(position, endIndex(position));
                             notifyDataSetChanged();
                             layoutManager.scrollToPosition(position);
                         }
@@ -124,10 +124,10 @@ public class RatSightingListActivity extends AppCompatActivity {
                     scrollDownBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            position = position + 10 > Model.ratSightings.size() ?
+                            position = position + 10 > SightingManager.ratSightings.size() ?
                                     position :
                                     position + 10;
-                            valuesToShow = Model.ratSightings.subList(position, endIndex(position));
+                            valuesToShow = SightingManager.ratSightings.subList(position, endIndex(position));
                             notifyDataSetChanged();
                             layoutManager.scrollToPosition(position);
                         }
@@ -152,7 +152,7 @@ public class RatSightingListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = valuesToShow.get(position);
             holder.mIdView.setText(valuesToShow.get(position).getUniqueKey());
-            holder.mContentView.setText(valuesToShow.get(position).getCity());
+            holder.mContentView.setText(valuesToShow.get(position).getLocation().getCity());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override

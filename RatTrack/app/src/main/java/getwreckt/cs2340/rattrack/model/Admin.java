@@ -22,6 +22,6 @@ public class Admin extends User {
      * @param username
      */
     public Admin(String fullName, String username) {
-        super(fullName, username);
+        super(fullName, username, "Admin");
     }
 }
