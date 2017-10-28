@@ -41,15 +41,43 @@ public class SightingManager {
         int daySince = curDay;
         int hourSince = curHours;
         if (timeUnit.equals("Months")) {
+
             if (numTimeUnitsAgo >= curMonth) {
                 monthSince = 12 - ((numTimeUnitsAgo - curMonth) % 12);
             } else {
                 monthSince = curMonth - numTimeUnitsAgo;
             }
 
+            int currentMonth = curMonth;
+            int newMonth = 0;
+            int currentYear = curYear;
+            while (numTimeUnitsAgo > 0) {
+                if (currentMonth == 1) {
+                    newMonth = 12;
+                    currentYear = currentYear - 1;
+                } else {
+                    newMonth = currentMonth - 1;
+                }
+                currentMonth = newMonth;
+                numTimeUnitsAgo--;
+            }
+            yearSince = currentYear;
+
         } else if (timeUnit.equals("Years")) {
             yearSince = curYear - numTimeUnitsAgo;
         } else if (timeUnit.equals("Days")) {
+            int currentHour = curHours;
+            int currentDay = curDay;
+            int numTimeUnitsAgoInHours = numTimeUnitsAgo * 24;
+            while (numTimeUnitsAgoInHours > 0) {
+                if (currentHour == 1) {
+                    currentHour = 24;
+                    currentDay = currentDay - 1;
+                } else {
+                    currentHour--;
+                }
+                numTimeUnitsAgoInHours--;
+            }
             daySince = curDay - numTimeUnitsAgo;
         } else if (timeUnit.equals("Hours")) {
             hourSince = curHours - numTimeUnitsAgo;
@@ -72,6 +100,22 @@ public class SightingManager {
             int year = Integer.parseInt(y);
             int day = Integer.parseInt(d);
             int month = Integer.parseInt(m);
+            if (timeUnit.equals("Months")) {
+                if (year > yearSince) {
+                    dateFilteredRatSightings.add(r);
+                } else if (year == yearSince && month >= monthSince) {
+                    dateFilteredRatSightings.add(r);
+                }
+            } else if (timeUnit.equals("Years")) {
+                if (year > yearSince) {
+                    dateFilteredRatSightings.add(r);
+                } else if (year == yearSince && month >= monthSince) {
+                    dateFilteredRatSightings.add(r);
+                }
+            } else if (timeUnit.equals("Days")) {
+
+            } else if (timeUnit.equals("Hours")) {
+            }
 
         }
 
