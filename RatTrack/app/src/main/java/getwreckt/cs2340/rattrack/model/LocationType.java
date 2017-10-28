@@ -9,6 +9,7 @@ public enum LocationType {
     FAM_1_2_MIXED ("1-2 Family Mixed Use Building"),
     FAM_3_APT ("3+ Family Apt. Building"),
     FAM_3_MIXED ("3+ Family Mixed Use Building"),
+    CATCH_BASIN_SEWER ("Catch Basin/Sewer"),
     COMMERCIAL_BLDNG ("Commercial Building"),
     CONSTRUCTION_SITE ("Construction Site"),
     NURSERY ("Day Care/Nursery"),
@@ -24,11 +25,26 @@ public enum LocationType {
     SUMMER_CAMP ("Summer Camp"),
     VACANT_BLDNG ("Vacant Building"),
     VACANT_LOT ("Vacant Lot"),
-    UNKNOWN ("Unknown");
+    UNKNOWN ("Unknown"),
+    NULL ("");
 
     private String name;
 
     LocationType(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static LocationType get(String name) {
+        for (LocationType locationType : values()) {
+            if (locationType.getName().equals(name)) {
+                return locationType;
+            }
+        }
+
+        throw new IllegalArgumentException(name);
     }
 }

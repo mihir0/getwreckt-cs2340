@@ -58,16 +58,16 @@ public class SightingDetailActivity extends AppCompatActivity {
         //set details
         uniqueKeyField.setText(sighting.getUniqueKey());
         dateField.setText("Date: " + sighting.getDate());
-        if (sighting.getAddress().equals("")) {
+        if (sighting.getLocation().getAddress().equals("")) {
             addrField.setText("N/A");
         } else {
-            addrField.setText(sighting.getAddress());
+            addrField.setText(sighting.getLocation().getAddress());
         }
-        cityField.setText(sighting.getCity());
-        zipField.setText(sighting.getZip());
-        boroughField.setText(sighting.getBorough());
-        coordinateField.setText("Coordinates: (" + sighting.getLatitude() + ", "
-                + sighting.getLongitude() + ")");
+        cityField.setText(sighting.getLocation().getCity());
+        zipField.setText(sighting.getLocation().getZip());
+        boroughField.setText(sighting.getLocation().getBorough().getName());
+        coordinateField.setText("Coordinates: (" + sighting.getLocation().getLatitude() + ", "
+                + sighting.getLocation().getLongitude() + ")");
 
         setTitle("Sighting Details");
 
