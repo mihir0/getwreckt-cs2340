@@ -41,6 +41,7 @@ public class SightingManager {
         int daySince = curDay;
         int hourSince = curHours;
         if (timeUnit.equals("Months")) {
+            //the user can view sightings since 30 months ago at maximum
 
             if (numTimeUnitsAgo >= curMonth) {
                 monthSince = 12 - ((numTimeUnitsAgo - curMonth) % 12);
@@ -64,22 +65,105 @@ public class SightingManager {
             yearSince = currentYear;
 
         } else if (timeUnit.equals("Years")) {
+            //the user can view sightings since 3-4 years ago at maximum
             yearSince = curYear - numTimeUnitsAgo;
         } else if (timeUnit.equals("Days")) {
+            //the user can view sightings since 50 days ago at maximum
+            boolean monthIs31Days = false;
+            if (curMonth == 5 || curMonth == 1 || curMonth == 3 || curMonth == 7
+                    || curMonth == 8 || curMonth == 10 || curMonth == 12){
+                monthIs31Days = true;
+            }
             int currentHour = curHours;
             int currentDay = curDay;
             int numTimeUnitsAgoInHours = numTimeUnitsAgo * 24;
             while (numTimeUnitsAgoInHours > 0) {
                 if (currentHour == 1) {
                     currentHour = 24;
-                    currentDay = currentDay - 1;
+                    if (currentDay == 1) {
+                        if (monthIs31Days) {
+                            if (curMonth == 8) {
+                                currentDay = 31;
+                                monthIs31Days = true;
+                                curMonth = 7;
+                            } else if (curMonth == 1) {
+                                currentDay = 31;
+                                monthIs31Days = true;
+                                curMonth = 12;
+                                curYear = curYear - 1;
+                            } else if (curMonth == 3) {
+                                currentDay = 28;
+                                monthIs31Days = false;
+                                curMonth = 2;
+                            } else {
+                                currentDay = 30;
+                                monthIs31Days = false;
+                                curMonth = curMonth - 1;
+                            }
+                        } else {
+                            currentDay = 31;
+                            monthIs31Days = true;
+                            curMonth = curMonth - 1;
+                        }
+                    } else {
+                        currentDay = currentDay - 1;
+                    }
                 } else {
                     currentHour--;
                 }
                 numTimeUnitsAgoInHours--;
             }
-            daySince = curDay - numTimeUnitsAgo;
+            monthSince = curMonth;
+            daySince = currentDay;
+            yearSince = curYear;
         } else if (timeUnit.equals("Hours")) {
+            //the user can view sightings since 24 hours ago at maximum
+            boolean monthIs31Days = false;
+            if (curMonth == 5 || curMonth == 1 || curMonth == 3 || curMonth == 7
+                    || curMonth == 8 || curMonth == 10 || curMonth == 12){
+                monthIs31Days = true;
+            }
+            int currentHour = curHours;
+            int currentDay = curDay;
+            while (numTimeUnitsAgo > 0) {
+                if (currentHour == 1) {
+                    currentHour = 24;
+                    if (currentDay == 1) {
+                        if (monthIs31Days) {
+                            if (curMonth == 8) {
+                                currentDay = 31;
+                                monthIs31Days = true;
+                                curMonth = 7;
+                            } else if (curMonth == 1) {
+                                currentDay = 31;
+                                monthIs31Days = true;
+                                curMonth = 12;
+                                curYear = curYear - 1;
+                            } else if (curMonth == 3) {
+                                currentDay = 28;
+                                monthIs31Days = false;
+                                curMonth = 2;
+                            } else {
+                                currentDay = 30;
+                                monthIs31Days = false;
+                                curMonth = curMonth - 1;
+                            }
+                        } else {
+                            currentDay = 31;
+                            monthIs31Days = true;
+                            curMonth = curMonth - 1;
+                        }
+                    } else {
+                        currentDay = currentDay - 1;
+                    }
+                } else {
+                    currentHour--;
+                }
+                numTimeUnitsAgo--;
+            }
+            monthSince = curMonth;
+            daySince = currentDay;
+            yearSince = curYear;
             hourSince = curHours - numTimeUnitsAgo;
         }
 
@@ -113,8 +197,17 @@ public class SightingManager {
                     dateFilteredRatSightings.add(r);
                 }
             } else if (timeUnit.equals("Days")) {
-
+                if (year > yearSince) {
+                    dateFilteredRatSightings.add(r);
+                } else if (year == yearSince) {
+                    if (month >= monthSince) {
+                        if (day <= daySince) {
+                            dateFilteredRatSightings.add(r);
+                        }
+                    }
+                }
             } else if (timeUnit.equals("Hours")) {
+
             }
 
         }
