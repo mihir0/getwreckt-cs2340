@@ -14,14 +14,14 @@ import java.util.Locale;
  */
 
 public class SightingManager {
-    private static List<RatSighting> ratSightings = new ArrayList<>();
+    public static List<RatSighting> ratSightings = new ArrayList<>();
     /**
      * Filters and returns sightings which fall within the given date range
      * @param numTimeUnitsAgo the username to check
      * @param timeUnit the password to check
      * @return list of ratSightings which are inside of the dates range
      */
-    public List<RatSighting> dateFilter(int numTimeUnitsAgo, String timeUnit) {
+    public static List<RatSighting> dateFilter(int numTimeUnitsAgo, String timeUnit) {
         // assigns the current day and time as a reference point
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.US);
@@ -84,7 +84,7 @@ public class SightingManager {
         }
 
         ArrayList<RatSighting> dateFilteredRatSightings = new ArrayList<>();
-        for (RatSighting r: Model.ratSightings) {
+        for (RatSighting r: ratSightings) {
             String date = r.getDate().toString();
             String mdy = date.split(" ")[0];
             String hms = date.split(" ")[1];
@@ -120,7 +120,7 @@ public class SightingManager {
         }
 
 
-        return new ArrayList<RatSighting>();
+        return dateFilteredRatSightings;
     }
 
     //

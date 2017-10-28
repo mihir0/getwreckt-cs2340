@@ -18,7 +18,7 @@ public class RatSighting implements Parcelable {
     public RatSighting() { }
 
     /**
-     * Creates a new RatSighting with
+     * Creates a new RatSighting using current user as the owner
      * username {@code username} and password {@code password}.
      * @param uniqueKey the unique id of the new sighting
      * @param date the string date of the sighting
@@ -31,7 +31,7 @@ public class RatSighting implements Parcelable {
      * @param longitude the longitude of the sighting
      */
     public RatSighting(String uniqueKey, String date, String typeLocation,
-                       String address, String city, String zip, String borough, String latitude,
+                       String zip, String address, String city, String borough, String latitude,
                        String longitude) {
         this.uniqueKey = uniqueKey;
         this.date = new Date(date);

@@ -10,7 +10,8 @@ public class User {
     private String fullName;
     private String userName;
     private String userType;
-    private Boolean signedIn;
+    private boolean signedIn;
+    private boolean isLocked;
     private int sightings = 0;
 
     public User() {}
@@ -119,6 +120,22 @@ public class User {
 
     public void setSightings(int sightings) {
         this.sightings = sightings;
+    }
+
+    public boolean isSignedIn() {
+        return signedIn;
+    }
+
+    public void setSignedIn(boolean signedIn) {
+        this.signedIn = signedIn;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
     }
 
     public void sightingMade() {
