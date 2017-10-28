@@ -126,39 +126,6 @@ public class SightingManager {
             int currentHour = curHours;
             int currentDay = curDay;
             while (numTimeUnitsAgo > 0) {
-                if (currentHour == 1) {
-                    currentHour = 24;
-                    if (currentDay == 1) {
-                        if (monthIs31Days) {
-                            if (curMonth == 8) {
-                                currentDay = 31;
-                                monthIs31Days = true;
-                                curMonth = 7;
-                            } else if (curMonth == 1) {
-                                currentDay = 31;
-                                monthIs31Days = true;
-                                curMonth = 12;
-                                curYear = curYear - 1;
-                            } else if (curMonth == 3) {
-                                currentDay = 28;
-                                monthIs31Days = false;
-                                curMonth = 2;
-                            } else {
-                                currentDay = 30;
-                                monthIs31Days = false;
-                                curMonth = curMonth - 1;
-                            }
-                        } else {
-                            currentDay = 31;
-                            monthIs31Days = true;
-                            curMonth = curMonth - 1;
-                        }
-                    } else {
-                        currentDay = currentDay - 1;
-                    }
-                } else {
-                    currentHour--;
-                }
                 numTimeUnitsAgo--;
             }
             monthSince = curMonth;
@@ -211,8 +178,6 @@ public class SightingManager {
             }
 
         }
-
-
         return dateFilteredRatSightings;
     }
 
