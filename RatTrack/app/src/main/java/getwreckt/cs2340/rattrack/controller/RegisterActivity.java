@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText userField;
     private EditText fullNameField;
-    private EditText passField;
+    private TextInputEditText passField;
     private Button registerButn;
     private Button cancelButn;
     private Spinner userTypeSpinner;
@@ -70,8 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
          * Grab dialog widgets
          */
         fullNameField = (EditText) findViewById(R.id.full_name);
-        userField = (EditText) findViewById(R.id.username);
-        passField = (EditText) findViewById(R.id.password);
+        userField = (EditText) findViewById(R.id.email);
+        passField = (TextInputEditText) findViewById(R.id.password);
 
         userTypeSpinner = (Spinner) findViewById(R.id.user_type_spinner);
 
