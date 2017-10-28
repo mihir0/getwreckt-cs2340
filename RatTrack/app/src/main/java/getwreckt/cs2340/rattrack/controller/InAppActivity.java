@@ -35,7 +35,7 @@ public class InAppActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
     private Button startButn;
     private Button makeSightingButn;
-
+    private Button mapBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +93,16 @@ public class InAppActivity extends AppCompatActivity {
                 Intent toMakeSighting = new Intent(InAppActivity.this,
                         MakeSightingActivity.class);
                 startActivity(toMakeSighting);
+            }
+        });
+
+        mapBtn = (Button) findViewById(R.id.map);
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toRatSightingMap = new Intent(InAppActivity.this,
+                        RatSightingMapActivity.class);
+                startActivity(toRatSightingMap);
             }
         });
 
