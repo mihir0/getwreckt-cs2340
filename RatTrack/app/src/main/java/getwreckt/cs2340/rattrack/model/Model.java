@@ -23,17 +23,26 @@ import java.util.ArrayList;
 public class Model {
     private Model _model = new Model();
     public static ArrayList<RatSighting> ratSightings = new ArrayList<>();
+    private static User currentUser;
 
     private static DatabaseReference mDataRef;
     private static FirebaseAuth mAuth;
 
+    /**
+     * constructor for a model
+     */
     private Model() {
         mDataRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
     }
 
-    private static User currentUser;
-
-    public static User getCurrentUser() { return currentUser; }
+    /**
+     * returns the logged in user
+     * @return Logged in user
+     */
+    public static User getCurrentUser() {
+        return currentUser;
+    }
     public static User setCurrentUser(User user) { return currentUser = user; }
+
 }
