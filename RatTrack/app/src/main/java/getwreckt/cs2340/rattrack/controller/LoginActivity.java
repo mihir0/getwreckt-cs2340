@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,8 +37,7 @@ import getwreckt.cs2340.rattrack.model.*;
 public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText passField;
-
-    public AutoCompleteTextView userField;
+    public EditText userField;
 
     //private AutoCompleteTextView userField;
     private Button loginButn;
@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Grab dialog widgets
 
-        userField = (AutoCompleteTextView) findViewById(R.id.username);
+        userField = (EditText) findViewById(R.id.email_login);
         passField = (TextInputEditText) findViewById(R.id.password);
         passTil = (TextInputLayout) findViewById(R.id.pass_text_input_layout);
         onLoginPressed();
@@ -94,7 +94,6 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-
             }
         });
     }
@@ -112,8 +111,4 @@ public class LoginActivity extends AppCompatActivity {
 
         });
     }
-
-
-
-
 }

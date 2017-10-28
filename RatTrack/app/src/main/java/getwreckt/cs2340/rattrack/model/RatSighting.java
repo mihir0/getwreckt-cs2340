@@ -2,6 +2,7 @@ package getwreckt.cs2340.rattrack.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 /**
  * Created by Patel on 10/5/2017.
@@ -83,7 +84,7 @@ public class RatSighting implements Parcelable {
         uniqueKey = in.readString();
         date = in.readParcelable(Date.class.getClassLoader());
         location = in.readParcelable(Location.class.getClassLoader());
-        //owner = in.readParcelable(User.class.getClassLoader());
+        owner = in.readParcelable(User.class.getClassLoader());
         isFlagged = in.readInt() == 1;
     }
 
@@ -92,7 +93,7 @@ public class RatSighting implements Parcelable {
         dest.writeString(uniqueKey);
         dest.writeParcelable(date, flags);
         dest.writeParcelable(location, flags);
-        //dest.writeParcelable(owner, flags);
+        dest.writeParcelable(owner, flags);
         dest.writeInt(isFlagged ? 1 : 0);
     }
 
@@ -161,7 +162,11 @@ public class RatSighting implements Parcelable {
     }
 
     private String generateUniqueKey() {
-        return getOwner().getUserName() + this.date + getOwner().getSightings();
+        String uname = Model.getCurrentUser().getUserName();
+        String user = uname.substring(0, uname.indexOf('.')) + uname.substring(uname.indexOf('.')
+                + 1);
+        owner.sightingMade();
+        return user + this.date + getOwner().getSightings();
     }
 
     @Override

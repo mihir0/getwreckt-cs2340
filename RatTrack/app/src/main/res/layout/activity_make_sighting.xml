@@ -1,48 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/month_spinner"
-        android:layout_width="30dp"
+    <EditText
+        android:id="@+id/date_input"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_alignTop="@+id/month_title"
-        android:layout_toEndOf="@+id/month_title"
-        android:layout_marginStart="27dp"
-        android:layout_alignBottom="@+id/month_title" />
+        android:ems="10"
+        android:hint="Date of Incident"
+        android:inputType="date"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp" />
+
+    <EditText
+        android:id="@+id/time_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Time of Incident"
+        android:inputType="time"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp" />
+
+    <EditText
+        android:id="@+id/address_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Address of Incident"
+        android:inputType="text"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp" />
+
+    <EditText
+        android:id="@+id/city_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="City"
+        android:inputType="text"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/zip_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Zip Code"
+        android:inputType="number"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/borough_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp" />
+
+    <Spinner
+        android:id="@+id/typeLocation_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/month_title"
-        android:layout_width="wrap_content"
+        android:id="@+id/coordinates_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:padding="10dp"
-        android:text="Month:"
-        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:text="Coordinates"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/latitude_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp" />
+        android:layout_below="@+id/make_button"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Latitude"
+        android:inputType="number"
+        android:paddingBottom="20dp"
+        android:paddingLeft="5dp" />
 
-    <TextView
-        android:id="@+id/day_title"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/longitude_input"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/month_spinner"
-        android:layout_marginStart="31dp"
-        android:padding="10dp"
-        android:layout_toEndOf="@+id/month_spinner"
-        android:text="Day"
-        android:layout_alignBottom="@+id/month_spinner" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="5dp"
+        android:ems="10"
+        android:hint="Longitude"
+        android:inputType="number"
+        android:paddingLeft="5dp" />
 
-    <Spinner
-        android:id="@+id/day_spinner"
-        android:layout_width="30dp"
+    <Button
+        android:id="@+id/make_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_alignTop="@+id/day_title"
-        android:layout_toEndOf="@+id/day_title"
-        android:layout_marginStart="27dp"
-        android:layout_alignBottom="@+id/day_title" />
-</RelativeLayout>
+        android:text="Make Sighting"
+        android:layout_above="@+id/longitude_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp" />
+
+</LinearLayout>
