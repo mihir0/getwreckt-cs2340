@@ -11,7 +11,8 @@ public enum Borough {
     QUEENS ("Queens"),
     STATEN_ISLAND ("Staten Island"),
     UNKNOWN ("Unknown"),
-    NA ("N/A");
+    NA ("N/A"),
+    NULL ("");
 
     private String name;
 
@@ -25,5 +26,15 @@ public enum Borough {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static Borough get(String name) {
+        for (Borough borough : values()) {
+            if (borough.getName().toUpperCase().equals(name.toUpperCase())) {
+                return borough;
+            }
+        }
+
+        throw new IllegalArgumentException(name);
     }
 }

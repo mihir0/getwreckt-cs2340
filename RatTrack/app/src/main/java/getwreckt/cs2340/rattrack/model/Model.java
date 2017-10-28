@@ -44,9 +44,11 @@ public class Model {
     }
     public static User setCurrentUser(User user) { return currentUser = user; }
 
-    public void readCSVFile(InputStream is) {
+    public static void readCSVFile(InputStream is) {
         Log.d("Model", "READING CSV FILE");
         Log.println(Log.INFO, "Starting", "READING CSV FILE");
+        mDataRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
@@ -56,8 +58,10 @@ public class Model {
                 String[] sightData = line.split(",");
                 //add new Sighting to list of sightings
 
-                SightingManager.ratSightings.add(new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
-                        sightData[9], sightData[16], sightData[23], sightData[24], sightData[25]));
+                //RatSighting rs = new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
+                //        sightData[9], sightData[16], sightData[23], sightData[24], sightData[25]);
+                //SightingManager.ratSightings.add(rs);
+                mDataRef.child("ratsightings").child(sightData[0]).setValue(null);
             }
             br.close();
         } catch (IOException e) {

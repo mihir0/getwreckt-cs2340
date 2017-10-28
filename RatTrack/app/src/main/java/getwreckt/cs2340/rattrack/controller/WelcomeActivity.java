@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.util.Log;
 
+import java.io.InputStream;
 import java.util.HashMap;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,12 +39,14 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         initLogin();
         initRegister();
-        if (Model.persistenceEnabled) {
+        if (persistenceEnabled) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            Model.persistenceEnabled = false;
+            persistenceEnabled = false;
         }
         mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
+        InputStream is = getResources().openRawResource(R.raw.rat_sightings);
+        Model.readCSVFile(is);
         if (mAuth.getCurrentUser() != null) {
             Intent toInAppScreen = new Intent(WelcomeActivity.this,
                     InAppActivity.class);

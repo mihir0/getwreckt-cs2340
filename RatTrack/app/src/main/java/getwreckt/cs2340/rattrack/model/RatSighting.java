@@ -36,7 +36,7 @@ public class RatSighting implements Parcelable {
                        String longitude) {
         this.uniqueKey = uniqueKey;
         this.date = new Date(date);
-        this.location = new Location(LocationType.valueOf(typeLocation), address, city, zip, Borough.valueOf(borough), latitude, longitude);
+        this.location = new Location(LocationType.get(typeLocation), address, city, zip, Borough.get(borough), latitude, longitude);
         this.owner = Model.getCurrentUser();
     }
 
@@ -55,7 +55,7 @@ public class RatSighting implements Parcelable {
     public RatSighting(String date, String typeLocation, String zip, String address, String city,
                        String borough, String latitude, String longitude) {
         this.date = new Date(date);
-        this.location = new Location(LocationType.valueOf(typeLocation), address, city, zip, Borough.valueOf(borough), latitude, longitude);
+        this.location = new Location(LocationType.get(typeLocation), address, city, zip, Borough.get(borough), latitude, longitude);
         this.uniqueKey = this.generateUniqueKey();
         this.owner = Model.getCurrentUser();
     }
@@ -75,8 +75,8 @@ public class RatSighting implements Parcelable {
                                    String latitude, String longitude, String uniqueKey) {
         this.uniqueKey = uniqueKey;
         this.date = new Date(date);
-        this.location = new Location(LocationType.valueOf(typeLocation), address, "N/A", "N/A",
-                Borough.valueOf(borough), latitude, longitude);
+        this.location = new Location(LocationType.get(typeLocation), address, "N/A", "N/A",
+                Borough.get(borough), latitude, longitude);
         this.owner = Model.getCurrentUser();
     }
 
