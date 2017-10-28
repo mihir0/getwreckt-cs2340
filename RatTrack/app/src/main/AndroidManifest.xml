@@ -43,7 +43,16 @@
             android:name=".controller.MakeSightingActivity"
             android:label="Sighting Detail"
             android:theme="@style/AppTheme" />
-        <activity android:name=".controller.RatSightingMapActivity"></activity>
+        <activity android:name=".controller.RatSightingMapActivity"
+            android:label = "Sightings Map"
+            android:theme = "@style/AppTheme" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCDfsagyBKH8WOTuViPZEUK8MrHKW-Rg6E"/>

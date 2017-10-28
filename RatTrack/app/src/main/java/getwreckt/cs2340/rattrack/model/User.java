@@ -3,7 +3,6 @@ package getwreckt.cs2340.rattrack.model;
 import java.security.SecureRandom;
 
 /**
- * The general object for the app's User. Holds all information about User.
  * Created by Patel on 9/21/2017.
  */
 
@@ -13,6 +12,8 @@ public class User {
     private String userType;
     private Boolean signedIn;
     private int sightings = 0;
+
+    public User() {}
 
     /**
      * Create a User with username {@code userName} and password {@code pass}.
@@ -26,7 +27,7 @@ public class User {
     /**
      * Creates a user with full name {@code fullName}, username {@userName}, and password {@code pass}.
      * @param fullName the first and last name of the new user
-     * @param userName the unique email of the new user
+     * @param userName the username of the new user
      */
     public User(String fullName, String userName) {
         this.fullName = fullName;
@@ -38,7 +39,7 @@ public class User {
     /**
      * Creates a user with full name {@code fullName}, username {@userName}, and password {@code pass}.
      * @param fullName the first and last name of the new user
-     * @param userName the unique email of the new user
+     * @param userName the username of the new user
      */
     public User(String fullName, String userName, String userType) {
         this.fullName = fullName;
@@ -46,6 +47,8 @@ public class User {
         this.userType = userType;
         this.signedIn = true;
     }
+
+
 
     /**
      * Username of the user
@@ -112,25 +115,14 @@ public class User {
         this.fullName = fullName;
     }
 
-    /**
-     * Get number of sightings of user
-     * @return number of sightings user has made
-     */
     public int getSightings() {
         return sightings;
     }
-    /**
-     * Set number of sightings of user
-     * @param sightings number sightings user has made
-     */
+
     public void setSightings(int sightings) {
         this.sightings = sightings;
     }
 
-    /**
-     * increments number of sightings user has made
-     *
-     */
     public void sightingMade() {
         this.sightings++;
     }
