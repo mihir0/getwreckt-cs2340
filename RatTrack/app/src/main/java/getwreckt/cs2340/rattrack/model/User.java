@@ -1,12 +1,15 @@
 package getwreckt.cs2340.rattrack.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.security.SecureRandom;
 
 /**
  * Created by Patel on 9/21/2017.
  */
 
-public class User {
+public class User implements Parcelable {
     private String fullName;
     private String userName;
     private String userType;
@@ -141,5 +144,34 @@ public class User {
     public void sightingMade() {
         this.sightings++;
     }
+
+    private User(Parcel in) {
+        fullName = in.readString();
+        userName = in.readString();
+        userType = in.readString();
+        signedIn = in.readInt() == 1;
+        isLocked = in.readInt() == 1;
+        sightings = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(fullName);
+        dest.writeString(userName);
+        dest.writeString(userType);
+        dest.writeInt(signedIn ? 1 : 0);
+        dest.writeInt(isLocked ? 1 : 0);
+        dest.writeInt(sightings);
+    }
+
+    public static final Parcelable.Creator<User> CREATOR
+            = new Parcelable.Creator<User>() {
+        public User createFromParcel (Parcel in) {return new User(in);}
+
+        public User[] newArray(int size) {return new User[size];}
+    };
+
+    @Override
+    public int describeContents() {return 0;}
 }
 

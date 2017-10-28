@@ -48,7 +48,8 @@ public class InAppActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (mAuth.getCurrentUser() != null) {
-                    Model.setCurrentUser(dataSnapshot.child(mAuth.getCurrentUser().getUid()).getValue(User.class));
+                    Model.setCurrentUser(dataSnapshot.child(mAuth.getCurrentUser().getUid())
+                            .getValue(User.class));
                     updateUI(mAuth.getCurrentUser());
                 }
             }
@@ -65,14 +66,7 @@ public class InAppActivity extends AppCompatActivity {
         logoutButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, Object> mapSignedIn = new HashMap<String, Object>();
-                mapSignedIn.put("signedIn", false);
-                mDataRef.child("users").child(mAuth.getCurrentUser().getUid()).updateChildren(mapSignedIn);
-                mAuth.signOut();
-                Model.setCurrentUser(null);
-                Intent toWelcomeScreen = new Intent(InAppActivity.this,
-                        WelcomeActivity.class);
-                startActivity(toWelcomeScreen);
+                logout();
             }
         });
 
@@ -104,8 +98,21 @@ public class InAppActivity extends AppCompatActivity {
 
     }
 
+    private void logout() {
+        HashMap<String, Object> mapSignedIn = new HashMap<String, Object>();
+        mapSignedIn.put("signedIn", false);
+        mDataRef.child("users").child(mAuth.getCurrentUser().getUid()).updateChildren(mapSignedIn);
+        mAuth.signOut();
+        Model.setCurrentUser(null);
+        Intent toWelcomeScreen = new Intent(InAppActivity.this,
+                WelcomeActivity.class);
+        startActivity(toWelcomeScreen);
+    }
+
     private void updateUI(FirebaseUser firebaseUser) {
-        if (Model.getCurrentUser().getSignedIn()) {
+        if (Model.getCurrentUser() == null) {
+            logout();
+        } else if (Model.getCurrentUser().getSignedIn()) {
             String strLine = "Hello, " + Model.getCurrentUser().getFullName() + ", You are now logged in!";
             text.setText(strLine);
         }
