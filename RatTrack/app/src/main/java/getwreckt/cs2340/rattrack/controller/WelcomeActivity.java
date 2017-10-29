@@ -45,8 +45,6 @@ public class WelcomeActivity extends AppCompatActivity {
         }
         mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
-        InputStream is = getResources().openRawResource(R.raw.rat_sightings);
-        Model.readCSVFile(is);
         if (mAuth.getCurrentUser() != null) {
             Intent toInAppScreen = new Intent(WelcomeActivity.this,
                     InAppActivity.class);
