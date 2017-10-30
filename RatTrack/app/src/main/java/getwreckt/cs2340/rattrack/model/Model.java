@@ -22,20 +22,52 @@ import java.util.ArrayList;
 
 public class Model {
     private Model _model = new Model();
-    public static ArrayList<RatSighting> ratSightings = new ArrayList<>();
+    private static User currentUser;
 
     private static DatabaseReference mDataRef;
     private static FirebaseAuth mAuth;
 
+    /**
+     * constructor for a model
+     */
     private Model() {
         mDataRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
     }
 
-    private static User currentUser;
+    /**
+     * returns the logged in user
+     * @return Logged in user
+     */
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+    public static User setCurrentUser(User user) { return currentUser = user; }
 
-    public static User getCurrentUser() { return currentUser; }
-    public static void setCurrentUser(User user) { currentUser = user; }
+    public static void readCSVFile(InputStream is) {
+        Log.d("Model", "READING CSV FILE");
+        Log.println(Log.INFO, "Starting", "READING CSV FILE");
+        mDataRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
-    public static boolean persistenceEnabled = true;
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            String line;
+            br.readLine(); //get rid of header line
+            while(((line = br.readLine()) != null) && line.length() != 0) {
+                String[] sightData = line.split(",");
+                //add new Sighting to list of sightings
+
+                //RatSighting rs = new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
+                //        sightData[9], sightData[16], sightData[23], sightData[24], sightData[25]);
+                //SightingManager.ratSightings.add(rs);
+                //mDataRef.child("ratsightings").child(sightData[0]).setValue(null);
+            }
+            br.close();
+        } catch (IOException e) {
+            Log.e("Model", "error reading csv data\n");
+            e.printStackTrace();
+        }
+    }
+
 }

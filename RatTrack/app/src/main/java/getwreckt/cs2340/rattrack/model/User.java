@@ -1,16 +1,20 @@
 package getwreckt.cs2340.rattrack.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.security.SecureRandom;
 
 /**
  * Created by Patel on 9/21/2017.
  */
 
-public class User {
+public class User implements Parcelable {
     private String fullName;
     private String userName;
     private String userType;
-    private Boolean signedIn;
+    private boolean signedIn;
+    private boolean isLocked;
     private int sightings = 0;
 
     public User() {}
@@ -47,8 +51,6 @@ public class User {
         this.userType = userType;
         this.signedIn = true;
     }
-
-
 
     /**
      * Username of the user
@@ -123,8 +125,45 @@ public class User {
         this.sightings = sightings;
     }
 
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
+    }
+
     public void sightingMade() {
         this.sightings++;
     }
+
+    private User(Parcel in) {
+        fullName = in.readString();
+        userName = in.readString();
+        userType = in.readString();
+        signedIn = in.readInt() == 1;
+        isLocked = in.readInt() == 1;
+        sightings = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(fullName);
+        dest.writeString(userName);
+        dest.writeString(userType);
+        dest.writeInt(signedIn ? 1 : 0);
+        dest.writeInt(isLocked ? 1 : 0);
+        dest.writeInt(sightings);
+    }
+
+    public static final Parcelable.Creator<User> CREATOR
+            = new Parcelable.Creator<User>() {
+        public User createFromParcel (Parcel in) {return new User(in);}
+
+        public User[] newArray(int size) {return new User[size];}
+    };
+
+    @Override
+    public int describeContents() {return 0;}
 }
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.util.Log;
 
+import java.io.InputStream;
 import java.util.HashMap;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,9 +39,9 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         initLogin();
         initRegister();
-        if (Model.persistenceEnabled) {
+        if (persistenceEnabled) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            Model.persistenceEnabled = false;
+            persistenceEnabled = false;
         }
         mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
@@ -49,6 +50,9 @@ public class WelcomeActivity extends AppCompatActivity {
                     InAppActivity.class);
             startActivity(toInAppScreen);
         }
+
+        //deletes ratsightings?
+        //mDataRef.child("ratsightings").setValue(null);
 
     }
 
