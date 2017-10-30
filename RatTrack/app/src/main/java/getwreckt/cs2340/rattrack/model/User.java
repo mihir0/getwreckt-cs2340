@@ -125,14 +125,6 @@ public class User implements Parcelable {
         this.sightings = sightings;
     }
 
-    public boolean isSignedIn() {
-        return signedIn;
-    }
-
-    public void setSignedIn(boolean signedIn) {
-        this.signedIn = signedIn;
-    }
-
     public boolean isLocked() {
         return isLocked;
     }
