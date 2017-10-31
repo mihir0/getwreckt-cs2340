@@ -113,8 +113,8 @@ public class InAppActivity extends AppCompatActivity {
         if (Model.getCurrentUser() == null) {
             logout();
         } else if (Model.getCurrentUser().getSignedIn()) {
-            //InputStream is = getResources().openRawResource(R.raw.rat_sightings);
-            //Model.readCSVFile(is);
+            InputStream is = getResources().openRawResource(R.raw.rat_sightings);
+            Model.readCSVFile(is);
             String strLine = "Hello, " + Model.getCurrentUser().getFullName() + ", You are now logged in!";
             text.setText(strLine);
         }

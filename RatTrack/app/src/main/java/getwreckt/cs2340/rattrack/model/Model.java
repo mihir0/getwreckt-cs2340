@@ -58,10 +58,10 @@ public class Model {
                 String[] sightData = line.split(",");
                 //add new Sighting to list of sightings
 
-                //RatSighting rs = new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
-                //        sightData[9], sightData[16], sightData[23], sightData[24], sightData[25]);
+                RatSighting rs = new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
+                        sightData[9], sightData[16], sightData[23], sightData[24], sightData[25]);
                 //SightingManager.ratSightings.add(rs);
-                //mDataRef.child("ratsightings").child(sightData[0]).setValue(null);
+                mDataRef.child("ratsightings").child(sightData[0]).setValue(rs);
             }
             br.close();
         } catch (IOException e) {

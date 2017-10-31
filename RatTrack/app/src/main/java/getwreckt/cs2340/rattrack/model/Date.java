@@ -73,7 +73,7 @@ public class Date implements Comparable<Date>, Parcelable {
 
         data = data.substring(data.indexOf(" ") + 1);
         setMeridiem(data);
-        setIsPM(data);
+        setIsPM(data.equals("PM"));
     }
 
 
@@ -150,10 +150,6 @@ public class Date implements Comparable<Date>, Parcelable {
 
     public void setIsPM(boolean value) {
         this.isPM = value;
-    }
-
-    public void setIsPM(String meridiem) {
-        this.isPM = meridiem.equals("PM");
     }
 
     public String getMeridiem() {

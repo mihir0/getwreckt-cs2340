@@ -45,6 +45,6 @@ public enum LocationType {
             }
         }
 
-        throw new IllegalArgumentException(name);
+        return NULL;
     }
 }

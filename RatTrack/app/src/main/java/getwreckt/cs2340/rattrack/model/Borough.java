@@ -35,6 +35,6 @@ public enum Borough {
             }
         }
 
-        throw new IllegalArgumentException(name);
+        return NULL;
     }
 }
