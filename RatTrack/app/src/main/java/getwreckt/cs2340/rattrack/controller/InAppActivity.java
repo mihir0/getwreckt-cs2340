@@ -35,6 +35,7 @@ public class InAppActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
     private Button startButn;
     private Button makeSightingButn;
+    private Button mapViewBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,16 @@ public class InAppActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 logout();
+            }
+        });
+
+        mapViewBtn = (Button) findViewById(R.id.map_view_button);
+        mapViewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toRatSightingMap = new Intent(InAppActivity.this,
+                        RatSightingMapActivity.class);
+                startActivity(toRatSightingMap);
             }
         });
 
@@ -113,8 +124,8 @@ public class InAppActivity extends AppCompatActivity {
         if (Model.getCurrentUser() == null) {
             logout();
         } else if (Model.getCurrentUser().getSignedIn()) {
-            InputStream is = getResources().openRawResource(R.raw.rat_sightings);
-            Model.readCSVFile(is);
+            //InputStream is = getResources().openRawResource(R.raw.rat_sightings);
+            //Model.readCSVFile(is);
             String strLine = "Hello, " + Model.getCurrentUser().getFullName() + ", You are now logged in!";
             text.setText(strLine);
         }
