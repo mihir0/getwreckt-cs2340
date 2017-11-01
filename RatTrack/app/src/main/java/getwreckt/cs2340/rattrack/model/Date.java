@@ -32,6 +32,9 @@ public class Date implements Comparable<Date>, Parcelable {
 
     private String systemString; //for natural ordering
 
+    /**
+     * Empty constructor for Firebase
+     */
     public Date() { }
 
     //constructor for NYC database date string

@@ -16,6 +16,9 @@ public class Location implements Parcelable {
     private String latitude;
     private String longitude;
 
+    /**
+     * Empty Constructor for Firebase
+     */
     public Location() { }
 
     public Location(LocationType typeLocation, String address, String city, String zip,
