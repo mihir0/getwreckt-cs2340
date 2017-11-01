@@ -1,13 +1,19 @@
 package getwreckt.cs2340.rattrack.controller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import getwreckt.cs2340.rattrack.R;
+import getwreckt.cs2340.rattrack.model.Date;
 import getwreckt.cs2340.rattrack.model.Model;
 import getwreckt.cs2340.rattrack.model.RatSighting;
 import getwreckt.cs2340.rattrack.model.User;
 
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,6 +37,9 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
     private GoogleMap map;
     private FirebaseAuth mAuth;
     private DatabaseReference mDataRef;
+    private EditText startDate;
+    private EditText endDate;
+    private Button updateMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,20 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
         // Retrieve the content view that renders the map.
 
         setContentView(R.layout.activity_rat_sighting_map);
+
+        startDate = (EditText) findViewById(R.id.start_date);
+        endDate = (EditText) findViewById(R.id.end_date);
+        updateMap = (Button) findViewById(R.id.update_map);
+        updateMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Model.startDate = new Date(startDate.getText().toString());
+                Model.endDate = new Date(endDate.getText().toString());
+                Intent refresh = new Intent(RatSightingMapActivity.this, RatSightingMapActivity.class);
+                startActivity(refresh);
+            }
+        });
+
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -59,15 +82,22 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
         mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
 
+        LatLng ll;
+
         mDataRef.child("ratsightings").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (mAuth.getCurrentUser() != null) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         RatSighting ratSighting = ds.getValue(RatSighting.class);
-                        LatLng latLng = new LatLng(Double.parseDouble(ratSighting.getLocation().getLatitude()),
-                                Double.parseDouble(ratSighting.getLocation().getLongitude()));
-                        map.addMarker(new MarkerOptions().position(latLng).title(ratSighting.toString()));
+                        if (ratSighting.getDate().compareTo(Model.startDate) >= 0
+                                && ratSighting.getDate().compareTo(Model.endDate) <= 0) {
+                            LatLng latLng = new LatLng(Double.parseDouble(ratSighting.getLocation().getLatitude()),
+                                    Double.parseDouble(ratSighting.getLocation().getLongitude()));
+                            String snippet = ratSighting.toString();
+                            map.addMarker(new MarkerOptions().position(latLng).title(ratSighting.toString()).snippet(snippet));
+                            //map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                        }
                     }
                     mDataRef.child("ratsightings").keepSynced(true);
                 }

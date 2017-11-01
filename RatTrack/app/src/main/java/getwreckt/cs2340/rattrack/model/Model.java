@@ -44,6 +44,9 @@ public class Model {
     }
     public static User setCurrentUser(User user) { return currentUser = user; }
 
+    public static Date startDate = new Date("01/01/1000 12:00:00 AM");
+    public static Date endDate = new Date("12/31/3999 11:59:00 PM");
+
     public static void readCSVFile(InputStream is) {
         Log.d("Model", "READING CSV FILE");
         Log.println(Log.INFO, "Starting", "READING CSV FILE");
@@ -54,12 +57,13 @@ public class Model {
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String line;
             br.readLine(); //get rid of header line
+            mDataRef.child("ratsightings").removeValue();
             while(((line = br.readLine()) != null) && line.length() != 0) {
                 String[] sightData = line.split(",");
                 //add new Sighting to list of sightings
 
                 RatSighting rs = new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
-                        sightData[9], sightData[16], sightData[23], sightData[24], sightData[25]);
+                        sightData[9], sightData[16], sightData[23], sightData[49], sightData[50]);
                 //SightingManager.ratSightings.add(rs);
                 mDataRef.child("ratsightings").child(sightData[0]).setValue(rs);
             }

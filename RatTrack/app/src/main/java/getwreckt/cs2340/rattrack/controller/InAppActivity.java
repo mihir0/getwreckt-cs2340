@@ -76,10 +76,6 @@ public class InAppActivity extends AppCompatActivity {
         mapViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, Object> map = new HashMap<>();
-                Random r = new Random();
-                map.put("accessed", r.nextInt());
-                mDataRef.child("ratsightings").updateChildren(map);
                 Intent toRatSightingMap = new Intent(InAppActivity.this,
                         RatSightingMapActivity.class);
                 startActivity(toRatSightingMap);

@@ -32,6 +32,8 @@ public class Date implements Comparable<Date>, Parcelable {
 
     private String systemString; //for natural ordering
 
+    public Date() { }
+
     //constructor for NYC database date string
     public Date(String data) {
         //data string is orginally of the form "month/date/year hour:minute:second AM/PM"
@@ -74,6 +76,7 @@ public class Date implements Comparable<Date>, Parcelable {
         data = data.substring(data.indexOf(" ") + 1);
         setMeridiem(data);
         setIsPM(data.equals("PM"));
+        generateSystemString(this.month, this.date, this.year, this.hour, this.isPM, this.minute, this.second);
     }
 
 
@@ -183,7 +186,8 @@ public class Date implements Comparable<Date>, Parcelable {
     //descending order on system generated strings
     @Override
     public int compareTo(Date other) {
-        return other.getSystemString().compareTo(this.systemString);
+        DateChainedComparator dateChainedComparator = new DateChainedComparator();
+        return dateChainedComparator.compare(other, this);
     }
 
     //custom comparators

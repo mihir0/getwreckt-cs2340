@@ -165,6 +165,7 @@ public class RatSighting implements Parcelable {
         String uname = Model.getCurrentUser().getUserName();
         String user = uname.substring(0, uname.indexOf('.')) + uname.substring(uname.indexOf('.')
                 + 1);
+        this.setOwner(Model.getCurrentUser());
         owner.sightingMade();
         return user + this.date + getOwner().getSightings();
     }

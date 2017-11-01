@@ -142,7 +142,7 @@ public class MakeSightingActivity extends AppCompatActivity {
                     dateField.setError("Must fill all fields with valid sighting details.");
                 } else {
                     try {
-                        _sighting = new RatSighting(date, typeLocation, zip, address, city, borough,
+                        _sighting = new RatSighting(date + " " + time, typeLocation, zip, address, city, borough,
                                 latitude, longitude);
 
                         Log.d("UserNull MakeSighting", Model.getCurrentUser().getUserName());
