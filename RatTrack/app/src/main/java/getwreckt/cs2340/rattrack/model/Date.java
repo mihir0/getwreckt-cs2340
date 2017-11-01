@@ -32,6 +32,8 @@ public class Date implements Comparable<Date>, Parcelable {
 
     private String systemString; //for natural ordering
 
+    public Date() {}
+
     //constructor for NYC database date string
     public Date(String data) {
         //data string is orginally of the form "month/date/year hour:minute:second AM/PM"
