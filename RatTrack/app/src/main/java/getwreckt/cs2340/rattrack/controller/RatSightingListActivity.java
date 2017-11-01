@@ -75,6 +75,7 @@ public class RatSightingListActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot snapshot) {
                     SightingManager.ratSightings.clear();
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                        Log.e("List", "" + postSnapshot.getValue(RatSighting.class));
                         RatSighting ratSighting = postSnapshot.getValue(RatSighting.class);
                         SightingManager.ratSightings.add(ratSighting);
                     }
