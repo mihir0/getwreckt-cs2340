@@ -40,7 +40,6 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
     private EditText startDate;
     private EditText endDate;
     private Button updateMap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +76,6 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.map = googleMap;
-
 
         mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
