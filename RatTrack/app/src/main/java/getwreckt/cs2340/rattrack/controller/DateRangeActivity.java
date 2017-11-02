@@ -10,5 +10,6 @@ public class DateRangeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_range);
+        getActionBar().setTitle("Select Date Range");
     }
 }

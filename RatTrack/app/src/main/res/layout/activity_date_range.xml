@@ -6,4 +6,58 @@
     android:layout_height="match_parent"
     tools:context="getwreckt.cs2340.rattrack.controller.DateRangeActivity">
 
+    <TextView
+        android:id="@+id/startLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/endLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="188dp" />
+
+    <TextView
+        android:id="@+id/dateLabel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date:"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="47dp" />
+
+    <TextView
+        android:id="@+id/dateLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date:"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="215dp" />
+
+    <TextView
+        android:id="@+id/timeLabel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time:"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="100dp" />
+
+    <TextView
+        android:id="@+id/timeLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time:"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="279dp" />
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="160dp"
+        android:layout_height="305dp"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="35dp" />
 </android.support.constraint.ConstraintLayout>
