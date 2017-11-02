@@ -52,7 +52,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCDfsagyBKH8WOTuViPZEUK8MrHKW-Rg6E" />
 
-        <activity android:name=".controller.DateRangeActivity"></activity>
+        <activity android:name=".controller.DateRangeActivity" />
+        <activity android:name=".controller.GraphActivity"></activity>
     </application>
 
 </manifest>
