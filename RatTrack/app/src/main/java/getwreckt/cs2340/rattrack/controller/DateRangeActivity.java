@@ -31,18 +31,18 @@ public class DateRangeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_range);
 
-        startMonth = (Spinner) findViewById(R.id.start_month);
-        startDay = (Spinner) findViewById(R.id.start_day);
-        startYear = (EditText) findViewById(R.id.start_year);
-        startHour = (Spinner) findViewById(R.id.start_hour);
-        startMin = (Spinner) findViewById(R.id.start_min);
-        startisPM = (CheckBox) findViewById(R.id.start_is_pm);
-        endMonth = (Spinner) findViewById(R.id.end_month);
-        endDay = (Spinner) findViewById(R.id.end_day);
-        endYear = (EditText) findViewById(R.id.end_year);
-        endHour = (Spinner) findViewById(R.id.end_hour);
-        endMin = (Spinner) findViewById(R.id.end_min);
-        endisPM = (CheckBox) findViewById(R.id.end_is_pm);
+//        startMonth = (Spinner) findViewById(R.id.start_month);
+//        startDay = (Spinner) findViewById(R.id.start_day);
+//        startYear = (EditText) findViewById(R.id.start_year);
+//        startHour = (Spinner) findViewById(R.id.start_hour);
+//        startMin = (Spinner) findViewById(R.id.start_min);
+//        startisPM = (CheckBox) findViewById(R.id.start_is_pm);
+//        endMonth = (Spinner) findViewById(R.id.end_month);
+//        endDay = (Spinner) findViewById(R.id.end_day);
+//        endYear = (EditText) findViewById(R.id.end_year);
+//        endHour = (Spinner) findViewById(R.id.end_hour);
+//        endMin = (Spinner) findViewById(R.id.end_min);
+//        endisPM = (CheckBox) findViewById(R.id.end_is_pm);
 
         Model.startGraphDate = new Date();
         Model.endGraphDate = new Date();
