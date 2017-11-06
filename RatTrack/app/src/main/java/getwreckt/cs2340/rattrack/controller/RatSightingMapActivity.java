@@ -54,8 +54,8 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
         updateMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Model.startDate = new Date(startDate.getText().toString());
-                Model.endDate = new Date(endDate.getText().toString());
+                Model.startMapDate = new Date(startDate.getText().toString());
+                Model.endMapDate = new Date(endDate.getText().toString());
                 Intent refresh = new Intent(RatSightingMapActivity.this, RatSightingMapActivity.class);
                 startActivity(refresh);
             }
@@ -90,8 +90,8 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
                 if (mAuth.getCurrentUser() != null) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         RatSighting ratSighting = ds.getValue(RatSighting.class);
-                        if (ratSighting.getDate().compareTo(Model.startDate) >= 0
-                                && ratSighting.getDate().compareTo(Model.endDate) <= 0) {
+                        if (ratSighting.getDate().compareTo(Model.startMapDate) >= 0
+                                && ratSighting.getDate().compareTo(Model.endMapDate) <= 0) {
                             LatLng latLng = new LatLng(Double.parseDouble(ratSighting.getLocation().getLatitude()),
                                     Double.parseDouble(ratSighting.getLocation().getLongitude()));
                             String snippet = ratSighting.toString();

@@ -10,54 +10,176 @@
         android:id="@+id/startLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Start"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/endLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="147dp"
         android:text="End"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="188dp" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startLabel" />
 
     <TextView
         android:id="@+id/dateLabel1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="6dp"
         android:text="Date:"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="47dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startLabel" />
 
     <TextView
         android:id="@+id/dateLabel2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="97dp"
         android:text="Date:"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="215dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeLabel1" />
 
     <TextView
         android:id="@+id/timeLabel1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="34dp"
         android:text="Time:"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="100dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateLabel1" />
 
     <TextView
         android:id="@+id/timeLabel2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="45dp"
         android:text="Time:"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="279dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateLabel2" />
 
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="160dp"
-        android:layout_height="305dp"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="35dp" />
+    <Spinner
+        android:id="@+id/start_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="47dp"
+        app:layout_constraintStart_toEndOf="@+id/dateLabel1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/start_day"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="47dp"
+        app:layout_constraintStart_toEndOf="@+id/start_month"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/start_year"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="47dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintStart_toEndOf="@+id/start_day"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/start_hour"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="29dp"
+        app:layout_constraintStart_toEndOf="@+id/timeLabel1"
+        app:layout_constraintTop_toBottomOf="@+id/start_month" />
+
+    <Spinner
+        android:id="@+id/start_min"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="29dp"
+        app:layout_constraintStart_toEndOf="@+id/start_hour"
+        app:layout_constraintTop_toBottomOf="@+id/start_day" />
+
+    <Spinner
+        android:id="@+id/end_month"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="91dp"
+        app:layout_constraintStart_toEndOf="@+id/dateLabel2"
+        app:layout_constraintTop_toBottomOf="@+id/start_hour" />
+
+    <Spinner
+        android:id="@+id/end_day"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="91dp"
+        app:layout_constraintStart_toEndOf="@+id/end_month"
+        app:layout_constraintTop_toBottomOf="@+id/start_min" />
+
+    <Spinner
+        android:id="@+id/end_hour"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toEndOf="@+id/timeLabel2"
+        app:layout_constraintTop_toBottomOf="@+id/end_month" />
+
+    <Spinner
+        android:id="@+id/end_min"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toEndOf="@+id/end_hour"
+        app:layout_constraintTop_toBottomOf="@+id/end_day" />
+
+    <EditText
+        android:id="@+id/end_year"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="83dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintStart_toEndOf="@+id/end_day"
+        app:layout_constraintTop_toBottomOf="@+id/start_is_pm" />
+
+    <CheckBox
+        android:id="@+id/start_is_pm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="23dp"
+        android:text="PM"
+        app:layout_constraintStart_toEndOf="@+id/start_min"
+        app:layout_constraintTop_toBottomOf="@+id/start_year" />
+
+    <CheckBox
+        android:id="@+id/end_is_pm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="34dp"
+        android:text="PM"
+        app:layout_constraintStart_toEndOf="@+id/end_min"
+        app:layout_constraintTop_toBottomOf="@+id/end_year" />
+
 </android.support.constraint.ConstraintLayout>
