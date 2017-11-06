@@ -34,26 +34,41 @@ public class DateRangeActivity extends AppCompatActivity {
     private Spinner endMin;
     private CheckBox endisPM;
     private Button continueButton;
+    private final HashMap<String, String> months = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_range);
 
-        final HashMap<String, String> month = new HashMap<>();
-        month.put("Select", "0");
-        month.put("January", "01");
-        month.put("February", "02");
-        month.put("March", "03");
-        month.put("April", "04");
-        month.put("May", "05");
-        month.put("June", "06");
-        month.put("July", "07");
-        month.put("August", "08");
-        month.put("September", "09");
-        month.put("October", "10");
-        month.put("November", "11");
-        month.put("December", "12");
+        months.put("Select", "0");
+        months.put("January", "01");
+        months.put("February", "02");
+        months.put("March", "03");
+        months.put("April", "04");
+        months.put("May", "05");
+        months.put("June", "06");
+        months.put("July", "07");
+        months.put("August", "08");
+        months.put("September", "09");
+        months.put("October", "10");
+        months.put("November", "11");
+        months.put("December", "12");
+
+        ArrayList<String> days = new ArrayList<>();
+        for (int i = 1; i < 32; i++) {
+            days.add(String.format("%02d", i));
+        }
+
+        ArrayList<String> hours = new ArrayList<>();
+        for (int i = 1; i < 13; i++) {
+            hours.add(String.format("%02d", i));
+        }
+
+        ArrayList<String> minutes = new ArrayList<>();
+        for (int i = 0; i < 61; i++) {
+            minutes.add(String.format("%02d", i));
+        }
 
         startMonth = (Spinner) findViewById(R.id.start_month);
         startDay = (Spinner) findViewById(R.id.start_day);
@@ -68,22 +83,50 @@ public class DateRangeActivity extends AppCompatActivity {
         endMin = (Spinner) findViewById(R.id.end_min);
         endisPM = (CheckBox) findViewById(R.id.end_is_pm);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, month.keySet().toArray());
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, months.keySet().toArray());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         startMonth.setAdapter(adapter);
+
+        adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, days);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        startDay.setAdapter(adapter);
+
+        adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, hours);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        startHour.setAdapter(adapter);
+
+        adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, minutes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        startMin.setAdapter(adapter);
+
+        adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, months.keySet().toArray());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        endMonth.setAdapter(adapter);
+
+        adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, days);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        endDay.setAdapter(adapter);
+
+        adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, hours);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        endHour.setAdapter(adapter);
+
+        adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, minutes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        endMin.setAdapter(adapter);
 
         continueButton = (Button) findViewById(R.id.continue_button);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String startDateString = month.get(startMonth.getSelectedItem().toString())
+                String startDateString = months.get(startMonth.getSelectedItem().toString())
                         + "/" + startDay.toString()
                         + "/" + startYear.getText().toString() + " "
                         + startHour.toString() + ":"
                         + startMin.toString() + ":"
                         + (startisPM.isChecked() ? "PM" : "AM");
 
-                String endDateString = month.get(endMonth.getSelectedItem().toString())
+                String endDateString = months.get(endMonth.getSelectedItem().toString())
                         + "/" + endDay.toString()
                         + "/" + endYear.getText().toString() + " "
                         + endHour.toString() + ":"
@@ -103,6 +146,5 @@ public class DateRangeActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 }
