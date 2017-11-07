@@ -41,7 +41,7 @@ public class Date implements Comparable<Date>, Parcelable {
     public Date(String data) {
         //data string is orginally of the form "month/date/year hour:minute:second AM/PM"
         //example: "9/5/2012 12:00:00 AM
-
+        data = data.trim();
         //get month
         String dataInput = data.substring(0, data.indexOf("/"));
         this.month = Integer.parseInt(dataInput);

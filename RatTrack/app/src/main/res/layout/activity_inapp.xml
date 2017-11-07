@@ -39,4 +39,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Map" />
+
+    <Button
+        android:id="@+id/start_graph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Graph" />
 </LinearLayout>
