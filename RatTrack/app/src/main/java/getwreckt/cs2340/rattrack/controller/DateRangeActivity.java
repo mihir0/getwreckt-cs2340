@@ -130,7 +130,7 @@ public class DateRangeActivity extends AppCompatActivity {
 
         startMin.setAdapter(minAdapter);
         endHour.setAdapter(minAdapter);
-        
+
         continueButton = (Button) findViewById(R.id.continue_button);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
