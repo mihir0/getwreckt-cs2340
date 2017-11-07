@@ -91,13 +91,18 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
                 if (mAuth.getCurrentUser() != null) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         RatSighting ratSighting = ds.getValue(RatSighting.class);
-                        if (ratSighting.getDate().compareTo(SightingManager.startMapDate) >= 0
+                        if (isValidSighting(ratSighting)
+                                && ratSighting.getDate().compareTo(SightingManager.startMapDate) >= 0
                                 && ratSighting.getDate().compareTo(SightingManager.endMapDate) <= 0) {
-                            LatLng latLng = new LatLng(Double.parseDouble(ratSighting.getLocation().getLatitude()),
-                                    Double.parseDouble(ratSighting.getLocation().getLongitude()));
-                            String snippet = ratSighting.toString();
-                            map.addMarker(new MarkerOptions().position(latLng).title(ratSighting.toString()).snippet(snippet));
-                            //map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                            try {
+                                LatLng latLng = new LatLng(Double.parseDouble(ratSighting.getLocation().getLatitude()),
+                                        Double.parseDouble(ratSighting.getLocation().getLongitude()));
+                                String snippet = ratSighting.toString();
+                                map.addMarker(new MarkerOptions().position(latLng).title(ratSighting.toString()).snippet(snippet));
+                                //map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                            } catch (Exception e) {
+
+                            }
                         }
                     }
                     mDataRef.child("ratsightings").keepSynced(true);
@@ -109,5 +114,10 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
 
             }
         });
+    }
+
+    private boolean isValidSighting(RatSighting ratSighting) {
+        return !(ratSighting.getLocation().getLatitude().equals("")
+                || ratSighting.getLocation().getLongitude().equals(""));
     }
 }
