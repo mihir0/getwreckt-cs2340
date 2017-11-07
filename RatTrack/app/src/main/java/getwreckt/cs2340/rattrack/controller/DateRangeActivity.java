@@ -76,33 +76,21 @@ public class DateRangeActivity extends AppCompatActivity {
         ArrayList<String> days = new ArrayList<>();
         days.add("Day");
         for (int i = 1; i <= 31; i++) {
-            if (i < 10) {
-                days.add("0" + i);
-            } else {
-                days.add("" + i);
-            }
+            days.add(String.format("%02d", i));
         }
 
         //hour spinner array
         ArrayList<String> hours = new ArrayList<>();
         hours.add("Hour");
         for (int i = 1; i <= 12; i++) {
-            if (i < 10) {
-                hours.add("0" + i);
-            } else {
-                hours.add("" + i);
-            }
+            hours.add(String.format("%02d", i));
         }
 
         //min spinner array
         ArrayList<String> mins = new ArrayList<>();
         mins.add("Minute");
         for (int i = 0; i <= 59; i++) {
-            if (i < 10) {
-                mins.add("0" + i);
-            } else {
-                mins.add("" + i);
-            }
+            mins.add(String.format("%02d", i));
         }
 
         ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this,
