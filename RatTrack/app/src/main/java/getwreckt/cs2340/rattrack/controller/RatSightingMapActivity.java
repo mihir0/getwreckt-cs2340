@@ -7,6 +7,7 @@ import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.Date;
 import getwreckt.cs2340.rattrack.model.Model;
 import getwreckt.cs2340.rattrack.model.RatSighting;
+import getwreckt.cs2340.rattrack.model.SightingManager;
 import getwreckt.cs2340.rattrack.model.User;
 
 import android.support.v4.app.FragmentActivity;
@@ -54,8 +55,8 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
         updateMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Model.startMapDate = new Date(startDate.getText().toString());
-                Model.endMapDate = new Date(endDate.getText().toString());
+                SightingManager.startMapDate = new Date(startDate.getText().toString());
+                SightingManager.endMapDate = new Date(endDate.getText().toString());
                 Intent refresh = new Intent(RatSightingMapActivity.this, RatSightingMapActivity.class);
                 startActivity(refresh);
             }
@@ -90,8 +91,8 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
                 if (mAuth.getCurrentUser() != null) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         RatSighting ratSighting = ds.getValue(RatSighting.class);
-                        if (ratSighting.getDate().compareTo(Model.startMapDate) >= 0
-                                && ratSighting.getDate().compareTo(Model.endMapDate) <= 0) {
+                        if (ratSighting.getDate().compareTo(SightingManager.startMapDate) >= 0
+                                && ratSighting.getDate().compareTo(SightingManager.endMapDate) <= 0) {
                             LatLng latLng = new LatLng(Double.parseDouble(ratSighting.getLocation().getLatitude()),
                                     Double.parseDouble(ratSighting.getLocation().getLongitude()));
                             String snippet = ratSighting.toString();
