@@ -35,6 +35,8 @@ import getwreckt.cs2340.rattrack.model.Model;
 import getwreckt.cs2340.rattrack.model.RatSighting;
 import getwreckt.cs2340.rattrack.model.SightingManager;
 import getwreckt.cs2340.rattrack.model.User;
+import getwreckt.cs2340.rattrack.model.Date;
+import getwreckt.cs2340.rattrack.model.SightingManager;
 
 public class GraphActivity extends AppCompatActivity {
 
@@ -54,8 +56,8 @@ public class GraphActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
         lineChart = (LineChart) findViewById(R.id.chart);
-        Date fromDate = Model.startGraphDate;
-        Date toDate = Model.endGraphDate;
+        Date fromDate = SightingManager.startGraphDate;
+        Date toDate = SightingManager.endGraphDate;
         startDate = (EditText) findViewById(R.id.start_date);
         endDate = (EditText) findViewById(R.id.end_date);
         updateGraph = (Button) findViewById(R.id.update_graph);
@@ -64,8 +66,8 @@ public class GraphActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Model.startGraphDate = new Date(startDate.getText().toString());
-                    Model.endGraphDate = new Date(endDate.getText().toString());
+                    SightingManager.startGraphDate = new Date(startDate.getText().toString());
+                    SightingManager.endGraphDate = new Date(endDate.getText().toString());
                     getGraphReady(lineChart);
                 } catch (Exception e) {
                     endDate.setError("please enter valid dates");
@@ -90,18 +92,18 @@ public class GraphActivity extends AppCompatActivity {
 
                 if (mAuth.getCurrentUser() != null) {
                     SightingManager.ratSightings.clear();
-                    int startDate = Model.startGraphDate.getYear() * 10000;
-                    startDate += (Model.startGraphDate.getMonth() * 100);
-                    startDate += Model.startGraphDate.getDate();
-                    int endDate = Model.endGraphDate.getYear() * 10000;
-                    endDate += (Model.endGraphDate.getMonth() * 100);
-                    endDate += Model.endGraphDate.getDate();
-                    int endTime = Model.endGraphDate.getHour() * 10000;
-                    endTime += (Model.endGraphDate.getMinute() * 100);
-                    endTime += Model.endGraphDate.getSecond();
-                    int startTime = Model.startGraphDate.getHour() * 10000;
-                    startTime += (Model.startGraphDate.getMinute() * 100);
-                    startTime += Model.startGraphDate.getSecond();
+                    int startDate = SightingManager.startGraphDate.getYear() * 10000;
+                    startDate += (SightingManager.startGraphDate.getMonth() * 100);
+                    startDate += SightingManager.startGraphDate.getDate();
+                    int endDate = SightingManager.endGraphDate.getYear() * 10000;
+                    endDate += (SightingManager.endGraphDate.getMonth() * 100);
+                    endDate += SightingManager.endGraphDate.getDate();
+                    int endTime = SightingManager.endGraphDate.getHour() * 10000;
+                    endTime += (SightingManager.endGraphDate.getMinute() * 100);
+                    endTime += SightingManager.endGraphDate.getSecond();
+                    int startTime = SightingManager.startGraphDate.getHour() * 10000;
+                    startTime += (SightingManager.startGraphDate.getMinute() * 100);
+                    startTime += SightingManager.startGraphDate.getSecond();
 
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         Log.e("List", "" + SightingManager.ratSightings.size());
