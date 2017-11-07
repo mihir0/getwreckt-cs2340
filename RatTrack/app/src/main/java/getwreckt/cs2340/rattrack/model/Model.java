@@ -50,6 +50,8 @@ public class Model {
     public static Date startGraphDate = new Date("01/01/1000 12:00:00 AM");
     public static Date endGraphDate = new Date("12/31/3999 11:59:00 PM");
 
+    public static String viewToGoTo = null;
+
     public static void readCSVFile(InputStream is) {
         Log.d("Model", "READING CSV FILE");
         Log.println(Log.INFO, "Starting", "READING CSV FILE");
