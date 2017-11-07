@@ -74,16 +74,11 @@ public class GraphActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-<<<<<<< HEAD
-                    Model.startGraphDate = new Date(startDate.getText().toString());
-                    Model.endGraphDate = new Date(endDate.getText().toString());
-                    Log.e("List", "got here");
-                    getGraphReady();
-=======
+
                     SightingManager.startGraphDate = new Date(startDate.getText().toString());
                     SightingManager.endGraphDate = new Date(endDate.getText().toString());
-                    getGraphReady(lineChart);
->>>>>>> 434adfa2c6c43d8ecc7c58e9b151ab1c59faa166
+                    Log.e("List", "got here");
+                    getGraphReady();
                 } catch (Exception e) {
                     endDate.setError("please enter valid dates");
                 }
@@ -125,12 +120,12 @@ public class GraphActivity extends AppCompatActivity {
                     if (endDate - startDate >= 10000) {
                         //count back from end year by month
                         sortBy = "years";
-                        int i = Model.endGraphDate.getYear();
-                        for (int j = Model.endGraphDate.getMonth(); j >= 1; j--) {
+                        int i = SightingManager.endGraphDate.getYear();
+                        for (int j = SightingManager.endGraphDate.getMonth(); j >= 1; j--) {
                             int dateKey = (j * 100) + (i * 10000);
                             dateToCountMap.put(dateKey, 0);
                             intervalList.add(j + "");
-                            if (i == Model.startGraphDate.getYear() && j == Model.startGraphDate.getMonth()) {
+                            if (i == SightingManager.startGraphDate.getYear() && j == SightingManager.startGraphDate.getMonth()) {
                                 j = -1;
                             } else if (j == 1) {
                                 i--;
@@ -140,14 +135,14 @@ public class GraphActivity extends AppCompatActivity {
                     } else if (endDate - startDate >= 100) {
                         //count back from end month
                         sortBy = "months";
-                        int y = Model.endGraphDate.getYear();
-                        int m = Model.endGraphDate.getMonth();
-                        for (int j = Model.endGraphDate.getDate(); j >= 1; j--) {
+                        int y = SightingManager.endGraphDate.getYear();
+                        int m = SightingManager.endGraphDate.getMonth();
+                        for (int j = SightingManager.endGraphDate.getDate(); j >= 1; j--) {
                             int dateKey = (m * 100) + (y * 10000) + j;
                             dateToCountMap.put(dateKey, 0);
                             intervalList.add(j + "");
-                            if (m == Model.startGraphDate.getMonth() && j == Model.startGraphDate.getDate()
-                                    && y == Model.startGraphDate.getYear()) {
+                            if (m == SightingManager.startGraphDate.getMonth() && j == SightingManager.startGraphDate.getDate()
+                                    && y == SightingManager.startGraphDate.getYear()) {
                                 j = -1;
                             } else if (j == 1 && m == 1) {
                                 y--;
@@ -172,14 +167,14 @@ public class GraphActivity extends AppCompatActivity {
                     } else if (endDate - startDate >= 1) {
                         //count back from end day
                         sortBy = "days";
-                        int y = Model.endGraphDate.getYear();
-                        int m = Model.endGraphDate.getMonth();
-                        for (int j = Model.endGraphDate.getDate(); j >= 1; j--) {
+                        int y = SightingManager.endGraphDate.getYear();
+                        int m = SightingManager.endGraphDate.getMonth();
+                        for (int j = SightingManager.endGraphDate.getDate(); j >= 1; j--) {
                             int dateKey = (m * 100) + (y * 10000) + j;
                             dateToCountMap.put(dateKey, 0);
                             intervalList.add(j + "");
-                            if (m == Model.startGraphDate.getMonth() && j == Model.startGraphDate.getDate()
-                                    && y == Model.startGraphDate.getYear()) {
+                            if (m == SightingManager.startGraphDate.getMonth() && j == SightingManager.startGraphDate.getDate()
+                                    && y == SightingManager.startGraphDate.getYear()) {
                                 j = -1;
                             } else if (j == 1 && m == 1) {
                                 y--;
