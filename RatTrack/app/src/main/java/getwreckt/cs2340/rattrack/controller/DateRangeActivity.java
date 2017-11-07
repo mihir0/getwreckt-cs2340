@@ -200,8 +200,8 @@ public class DateRangeActivity extends AppCompatActivity {
 
         try {
             int year = Integer.parseInt(selYear);
-            if (!((year  >= 1900) && (year <= Calendar.YEAR))) {
-                errorMsg.setText("Enter a realistic year");
+            if (!((year  >= 1900) && (year <= Calendar.getInstance().get(Calendar.YEAR)))) {
+                errorMsg.setText("Enter a realistic year. You entered: " + year + ".");
                 return false;
             }
         } catch (NumberFormatException nfe) {
