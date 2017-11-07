@@ -7,6 +7,7 @@ import android.os.Parcelable;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -77,17 +78,22 @@ public class Date implements Comparable<Date>, Parcelable {
         this.second = Integer.parseInt(dataInput);
 
         data = data.substring(data.indexOf(" ") + 1);
-        setMeridiem(data);
+        setMeridiem();
         setIsPM(data.equals("PM"));
         generateSystemString(this.month, this.date, this.year, this.hour, this.isPM, this.minute, this.second);
     }
 
 
-    /** constructor for in app date input
-     public Date()
-     {
-
-     }     */
+    //constructor for in app date input
+     public Date(int month, int date, int year, int hour, int minute, boolean isPM) {
+         this.month = month;
+         this.date = date;
+         this.year = year;
+         this.isPM = isPM;
+         this.minute = minute;
+         this.second = 0;
+         setHour(hour);
+     }
 
     /** constructor for android timestamp
      public Date(Timestamp timestamp) {
@@ -162,8 +168,8 @@ public class Date implements Comparable<Date>, Parcelable {
         return this.meridiem;
     }
 
-    public void setMeridiem(String meridiem) {
-        this.meridiem = meridiem;
+    public void setMeridiem() {
+        this.meridiem = isPM ? "PM" : "AM";
     }
 
     private String digitToString(int digit) {
@@ -240,7 +246,7 @@ public class Date implements Comparable<Date>, Parcelable {
         }
     };
 
-    public class DateChainedComparator implements Comparator<Date> {
+    public static class DateChainedComparator implements Comparator<Date> {
         private List<Comparator<Date>> listComparators = new ArrayList<Comparator<Date>>();
 
         public DateChainedComparator() {
@@ -253,9 +259,7 @@ public class Date implements Comparable<Date>, Parcelable {
         }
 
         public DateChainedComparator(Comparator<Date> ... comparators) {
-            for (Comparator<Date> comparator: comparators) {
-                listComparators.add(comparator);
-            }
+            listComparators.addAll(Arrays.asList(comparators));
         }
 
         @Override
