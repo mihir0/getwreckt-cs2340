@@ -74,7 +74,6 @@ public class GraphActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-
                     SightingManager.startGraphDate = new Date(startDate.getText().toString());
                     SightingManager.endGraphDate = new Date(endDate.getText().toString());
                     Log.e("List", "got here");
@@ -252,14 +251,14 @@ public class GraphActivity extends AppCompatActivity {
             }
         });
         List<Entry> entries = convertDataSetToEntry(dateToCountMap, xAxisIntervals);
-        LineDataSet dataset = new LineDataSet(entries, "# of Calls");
+        LineDataSet dataset = new LineDataSet(entries, "# of ratsightings by " + sortBy);
         LineData data = new LineData(dataset);
         dataset.setColors(ColorTemplate.COLORFUL_COLORS);
         dataset.setDrawFilled(true);
         lineChart.setData(data);
         lineChart.animateY(5000);
         XAxis xAxis = lineChart.getXAxis();
-        lineChart.getDescription().setText("Average Calls per Month");
+        lineChart.getDescription().setText("sightings over time");
         xAxis.setValueFormatter(new MyAxisValueFormatter(xAxisIntervals));
 
     }
