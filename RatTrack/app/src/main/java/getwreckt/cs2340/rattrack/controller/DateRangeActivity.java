@@ -123,7 +123,7 @@ public class DateRangeActivity extends AppCompatActivity {
         minAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         startMin.setAdapter(minAdapter);
-        endHour.setAdapter(minAdapter);
+        endMin.setAdapter(minAdapter);
         
         continueButton = (Button) findViewById(R.id.continue_button);
         continueButton.setOnClickListener(new View.OnClickListener() {
