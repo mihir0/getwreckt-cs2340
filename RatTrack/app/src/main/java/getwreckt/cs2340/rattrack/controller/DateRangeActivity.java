@@ -58,6 +58,8 @@ public class DateRangeActivity extends AppCompatActivity {
         month.put("November", "11");
         month.put("December", "12");
 
+
+        //TODO change order for month adapter
         final ArrayList<String> months = new ArrayList<>();
         for (String strMonth : month.keySet()) {
             months.add(strMonth);
@@ -102,6 +104,7 @@ public class DateRangeActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, months);
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         startMonth.setAdapter(monthAdapter);
+        endMonth.setAdapter(monthAdapter);
 
         ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, days);
