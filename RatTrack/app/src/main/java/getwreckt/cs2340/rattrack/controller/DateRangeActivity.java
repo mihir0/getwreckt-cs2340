@@ -36,6 +36,7 @@ public class DateRangeActivity extends AppCompatActivity {
     private CheckBox endisPM;
     private Button continueButton;
     private TextView errorMsg;
+    private final HashMap<String, String> months = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +130,7 @@ public class DateRangeActivity extends AppCompatActivity {
 
         startMin.setAdapter(minAdapter);
         endHour.setAdapter(minAdapter);
-
+        
         continueButton = (Button) findViewById(R.id.continue_button);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override

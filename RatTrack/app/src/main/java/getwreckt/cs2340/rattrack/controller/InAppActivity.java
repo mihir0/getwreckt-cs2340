@@ -37,6 +37,7 @@ public class InAppActivity extends AppCompatActivity {
     private Button startButn;
     private Button makeSightingButn;
     private Button mapViewBtn;
+    private Button startGraphBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +108,18 @@ public class InAppActivity extends AppCompatActivity {
                 startActivity(toMakeSighting);
             }
         });
+
+        startGraphBtn = (Button) findViewById(R.id.start_graph);
+        startGraphBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.println(Log.INFO, "CLICK", "Start graph button clicked");
+                Intent toMakeGraph = new Intent(InAppActivity.this,
+                        GraphActivity.class);
+                startActivity(toMakeGraph);
+            }
+        });
+
 
     }
 
