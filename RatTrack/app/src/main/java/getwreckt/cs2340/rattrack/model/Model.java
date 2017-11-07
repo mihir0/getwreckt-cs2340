@@ -46,7 +46,7 @@ public class Model {
 
     public static String viewToGoTo = null;
 
-    /**
+
     public static void readCSVFile(InputStream is) {
         Log.d("Model", "READING CSV FILE");
         Log.println(Log.INFO, "Starting", "READING CSV FILE");
@@ -63,7 +63,7 @@ public class Model {
                 //add new Sighting to list of sightings
 
                 RatSighting rs = new RatSighting(sightData[0], sightData[1], sightData[7], sightData[8],
-                        sightData[9], sightData[16], sightData[23], sightData[49], sightData[50]);
+                        sightData[9], sightData[16], sightData[23], sightData[sightData.length - 4], sightData[sightData.length - 3]);
                 //SightingManager.ratSightings.add(rs);
                 mDataRef.child("ratsightings").child(sightData[0]).setValue(rs);
             }
@@ -73,6 +73,6 @@ public class Model {
             e.printStackTrace();
         }
     }
-     **/
+
 
 }
