@@ -142,14 +142,14 @@ public class DateRangeActivity extends AppCompatActivity {
                                 endHour.getSelectedItem().toString(),
                                 endMin.getSelectedItem().toString())) {
 
-                    Date start = new Date(Integer.parseInt(month.get(startMonth.getSelectedItem()).toString()),
+                    Date start = new Date(Integer.parseInt(startMonth.getSelectedItem().toString()),
                             Integer.parseInt(startDay.getSelectedItem().toString()),
                             Integer.parseInt(startYear.getText().toString()),
                             Integer.parseInt(startHour.getSelectedItem().toString()),
                             Integer.parseInt(startMin.getSelectedItem().toString()),
                             startisPM.isChecked());
 
-                    Date end = new Date(Integer.parseInt(month.get(endMonth.getSelectedItem().toString())),
+                    Date end = new Date(Integer.parseInt(endMonth.getSelectedItem().toString()),
                             Integer.parseInt(endDay.getSelectedItem().toString()),
                             Integer.parseInt(endYear.getText().toString()),
                             Integer.parseInt(endHour.getSelectedItem().toString()),
@@ -200,8 +200,8 @@ public class DateRangeActivity extends AppCompatActivity {
 
         try {
             int year = Integer.parseInt(selYear);
-            if (!((year  >= 1900))) {
-                errorMsg.setText("Enter a realistic year");
+            if (!((year  >= 1900) && (year <= Calendar.getInstance().get(Calendar.YEAR)))) {
+                errorMsg.setText("Enter a realistic year. You entered: " + year + ".");
                 return false;
             }
         } catch (NumberFormatException nfe) {
