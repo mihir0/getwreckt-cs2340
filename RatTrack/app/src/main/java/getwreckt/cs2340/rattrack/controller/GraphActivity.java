@@ -60,14 +60,15 @@ public class GraphActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
-
         mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
         lineChart = (LineChart) findViewById(R.id.chart);
+        /*
         Date fromDate = SightingManager.startGraphDate;
         Date toDate = SightingManager.endGraphDate;
         startDate = (EditText) findViewById(R.id.start_date);
         endDate = (EditText) findViewById(R.id.end_date);
+        */
         updateGraph = (Button) findViewById(R.id.update_graph);
         newGraph = (Button) findViewById(R.id.new_graph);
 
@@ -94,9 +95,18 @@ public class GraphActivity extends AppCompatActivity {
                 startActivity(refresh);
             }
         });
+        getDateRange();
+    }
 
 
-
+    /**
+     * Calls DateRangeActivity to set startDate and endDate
+     */
+    public void getDateRange() {
+        Model.viewToGoTo = "Graph";
+        Intent toDateRange = new Intent(GraphActivity.this,
+                DateRangeActivity.class);
+        startActivity(toDateRange);
     }
 
     public void getGraphReady() {
@@ -284,7 +294,6 @@ public class GraphActivity extends AppCompatActivity {
                                     dateToCountMap.put(dayKey, count + 1);
                                 }
                             }
-
                         }
 
                     }
@@ -333,7 +342,6 @@ public class GraphActivity extends AppCompatActivity {
 
         return entries;
     }
-
 
     public class MyAxisValueFormatter implements IAxisValueFormatter {
 

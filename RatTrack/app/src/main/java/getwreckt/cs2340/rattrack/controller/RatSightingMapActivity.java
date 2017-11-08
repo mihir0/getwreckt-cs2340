@@ -38,8 +38,6 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
     private GoogleMap map;
     private FirebaseAuth mAuth;
     private DatabaseReference mDataRef;
-    private EditText startDate;
-    private EditText endDate;
     private Button updateMap;
 
     @Override
@@ -49,16 +47,13 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
 
         setContentView(R.layout.activity_rat_sighting_map);
 
-        startDate = (EditText) findViewById(R.id.start_date);
-        endDate = (EditText) findViewById(R.id.end_date);
         updateMap = (Button) findViewById(R.id.update_map);
         updateMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SightingManager.startMapDate = new Date(startDate.getText().toString());
-                SightingManager.endMapDate = new Date(endDate.getText().toString());
-                Intent refresh = new Intent(RatSightingMapActivity.this, RatSightingMapActivity.class);
-                startActivity(refresh);
+                Model.viewToGoTo = "Map";
+                Intent toDateRange = new Intent(RatSightingMapActivity.this, DateRangeActivity.class);
+                startActivity(toDateRange);
             }
         });
 

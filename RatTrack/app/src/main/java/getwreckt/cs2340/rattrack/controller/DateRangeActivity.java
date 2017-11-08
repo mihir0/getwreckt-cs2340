@@ -58,6 +58,13 @@ public class DateRangeActivity extends AppCompatActivity {
         month.put("November", "11");
         month.put("December", "12");
 
+
+        //TODO change order for month adapter
+        final ArrayList<String> months = new ArrayList<>();
+        for (String strMonth : month.keySet()) {
+            months.add(strMonth);
+        }
+
         startMonth = (Spinner) findViewById(R.id.start_month);
         startDay = (Spinner) findViewById(R.id.start_day);
         startYear = (EditText) findViewById(R.id.start_year);
@@ -94,9 +101,10 @@ public class DateRangeActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, (String[]) month.keySet().toArray());
+                android.R.layout.simple_spinner_item, months);
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         startMonth.setAdapter(monthAdapter);
+        endMonth.setAdapter(monthAdapter);
 
         ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, days);
@@ -117,7 +125,7 @@ public class DateRangeActivity extends AppCompatActivity {
         minAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         startMin.setAdapter(minAdapter);
-        endHour.setAdapter(minAdapter);
+        endMin.setAdapter(minAdapter);
         
         continueButton = (Button) findViewById(R.id.continue_button);
         continueButton.setOnClickListener(new View.OnClickListener() {
@@ -192,8 +200,8 @@ public class DateRangeActivity extends AppCompatActivity {
 
         try {
             int year = Integer.parseInt(selYear);
-            if (!((year  >= 1900) && (year <= Calendar.YEAR))) {
-                errorMsg.setText("Enter a realistic year");
+            if (!((year  >= 1900) && (year <= Calendar.getInstance().get(Calendar.YEAR)))) {
+                errorMsg.setText("Enter a realistic year. You entered: " + year + ".");
                 return false;
             }
         } catch (NumberFormatException nfe) {
