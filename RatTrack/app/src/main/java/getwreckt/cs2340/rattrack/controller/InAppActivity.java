@@ -114,6 +114,7 @@ public class InAppActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.println(Log.INFO, "CLICK", "Start graph button clicked");
+                Model.viewToGoTo = "Graph";
                 Intent toMakeGraph = new Intent(InAppActivity.this,
                         GraphActivity.class);
                 startActivity(toMakeGraph);
