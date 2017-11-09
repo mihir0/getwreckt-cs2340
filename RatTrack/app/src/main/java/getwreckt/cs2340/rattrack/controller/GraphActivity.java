@@ -49,7 +49,6 @@ public class GraphActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
     private EditText startDate;
     private EditText endDate;
-    private Button updateGraph;
     private Button newGraph;
     private LineChart lineChart;
     private String[] xAxisIntervals = {};
@@ -67,30 +66,16 @@ public class GraphActivity extends AppCompatActivity {
         startDate = (EditText) findViewById(R.id.start_date);
         endDate = (EditText) findViewById(R.id.end_date);
 
-        updateGraph = (Button) findViewById(R.id.update_graph);
         newGraph = (Button) findViewById(R.id.new_graph);
 
-        updateGraph.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    SightingManager.startGraphDate = new Date(startDate.getText().toString());
-                    SightingManager.endGraphDate = new Date(endDate.getText().toString());
-//                    SightingManager.startGraphDate = new Date("01/05/2016 12:00:00 AM");
-//                    SightingManager.endGraphDate = new Date("12/05/2017 12:00:00 AM");
-                    Log.e("List", "got here");
-                    getGraphReady();
-                } catch (Exception e) {
-                    endDate.setError("please enter valid dates");
-                }
-            }
-        });
+        getGraphReady();
 
         newGraph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent refresh = new Intent(GraphActivity.this, GraphActivity.class);
-                startActivity(refresh);
+                Model.viewToGoTo = "Graph";
+                Intent toDateRange = new Intent(GraphActivity.this, DateRangeActivity.class);
+                startActivity(toDateRange);
             }
         });
     }

@@ -79,8 +79,9 @@ public class InAppActivity extends AppCompatActivity {
         mapViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Model.viewToGoTo = "Map";
                 Intent toRatSightingMap = new Intent(InAppActivity.this,
-                        RatSightingMapActivity.class);
+                        DateRangeActivity.class);
                 startActivity(toRatSightingMap);
             }
         });
@@ -118,7 +119,7 @@ public class InAppActivity extends AppCompatActivity {
                 Log.println(Log.INFO, "CLICK", "Start graph button clicked");
                 Model.viewToGoTo = "Graph";
                 Intent toMakeGraph = new Intent(InAppActivity.this,
-                        GraphActivity.class);
+                        DateRangeActivity.class);
                 startActivity(toMakeGraph);
             }
         });

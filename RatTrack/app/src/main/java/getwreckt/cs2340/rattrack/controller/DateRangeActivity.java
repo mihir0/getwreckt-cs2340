@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import getwreckt.cs2340.rattrack.R;
@@ -38,6 +39,21 @@ public class DateRangeActivity extends AppCompatActivity {
     private TextView errorMsg;
     private final HashMap<String, String> months = new HashMap<>();
 
+
+    private static class MonthComparator implements Comparator<String> {
+        private HashMap<String, String> map;
+
+        public MonthComparator(HashMap<String, String> map) {
+            this.map = map;
+        }
+        @Override
+        public int compare(String o1, String o2) {
+            Integer i = Integer.parseInt(map.get(o1));
+            Integer j = Integer.parseInt(map.get(o2));
+            return i.compareTo(j);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +77,18 @@ public class DateRangeActivity extends AppCompatActivity {
 
         //TODO change order for month adapter
         final ArrayList<String> months = new ArrayList<>();
-        for (String strMonth : month.keySet()) {
-            months.add(strMonth);
-        }
+        months.add("January");
+        months.add("February");
+        months.add("March");
+        months.add("April");
+        months.add("May");
+        months.add("June");
+        months.add("July");
+        months.add("August");
+        months.add("September");
+        months.add("October");
+        months.add("November");
+        months.add("December");
 
         startMonth = (Spinner) findViewById(R.id.start_month);
         startDay = (Spinner) findViewById(R.id.start_day);
@@ -142,14 +167,14 @@ public class DateRangeActivity extends AppCompatActivity {
                                 endHour.getSelectedItem().toString(),
                                 endMin.getSelectedItem().toString())) {
 
-                    Date start = new Date(Integer.parseInt(startMonth.getSelectedItem().toString()),
+                    Date start = new Date(Integer.parseInt(month.get(startMonth.getSelectedItem().toString())),
                             Integer.parseInt(startDay.getSelectedItem().toString()),
                             Integer.parseInt(startYear.getText().toString()),
                             Integer.parseInt(startHour.getSelectedItem().toString()),
                             Integer.parseInt(startMin.getSelectedItem().toString()),
                             startisPM.isChecked());
 
-                    Date end = new Date(Integer.parseInt(endMonth.getSelectedItem().toString()),
+                    Date end = new Date(Integer.parseInt(month.get(endMonth.getSelectedItem().toString())),
                             Integer.parseInt(endDay.getSelectedItem().toString()),
                             Integer.parseInt(endYear.getText().toString()),
                             Integer.parseInt(endHour.getSelectedItem().toString()),
