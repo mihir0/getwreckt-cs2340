@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
 
 import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.Date;
@@ -37,11 +38,11 @@ public class DateRangeActivity extends AppCompatActivity {
     private CheckBox endisPM;
     private Button continueButton;
     private TextView errorMsg;
-    private final HashMap<String, String> months = new HashMap<>();
+    private final Map<String, String> months = new HashMap<>();
 
 
     private static class MonthComparator implements Comparator<String> {
-        private HashMap<String, String> map;
+        private Map<String, String> map;
 
         public MonthComparator(HashMap<String, String> map) {
             this.map = map;
@@ -59,7 +60,7 @@ public class DateRangeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_range);
 
-        final HashMap<String, String> month = new HashMap<>();
+        final Map<String, String> month = new HashMap<>();
         month.put("Month", "0");
         month.put("January", "01");
         month.put("February", "02");
@@ -104,24 +105,30 @@ public class DateRangeActivity extends AppCompatActivity {
         endisPM = (CheckBox) findViewById(R.id.end_is_pm);
         errorMsg = (TextView) findViewById(R.id.error_msg);
 
+        int maxDaysForMonth = 31;
+
         //day spinner array
         ArrayList<String> days = new ArrayList<>();
         days.add("Day");
-        for (int i = 1; i <= 31; i++) {
+        for (int i = 1; i <= maxDaysForMonth; i++) {
             days.add(String.format("%02d", i));
         }
+
+        int maxHours = 12;
 
         //hour spinner array
         ArrayList<String> hours = new ArrayList<>();
         hours.add("Hour");
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= maxHours; i++) {
             hours.add(String.format("%02d", i));
         }
+
+        int maxMin = 59;
 
         //min spinner array
         ArrayList<String> mins = new ArrayList<>();
         mins.add("Minute");
-        for (int i = 0; i <= 59; i++) {
+        for (int i = 0; i <= maxMin; i++) {
             mins.add(String.format("%02d", i));
         }
 
@@ -223,9 +230,11 @@ public class DateRangeActivity extends AppCompatActivity {
             return false;
         }
 
+        int minYear = 1900;
+
         try {
             int year = Integer.parseInt(selYear);
-            if (!((year  >= 1900) && (year <= Calendar.getInstance().get(Calendar.YEAR)))) {
+            if (!((year  >= minYear) && (year <= Calendar.getInstance().get(Calendar.YEAR)))) {
                 errorMsg.setText("Enter a realistic year. You entered: " + year + ".");
                 return false;
             }
@@ -237,22 +246,24 @@ public class DateRangeActivity extends AppCompatActivity {
         int day = Integer.parseInt(selDay);
         int year = Integer.parseInt(selYear);
 
+        int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
         HashMap<String, Integer> monthDays = new HashMap<>();
-        monthDays.put("January", 31);
-        monthDays.put("March", 31);
-        monthDays.put("April", 30);
-        monthDays.put("May", 31);
-        monthDays.put("June", 30);
-        monthDays.put("July", 31);
-        monthDays.put("August", 31);
-        monthDays.put("September", 30);
-        monthDays.put("October", 31);
-        monthDays.put("November", 30);
-        monthDays.put("December", 31);
+        monthDays.put("January", daysPerMonth[0]);
+        monthDays.put("March", daysPerMonth[2]);
+        monthDays.put("April", daysPerMonth[3]);
+        monthDays.put("May", daysPerMonth[4]);
+        monthDays.put("June", daysPerMonth[5]);
+        monthDays.put("July", daysPerMonth[6]);
+        monthDays.put("August", daysPerMonth[7]);
+        monthDays.put("September", daysPerMonth[8]);
+        monthDays.put("October", daysPerMonth[9]);
+        monthDays.put("November", daysPerMonth[10]);
+        monthDays.put("December", daysPerMonth[11]);
 
         if (selMonth.equals("February")) {
-            if (day > 28) {
-                if (!((day == 29) && (year % 4 == 0))) {
+            if (day > daysPerMonth[1]) {
+                if (!((day == daysPerMonth[1] + 1) && (year % 4 == 0))) {
                     errorMsg.setText("Invalid day for selected month");
                     return false;
                 }

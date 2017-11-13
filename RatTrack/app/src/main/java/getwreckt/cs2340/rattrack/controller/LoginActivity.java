@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.*;
@@ -85,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        HashMap<String, Object> mapSignedIn = new HashMap<String, Object>();
+                                        Map<String, Object> mapSignedIn = new HashMap<String, Object>();
                                         mapSignedIn.put("signedIn", true);
                                         mDataRef.child("users").child(mAuth.getCurrentUser().getUid()).updateChildren(mapSignedIn);
                                         startActivity(toInAppScreen);

@@ -24,6 +24,7 @@ import org.xml.sax.DTDHandler;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -128,7 +129,7 @@ public class InAppActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        HashMap<String, Object> mapSignedIn = new HashMap<String, Object>();
+        Map<String, Object> mapSignedIn = new HashMap<String, Object>();
         mapSignedIn.put("signedIn", false);
         mDataRef.child("users").child(mAuth.getCurrentUser().getUid()).updateChildren(mapSignedIn);
         mAuth.signOut();
@@ -139,12 +140,13 @@ public class InAppActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser firebaseUser) {
-        if (Model.getCurrentUser() == null) {
+        Model m = new Model();
+        if (m.getCurrentUser() == null) {
             logout();
-        } else if (Model.getCurrentUser().getSignedIn()) {
+        } else if (m.getCurrentUser().getSignedIn()) {
             //InputStream is = getResources().openRawResource(R.raw.rat_sightings);
             //Model.readCSVFile(is);
-            String strLine = "Hello, " + Model.getCurrentUser().getFullName() + ", You are now logged in!";
+            String strLine = "Hello, " + m.getCurrentUser().getFullName() + ", You are now logged in!";
             text.setText(strLine);
         }
     }
