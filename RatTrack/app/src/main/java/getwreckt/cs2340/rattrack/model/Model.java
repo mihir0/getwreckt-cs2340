@@ -30,7 +30,7 @@ public class Model {
     /**
      * constructor for a model
      */
-    public Model() {
+    private Model() {
         mDataRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
     }

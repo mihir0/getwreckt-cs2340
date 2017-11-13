@@ -140,13 +140,12 @@ public class InAppActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser firebaseUser) {
-        Model m = new Model();
-        if (m.getCurrentUser() == null) {
+        if (Model.getCurrentUser() == null) {
             logout();
-        } else if (m.getCurrentUser().getSignedIn()) {
+        } else if (Model.getCurrentUser().getSignedIn()) {
             //InputStream is = getResources().openRawResource(R.raw.rat_sightings);
             //Model.readCSVFile(is);
-            String strLine = "Hello, " + m.getCurrentUser().getFullName() + ", You are now logged in!";
+            String strLine = "Hello, " + Model.getCurrentUser().getFullName() + ", You are now logged in!";
             text.setText(strLine);
         }
     }
