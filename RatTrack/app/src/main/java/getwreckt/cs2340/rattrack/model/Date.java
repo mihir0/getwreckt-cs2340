@@ -130,7 +130,7 @@ public class Date implements Comparable<Date>, Parcelable {
     }
 
     //changes to military time
-    public void setHour(int hour) {
+    private void setHour(int hour) {
         if (isPM) {
             this.hour = hour + 12;
         } else if (hour == 12){
@@ -195,7 +195,7 @@ public class Date implements Comparable<Date>, Parcelable {
     //descending order on system generated strings
     @Override
     public int compareTo(Date other) {
-        DateChainedComparator dateChainedComparator = new DateChainedComparator();
+        java.util.Comparator<Date> dateChainedComparator = new DateChainedComparator();
         return dateChainedComparator.compare(other, this);
     }
 
@@ -247,7 +247,7 @@ public class Date implements Comparable<Date>, Parcelable {
     };
 
     public static class DateChainedComparator implements Comparator<Date> {
-        private List<Comparator<Date>> listComparators = new ArrayList<Comparator<Date>>();
+        private java.util.Collection<Comparator<Date>> listComparators = new ArrayList<Comparator<Date>>();
 
         public DateChainedComparator() {
             this.listComparators.add(YearComparator);
