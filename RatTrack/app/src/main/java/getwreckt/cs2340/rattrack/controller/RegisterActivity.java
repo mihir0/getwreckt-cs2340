@@ -72,7 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
         fullNameField = (EditText) findViewById(R.id.full_name);
         userField = (EditText) findViewById(R.id.email);
         passField = (TextInputEditText) findViewById(R.id.password);
-
         userTypeSpinner = (Spinner) findViewById(R.id.user_type_spinner);
 
         /*

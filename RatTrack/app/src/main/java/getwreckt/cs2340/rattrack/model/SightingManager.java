@@ -141,7 +141,7 @@ public class SightingManager {
             hourSince = curHours - numTimeUnitsAgo;
         }
 
-        ArrayList<RatSighting> dateFilteredRatSightings = new ArrayList<>();
+        List<RatSighting> dateFilteredRatSightings = new ArrayList<>();
         for (RatSighting r: ratSightings) {
             String date = r.getDate().toString();
             String mdy = date.split(" ")[0];

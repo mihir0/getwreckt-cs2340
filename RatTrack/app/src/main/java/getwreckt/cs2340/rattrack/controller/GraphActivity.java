@@ -49,7 +49,6 @@ public class GraphActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
     private EditText startDate;
     private EditText endDate;
-    private Button updateGraph;
     private Button newGraph;
     private LineChart lineChart;
     private String[] xAxisIntervals = {};
@@ -63,38 +62,24 @@ public class GraphActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
         lineChart = (LineChart) findViewById(R.id.chart);
-        /*
-        Date fromDate = SightingManager.startGraphDate;
-        Date toDate = SightingManager.endGraphDate;
+
         startDate = (EditText) findViewById(R.id.start_date);
         endDate = (EditText) findViewById(R.id.end_date);
-        */
-        updateGraph = (Button) findViewById(R.id.update_graph);
-        newGraph = (Button) findViewById(R.id.new_graph);
-        updateGraph.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
 
-                    SightingManager.startGraphDate = new Date(startDate.getText().toString());
-                    SightingManager.endGraphDate = new Date(endDate.getText().toString());
-                    Log.e("List", "got here");
-                    getGraphReady();
-                } catch (Exception e) {
-                    endDate.setError("please enter valid dates");
-                }
-            }
-        });
+        newGraph = (Button) findViewById(R.id.new_graph);
+
+        getGraphReady();
 
         newGraph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent refresh = new Intent(GraphActivity.this, GraphActivity.class);
-                startActivity(refresh);
+                Model.viewToGoTo = "Graph";
+                Intent toDateRange = new Intent(GraphActivity.this, DateRangeActivity.class);
+                startActivity(toDateRange);
             }
         });
-        getDateRange();
     }
+
 
     /**
      * Calls DateRangeActivity to set startDate and endDate
@@ -108,111 +93,152 @@ public class GraphActivity extends AppCompatActivity {
 
     public void getGraphReady() {
         mDataRef.child("ratsightings").addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                intervalList.clear();
 
                 if (mAuth.getCurrentUser() != null) {
                     SightingManager.ratSightings.clear();
 
-                    int startDate = SightingManager.startGraphDate.getYear() * 10000;
-                    startDate += (SightingManager.startGraphDate.getMonth() * 100);
-                    startDate += SightingManager.startGraphDate.getDate();
-                    int endDate = SightingManager.endGraphDate.getYear() * 10000;
-                    endDate += (SightingManager.endGraphDate.getMonth() * 100);
-                    endDate += SightingManager.endGraphDate.getDate();
-                    int endTime = SightingManager.endGraphDate.getHour() * 10000;
-                    endTime += (SightingManager.endGraphDate.getMinute() * 100);
-                    endTime += SightingManager.endGraphDate.getSecond();
-                    int startTime = SightingManager.startGraphDate.getHour() * 10000;
-                    startTime += (SightingManager.startGraphDate.getMinute() * 100);
-                    startTime += SightingManager.startGraphDate.getSecond();
+                    Date initDate = SightingManager.startGraphDate;
+                    Date lastDate = SightingManager.endGraphDate;
+
+                    int beginYear = initDate.getYear();
+                    int beginMonth = initDate.getMonth();
+                    int beginDate = initDate.getDate();
+                    int beginHour = initDate.getHour();
+                    int beginMinute = initDate.getMinute();
+                    int beginSecond = initDate.getSecond();
+
+                    int endingYear = lastDate.getYear();
+                    int endingMonth = lastDate.getMonth();
+                    int endingDate = lastDate.getDate();
+                    int endingHour = lastDate.getHour();
+                    int endingMinute = lastDate.getMinute();
+                    int endingSecond = lastDate.getSecond();
+
+                    int yearPos = 10000;
+                    int monPos = 100;
+
+                    int startDate = beginYear * yearPos;
+                    startDate += (beginMonth * monPos);
+                    startDate += beginDate;
+                    int endDate = endingYear * yearPos;
+                    endDate += (endingMonth * monPos);
+                    endDate += endingDate;
+                    int endTime = endingHour * yearPos;
+                    endTime += (endingMinute * monPos);
+                    endTime += endingSecond;
+                    int startTime = beginHour * yearPos;
+                    startTime += (beginMinute * monPos);
+                    startTime += beginSecond;
 
 
-                    if (endDate - startDate >= 10000) {
+                    if (endDate - startDate >= yearPos) {
                         //count back from end year by month
-                        sortBy = "years";
-                        int i = SightingManager.endGraphDate.getYear();
-                        for (int j = SightingManager.endGraphDate.getMonth(); j >= 1; j--) {
-                            int dateKey = (j * 100) + (i * 10000);
-                            dateToCountMap.put(dateKey, 0);
-                            intervalList.add(j + "");
-                            if (i == SightingManager.startGraphDate.getYear() && j == SightingManager.startGraphDate.getMonth()) {
-                                j = -1;
-                            } else if (j == 1) {
-                                i--;
-                                j = 12;
-                            }
-                        }
-                    } else if (endDate - startDate >= 100) {
-                        //count back from end month
                         sortBy = "months";
-                        int y = SightingManager.endGraphDate.getYear();
-                        int m = SightingManager.endGraphDate.getMonth();
-                        for (int j = SightingManager.endGraphDate.getDate(); j >= 1; j--) {
-                            int dateKey = (m * 100) + (y * 10000) + j;
+                        Log.e("List", "got here 2");
+
+                        int i = beginYear;
+                        int counter = 0;
+                        for (int j = beginMonth; j < 13; j++) {
+                            int dateKey = (j * monPos) + (i * yearPos);
                             dateToCountMap.put(dateKey, 0);
-                            intervalList.add(j + "");
-                            if (m == SightingManager.startGraphDate.getMonth() && j == SightingManager.startGraphDate.getDate()
-                                    && y == SightingManager.startGraphDate.getYear()) {
-                                j = -1;
-                            } else if (j == 1 && m == 1) {
-                                y--;
-                                m = 12;
-                                j = 31;
-                            } else if (m == 3 && j == 1 && (y%4 == 0)) {
-                                j = 29;
-                                m--;
-                            } else if(m == 3 && j == 1) {
-                                j = 28;
-                                m--;
-                            } else if (j == 1) {
-                                m--;
-                                if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8
-                                        || m == 10) {
-                                    j = 31;
-                                } else {
-                                    j = 30;
+                            intervalList.add("" + counter);
+                            if (i == endingYear && j == endingMonth) {
+                                j = 12;
+                            } else if (j == 12) {
+                                i++;
+                                j = 0;
+                            }
+                            counter++;
+                        }
+                    } else if (endDate - startDate >= monPos) {
+                        //count back from end month
+                        int endMonth = endingMonth;
+                        int startMonth =  beginMonth;
+                        if (startMonth - endMonth == 11) {
+                            sortBy = "days";
+                            int y = beginYear;
+                            int m = beginMonth;
+                            int counter = 0;
+                            for (int j = beginDate; j <= daysForMonAndYear(m, y); j++) {
+                                int dateKey = (m * monPos) + (y * yearPos) + j;
+                                dateToCountMap.put(dateKey, 0);
+                                intervalList.add("" +  counter);
+                                if (m == endingMonth && j == endingDate
+                                        && y == endingYear) {
+                                    j = 32;
+                                } else if (j == 31 && m == 12) {
+                                    y++;
+                                    m = 1;
+                                    j = 1;
+                                    j--;
+                                } else if (j == daysForMonAndYear(m, y)) {
+                                    m++;
+                                    j = 1;
+                                    j--;
                                 }
+                                counter++;
+                            }
+                        } else {
+                            sortBy = "months";
+                            int y = beginYear;
+                            int m = beginMonth;
+                            int counter = 0;
+                            for (int j = beginDate; j <= daysForMonAndYear(m, y); j++) {
+                                int dateKey = (m * monPos) + (y * yearPos);
+                                dateToCountMap.put(dateKey, 0);
+                                intervalList.add("" + counter);
+                                if (m == endingMonth && j == endingDate
+                                        && y == endingYear) {
+                                    j = 32;
+                                } else if (j == 31 && m == 12) {
+                                    y++;
+                                    m = 1;
+                                    j = 1;
+                                    j--;
+                                } else if (j == daysForMonAndYear(m, y)) {
+                                    m++;
+                                    j = daysForMonAndYear(m, y);
+                                    j--;
+                                }
+                                counter++;
                             }
                         }
                     } else if (endDate - startDate >= 1) {
                         //count back from end day
                         sortBy = "days";
-                        int y = SightingManager.endGraphDate.getYear();
-                        int m = SightingManager.endGraphDate.getMonth();
-                        for (int j = SightingManager.endGraphDate.getDate(); j >= 1; j--) {
-                            int dateKey = (m * 100) + (y * 10000) + j;
+                        int y = beginYear;
+                        int m = beginMonth;
+                        int counter = 0;
+                        for (int j = beginDate; j <= daysForMonAndYear(m, y); j++) {
+                            int dateKey = (m * monPos) + (y * yearPos) + j;
                             dateToCountMap.put(dateKey, 0);
-                            intervalList.add(j + "");
-                            if (m == SightingManager.startGraphDate.getMonth() && j == SightingManager.startGraphDate.getDate()
-                                    && y == SightingManager.startGraphDate.getYear()) {
-                                j = -1;
-                            } else if (j == 1 && m == 1) {
-                                y--;
-                                m = 12;
-                                j = 31;
-                            } else if (m == 3 && j == 1 && (y%4 == 0)) {
-                                j = 29;
-                                m--;
-                            } else if(m == 3 && j == 1) {
-                                j = 28;
-                                m--;
-                            } else if (j == 1) {
-                                m--;
-                                if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8
-                                        || m == 10) {
-                                    j = 31;
-                                } else {
-                                    j = 30;
-                                }
+                            intervalList.add("" + counter);
+                            if (m == endingMonth && j == endingDate
+                                    && y == endingYear) {
+                                j = 32;
+                            } else if (j == 31 && m == 12) {
+                                y++;
+                                m = 1;
+                                j = 1;
+                                j--;
+                            } else if (j == daysForMonAndYear(m, y)) {
+                                m++;
+                                j = daysForMonAndYear(m, y);
+                                j--;
                             }
+                            counter++;
                         }
                     }
                     xAxisIntervals = new String[intervalList.size()];
-                    int index = intervalList.size() - 1;
+                    int index = 0;
                     for (String s: intervalList) {
                         xAxisIntervals[index] = s;
-                        index--;
+                        index++;
                     }
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         Log.e("List", "" + SightingManager.ratSightings.size());
@@ -223,37 +249,46 @@ public class GraphActivity extends AppCompatActivity {
                         int year = date.getYear();
                         int month = date.getMonth();
                         int day = date.getDate();
-                        int dateToInspect = (year * 10000) + (month * 100) + (day);
+                        int dateToInspect = (year * yearPos) + (month * monPos) + (day);
 
                         int hour = date.getHour();
                         int min = date.getMinute();
                         int sec = date.getSecond();
-                        int timeToInspect = (hour * 10000) + (min * 100) + (sec);
+                        int timeToInspect = (hour * yearPos) + (min * monPos) + (sec);
 
                         Log.e("List", "" + dateToInspect);
 
-                        if (startDate == endDate) {
-                            if (dateToInspect == startDate) {
-                                if (timeToInspect >= startTime && timeToInspect <= endTime){
-                                    SightingManager.ratSightings.add(ratSighting);
-                                }
-                            }
-                        } else if (dateToInspect >= startDate && dateToInspect <= endDate) {
+                        if (dateToInspect >= startDate && dateToInspect <= endDate) {
                             Log.e("List", "" + postSnapshot.getValue(RatSighting.class));
-                            SightingManager.ratSightings.add(ratSighting);
                             if (sortBy.equals("years") || sortBy.equals("months")) {
-                                int monthKey = (dateToInspect / 100) * 100;
-                                int count = dateToCountMap.get(monthKey);
-                                dateToCountMap.put(monthKey, count + 1);
+                                int monthKey = (dateToInspect / monPos) * monPos;
+                                if (dateToCountMap.get(monthKey) != null) {
+                                    int count = dateToCountMap.get(monthKey);
+                                    dateToCountMap.put(monthKey, count + 1);
+                                }
                             } else if (sortBy.equals("days")) {
                                 int dayKey = dateToInspect;
-                                int count = dateToCountMap.get(dayKey);
-                                dateToCountMap.put(dayKey, count + 1);
+                                if (dateToCountMap.get(dayKey) != null) {
+                                    int count = dateToCountMap.get(dayKey);
+                                    dateToCountMap.put(dayKey, count + 1);
+                                }
                             }
                         }
 
                     }
                 }
+                List<Entry> entries = convertDataSetToEntry(dateToCountMap, xAxisIntervals);
+                LineDataSet dataset = new LineDataSet(entries, "# of ratsightings by " + sortBy + " since " + SightingManager.startGraphDate.toString());
+                LineData data = new LineData(dataset);
+                dataset.setColors(ColorTemplate.rgb("7FFF"));
+                dataset.setDrawFilled(true);
+                lineChart.setData(data);
+                lineChart.setVisibleXRangeMinimum(intervalList.size());
+                lineChart.fitScreen();
+                lineChart.animateY(5000);
+//                XAxis xAxis = lineChart.getXAxis();
+//                lineChart.getDescription().setText("sightings over time");
+//                xAxis.setValueFormatter(new MyAxisValueFormatter(xAxisIntervals));
             }
 
             @Override
@@ -261,32 +296,43 @@ public class GraphActivity extends AppCompatActivity {
 
             }
         });
-        List<Entry> entries = convertDataSetToEntry(dateToCountMap, xAxisIntervals);
-        LineDataSet dataset = new LineDataSet(entries, "# of Calls");
-        LineData data = new LineData(dataset);
-        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-        dataset.setDrawFilled(true);
-        lineChart.setData(data);
-        lineChart.animateY(5000);
-        XAxis xAxis = lineChart.getXAxis();
-        lineChart.getDescription().setText("Average Calls per Month");
-        xAxis.setValueFormatter(new MyAxisValueFormatter(xAxisIntervals));
+
 
     }
 
+    private int daysForMonAndYear(int mon, int year) {
+        if (mon == 1 || mon == 3 || mon == 5 || mon == 7 || mon == 8 || mon == 10 || mon == 12) {
+            return 31;
+        } else if (mon == 2) {
+            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                return 29;
+            } else {
+                return 28;
+            }
+        } else {
+            return 30;
+        }
+    }
+
     private List<Entry> convertDataSetToEntry(HashMap<Integer, Integer> data, String[] intervals) {
+        Log.e("List", "got here");
+        Log.e("List", "" + intervalList.size());
+
         Set<Integer> keys = data.keySet();
         List<Entry> entries = new ArrayList<>();
         List<Integer> keyList = new ArrayList<>(keys);
         Collections.sort(keyList);
         int i = 0;
         for (Integer k: keyList) {
+            Log.e("List", "got here 2");
+
             int count = data.get(k);
             String s = intervals[i];
             int interval = Integer.parseInt(s);
             entries.add(new Entry(interval, count));
             i++;
         }
+
         return entries;
     }
 
