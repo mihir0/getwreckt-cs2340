@@ -43,10 +43,16 @@
             android:name=".controller.MakeSightingActivity"
             android:label="Sighting Detail"
             android:theme="@style/AppTheme" />
-        <activity android:name=".controller.RatSightingMapActivity"></activity>
+        <activity
+            android:name=".controller.RatSightingMapActivity"
+            android:label="Map"
+            android:theme="@style/AppTheme" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCDfsagyBKH8WOTuViPZEUK8MrHKW-Rg6E"/>
+            android:value="AIzaSyCDfsagyBKH8WOTuViPZEUK8MrHKW-Rg6E" />
+
+        <activity android:name=".controller.DateRangeActivity"></activity>
     </application>
 
 </manifest>

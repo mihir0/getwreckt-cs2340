@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import getwreckt.cs2340.rattrack.model.*;
@@ -70,7 +71,7 @@ public class MakeSightingActivity extends AppCompatActivity {
 
         makeBtn = (Button) findViewById(R.id.make_button);
 
-        ArrayList<RatSighting> sightings = Model.ratSightings;
+        List<RatSighting> sightings = SightingManager.ratSightings;
 
 
         ArrayList<String> boroughs = new ArrayList<>();
@@ -141,8 +142,8 @@ public class MakeSightingActivity extends AppCompatActivity {
                     dateField.setError("Must fill all fields with valid sighting details.");
                 } else {
                     try {
-                        _sighting = new RatSighting(Model.getCurrentUser(), date, typeLocation, zip,
-                                address, city, borough, latitude, longitude);
+                        _sighting = new RatSighting(date + " " + time, typeLocation, zip, address, city, borough,
+                                latitude, longitude);
 
                         Log.d("UserNull MakeSighting", Model.getCurrentUser().getUserName());
 

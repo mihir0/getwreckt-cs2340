@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by maya v on 9/21/2017.
@@ -35,6 +36,7 @@ public class InAppActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
     private Button startButn;
     private Button makeSightingButn;
+    private Button mapViewBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +68,17 @@ public class InAppActivity extends AppCompatActivity {
         logoutButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, Object> mapSignedIn = new HashMap<String, Object>();
-                mapSignedIn.put("signedIn", false);
-                mDataRef.child("users").child(mAuth.getCurrentUser().getUid()).updateChildren(mapSignedIn);
-                mAuth.signOut();
-                Model.setCurrentUser(null);
-                Intent toWelcomeScreen = new Intent(InAppActivity.this,
-                        WelcomeActivity.class);
-                startActivity(toWelcomeScreen);
+                logout();
+            }
+        });
+
+        mapViewBtn = (Button) findViewById(R.id.map_view_button);
+        mapViewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toRatSightingMap = new Intent(InAppActivity.this,
+                        RatSightingMapActivity.class);
+                startActivity(toRatSightingMap);
             }
         });
 
@@ -105,8 +110,23 @@ public class InAppActivity extends AppCompatActivity {
 
     }
 
+    private void logout() {
+        HashMap<String, Object> mapSignedIn = new HashMap<String, Object>();
+        mapSignedIn.put("signedIn", false);
+        mDataRef.child("users").child(mAuth.getCurrentUser().getUid()).updateChildren(mapSignedIn);
+        mAuth.signOut();
+        Model.setCurrentUser(null);
+        Intent toWelcomeScreen = new Intent(InAppActivity.this,
+                WelcomeActivity.class);
+        startActivity(toWelcomeScreen);
+    }
+
     private void updateUI(FirebaseUser firebaseUser) {
-        if (Model.getCurrentUser().getSignedIn()) {
+        if (Model.getCurrentUser() == null) {
+            logout();
+        } else if (Model.getCurrentUser().getSignedIn()) {
+            //InputStream is = getResources().openRawResource(R.raw.rat_sightings);
+            //Model.readCSVFile(is);
             String strLine = "Hello, " + Model.getCurrentUser().getFullName() + ", You are now logged in!";
             text.setText(strLine);
         }

@@ -7,6 +7,8 @@ package getwreckt.cs2340.rattrack.model;
 
 public class Admin extends User {
 
+    public Admin() {}
+
     /**
      * Creates a new Admin, which is a User with special privileges, with
      * username {@code username} and password {@code password}.
@@ -23,6 +25,6 @@ public class Admin extends User {
      * @param username Admin's unique email
      */
     public Admin(String fullName, String username) {
-        super(fullName, username);
+        super(fullName, username, "Admin");
     }
 }

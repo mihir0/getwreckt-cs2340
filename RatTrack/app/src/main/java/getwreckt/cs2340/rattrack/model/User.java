@@ -1,18 +1,23 @@
 package getwreckt.cs2340.rattrack.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.security.SecureRandom;
 
 /**
- * The general object for the app's User. Holds all information about User.
  * Created by Patel on 9/21/2017.
  */
 
-public class User {
+public class User implements Parcelable {
     private String fullName;
     private String userName;
     private String userType;
-    private Boolean signedIn;
+    private boolean signedIn;
+    private boolean isLocked;
     private int sightings = 0;
+
+    public User() {}
 
     /**
      * Create a User with username {@code userName} and password {@code pass}.
@@ -26,7 +31,7 @@ public class User {
     /**
      * Creates a user with full name {@code fullName}, username {@userName}, and password {@code pass}.
      * @param fullName the first and last name of the new user
-     * @param userName the unique email of the new user
+     * @param userName the username of the new user
      */
     public User(String fullName, String userName) {
         this.fullName = fullName;
@@ -38,7 +43,7 @@ public class User {
     /**
      * Creates a user with full name {@code fullName}, username {@userName}, and password {@code pass}.
      * @param fullName the first and last name of the new user
-     * @param userName the unique email of the new user
+     * @param userName the username of the new user
      */
     public User(String fullName, String userName, String userType) {
         this.fullName = fullName;
@@ -112,27 +117,53 @@ public class User {
         this.fullName = fullName;
     }
 
-    /**
-     * Get number of sightings of user
-     * @return number of sightings user has made
-     */
     public int getSightings() {
         return sightings;
     }
-    /**
-     * Set number of sightings of user
-     * @param sightings number sightings user has made
-     */
+
     public void setSightings(int sightings) {
         this.sightings = sightings;
     }
 
-    /**
-     * increments number of sightings user has made
-     *
-     */
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
+    }
+
     public void sightingMade() {
         this.sightings++;
     }
+
+    private User(Parcel in) {
+        fullName = in.readString();
+        userName = in.readString();
+        userType = in.readString();
+        signedIn = in.readInt() == 1;
+        isLocked = in.readInt() == 1;
+        sightings = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(fullName);
+        dest.writeString(userName);
+        dest.writeString(userType);
+        dest.writeInt(signedIn ? 1 : 0);
+        dest.writeInt(isLocked ? 1 : 0);
+        dest.writeInt(sightings);
+    }
+
+    public static final Parcelable.Creator<User> CREATOR
+            = new Parcelable.Creator<User>() {
+        public User createFromParcel (Parcel in) {return new User(in);}
+
+        public User[] newArray(int size) {return new User[size];}
+    };
+
+    @Override
+    public int describeContents() {return 0;}
 }
 

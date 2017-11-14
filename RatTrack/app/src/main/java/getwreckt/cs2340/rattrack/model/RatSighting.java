@@ -11,26 +11,18 @@ import android.util.Log;
 public class RatSighting implements Parcelable {
 
     private String uniqueKey;
-    private String date;
-    private String zip;
-    private String typeLocation;
-    private String address;
-    private String city;
-    private String borough;
-    private String latitude;
-    private String longitude;
+    private Date date;
+    private Location location;
     private User owner;
+    private boolean isFlagged;
 
-    /**
-     * no arg constructor of a rat sighting
-     */
     public RatSighting() { }
 
     /**
-     * Creates a new RatSighting with
+     * Creates a new RatSighting using current user as the owner
      * username {@code username} and password {@code password}.
      * @param uniqueKey the unique id of the new sighting
-     * @param date the date of the sighting
+     * @param date the string date of the sighting
      * @param typeLocation the type of location
      * @param zip the zip of location
      * @param address the address of th sighting
@@ -43,14 +35,9 @@ public class RatSighting implements Parcelable {
                        String zip, String address, String city, String borough, String latitude,
                        String longitude) {
         this.uniqueKey = uniqueKey;
-        this.date = date;
-        this.typeLocation = typeLocation;
-        this.zip = zip;
-        this.address = address;
-        this.city = city;
-        this.borough = borough;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.date = new Date(date);
+        this.location = new Location(LocationType.get(typeLocation), address, city, zip, Borough.get(borough), latitude, longitude);
+        this.owner = Model.getCurrentUser();
     }
 
     /**
@@ -65,19 +52,12 @@ public class RatSighting implements Parcelable {
      * @param latitude the latitude of the sighting
      * @param longitude the longitude of the sighting
      */
-    public RatSighting(User owner, String date, String typeLocation, String zip, String address,
-                       String city, String borough, String latitude, String longitude) {
-        this.owner = owner;
-        Log.d("UserNull RatSighting", owner.getUserName());
-        this.date = date;
-        this.typeLocation = typeLocation;
-        this.zip = zip;
-        this.address = address;
-        this.city = city;
-        this.borough = borough;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.uniqueKey = generateUniqueKey();
+    public RatSighting(String date, String typeLocation, String zip, String address, String city,
+                       String borough, String latitude, String longitude) {
+        this.date = new Date(date);
+        this.location = new Location(LocationType.get(typeLocation), address, city, zip, Borough.get(borough), latitude, longitude);
+        this.uniqueKey = this.generateUniqueKey();
+        this.owner = Model.getCurrentUser();
     }
 
     /**
@@ -93,43 +73,28 @@ public class RatSighting implements Parcelable {
     public RatSighting(String date, String address,
                                    String borough, String typeLocation,
                                    String latitude, String longitude, String uniqueKey) {
-        this.date = date;
-        this.address = address;
-        this.borough = borough;
-        this.typeLocation = typeLocation;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.city = "n/a";
-        this.zip = "n/a";
         this.uniqueKey = uniqueKey;
+        this.date = new Date(date);
+        this.location = new Location(LocationType.get(typeLocation), address, "N/A", "N/A",
+                Borough.get(borough), latitude, longitude);
+        this.owner = Model.getCurrentUser();
     }
-    /**
-     * Creates new RatSighting without city or zip known
-     * @param in the unique id of the new sighting
-     */
+
     private RatSighting(Parcel in) {
         uniqueKey = in.readString();
-        date = in.readString();
-        typeLocation = in.readString();
-        zip = in.readString();
-        address = in.readString();
-        city = in.readString();
-        borough = in.readString();
-        latitude = in.readString();
-        longitude = in.readString();
+        date = in.readParcelable(Date.class.getClassLoader());
+        location = in.readParcelable(Location.class.getClassLoader());
+        owner = in.readParcelable(User.class.getClassLoader());
+        isFlagged = in.readInt() == 1;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(uniqueKey);
-        dest.writeString(date);
-        dest.writeString(typeLocation);
-        dest.writeString(zip);
-        dest.writeString(address);
-        dest.writeString(city);
-        dest.writeString(borough);
-        dest.writeString(latitude);
-        dest.writeString(longitude);
+        dest.writeParcelable(date, flags);
+        dest.writeParcelable(location, flags);
+        dest.writeParcelable(owner, flags);
+        dest.writeInt(isFlagged ? 1 : 0);
     }
 
     public static final Parcelable.Creator<RatSighting> CREATOR
@@ -161,141 +126,46 @@ public class RatSighting implements Parcelable {
      * Gets the date of a sighting
      * @return the date of a sighting
      */
-    public String getDate() {
+    public Date getDate() {
         return this.date;
     }
     /**
      * Sets the date to the given date.
      * @param date the date to set
      */
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    /**
-     * Gets the type of location of a sighting
-     * @return the type of location of a sighting
-     */
-    public String getTypeLocation() {
-        return this.typeLocation;
-    }
-    /**
-     * Sets the type of location to the given typeLocation.
-     * @param typeLocation the type of location to set
-     */
-    public void setTypeLocation(String typeLocation) {
-        this.typeLocation = typeLocation;
-    }
-
-    /**
-     * Gets the addressof a sighting
-     * @return the address of a sighting
-     */
-    public String getAddress() {
-        return this.address;
-    }
-    /**
-     * Sets the address to the given address.
-     * @param address the address to set
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    /**
-     * Gets the city of a sighting
-     * @return the city of a sighting
-     */
-    public String getCity() {return this.city;}
-    /**
-     * Sets the city to the given city.
-     * @param city the city to set
-     */
-    public void setCity(String city) {this.city = city;}
-
-    /**
-     * Gets the borough of a sighting
-     * @return the borough of a sighting
-     */
-    public String getBorough() {
-        return this.borough;
-    }
-    /**
-     * Sets the borough to the given borough.
-     * @param borough the date to set
-     */
-    public void setBorough(String borough) {
-        this.borough = borough;
-    }
-
-    /**
-     * Gets the latitude of a sighting
-     * @return the latitude of a sighting
-     */
-    public String getLatitude() {
-        return this.latitude;
-    }
-    /**
-     * Sets the latitude to the given latitude.
-     * @param latitude the latitude to set
-     */
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    /**
-     * Gets the longitude of a sighting
-     * @return the longitude of a sighting
-     */
-    public String getLongitude() {
-        return this.longitude;
-    }
-    /**
-     * Sets the longitude to the given longitude.
-     * @param longitude the longitude to set
-     */
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    /**
-     * Gets the zip of a sighting
-     * @return the zip of a sighting
-     */
-    public String getZip() {
-        return this.zip;
-    }
-    /**
-     * Sets the zip to the given zip.
-     * @param zip the zip to set
-     */
-    public void setZip(String zip){
-        this.zip = zip;
-    }
-
-    /**
-     * Gets the owner of the sighting
-     * @return the owner
-     */
     private User getOwner() {
         return owner;
     }
-    /**
-     * Sets the owner
-     * @param owner the zip to set
-     */
+
     public void setOwner(User owner) {
         this.owner = owner;
     }
 
-    /**
-     * makes a unique key for a new sighting
-     * @return the new key
-     */
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public boolean isFlagged() {
+        return isFlagged;
+    }
+
+    public void setFlagged(boolean flagged) {
+        isFlagged = flagged;
+    }
+
     private String generateUniqueKey() {
         String uname = Model.getCurrentUser().getUserName();
         String user = uname.substring(0, uname.indexOf('.')) + uname.substring(uname.indexOf('.')
                 + 1);
+        this.setOwner(Model.getCurrentUser());
         owner.sightingMade();
         return user + this.date + getOwner().getSightings();
     }
