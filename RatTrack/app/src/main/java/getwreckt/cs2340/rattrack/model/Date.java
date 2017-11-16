@@ -6,13 +6,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-
 /**
- * Created by maya v on 10/20/2017.
+ * Date class creates Date item with attributes month, date, year, hour, minute, second, AM/PM,
+ * meridiem, custom system string
+ * Comes with comparator
+ * author: Maya Viust
  */
 
 public class Date implements Comparable<Date>, Parcelable {
@@ -79,7 +77,7 @@ public class Date implements Comparable<Date>, Parcelable {
         data = data.substring(data.indexOf(" ") + 1);
         setIsPM("PM".equals(data));
         setMeridiem();
-        generateSystemString();
+        this.systemString = generateSystemString();
     }
 
     /**
@@ -141,7 +139,7 @@ public class Date implements Comparable<Date>, Parcelable {
      *  Sets an hour in military time
      * @param hour hour in int
      */
-    public void setHour(int hour) {
+    public final void setHour(int hour) {
         if (isPM) {
             this.hour = hour + 12;
         } else if (hour == 12){
@@ -171,7 +169,7 @@ public class Date implements Comparable<Date>, Parcelable {
         return this.isPM;
     }
 
-    public void setIsPM(boolean value) {
+    public final void setIsPM(boolean value) {
         this.isPM = value;
     }
 
@@ -179,7 +177,7 @@ public class Date implements Comparable<Date>, Parcelable {
         return this.meridiem;
     }
 
-    public void setMeridiem() {
+    public final void setMeridiem() {
         this.meridiem = isPM ? "PM" : "AM";
     }
 
@@ -194,88 +192,15 @@ public class Date implements Comparable<Date>, Parcelable {
         String minuteStr = digitToString(minute);
         String secondStr = digitToString(second);
 
-        String sysID = "" + year + "-" + monthStr + "-" + dateStr + " " + hourStr + ":" + minuteStr + ":"
+        return "" + year + "-" + monthStr + "-" + dateStr + " " + hourStr + ":" + minuteStr + ":"
                 + secondStr;
-        this.systemString = sysID;
-        return sysID;
     }
 
-    //descending order on system generated strings
+    //descending order on system generated string
     @Override
     public int compareTo(@NonNull Date other) {
         java.util.Comparator<Date> dateChainedComparator = new DateChainedComparator();
         return dateChainedComparator.compare(other, this);
-    }
-
-    public static class DateChainedComparator implements Comparator<Date> {
-        private java.util.Collection<Comparator<Date>> listComparators = new ArrayList<>();
-
-        //custom comparators
-        //date ordering goes: year, month, date, hour, minute, second
-        //DEFAULT IS DESCENDING ORDER
-
-        private static Comparator<Date> YearComparator = new Comparator<Date>() {
-            @Override
-            public int compare(Date d1, Date d2) {
-                return d2.getYear() - d1.getYear();
-            }
-        };
-
-        private static Comparator<Date> MonthComparator = new Comparator<Date>() {
-            @Override
-            public int compare(Date d1, Date d2) {
-                return d2.getMonth() - d1.getMonth();
-            }
-        };
-
-        private static Comparator<Date> DateComparator = new Comparator<Date>() {
-            @Override
-            public int compare(Date d1, Date d2) {
-                return d2.getDate() - d1.getDate();
-            }
-        };
-
-        //hour in military time
-        private static Comparator<Date> HourComparator = new Comparator<Date>() {
-            @Override
-            public int compare(Date d1, Date d2) {
-                return d2.getHour() - d1.getHour();
-            }
-        };
-
-        private static Comparator<Date> MinuteComparator = new Comparator<Date>() {
-            @Override
-            public int compare(Date d1, Date d2) {
-                return d2.getMinute() - d1.getMinute();
-            }
-        };
-
-        private static Comparator<Date> SecondComparator = new Comparator<Date>() {
-            @Override
-            public int compare(Date d1, Date d2) {
-                return d2.getSecond() - d1.getSecond();
-            }
-        };
-
-        public DateChainedComparator() {
-            this.listComparators.add(YearComparator);
-            this.listComparators.add(MonthComparator);
-            this.listComparators.add(DateComparator);
-            this.listComparators.add(HourComparator);
-            this.listComparators.add(MinuteComparator);
-            this.listComparators.add(SecondComparator);
-        }
-
-        @Override
-        public int compare(Date d1, Date d2) {
-            for (Comparator<Date> comparator: listComparators) {
-                int result = comparator.compare(d1, d2);
-                if (result != 0) {
-                    return result;
-                }
-            }
-            return 0;
-        }
     }
 
     private int getMeridiemHour() {
