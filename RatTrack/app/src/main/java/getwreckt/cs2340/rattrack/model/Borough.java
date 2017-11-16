@@ -1,7 +1,7 @@
 package getwreckt.cs2340.rattrack.model;
 
 /**
- * Created by maya v on 10/20/2017.
+ * Borough enum for all 5 NYC boroughs and options for unknown and N/A
  */
 
 public enum Borough {
@@ -14,32 +14,24 @@ public enum Borough {
     NA ("N/A"),
     NULL ("");
 
-    private String name;
+    private final String name;
 
     Borough(String name) {
         this.name = name;
     }
 
     /**
-     * Getter method for name
-     * @return name of an admin in string
+     * getter for name of borough enum
+     * @return String version of Borough name
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Setter method for name
-     * @param name name of an admin
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Gets Borough in UpperCase
-     * @param name name of borough
-     * @return borough in UpperCase or null
+     * searches for borough matching name of param
+     * @param name of borough to find
+     * @return borough with matching name or null if match was not found
      */
     public static Borough get(String name) {
         for (Borough borough : values()) {

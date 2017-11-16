@@ -20,8 +20,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
+import org.xml.sax.DTDHandler;
+
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -37,6 +40,7 @@ public class InAppActivity extends AppCompatActivity {
     private Button startButn;
     private Button makeSightingButn;
     private Button mapViewBtn;
+    private Button startGraphBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +80,9 @@ public class InAppActivity extends AppCompatActivity {
         mapViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Model.viewToGoTo = "Map";
                 Intent toRatSightingMap = new Intent(InAppActivity.this,
-                        RatSightingMapActivity.class);
+                        DateRangeActivity.class);
                 startActivity(toRatSightingMap);
             }
         });
@@ -108,10 +113,23 @@ public class InAppActivity extends AppCompatActivity {
             }
         });
 
+        startGraphBtn = (Button) findViewById(R.id.start_graph);
+        startGraphBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.println(Log.INFO, "CLICK", "Start graph button clicked");
+                Model.viewToGoTo = "Graph";
+                Intent toMakeGraph = new Intent(InAppActivity.this,
+                        DateRangeActivity.class);
+                startActivity(toMakeGraph);
+            }
+        });
+
+
     }
 
     private void logout() {
-        HashMap<String, Object> mapSignedIn = new HashMap<String, Object>();
+        Map<String, Object> mapSignedIn = new HashMap<String, Object>();
         mapSignedIn.put("signedIn", false);
         mDataRef.child("users").child(mAuth.getCurrentUser().getUid()).updateChildren(mapSignedIn);
         mAuth.signOut();

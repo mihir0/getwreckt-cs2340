@@ -7,6 +7,7 @@ import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.Date;
 import getwreckt.cs2340.rattrack.model.Model;
 import getwreckt.cs2340.rattrack.model.RatSighting;
+import getwreckt.cs2340.rattrack.model.SightingManager;
 import getwreckt.cs2340.rattrack.model.User;
 
 import android.support.v4.app.FragmentActivity;
@@ -37,8 +38,6 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
     private GoogleMap map;
     private FirebaseAuth mAuth;
     private DatabaseReference mDataRef;
-    private EditText startDate;
-    private EditText endDate;
     private Button updateMap;
 
     @Override
@@ -48,16 +47,13 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
 
         setContentView(R.layout.activity_rat_sighting_map);
 
-        startDate = (EditText) findViewById(R.id.start_date);
-        endDate = (EditText) findViewById(R.id.end_date);
         updateMap = (Button) findViewById(R.id.update_map);
         updateMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Model.startDate = new Date(startDate.getText().toString());
-                Model.endDate = new Date(endDate.getText().toString());
-                Intent refresh = new Intent(RatSightingMapActivity.this, RatSightingMapActivity.class);
-                startActivity(refresh);
+                Model.viewToGoTo = "Map";
+                Intent toDateRange = new Intent(RatSightingMapActivity.this, DateRangeActivity.class);
+                startActivity(toDateRange);
             }
         });
 
@@ -90,13 +86,18 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
                 if (mAuth.getCurrentUser() != null) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         RatSighting ratSighting = ds.getValue(RatSighting.class);
-                        if (ratSighting.getDate().compareTo(Model.startDate) >= 0
-                                && ratSighting.getDate().compareTo(Model.endDate) <= 0) {
-                            LatLng latLng = new LatLng(Double.parseDouble(ratSighting.getLocation().getLatitude()),
-                                    Double.parseDouble(ratSighting.getLocation().getLongitude()));
-                            String snippet = ratSighting.toString();
-                            map.addMarker(new MarkerOptions().position(latLng).title(ratSighting.toString()).snippet(snippet));
-                            //map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                        if (isValidSighting(ratSighting)
+                                && ratSighting.getDate().compareTo(SightingManager.startMapDate) >= 0
+                                && ratSighting.getDate().compareTo(SightingManager.endMapDate) <= 0) {
+                            try {
+                                LatLng latLng = new LatLng(Double.parseDouble(ratSighting.getLocation().getLatitude()),
+                                        Double.parseDouble(ratSighting.getLocation().getLongitude()));
+                                String snippet = ratSighting.toString();
+                                map.addMarker(new MarkerOptions().position(latLng).title(ratSighting.toString()).snippet(snippet));
+                                //map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                            } catch (Exception e) {
+
+                            }
                         }
                     }
                     mDataRef.child("ratsightings").keepSynced(true);
@@ -108,5 +109,10 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
 
             }
         });
+    }
+
+    private boolean isValidSighting(RatSighting ratSighting) {
+        return !(ratSighting.getLocation().getLatitude().equals("")
+                || ratSighting.getLocation().getLongitude().equals(""));
     }
 }

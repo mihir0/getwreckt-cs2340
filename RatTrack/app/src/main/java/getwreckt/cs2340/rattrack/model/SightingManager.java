@@ -15,6 +15,13 @@ import java.util.Locale;
 
 public class SightingManager {
     public static List<RatSighting> ratSightings = new ArrayList<>();
+
+    public static Date startMapDate = new Date("01/01/1000 12:00:00 AM");
+    public static Date endMapDate = new Date("12/31/3999 11:59:00 PM");
+
+    public static Date startGraphDate = new Date("01/01/1000 12:00:00 AM");
+    public static Date endGraphDate = new Date("12/31/3999 11:59:00 PM");
+
     /**
      * Filters and returns sightings which fall within the given date range
      * @param numTimeUnitsAgo the username to check
@@ -134,7 +141,7 @@ public class SightingManager {
             hourSince = curHours - numTimeUnitsAgo;
         }
 
-        ArrayList<RatSighting> dateFilteredRatSightings = new ArrayList<>();
+        List<RatSighting> dateFilteredRatSightings = new ArrayList<>();
         for (RatSighting r: ratSightings) {
             String date = r.getDate().toString();
             String mdy = date.split(" ")[0];
