@@ -7,6 +7,9 @@ package getwreckt.cs2340.rattrack.model;
 
 public class Admin extends User {
 
+    /**
+     * no arg constructor required for firebase
+     */
     public Admin() {}
 
     /**

@@ -4,10 +4,12 @@ package getwreckt.cs2340.rattrack.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by maya v on 10/20/2017.
@@ -28,15 +30,18 @@ public class Date implements Comparable<Date>, Parcelable {
     private String systemString; //for natural ordering
 
     /**
-     * Empty constructor for Firebase
+     *  No argument constructor for Firebase
      */
     public Date() { }
 
-    //constructor for NYC database date string
+    /**
+     *  Parametrized constructor
+     * @param data input in the form of "month/date/year hour:minute:second AM/PM"
+     */
     public Date(String data) {
         //data string is originally of the form "month/date/year hour:minute:second AM/PM"
         //example: "9/5/2012 12:00:00 AM
-        data = data.trim();
+
         //get month
         String dataInput = data.substring(0, data.indexOf("/"));
         this.month = Integer.parseInt(dataInput);
@@ -74,57 +79,69 @@ public class Date implements Comparable<Date>, Parcelable {
         data = data.substring(data.indexOf(" ") + 1);
         setIsPM("PM".equals(data));
         setMeridiem();
-        generateSystemString(this.month, this.date, this.year, this.hour, this.isPM, this.minute, this.second);
+        generateSystemString();
     }
 
-
-    //constructor for in app date input
-     public Date(int month, int date, int year, int hour, int minute, boolean isPM) {
-         this.month = month;
-         this.date = date;
-         this.year = year;
-         this.isPM = isPM;
-         this.minute = minute;
-         this.second = 0;
-         setHour(hour);
-     }
-
-    /** constructor for android timestamp
-     public Date(Timestamp timestamp) {
-
-     }
-     **/
-
+    /**
+     * Getter method for month
+     * @return month in int
+     */
     public int getMonth() {
         return this.month;
     }
 
+    /**
+     * Setter method for month
+     * @param month month in int
+     */
     public void setMonth(int month) {
         this.month = month;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDate() {
         return this.date;
     }
 
+    /**
+     * Setter method for date
+     * @param date input date
+     */
     public void setDate(int date) {
         this.date = date;
     }
 
+    /**
+     * Getter method for year
+     * @return year in int
+     */
     public int getYear() {
         return this.year;
     }
 
+    /**
+     * Setter method for year
+     * @param year year in int
+     */
     public void setYear(int year) {
         this.year = year;
     }
 
+    /**
+     * Getter method for hour
+     * @return hour in int
+     */
     public int getHour() {
         return this.hour;
     }
-
-    //changes to military time
-    private void setHour(int hour) {
+    /**
+     *  Sets an hour in military time
+     * @param hour hour in int
+     */
+    public void setHour(int hour) {
         if (isPM) {
             this.hour = hour + 12;
         } else if (hour == 12){
@@ -170,79 +187,75 @@ public class Date implements Comparable<Date>, Parcelable {
         return ((digit < 10 ? "0" : "") + digit);
     }
 
-    public String getSystemString() {
-        return this.systemString;
-    }
-
-    //TODO change to no arg method
-    private String generateSystemString(int month, int date, int year, int hour, boolean isPM,
-                                        int minute, int second) {
+    private String generateSystemString() {
         String monthStr = digitToString(month);
         String dateStr = digitToString(date);
         String hourStr  = digitToString(hour);
         String minuteStr = digitToString(minute);
         String secondStr = digitToString(second);
 
-        return "" + year + "-" + monthStr + "-" + dateStr + " " + hourStr + ":" + minuteStr + ":"
+        String sysID = "" + year + "-" + monthStr + "-" + dateStr + " " + hourStr + ":" + minuteStr + ":"
                 + secondStr;
+        this.systemString = sysID;
+        return sysID;
     }
 
     //descending order on system generated strings
     @Override
-    public int compareTo(Date other) {
+    public int compareTo(@NonNull Date other) {
         java.util.Comparator<Date> dateChainedComparator = new DateChainedComparator();
         return dateChainedComparator.compare(other, this);
     }
 
-    //custom comparators
-    //date ordering goes: year, month, date, hour, minute, second
-    //DEFAULT IS DESCENDING ORDER
-
-    public static Comparator<Date> YearComparator = new Comparator<Date>() {
-        @Override
-        public int compare(Date d1, Date d2) {
-            return d2.getYear() - d1.getYear();
-        }
-    };
-
-    public static Comparator<Date> MonthComparator = new Comparator<Date>() {
-        @Override
-        public int compare(Date d1, Date d2) {
-            return d2.getMonth() - d1.getMonth();
-        }
-    };
-
-    public static Comparator<Date> DateComparator = new Comparator<Date>() {
-        @Override
-        public int compare(Date d1, Date d2) {
-            return d2.getDate() - d1.getDate();
-        }
-    };
-
-    //hour in military time
-    public static Comparator<Date> HourComparator = new Comparator<Date>() {
-        @Override
-        public int compare(Date d1, Date d2) {
-            return d2.getHour() - d1.getHour();
-        }
-    };
-
-    public static Comparator<Date> MinuteComparator = new Comparator<Date>() {
-        @Override
-        public int compare(Date d1, Date d2) {
-            return d2.getMinute() - d1.getMinute();
-        }
-    };
-
-    public static Comparator<Date> SecondComparator = new Comparator<Date>() {
-        @Override
-        public int compare(Date d1, Date d2) {
-            return d2.getSecond() - d1.getSecond();
-        }
-    };
-
     public static class DateChainedComparator implements Comparator<Date> {
         private java.util.Collection<Comparator<Date>> listComparators = new ArrayList<>();
+
+        //custom comparators
+        //date ordering goes: year, month, date, hour, minute, second
+        //DEFAULT IS DESCENDING ORDER
+
+        private static Comparator<Date> YearComparator = new Comparator<Date>() {
+            @Override
+            public int compare(Date d1, Date d2) {
+                return d2.getYear() - d1.getYear();
+            }
+        };
+
+        private static Comparator<Date> MonthComparator = new Comparator<Date>() {
+            @Override
+            public int compare(Date d1, Date d2) {
+                return d2.getMonth() - d1.getMonth();
+            }
+        };
+
+        private static Comparator<Date> DateComparator = new Comparator<Date>() {
+            @Override
+            public int compare(Date d1, Date d2) {
+                return d2.getDate() - d1.getDate();
+            }
+        };
+
+        //hour in military time
+        private static Comparator<Date> HourComparator = new Comparator<Date>() {
+            @Override
+            public int compare(Date d1, Date d2) {
+                return d2.getHour() - d1.getHour();
+            }
+        };
+
+        private static Comparator<Date> MinuteComparator = new Comparator<Date>() {
+            @Override
+            public int compare(Date d1, Date d2) {
+                return d2.getMinute() - d1.getMinute();
+            }
+        };
+
+        private static Comparator<Date> SecondComparator = new Comparator<Date>() {
+            @Override
+            public int compare(Date d1, Date d2) {
+                return d2.getSecond() - d1.getSecond();
+            }
+        };
 
         public DateChainedComparator() {
             this.listComparators.add(YearComparator);
@@ -251,10 +264,6 @@ public class Date implements Comparable<Date>, Parcelable {
             this.listComparators.add(HourComparator);
             this.listComparators.add(MinuteComparator);
             this.listComparators.add(SecondComparator);
-        }
-
-        public DateChainedComparator(Comparator<Date> ... comparators) {
-            listComparators.addAll(Arrays.asList(comparators));
         }
 
         @Override
