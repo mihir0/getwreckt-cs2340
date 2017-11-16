@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by Patel on 10/5/2017.
+ * Rat sighting class with attributes for uniqueKey, date, location, owner, and if it has been
+ * flagged.
+ * Author: Manan Patel
  */
 
 public class RatSighting implements Parcelable {
@@ -38,7 +40,8 @@ public class RatSighting implements Parcelable {
                        String longitude) {
         this.uniqueKey = uniqueKey;
         this.date = new Date(date);
-        this.location = new Location(LocationType.get(typeLocation), address, city, zip, Borough.get(borough), latitude, longitude);
+        this.location = new Location(LocationType.get(typeLocation), address, city, zip,
+                Borough.get(borough), latitude, longitude);
         this.owner = Model.getCurrentUser();
     }
 
@@ -57,28 +60,9 @@ public class RatSighting implements Parcelable {
     public RatSighting(String date, String typeLocation, String zip, String address, String city,
                        String borough, String latitude, String longitude) {
         this.date = new Date(date);
-        this.location = new Location(LocationType.get(typeLocation), address, city, zip, Borough.get(borough), latitude, longitude);
-        this.uniqueKey = this.generateUniqueKey();
-        this.owner = Model.getCurrentUser();
-    }
-
-    /**
-     * Creates new RatSighting without city or zip known
-     * @param uniqueKey the unique id of the new sighting
-     * @param date the date of the sighting
-     * @param typeLocation the type of location
-     * @param address the address of th sighting
-     * @param borough the borough of the sighting
-     * @param latitude the latitude of the sighting
-     * @param longitude the longitude of the sighting
-     */
-    public RatSighting(String date, String address,
-                                   String borough, String typeLocation,
-                                   String latitude, String longitude, String uniqueKey) {
-        this.uniqueKey = uniqueKey;
-        this.date = new Date(date);
-        this.location = new Location(LocationType.get(typeLocation), address, "N/A", "N/A",
+        this.location = new Location(LocationType.get(typeLocation), address, city, zip,
                 Borough.get(borough), latitude, longitude);
+        this.uniqueKey = this.generateUniqueKey();
         this.owner = Model.getCurrentUser();
     }
 
@@ -101,8 +85,10 @@ public class RatSighting implements Parcelable {
 
     public static final Parcelable.Creator<RatSighting> CREATOR
             = new Parcelable.Creator<RatSighting>() {
+        @Override
         public RatSighting createFromParcel (Parcel in) {return new RatSighting(in);}
 
+        @Override
         public RatSighting[] newArray(int size) {return new RatSighting[size];}
     };
 
@@ -128,7 +114,7 @@ public class RatSighting implements Parcelable {
      * Gets the date of a sighting
      * @return the date of a sighting
      */
-    public Date getDate() {
+    public Comparable getDate() {
         return this.date;
     }
     /**
@@ -151,7 +137,7 @@ public class RatSighting implements Parcelable {
      * Sets the user to the given owner
      * @param owner user of system
      */
-    public void setOwner(User owner) {
+    private void setOwner(User owner) {
         this.owner = owner;
     }
 
@@ -192,12 +178,12 @@ public class RatSighting implements Parcelable {
      * @return string representation of the unique key
      */
     private String generateUniqueKey() {
-        String uname = Model.getCurrentUser().getUserName();
-        String user = uname.substring(0, uname.indexOf('.')) + uname.substring(uname.indexOf('.')
-                + 1);
         this.setOwner(Model.getCurrentUser());
+        String userName = this.owner.getUserName();
+        String user = userName.substring(0, userName.indexOf('.')) + userName.substring(userName.indexOf('.')
+                + 1);
         owner.sightingMade();
-        return user + this.date + getOwner().getSightings();
+        return user + this.date + this.owner.getSightings();
     }
 
     @Override
