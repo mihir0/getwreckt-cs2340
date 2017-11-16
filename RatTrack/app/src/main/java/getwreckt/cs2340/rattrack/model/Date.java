@@ -5,14 +5,9 @@ package getwreckt.cs2340.rattrack.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 /**
  * Created by maya v on 10/20/2017.
@@ -33,11 +28,14 @@ public class Date implements Comparable<Date>, Parcelable {
     private String systemString; //for natural ordering
 
     /**
-     * Empty constructor for Firebase
+     *  No argument constructor for Firebase
      */
     public Date() { }
 
-    //constructor for NYC database date string
+    /**
+     *  Parametrized constructor
+     * @param data input in the form of "month/date/year hour:minute:second AM/PM"
+     */
     public Date(String data) {
         //data string is orginally of the form "month/date/year hour:minute:second AM/PM"
         //example: "9/5/2012 12:00:00 AM
@@ -82,48 +80,66 @@ public class Date implements Comparable<Date>, Parcelable {
         generateSystemString(this.month, this.date, this.year, this.hour, this.isPM, this.minute, this.second);
     }
 
-
-    /** constructor for in app date input
-     public Date()
-     {
-
-     }     */
-
-    /** constructor for android timestamp
-     public Date(Timestamp timestamp) {
-
-     }
-     **/
-
+    /**
+     * Getter method for month
+     * @return month in int
+     */
     public int getMonth() {
         return this.month;
     }
 
+    /**
+     * Setter method for month
+     * @param month month in int
+     */
     public void setMonth(int month) {
         this.month = month;
     }
 
+    /**
+     * Getter method for date
+     * @return date date in int
+     */
     public int getDate() {
         return this.date;
     }
 
+    /**
+     * Setter method for date
+     * @param date input date
+     */
     public void setDate(int date) {
         this.date = date;
     }
 
+    /**
+     * Getter method for year
+     * @return year in int
+     */
     public int getYear() {
         return this.year;
     }
 
+    /**
+     * Setter method for year
+     * @param year year in int
+     */
     public void setYear(int year) {
         this.year = year;
     }
 
+    /**
+     * Getter method for hour
+     * @return hour in int
+     */
     public int getHour() {
         return this.hour;
     }
 
-    //changes to military time
+    /**
+     *  Sets an hour in military time
+     * @param hour hour in int
+     */
     public void setHour(int hour) {
         if (isPM) {
             this.hour = hour + 12;
@@ -134,46 +150,98 @@ public class Date implements Comparable<Date>, Parcelable {
         }
     }
 
+    /**
+     * Getter method for minute
+     * @return minute in int
+     */
     public int getMinute() {
         return this.minute;
     }
 
+    /**
+     * Setter method for minute
+     * @param minute minute in int
+     */
     public void setMinute(int minute) {
         this.minute = minute;
     }
 
+    /**
+     * Getter method for second
+     * @return second in int
+     */
     public int getSecond() {
         return this.second;
     }
 
+    /**
+     * Setter method for second
+     * @param second in int
+     */
     public void setSecond(int second) {
         this.second = second;
     }
 
+    /**
+     * Getter method for pm
+     * @return boolean value for pm
+     */
     public boolean getIsPM() {
         return this.isPM;
     }
 
+    /**
+     * Setter method for pm
+     * @param value boolean input value
+     */
     public void setIsPM(boolean value) {
         this.isPM = value;
     }
 
+    /**
+     * Getter method of meridiem
+     * @return string representation of meridiem
+     */
     public String getMeridiem() {
         return this.meridiem;
     }
 
+    /**
+     * Setter method of meridiem
+     * @param meridiem string representation of meridiem
+     */
     public void setMeridiem(String meridiem) {
         this.meridiem = meridiem;
     }
 
+    /**
+     * Digit to string converter
+     * @param digit integer value of digit
+     * @return string representation of digit
+     */
     private String digitToString(int digit) {
         return (digit < 10) ? ("0" + digit) : ("" + digit);
     }
 
+    /**
+     * Getter method for system String
+     * @return system string
+     */
     public String getSystemString() {
         return this.systemString;
     }
 
+    /**
+     * Method which generate system string
+     * @param month integer value of month
+     * @param date date in integer
+     * @param year year in integer
+     * @param hour hour in integer
+     * @param isPM boolean input
+     * @param minute minute in integer
+     * @param second second in integer
+     * @return String representation of system string
+     */
     private String generateSystemString(int month, int date, int year, int hour, boolean isPM,
                                         int minute, int second) {
         String monthStr = digitToString(month);
@@ -240,9 +308,15 @@ public class Date implements Comparable<Date>, Parcelable {
         }
     };
 
+    /**
+     * Inner class to support Comparator
+     */
     public class DateChainedComparator implements Comparator<Date> {
         private List<Comparator<Date>> listComparators = new ArrayList<Comparator<Date>>();
 
+        /**
+         * No argument constructor
+         */
         public DateChainedComparator() {
             this.listComparators.add(YearComparator);
             this.listComparators.add(MonthComparator);
@@ -252,6 +326,10 @@ public class Date implements Comparable<Date>, Parcelable {
             this.listComparators.add(SecondComparator);
         }
 
+        /**
+         * Parametrized constructor
+         * @param comparators parameter of Comparator
+         */
         public DateChainedComparator(Comparator<Date> ... comparators) {
             for (Comparator<Date> comparator: comparators) {
                 listComparators.add(comparator);
@@ -270,6 +348,10 @@ public class Date implements Comparable<Date>, Parcelable {
         }
     }
 
+    /**
+     *  Converts hour in to meridiem hour
+     * @return hour in meridiem
+     */
     private int getMeridiemHour() {
         if (isPM) {
             return hour - 12;
@@ -279,11 +361,19 @@ public class Date implements Comparable<Date>, Parcelable {
         return hour;
     }
 
+    /**
+     * Getter method for time
+     * @return String representation of time
+     */
     public String getTime() {
         return "" + digitToString(getMeridiemHour()) + ":" + digitToString(this.minute) + ":"
                 + digitToString(this.second) + " " + meridiem;
     }
 
+    /**
+     * Concatenates month,date and year which are calendar
+     * @return string representation of calendar
+     */
     public String getCalendarDate() {
         return "" + digitToString(this.month) + "-" + digitToString(this.date)
                 + digitToString(this.year);
@@ -324,6 +414,10 @@ public class Date implements Comparable<Date>, Parcelable {
     @Override
     public int describeContents() {return 0;}
 
+    /**
+     * ToString method for Date class
+     * @return String representation of date and time
+     */
     public String toString() {
         return getCalendarDate() + " " + getTime();
     }

@@ -3,8 +3,6 @@ package getwreckt.cs2340.rattrack.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.security.SecureRandom;
-
 /**
  * Created by Patel on 9/21/2017.
  */
@@ -17,11 +15,14 @@ public class User implements Parcelable {
     private boolean isLocked;
     private int sightings = 0;
 
+    /**
+     * No argument constructor
+     */
     public User() {}
 
     /**
-     * Create a User with username {@code userName} and password {@code pass}.
-     * @param userName the username for the user
+     * Create a User with username
+     * @param userName username for the user
      */
     public User(String userName) {
 
@@ -29,7 +30,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * Creates a user with full name {@code fullName}, username {@userName}, and password {@code pass}.
+     * Creates a user with full name and userName
      * @param fullName the first and last name of the new user
      * @param userName the username of the new user
      */
@@ -41,9 +42,10 @@ public class User implements Parcelable {
     }
 
     /**
-     * Creates a user with full name {@code fullName}, username {@userName}, and password {@code pass}.
+     * Creates a user with full name, userName, userType.
      * @param fullName the first and last name of the new user
      * @param userName the username of the new user
+     * @param userType type of user admin/user
      */
     public User(String fullName, String userName, String userType) {
         this.fullName = fullName;
@@ -53,7 +55,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * Username of the user
+     * Gets the username of the user
      * @return username of the user
      */
     public String getUserName() {
@@ -69,8 +71,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * Username of the user
-     * @return username of the user
+     * Getter method for the userType of the user
+     * @return userType of the user
      */
     public String getUserType() {
         return this.userType;
@@ -117,22 +119,41 @@ public class User implements Parcelable {
         this.fullName = fullName;
     }
 
+    /**
+     * Getter method for sightings
+     * @return sightings in int
+     */
     public int getSightings() {
         return sightings;
     }
 
+    /**
+     * Setter method for sightings
+     * @param sightings sightings
+     */
     public void setSightings(int sightings) {
         this.sightings = sightings;
     }
 
+    /**
+     * checks if user is locked or not
+     * @return boolean result of an account if it is locked or not
+     */
     public boolean isLocked() {
         return isLocked;
     }
 
+    /**
+     * Setter method for an account
+     * @param locked boolean value of an account
+     */
     public void setLocked(boolean locked) {
         isLocked = locked;
     }
 
+    /**
+     * Checks if sighting is made or not
+     */
     public void sightingMade() {
         this.sightings++;
     }
@@ -158,6 +179,7 @@ public class User implements Parcelable {
 
     public static final Parcelable.Creator<User> CREATOR
             = new Parcelable.Creator<User>() {
+
         public User createFromParcel (Parcel in) {return new User(in);}
 
         public User[] newArray(int size) {return new User[size];}

@@ -2,20 +2,18 @@ package getwreckt.cs2340.rattrack.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.RatSighting;
 
+/**
+ * Detail Sighting class
+ */
 public class SightingDetailActivity extends AppCompatActivity {
     //widgets for binding
     private TextView uniqueKeyField;

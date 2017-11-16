@@ -2,7 +2,6 @@ package getwreckt.cs2340.rattrack.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 /**
  * Created by Patel on 10/5/2017.
@@ -16,6 +15,9 @@ public class RatSighting implements Parcelable {
     private User owner;
     private boolean isFlagged;
 
+    /**
+     * No argument constructor
+     */
     public RatSighting() { }
 
     /**
@@ -137,30 +139,58 @@ public class RatSighting implements Parcelable {
         this.date = date;
     }
 
+    /**
+     * Getter method of user who made sighting
+     * @return user who made sighting
+     */
     private User getOwner() {
         return owner;
     }
 
+    /**
+     * Sets the user to the given owner
+     * @param owner user of system
+     */
     public void setOwner(User owner) {
         this.owner = owner;
     }
 
+    /**
+     * Getter method of location
+     * @return location of sighting
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     * Setter method of location
+     * @param location location of sighting
+     */
     public void setLocation(Location location) {
         this.location = location;
     }
 
+    /**
+     * used to flag users
+     * @return boolean value of flagged users
+     */
     public boolean isFlagged() {
         return isFlagged;
     }
 
+    /**
+     * Setter method used to flag users
+     * @param flagged boolean value of flagged users
+     */
     public void setFlagged(boolean flagged) {
         isFlagged = flagged;
     }
 
+    /**
+     * Generates unique key for every user who made sighting
+     * @return string representation of the unique key
+     */
     private String generateUniqueKey() {
         String uname = Model.getCurrentUser().getUserName();
         String user = uname.substring(0, uname.indexOf('.')) + uname.substring(uname.indexOf('.')
