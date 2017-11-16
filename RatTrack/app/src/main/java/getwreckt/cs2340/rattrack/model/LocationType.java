@@ -1,7 +1,8 @@
 package getwreckt.cs2340.rattrack.model;
 
 /**
- * Created by maya v on 10/20/2017.
+ * enum for a rat sighting's location type with unknown as an option
+ * Author: Maya Viust
  */
 
 public enum LocationType {
@@ -28,7 +29,7 @@ public enum LocationType {
     UNKNOWN ("Unknown"),
     NULL ("");
 
-    private String name;
+    private final String name;
 
     /**
      * Parametrized constructor of location type

@@ -60,7 +60,7 @@ public class Date implements Comparable<Date>, Parcelable {
 
         //get hour
         dataInput = data.substring(0, data.indexOf(":"));
-        setHour(Integer.parseInt(dataInput));
+        int initHour = Integer.parseInt(dataInput);
 
         data = data.substring(data.indexOf(":") + 1);
 
@@ -76,6 +76,9 @@ public class Date implements Comparable<Date>, Parcelable {
 
         data = data.substring(data.indexOf(" ") + 1);
         setIsPM("PM".equals(data));
+
+        setHour(initHour);
+
         setMeridiem();
         this.systemString = generateSystemString();
     }
@@ -141,7 +144,7 @@ public class Date implements Comparable<Date>, Parcelable {
      * @param hour hour in int
      */
     public final void setHour(int hour) {
-        if (isPM) {
+        if (isPM && (hour != 12)) {
             this.hour = hour + 12;
         } else if (hour == 12){
             this.hour = 0;

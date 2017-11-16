@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
- * Created by maya v on 11/16/2017.
+ * Custom comparator for Date objects. Sorts by year, month, date, hour, minute, second in that
+ * order
+ * Author: Maya Viust
  */
 
 public class DateChainedComparator implements Comparator<Date> {
@@ -57,7 +59,10 @@ public class DateChainedComparator implements Comparator<Date> {
             }
         };
 
-        public DateChainedComparator() {
+    /**
+     * constructor for the comparator that sorts by calendar date then time
+     */
+    public DateChainedComparator() {
             this.listComparators.add(YearComparator);
             this.listComparators.add(MonthComparator);
             this.listComparators.add(DateComparator);

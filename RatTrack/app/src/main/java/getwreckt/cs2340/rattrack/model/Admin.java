@@ -2,7 +2,7 @@ package getwreckt.cs2340.rattrack.model;
 
 /**
  * Admin is User that can add, remove, and unlock users.
- * Created by Patel on 9/28/2017.
+ * Author: Manan Patel
  */
 
 public class Admin extends User {

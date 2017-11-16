@@ -2,6 +2,7 @@ package getwreckt.cs2340.rattrack.model;
 
 /**
  * Borough enum for all 5 NYC boroughs and options for unknown and N/A
+ * Author: Maya Viust
  */
 
 public enum Borough {
