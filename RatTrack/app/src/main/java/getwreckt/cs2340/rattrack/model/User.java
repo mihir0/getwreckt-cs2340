@@ -22,7 +22,7 @@ public class User implements Parcelable {
 
     /**
      * Create a User with username
-     * @param userName the username for the user
+     * @param userName username for the user
      */
     public User(String userName) {
 
@@ -55,7 +55,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * Username of the user
+     * Gets the username of the user
      * @return username of the user
      */
     public String getUserName() {
@@ -71,8 +71,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * Username of the user
-     * @return username of the user
+     * Getter method for the userType of the user
+     * @return userType of the user
      */
     public String getUserType() {
         return this.userType;

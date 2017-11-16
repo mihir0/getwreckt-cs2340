@@ -183,7 +183,7 @@ public class Date implements Comparable<Date>, Parcelable {
     }
 
     /**
-     * Getter for pm
+     * Getter method for pm
      * @return boolean value for pm
      */
     public boolean getIsPM() {
@@ -309,7 +309,7 @@ public class Date implements Comparable<Date>, Parcelable {
     };
 
     /**
-     * Inner class of Date
+     * Inner class to support Comparator
      */
     public class DateChainedComparator implements Comparator<Date> {
         private List<Comparator<Date>> listComparators = new ArrayList<Comparator<Date>>();
