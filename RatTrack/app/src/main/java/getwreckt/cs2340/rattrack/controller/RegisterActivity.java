@@ -1,43 +1,31 @@
 package getwreckt.cs2340.rattrack.controller;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.StringBuilderPrinter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.util.Log;
 import android.view.View;
-import android.content.Intent;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
-import android.app.AlertDialog;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.*;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 
 import getwreckt.cs2340.rattrack.R;
-import getwreckt.cs2340.rattrack.model.*;
+import getwreckt.cs2340.rattrack.model.Model;
+import getwreckt.cs2340.rattrack.model.User;
 
 /**
  * Created by maya v on 9/21/2017.
@@ -66,17 +54,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
-        /**
-         * Grab dialog widgets
-         */
         fullNameField = (EditText) findViewById(R.id.full_name);
         userField = (EditText) findViewById(R.id.email);
         passField = (TextInputEditText) findViewById(R.id.password);
         userTypeSpinner = (Spinner) findViewById(R.id.user_type_spinner);
 
-        /*
-          Set up the adapter to display the user types in the spinner
-         */
+        //Set up the adapter to display the user types in the spinner
 
         ArrayList<String> userTypes = new ArrayList<String>();
         userTypes.add("User");
@@ -111,6 +94,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Creates a user when the user
+     * @param u user who is registering
+     * @param pass password of the user
+     */
     public void createUser(final User u, final String pass) {
         mAuth.createUserWithEmailAndPassword(u.getUserName(), pass)
                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
@@ -130,6 +118,10 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * used to change the user app to in app activity
+     * @param currUser valid registered user
+     */
     public void updateUI(FirebaseUser currUser) {
         Intent toInAppScreen = new Intent(RegisterActivity.this,
                 InAppActivity.class);

@@ -3,10 +3,7 @@ package getwreckt.cs2340.rattrack.controller;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,10 +21,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import getwreckt.cs2340.rattrack.R;
-import getwreckt.cs2340.rattrack.model.*;
+import getwreckt.cs2340.rattrack.model.RatSighting;
+import getwreckt.cs2340.rattrack.model.SightingManager;
 
 /**
  * Created by Patel on 10/11/2017.
@@ -69,7 +64,10 @@ public class RatSightingListActivity extends AppCompatActivity {
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
-
+        /**
+         * Parameterized Constructor
+         * @param ref reference for database
+         */
         public SimpleItemRecyclerViewAdapter(final DatabaseReference ref) {
             ref.child("ratsightings").addValueEventListener(new ValueEventListener() {
                 public void onDataChange(DataSnapshot snapshot) {
@@ -173,12 +171,19 @@ public class RatSightingListActivity extends AppCompatActivity {
             return valuesToShow.size();
         }
 
+        /**
+         * Inner class to support view holder
+         */
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
             public RatSighting mItem;
 
+            /**
+             * Parametrized Constructor
+             * @param view view to display
+             */
             public ViewHolder(View view) {
                 super(view);
                 mView = view;

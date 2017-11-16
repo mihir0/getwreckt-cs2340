@@ -3,18 +3,14 @@ package getwreckt.cs2340.rattrack.model;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 /**
  * Created by aguy on 10/8/17.
@@ -42,6 +38,12 @@ public class Model {
     public static User getCurrentUser() {
         return currentUser;
     }
+
+    /**
+     * setter for the current user
+     * @param user user of the system
+     * @return new user
+     */
     public static User setCurrentUser(User user) { return currentUser = user; }
 
     public static String viewToGoTo = null;

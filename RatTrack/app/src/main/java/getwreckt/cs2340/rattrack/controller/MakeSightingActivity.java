@@ -1,9 +1,8 @@
 package getwreckt.cs2340.rattrack.controller;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import getwreckt.cs2340.rattrack.R;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,16 +15,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import getwreckt.cs2340.rattrack.model.*;
-
-
+import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.Model;
+import getwreckt.cs2340.rattrack.model.RatSighting;
+import getwreckt.cs2340.rattrack.model.SightingManager;
 
 /**
  * Created by maya v on 10/16/2017.
@@ -117,6 +113,9 @@ public class MakeSightingActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Makes a new sighting
+     */
     public void onMakeButtonPressed() {
         Log.d("Register", "Register new user");
 
@@ -160,9 +159,16 @@ public class MakeSightingActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks whether {@code user} and {@code pass} are nonempty strings
-     * @param address the username to check
-     * @return whether {@code user} and {@code pass} are not empty strings
+     * Checks weather the sighting is valid or not
+     * @param date date of the sighting
+     * @param address address of the sighting
+     * @param city city of the sighting
+     * @param zip zip code of the sighting
+     * @param borough borough of the sighting
+     * @param typeLocation type location of the sighting
+     * @param latitude latitude of the sighting
+     * @param longitude longitude of the sighting
+     * @return boolena result of the sighting if it is valid or not
      */
     public boolean isValidSighting(String date, String address, String city, String zip,
                                    String borough, String typeLocation, String latitude,

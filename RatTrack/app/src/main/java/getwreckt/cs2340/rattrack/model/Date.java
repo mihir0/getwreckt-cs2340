@@ -97,8 +97,8 @@ public class Date implements Comparable<Date>, Parcelable {
     }
 
     /**
-     *
-     * @return
+     * Getter method for date
+     * @return date date in int
      */
     public int getDate() {
         return this.date;
@@ -135,6 +135,7 @@ public class Date implements Comparable<Date>, Parcelable {
     public int getHour() {
         return this.hour;
     }
+
     /**
      *  Sets an hour in military time
      * @param hour hour in int
@@ -149,51 +150,95 @@ public class Date implements Comparable<Date>, Parcelable {
         }
     }
 
+    /**
+     * Getter method for minute
+     * @return minute in int
+     */
     public int getMinute() {
         return this.minute;
     }
 
+    /**
+     * Setter method for minute
+     * @param minute minute in int
+     */
     public void setMinute(int minute) {
         this.minute = minute;
     }
 
+    /**
+     * Getter method for second
+     * @return second in int
+     */
     public int getSecond() {
         return this.second;
     }
 
+    /**
+     * Setter method for second
+     * @param second in int
+     */
     public void setSecond(int second) {
         this.second = second;
     }
 
+    /**
+     * Getter for pm
+     * @return boolean value for pm
+     */
     public boolean getIsPM() {
         return this.isPM;
     }
 
+    /**
+     * Setter method for pm
+     * @param value boolean input value
+     */
     public final void setIsPM(boolean value) {
+
         this.isPM = value;
     }
 
+    /**
+     * Getter method of meridiem
+     * @return string representation of meridiem
+     */
     public String getMeridiem() {
         return this.meridiem;
     }
 
-    public final void setMeridiem() {
+    /**
+     * Setter method of meridiem
+     */
+    private final void setMeridiem() {
         this.meridiem = isPM ? "PM" : "AM";
     }
 
+    /**
+     * Digit to string converter
+     * @param digit integer value of digit
+     * @return string representation of digit
+     */
     private String digitToString(int digit) {
         return ((digit < 10 ? "0" : "") + digit);
     }
 
-    private String generateSystemString() {
-        String monthStr = digitToString(month);
-        String dateStr = digitToString(date);
-        String hourStr  = digitToString(hour);
-        String minuteStr = digitToString(minute);
-        String secondStr = digitToString(second);
+    /**
+     * Getter method for system String
+     * @return system string
+     */
+    public String getSystemString() {
+        return this.systemString;
+    }
 
-        return "" + year + "-" + monthStr + "-" + dateStr + " " + hourStr + ":" + minuteStr + ":"
-                + secondStr;
+    /**
+     * Method which generate system string
+     * @return String representation of system string
+     */
+    private String generateSystemString() {
+        return "" + this.year + "-" + digitToString(this.month) + "-" + digitToString(this.date)
+                + " " + digitToString(this.hour) + ":" + digitToString(this.minute) + ":"
+                + digitToString(this.second);
     }
 
     //descending order on system generated string
@@ -212,11 +257,19 @@ public class Date implements Comparable<Date>, Parcelable {
         return hour;
     }
 
+    /**
+     * Getter method for time
+     * @return String representation of time
+     */
     public String getTime() {
         return "" + digitToString(getMeridiemHour()) + ":" + digitToString(this.minute) + ":"
                 + digitToString(this.second) + " " + meridiem;
     }
 
+    /**
+     * Concatenates month,date and year which are calendar
+     * @return string representation of calendar
+     */
     public String getCalendarDate() {
         return "" + digitToString(this.month) + "-" + digitToString(this.date)
                 + digitToString(this.year);
@@ -259,6 +312,10 @@ public class Date implements Comparable<Date>, Parcelable {
     @Override
     public int describeContents() {return 0;}
 
+    /**
+     * ToString method for Date class
+     * @return String representation of date and time
+     */
     public String toString() {
         return getCalendarDate() + " " + getTime();
     }
