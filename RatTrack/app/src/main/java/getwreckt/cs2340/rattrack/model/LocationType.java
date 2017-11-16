@@ -30,14 +30,27 @@ public enum LocationType {
 
     private String name;
 
+    /**
+     * Parametrized constructor of location type
+     * @param name name of location
+     */
     LocationType(String name) {
         this.name = name;
     }
 
+    /**
+     * Getter method for name
+     * @return name of location
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Selects location type using name of location
+     * @param name name of location
+     * @return location type
+     */
     public static LocationType get(String name) {
         for (LocationType locationType : values()) {
             if (locationType.getName().equals(name)) {
