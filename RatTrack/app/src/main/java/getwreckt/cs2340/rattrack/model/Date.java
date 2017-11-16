@@ -5,14 +5,9 @@ package getwreckt.cs2340.rattrack.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 /**
  * Created by maya v on 10/20/2017.
@@ -33,11 +28,14 @@ public class Date implements Comparable<Date>, Parcelable {
     private String systemString; //for natural ordering
 
     /**
-     * Empty constructor for Firebase
+     *  No argument constructor for Firebase
      */
     public Date() { }
 
-    //constructor for NYC database date string
+    /**
+     *  Parametrized constructor
+     * @param data input in the form of "month/date/year hour:minute:second AM/PM"
+     */
     public Date(String data) {
         //data string is orginally of the form "month/date/year hour:minute:second AM/PM"
         //example: "9/5/2012 12:00:00 AM
@@ -82,48 +80,65 @@ public class Date implements Comparable<Date>, Parcelable {
         generateSystemString(this.month, this.date, this.year, this.hour, this.isPM, this.minute, this.second);
     }
 
-
-    /** constructor for in app date input
-     public Date()
-     {
-
-     }     */
-
-    /** constructor for android timestamp
-     public Date(Timestamp timestamp) {
-
-     }
-     **/
-
+    /**
+     * Getter method for month
+     * @return month in int
+     */
     public int getMonth() {
         return this.month;
     }
 
+    /**
+     * Setter method for month
+     * @param month month in int
+     */
     public void setMonth(int month) {
         this.month = month;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDate() {
         return this.date;
     }
 
+    /**
+     * Setter method for date
+     * @param date input date
+     */
     public void setDate(int date) {
         this.date = date;
     }
 
+    /**
+     * Getter method for year
+     * @return year in int
+     */
     public int getYear() {
         return this.year;
     }
 
+    /**
+     * Setter method for year
+     * @param year year in int
+     */
     public void setYear(int year) {
         this.year = year;
     }
 
+    /**
+     * Getter method for hour
+     * @return hour in int
+     */
     public int getHour() {
         return this.hour;
     }
-
-    //changes to military time
+    /**
+     *  Sets an hour in military time
+     * @param hour hour in int
+     */
     public void setHour(int hour) {
         if (isPM) {
             this.hour = hour + 12;
