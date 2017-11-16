@@ -30,7 +30,7 @@ public enum Borough {
 
     public static Borough get(String name) {
         for (Borough borough : values()) {
-            if (borough.getName().toUpperCase().equals(name.toUpperCase())) {
+            if ((borough.getName().toUpperCase()).equals(name.toUpperCase())) {
                 return borough;
             }
         }

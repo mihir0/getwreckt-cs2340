@@ -5,15 +5,9 @@ package getwreckt.cs2340.rattrack.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 /**
  * Created by maya v on 10/20/2017.
@@ -40,7 +34,7 @@ public class Date implements Comparable<Date>, Parcelable {
 
     //constructor for NYC database date string
     public Date(String data) {
-        //data string is orginally of the form "month/date/year hour:minute:second AM/PM"
+        //data string is originally of the form "month/date/year hour:minute:second AM/PM"
         //example: "9/5/2012 12:00:00 AM
         data = data.trim();
         //get month
@@ -78,8 +72,8 @@ public class Date implements Comparable<Date>, Parcelable {
         this.second = Integer.parseInt(dataInput);
 
         data = data.substring(data.indexOf(" ") + 1);
+        setIsPM("PM".equals(data));
         setMeridiem();
-        setIsPM(data.equals("PM"));
         generateSystemString(this.month, this.date, this.year, this.hour, this.isPM, this.minute, this.second);
     }
 
@@ -173,13 +167,14 @@ public class Date implements Comparable<Date>, Parcelable {
     }
 
     private String digitToString(int digit) {
-        return (digit < 10) ? ("0" + digit) : ("" + digit);
+        return ((digit < 10 ? "0" : "") + digit);
     }
 
     public String getSystemString() {
         return this.systemString;
     }
 
+    //TODO change to no arg method
     private String generateSystemString(int month, int date, int year, int hour, boolean isPM,
                                         int minute, int second) {
         String monthStr = digitToString(month);
@@ -247,7 +242,7 @@ public class Date implements Comparable<Date>, Parcelable {
     };
 
     public static class DateChainedComparator implements Comparator<Date> {
-        private java.util.Collection<Comparator<Date>> listComparators = new ArrayList<Comparator<Date>>();
+        private java.util.Collection<Comparator<Date>> listComparators = new ArrayList<>();
 
         public DateChainedComparator() {
             this.listComparators.add(YearComparator);
@@ -320,8 +315,10 @@ public class Date implements Comparable<Date>, Parcelable {
     }
 
     public static final Parcelable.Creator<Date> CREATOR = new Parcelable.Creator<Date>() {
+        @Override
         public Date createFromParcel (Parcel in) {return new Date(in);}
 
+        @Override
         public Date[] newArray(int size) {return new Date[size];}
     };
 
