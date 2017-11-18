@@ -19,6 +19,7 @@ import java.util.Map;
 
 import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.Date;
+import getwreckt.cs2340.rattrack.model.DateChainedComparator;
 import getwreckt.cs2340.rattrack.model.Model;
 import getwreckt.cs2340.rattrack.model.SightingManager;
 
@@ -174,6 +175,7 @@ public class DateRangeActivity extends AppCompatActivity {
                                 endHour.getSelectedItem().toString(),
                                 endMin.getSelectedItem().toString())) {
 
+
                     Date start = new Date(Integer.parseInt(month.get(startMonth.getSelectedItem().toString())),
                             Integer.parseInt(startDay.getSelectedItem().toString()),
                             Integer.parseInt(startYear.getText().toString()),
@@ -280,7 +282,7 @@ public class DateRangeActivity extends AppCompatActivity {
 
     private boolean isValidRange(Date start, Date end) {
         //end > start
-        Date.DateChainedComparator comp = new Date.DateChainedComparator();
+        DateChainedComparator comp = new DateChainedComparator();
         if (comp.compare(start, end) > 1) {
             errorMsg.setText("End date must come after start date");
             return false;

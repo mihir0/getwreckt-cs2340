@@ -33,6 +33,18 @@ public class Date implements Comparable<Date>, Parcelable {
     public Date() { }
 
     /**
+     *  constructor for Firebase
+     */
+    public Date(int month, int day, int year, int hour, int minute, boolean isPM) {
+        this.date = day;
+        this.month = month;
+        this.year = year;
+        this.hour = hour;
+        this.minute = minute;
+        meridiem = (isPM) ? "PM" : "AM";
+    }
+
+    /**
      *  Parametrized constructor
      * @param data input in the form of "month/date/year hour:minute:second AM/PM"
      */
