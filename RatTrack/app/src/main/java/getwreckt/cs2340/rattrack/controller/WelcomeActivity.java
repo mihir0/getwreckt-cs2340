@@ -31,7 +31,6 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button registerBut;
     private FirebaseAuth mAuth;
     private DatabaseReference mDataRef;
-    private boolean persistenceEnabled = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +38,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         initLogin();
         initRegister();
-        if (persistenceEnabled) {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            persistenceEnabled = false;
-        }
+
         mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
         if (mAuth.getCurrentUser() != null) {

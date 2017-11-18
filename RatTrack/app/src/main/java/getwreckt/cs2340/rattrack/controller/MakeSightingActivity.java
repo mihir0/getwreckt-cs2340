@@ -67,7 +67,6 @@ public class MakeSightingActivity extends AppCompatActivity {
 
         makeBtn = (Button) findViewById(R.id.make_button);
 
-        List<RatSighting> sightings = SightingManager.ratSightings;
 
 
         ArrayList<String> boroughs = new ArrayList<>();

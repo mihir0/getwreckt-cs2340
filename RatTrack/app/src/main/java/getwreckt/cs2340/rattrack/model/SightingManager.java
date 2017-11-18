@@ -14,7 +14,7 @@ import java.util.Locale;
  */
 
 public class SightingManager {
-    private static List<RatSighting> ratSightings = new ArrayList<>();
+    public static List<RatSighting> ratSightings = new ArrayList<>();
     /**
      * Filters and returns sightings which fall within the given date range
      * @param numTimeUnitsAgo the username to check
