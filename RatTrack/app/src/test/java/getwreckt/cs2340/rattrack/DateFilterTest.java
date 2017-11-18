@@ -27,7 +27,7 @@ public class DateFilterTest {
         listToFilter = new ArrayList<>();
         listToFilter.add(new RatSighting("1111111", "9/3/2017 12:30:56 PM", "Unknown", "10101", "123 Brook Rd", "Brooklyn", "Brooklyn", "47.567", "-74.568"));
         listToFilter.add(new RatSighting("1111112","9/2/2017 12:30:56 PM", "Unknown", "10101", "234 Brook Rd", "Brooklyn", "Brooklyn", "47.567", "-74.568"));
-        listToFilter.add(new RatSighting("1111113","8/4/2017 12:30:56 PM", "Unknown", "10101", "345 Brook Rd", "Brooklyn", "Brooklyn", "47.567", "-74.568"));
+        listToFilter.add(new RatSighting("1111113","8/2/2017 12:30:56 PM", "Unknown", "10101", "345 Brook Rd", "Brooklyn", "Brooklyn", "47.567", "-74.568"));
         listToFilter.add(new RatSighting("1111114","9/4/2016 12:30:56 PM", "Unknown", "10101", "456 Brook Rd", "Brooklyn", "Brooklyn", "47.567", "-74.568"));
         listToFilter.add(new RatSighting("1111115","9/4/2015 12:30:56 PM", "Unknown", "10101", "567 Brook Rd", "Brooklyn", "Brooklyn", "47.567", "-74.568"));
         listToFilter.add(new RatSighting("1111116","9/3/2017 12:10:56 PM", "Unknown", "10101", "678 Brook Rd", "Brooklyn", "Brooklyn", "47.567", "-74.568"));
@@ -42,7 +42,6 @@ public class DateFilterTest {
         Set<String> addresses = new HashSet<>();
         addresses.add("123 Brook Rd");
         addresses.add("234 Brook Rd");
-        addresses.add("345 Brook Rd");
         addresses.add("678 Brook Rd");
         addresses.add("789 Brook Rd");
         addresses.add("890 Brook Rd");
@@ -50,6 +49,32 @@ public class DateFilterTest {
         for (RatSighting ratSighting : newList) {
             addressesToCheck.add(ratSighting.getLocation().getAddress());
         }
-        Assert.assertTrue(addresses.containsAll(addressesToCheck) && addressesToCheck.containsAll(addresses));
+        Assert.assertTrue(addressesToCheck.toString(), addresses.containsAll(addressesToCheck) && addressesToCheck.containsAll(addresses));
+    }
+
+    @Test
+    public void testPastHour() {
+        setup();
+        List<RatSighting> newList = SightingManager.dateFilter(1, "Hours", listToFilter, new Date("9/3/2017 12:30:56 PM"));
+        Set<String> addresses = new HashSet<>();
+        addresses.add("678 Brook Rd");
+        Set<String> addressesToCheck = new HashSet<>();
+        for (RatSighting ratSighting : newList) {
+            addressesToCheck.add(ratSighting.getLocation().getAddress());
+        }
+        Assert.assertTrue(addressesToCheck.toString(), addresses.containsAll(addressesToCheck) && addressesToCheck.containsAll(addresses));
+    }
+
+    @Test
+    public void testPastTwoDays() {
+        setup();
+        List<RatSighting> newList = SightingManager.dateFilter(2, "Days", listToFilter, new Date("9/3/2017 12:30:56 PM"));
+        Set<String> addresses = new HashSet<>();
+        addresses.add("678 Brook Rd");
+        Set<String> addressesToCheck = new HashSet<>();
+        for (RatSighting ratSighting : newList) {
+            addressesToCheck.add(ratSighting.getLocation().getAddress());
+        }
+        Assert.assertTrue(addressesToCheck.toString(), addresses.containsAll(addressesToCheck) && addressesToCheck.containsAll(addresses));
     }
 }
