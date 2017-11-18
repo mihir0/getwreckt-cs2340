@@ -114,7 +114,7 @@ public class RatSighting implements Parcelable {
      * Gets the date of a sighting
      * @return the date of a sighting
      */
-    public Comparable getDate() {
+    public Date getDate() {
         return this.date;
     }
     /**
