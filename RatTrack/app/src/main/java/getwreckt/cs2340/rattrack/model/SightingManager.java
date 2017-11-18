@@ -28,13 +28,13 @@ public class SightingManager {
      * @param timeUnit the password to check
      * @return list of ratSightings which are inside of the dates range
      */
-    public static List<RatSighting> dateFilter(int numTimeUnitsAgo, String timeUnit) {
+    public static List<RatSighting> dateFilter(int numTimeUnitsAgo, String timeUnit, List<RatSighting> listToFilter, Date fromDate) {
         // assigns the current day and time as a reference point
 
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.US);
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a", Locale.US);
         Calendar cal = Calendar.getInstance();
         String curDateAsStr = dateFormat.format(cal.getTime());
-        Date curDate = new Date(curDateAsStr);
+        Date curDate = fromDate == null ? new Date(curDateAsStr) : fromDate;
         int curYear = curDate.getYear();
         int curMonth = curDate.getMonth();
         int curDay = curDate.getDate();
@@ -147,16 +147,16 @@ public class SightingManager {
         }
 
         List<RatSighting> dateFilteredRatSightings = new ArrayList<>();
-        for (RatSighting r: ratSightings) {
-            String date = r.getDate().toString();
-            String mdy = date.split(" ")[0];
+        for (RatSighting r: listToFilter) {
+            String date = r.getDate().getSystemString();
+            String ymd = date.split(" ")[0];
             String hms = date.split(" ")[1];
             String h = hms.split(":")[0];
             String min = hms.split(":")[1];
             String s = hms.split(":")[2];
-            String m = mdy.split("/")[0];
-            String d = mdy.split("/")[1];
-            String y = mdy.split("/")[2];
+            String y = ymd.split("-")[0];
+            String m = ymd.split("-")[1];
+            String d = ymd.split("-")[2];
             int hour = Integer.parseInt(h);
             int minutes = Integer.parseInt(min);
             int seconds = Integer.parseInt(s);

@@ -27,6 +27,8 @@ public class Date implements Comparable<Date>, Parcelable {
 
     private String systemString; //for natural ordering
 
+    private String toString;
+
     /**
      *  No argument constructor for Firebase
      */
@@ -51,6 +53,8 @@ public class Date implements Comparable<Date>, Parcelable {
     public Date(String data) {
         //data string is originally of the form "month/date/year hour:minute:second AM/PM"
         //example: "9/5/2012 12:00:00 AM
+
+        toString = data;
 
         //get month
         String dataInput = data.substring(0, data.indexOf("/"));
@@ -329,6 +333,6 @@ public class Date implements Comparable<Date>, Parcelable {
      * @return String representation of date and time
      */
     public String toString() {
-        return getCalendarDate() + " " + getTime();
+        return toString == null ? getCalendarDate() + " " + getTime() : toString;
     }
 }
