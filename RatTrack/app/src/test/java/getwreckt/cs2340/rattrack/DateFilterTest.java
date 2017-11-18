@@ -70,7 +70,11 @@ public class DateFilterTest {
         setup();
         List<RatSighting> newList = SightingManager.dateFilter(2, "Days", listToFilter, new Date("9/3/2017 12:30:56 PM"));
         Set<String> addresses = new HashSet<>();
+        addresses.add("123 Brook Rd");
+        addresses.add("234 Brook Rd");
         addresses.add("678 Brook Rd");
+        addresses.add("789 Brook Rd");
+        addresses.add("890 Brook Rd");
         Set<String> addressesToCheck = new HashSet<>();
         for (RatSighting ratSighting : newList) {
             addressesToCheck.add(ratSighting.getLocation().getAddress());
