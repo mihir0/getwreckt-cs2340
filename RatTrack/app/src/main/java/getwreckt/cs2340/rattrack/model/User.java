@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by Patel on 9/21/2017.
+ * Class for the User object. Attributes for full name, user name, user type, if they are signed in,
+ * if they are locked out and the number of sightings they have made
+ * Author: Manan Patel
  */
 
 public class User implements Parcelable {
@@ -180,8 +182,10 @@ public class User implements Parcelable {
     public static final Parcelable.Creator<User> CREATOR
             = new Parcelable.Creator<User>() {
 
+        @Override
         public User createFromParcel (Parcel in) {return new User(in);}
 
+        @Override
         public User[] newArray(int size) {return new User[size];}
     };
 

@@ -22,6 +22,7 @@ public class Model {
 
     private static DatabaseReference mDataRef;
     private static FirebaseAuth mAuth;
+    public static boolean persistenceEnabled = true;
 
     /**
      * constructor for a model
