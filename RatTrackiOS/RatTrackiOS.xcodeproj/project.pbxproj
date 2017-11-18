@@ -97,8 +97,9 @@
 		9C14680E1FB506CE00B63D46 /* RatTrackiOS */ = {
 			isa = PBXGroup;
 			children = (
-				9C14680F1FB506CE00B63D46 /* AppDelegate.swift */,
 				9C1468111FB506CE00B63D46 /* ViewController.swift */,
+				9C9CB1201FBF6D8F0096B580 /* Controller */,
+				9C14680F1FB506CE00B63D46 /* AppDelegate.swift */,
 				9C1468131FB506CE00B63D46 /* Main.storyboard */,
 				9C1468161FB506CE00B63D46 /* Assets.xcassets */,
 				9C1468181FB506CE00B63D46 /* LaunchScreen.storyboard */,
@@ -123,6 +124,13 @@
 				9C1468311FB506CE00B63D46 /* Info.plist */,
 			);
 			path = RatTrackiOSUITests;
+			sourceTree = "<group>";
+		};
+		9C9CB1201FBF6D8F0096B580 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
