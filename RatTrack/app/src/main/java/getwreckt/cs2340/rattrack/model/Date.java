@@ -44,6 +44,7 @@ public class Date implements Comparable<Date>, Parcelable {
         this.hour = hour;
         this.minute = minute;
         meridiem = (isPM) ? "PM" : "AM";
+        generateSystemString();
     }
 
     /**
@@ -93,7 +94,7 @@ public class Date implements Comparable<Date>, Parcelable {
         data = data.substring(data.indexOf(" ") + 1);
         setIsPM("PM".equals(data));
         setMeridiem();
-        this.systemString = generateSystemString();
+        generateSystemString();
     }
 
     /**
@@ -110,6 +111,7 @@ public class Date implements Comparable<Date>, Parcelable {
      */
     public void setMonth(int month) {
         this.month = month;
+        generateSystemString();
     }
 
     /**
@@ -126,6 +128,7 @@ public class Date implements Comparable<Date>, Parcelable {
      */
     public void setDate(int date) {
         this.date = date;
+        generateSystemString();
     }
 
     /**
@@ -142,6 +145,7 @@ public class Date implements Comparable<Date>, Parcelable {
      */
     public void setYear(int year) {
         this.year = year;
+        generateSystemString();
     }
 
     /**
@@ -164,6 +168,7 @@ public class Date implements Comparable<Date>, Parcelable {
         } else {
             this.hour = hour;
         }
+        generateSystemString();
     }
 
     /**
@@ -180,6 +185,7 @@ public class Date implements Comparable<Date>, Parcelable {
      */
     public void setMinute(int minute) {
         this.minute = minute;
+        generateSystemString();
     }
 
     /**
@@ -196,6 +202,7 @@ public class Date implements Comparable<Date>, Parcelable {
      */
     public void setSecond(int second) {
         this.second = second;
+        generateSystemString();
     }
 
     /**
@@ -213,6 +220,7 @@ public class Date implements Comparable<Date>, Parcelable {
     public final void setIsPM(boolean value) {
 
         this.isPM = value;
+        generateSystemString();
     }
 
     /**
@@ -228,6 +236,7 @@ public class Date implements Comparable<Date>, Parcelable {
      */
     private final void setMeridiem() {
         this.meridiem = isPM ? "PM" : "AM";
+        generateSystemString();
     }
 
     /**
@@ -251,8 +260,8 @@ public class Date implements Comparable<Date>, Parcelable {
      * Method which generate system string
      * @return String representation of system string
      */
-    private String generateSystemString() {
-        return "" + this.year + "-" + digitToString(this.month) + "-" + digitToString(this.date)
+    private void generateSystemString() {
+         this.systemString = "" + this.year + "-" + digitToString(this.month) + "-" + digitToString(this.date)
                 + " " + digitToString(this.hour) + ":" + digitToString(this.minute) + ":"
                 + digitToString(this.second);
     }

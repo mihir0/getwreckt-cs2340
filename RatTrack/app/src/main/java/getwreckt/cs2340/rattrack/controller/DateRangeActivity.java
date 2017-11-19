@@ -192,19 +192,22 @@ public class DateRangeActivity extends AppCompatActivity {
                             Integer.parseInt(endMin.getSelectedItem().toString()),
                             endisPM.isChecked());
 
-                    if (Model.viewToGoTo.equals("Graph")) {
-                        SightingManager.startGraphDate = start;
-                        SightingManager.endGraphDate = end;
-                        Intent toGraph = new Intent(DateRangeActivity.this,
-                                GraphActivity.class);
-                        startActivity(toGraph);
-                    } else if (Model.viewToGoTo.equals("Map")) {
-                        SightingManager.startMapDate = start;
-                        SightingManager.endMapDate = end;
-                        Intent toMap = new Intent(DateRangeActivity.this,
-                                RatSightingMapActivity.class);
-                        startActivity(toMap);
+                    if (isValidRange(start, end)) {
+                        if (Model.viewToGoTo.equals("Graph")) {
+                            SightingManager.startGraphDate = start;
+                            SightingManager.endGraphDate = end;
+                            Intent toGraph = new Intent(DateRangeActivity.this,
+                                    GraphActivity.class);
+                            startActivity(toGraph);
+                        } else if (Model.viewToGoTo.equals("Map")) {
+                            SightingManager.startMapDate = start;
+                            SightingManager.endMapDate = end;
+                            Intent toMap = new Intent(DateRangeActivity.this,
+                                    RatSightingMapActivity.class);
+                            startActivity(toMap);
+                        }
                     }
+
                 }
             }
         });
@@ -285,11 +288,15 @@ public class DateRangeActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean isValidRange(Date start, Date end) {
+    public boolean isValidRange(Date start, Date end) throws java.lang.IllegalArgumentException {
         //end > start
+        if ((start == null) || (end == null)) {
+            throw new java.lang.IllegalArgumentException("One of the inputted dates was null");
+        }
         DateChainedComparator comp = new DateChainedComparator();
-        if (comp.compare(start, end) > 1) {
-            errorMsg.setText("End date must come after start date");
+        if (comp.compare(start, end) < 0) {
+            //errorMsg.setText("End date must come after start date");
+            System.out.println(comp.compare(start, end));
             return false;
         }
         return true;
