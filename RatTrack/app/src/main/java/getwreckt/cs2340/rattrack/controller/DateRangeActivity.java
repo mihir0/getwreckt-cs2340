@@ -25,6 +25,7 @@ import getwreckt.cs2340.rattrack.model.SightingManager;
 
 public class DateRangeActivity extends AppCompatActivity {
 
+    static DateRangeActivity activity;
     private Spinner startMonth;
     private Spinner startDay;
     private EditText startYear;
@@ -60,6 +61,7 @@ public class DateRangeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_range);
+        activity = this;
 
         final Map<String, String> month = new HashMap<>();
         month.put("Month", "0");
@@ -209,7 +211,7 @@ public class DateRangeActivity extends AppCompatActivity {
 
     }
 
-    private boolean isValidDate(String selMonth, String selDay,
+    public boolean isValidDate(String selMonth, String selDay,
                                        String selYear, String selHour,
                                        String selMin) {
         if (selMonth.equals("Month")) {
@@ -252,6 +254,7 @@ public class DateRangeActivity extends AppCompatActivity {
 
         HashMap<String, Integer> monthDays = new HashMap<>();
         monthDays.put("January", daysPerMonth[0]);
+        monthDays.put("February", daysPerMonth[1]);
         monthDays.put("March", daysPerMonth[2]);
         monthDays.put("April", daysPerMonth[3]);
         monthDays.put("May", daysPerMonth[4]);
@@ -265,7 +268,9 @@ public class DateRangeActivity extends AppCompatActivity {
 
         if (selMonth.equals("February")) {
             if (day > daysPerMonth[1]) {
-                if (!((day == daysPerMonth[1] + 1) && (year % 4 == 0))) {
+                if ((day == daysPerMonth[1] + 1) && (year % 4 == 0)) {
+                    return true;
+                } else {
                     errorMsg.setText("Invalid day for selected month");
                     return false;
                 }
@@ -288,5 +293,9 @@ public class DateRangeActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public static DateRangeActivity getInstance(){
+        return activity;
     }
 }
