@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Patel on 11/18/2017.
  */
-public class DateRangeActivityTest {
+public class IsValidDateTest {
 
     private static final int TIMEOUT = 200;
     private String unselMonth;
