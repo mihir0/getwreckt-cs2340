@@ -159,7 +159,7 @@ public class Date implements Comparable<Date>, Parcelable {
     public final void setHour(int hour) {
         if (isPM) {
             this.hour = hour + 12;
-        } else if (hour == 12){
+        } else if (hour == 12){// means AM
             this.hour = 0;
         } else {
             this.hour = hour;
