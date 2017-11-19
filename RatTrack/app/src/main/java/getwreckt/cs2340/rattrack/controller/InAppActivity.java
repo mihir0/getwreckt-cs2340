@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import getwreckt.cs2340.rattrack.model.Model;
+import getwreckt.cs2340.rattrack.model.RatSighting;
+import getwreckt.cs2340.rattrack.model.SightingManager;
 import getwreckt.cs2340.rattrack.model.User;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import org.xml.sax.DTDHandler;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
