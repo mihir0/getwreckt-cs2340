@@ -30,102 +30,119 @@ public class IsValidDateTest {
         unselDay = "Day";
         unselYear = "Year";
         unselHour = "Hour";
-
         unselMin = "Minute";
 
     }
 
-    @Test (timeout = TIMEOUT)
-    public void testIsValidDate() throws Exception {
+        @Test (timeout = TIMEOUT)
+        public void testIsValidDate() throws Exception {
 
         /* Testing with unselected fields. isValidDate should return false in each case */
             assertFalse("Expected false, returned: " +
-                        ((isValidDate(unselMonth, "01", "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate(unselMonth, "01", "2017", "12", "00" ));
+                        ((isValidDate(unselMonth, "01", "2017", "12", "00")) ? "true" : "false"),
+                    isValidDate(unselMonth, "01", "2017", "12", "00"));
 
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("January", unselDay, "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate("January", unselDay, "2017", "12", "00" ));
+                        ((isValidDate("January", unselDay, "2017", "12", "00")) ? "true" : "false"),
+                    isValidDate("January", unselDay, "2017", "12", "00"));
 
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("January", "01", unselYear, "12", "00" )) ? "true" : "false"),
-                        isValidDate("January", "01", unselYear, "12", "00" ));
+                        ((isValidDate("January", "01", unselYear, "12", "00")) ? "true" : "false"),
+                    isValidDate("January", "01", unselYear, "12", "00"));
 
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("January", "01", "2017", unselHour, "00" )) ? "true" : "false"),
-                        isValidDate("January", "01", "2017", unselHour, "00" ));
+                        ((isValidDate("January", "01", "2017", unselHour, "00")) ? "true" : "false"),
+                    isValidDate("January", "01", "2017", unselHour, "00"));
 
             assertFalse("Expected false, returned: " +
                         ((isValidDate("January", "01", "2017", "12", unselMin)) ? "true" : "false"),
-                        isValidDate("January", "01", "2017", "12", unselMin));
-
+                    isValidDate("January", "01", "2017", "12", unselMin));
+        }
         //===============================================================================================================================
         /* Testing an unrealistic date. isValidDate should return false in each case. */
+
+        @Test (timeout = TIMEOUT)
+        public void testUnrealisticYears() throws Exception {
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("January", "01", "2019", "12", "00" )) ? "true" : "false"),
-                        isValidDate("January", "01", "2019", "12", "00" ));
+                        ((isValidDate("January", "01", "2019", "12", "00")) ? "true" : "false"),
+                    isValidDate("January", "01", "2019", "12", "00"));
 
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("January", "01", "1899", "12", "00" )) ? "true" : "false"),
-                        isValidDate("January", "01", "1899", "12", "00" ));
-
+                        ((isValidDate("January", "01", "1899", "12", "00")) ? "true" : "false"),
+                    isValidDate("January", "01", "1899", "12", "00"));
+        }
         //===============================================================================================================================
         /* Testing for invalid dates of February (tested with leap and non-leap years).
            isValidDate should return false in each case. */
+
+        @Test (timeout = TIMEOUT)
+        public void testInvalidFebruaryDates() throws Exception {
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("February", "31", "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate("February", "31", "2017", "12", "00" ));
+                            ((isValidDate("February", "31", "2017", "12", "00")) ? "true" : "false"),
+                    isValidDate("February", "31", "2017", "12", "00"));
 
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("February", "30", "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate("February", "30", "2017", "12", "00" ));
+                            ((isValidDate("February", "30", "2017", "12", "00")) ? "true" : "false"),
+                    isValidDate("February", "30", "2017", "12", "00"));
 
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("February", "29", "2017", "12", "59" )) ? "true" : "false"),
-                        isValidDate("February", "29", "2017", "12", "59" ));
-
+                            ((isValidDate("February", "29", "2017", "12", "59")) ? "true" : "false"),
+                    isValidDate("February", "29", "2017", "12", "59"));
+        }
         //===============================================================================================================================
         /* Testing for valid dates of February (tested with leap and non-leap years).
            isValidDate should return true in each case. */
+
+        @Test (timeout = TIMEOUT)
+        public void testValidFebruaryDates() throws Exception {
             assertTrue("Expected true, returned: " +
-                        ((isValidDate("February", "28", "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate("February", "28", "2017", "12", "00" ));
+                            ((isValidDate("February", "28", "2017", "12", "00")) ? "true" : "false"),
+                    isValidDate("February", "28", "2017", "12", "00"));
 
             assertTrue("Expected true, returned: " +
-                        ((isValidDate("February", "29", "2016", "12", "00" )) ? "true" : "false"),
-                        isValidDate("February", "29", "2016", "12", "00" ));
-
+                            ((isValidDate("February", "29", "2016", "12", "00")) ? "true" : "false"),
+                    isValidDate("February", "29", "2016", "12", "00"));
+        }
         //===============================================================================================================================
         /* Testing for a date this year that has not arrived.
          isValidDate should return false in each case. */
-            assertFalse("Expected false, returned: " +
-                        ((isValidDate("December", "29", "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate("December", "29", "2017", "12", "00" ));
-            assertFalse("Expected false, returned: " +
-                        ((isValidDate("November", "23", "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate("November", "23", "2017", "12", "00" ));
 
+        @Test (timeout = TIMEOUT)
+        public void testFutureDate() throws Exception {
+            assertFalse("Expected false, returned: " +
+                            ((isValidDate("December", "29", "2017", "12", "00")) ? "true" : "false"),
+                    isValidDate("December", "29", "2017", "12", "00"));
+            assertFalse("Expected false, returned: " +
+                            ((isValidDate("November", "23", "2017", "12", "00")) ? "true" : "false"),
+                    isValidDate("November", "23", "2017", "12", "00"));
+        }
         //===============================================================================================================================
         /* Testing with selected day greater than it should be for the month. isValidDate should
            return false in each case. */
+
+        @Test (timeout = TIMEOUT)
+        public void testInvalidDaysOfMonth() throws Exception {
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("November", "31", "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate("November", "31", "2017", "12", "00" ));
+                            ((isValidDate("November", "31", "2017", "12", "00")) ? "true" : "false"),
+                            isValidDate("November", "31", "2017", "12", "00"));
 
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("April", "31", "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate("April", "31", "2017", "12", "00" ));
+                            ((isValidDate("April", "31", "2017", "12", "00")) ? "true" : "false"),
+                            isValidDate("April", "31", "2017", "12", "00"));
 
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("June", "31", "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate("June", "31", "2017", "12", "00" ));
+                        ((isValidDate("June", "31", "2017", "12", "00")) ? "true" : "false"),
+                        isValidDate("June", "31", "2017", "12", "00"));
 
             assertFalse("Expected false, returned: " +
-                        ((isValidDate("September", "31", "2017", "12", "00" )) ? "true" : "false"),
-                        isValidDate("September", "31", "2017", "12", "00" ));
-
+                        ((isValidDate("September", "31", "2017", "12", "00")) ? "true" : "false"),
+                        isValidDate("September", "31", "2017", "12", "00"));
+        }
         //===============================================================================================================================
         /* Testing for realistic date that has passed. isValidDate should return true in each case. */
+
+        @Test (timeout = TIMEOUT)
+        public void testRealisticDates() throws Exception {
             assertTrue("Expected true, returned: " +
                         ((isValidDate("November", "17", "2017", "12", "00" )) ? "true" : "false"),
                         isValidDate("November", "17", "2017", "12", "00" ));
@@ -151,7 +168,9 @@ public class IsValidDateTest {
                         isValidDate("March", "17", "1900", "04", "00" ));
     }
 
+    //=============================================================================================================================
     /* isValidDate() Method from DateRangeActivity */
+
         public boolean isValidDate(String selMonth, String selDay,
                 String selYear, String selHour,
                 String selMin) {
