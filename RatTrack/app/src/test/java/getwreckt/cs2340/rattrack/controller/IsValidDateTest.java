@@ -35,7 +35,7 @@ public class IsValidDateTest {
     }
 
         @Test (timeout = TIMEOUT)
-        public void testIsValidDate() throws Exception {
+        public void testUnselectedDate() throws Exception {
 
         /* Testing with unselected fields. isValidDate should return false in each case */
             assertFalse("Expected false, returned: " +
@@ -166,7 +166,7 @@ public class IsValidDateTest {
             assertTrue("Expected true, returned: " +
                         ((isValidDate("March", "17", "1900", "04", "00" )) ? "true" : "false"),
                         isValidDate("March", "17", "1900", "04", "00" ));
-    }
+        }
 
     //=============================================================================================================================
     /* isValidDate() Method from DateRangeActivity */
@@ -175,22 +175,22 @@ public class IsValidDateTest {
                 String selYear, String selHour,
                 String selMin) {
             if (selMonth.equals("Month")) {
-//            errorMsg.setText("Select a month");
+    //            errorMsg.setText("Select a month");
                 return false;
             }
 
             if (selDay.equals("Day")) {
-//            errorMsg.setText("Select a day");
+    //            errorMsg.setText("Select a day");
                 return false;
             }
 
             if (selHour.equals("Hour")) {
-//            errorMsg.setText("Select an hour");
+    //            errorMsg.setText("Select an hour");
                 return false;
             }
 
             if (selMin.equals("Minute")) {
-//            errorMsg.setText("Select a minute");
+    //            errorMsg.setText("Select a minute");
                 return false;
             }
 
@@ -199,11 +199,11 @@ public class IsValidDateTest {
             try {
                 int year = Integer.parseInt(selYear);
                 if (!((year  >= minYear) && (year <= Calendar.getInstance().get(Calendar.YEAR)))) {
-//                errorMsg.setText("Enter a realistic year. You entered: " + year + ".");
+    //                errorMsg.setText("Enter a realistic year. You entered: " + year + ".");
                     return false;
                 }
             } catch (NumberFormatException nfe) {
-//            errorMsg.setText("Invalid year entry");
+    //            errorMsg.setText("Invalid year entry");
                 return false;
             }
 
@@ -231,14 +231,14 @@ public class IsValidDateTest {
                     if ((day == daysPerMonth[1] + 1) && (year % 4 == 0)) {
                         return true;
                     } else {
-//                    errorMsg.setText("Invalid day for selected month");
+    //                    errorMsg.setText("Invalid day for selected month");
                         return false;
                     }
                 }
             }
 
             if (Integer.parseInt(selDay) > monthDays.get(selMonth)) {
-//            errorMsg.setText("Invalid day for selected month");
+    //            errorMsg.setText("Invalid day for selected month");
                 return false;
             }
 
