@@ -143,6 +143,8 @@ public class MakeSightingActivity extends AppCompatActivity {
                         _sighting = new RatSighting(date + " " + time, typeLocation, zip, address, city, borough,
                                 latitude, longitude);
 
+                        SightingManager.addSighting(_sighting);
+
                         Log.d("UserNull MakeSighting", Model.getCurrentUser().getUserName());
 
                         mDataRef.child("ratsightings").child(_sighting.getUniqueKey()).setValue(_sighting);
