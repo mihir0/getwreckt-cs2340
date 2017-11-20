@@ -264,7 +264,7 @@ public class Date implements Comparable<Date>, Parcelable {
         return dateChainedComparator.compare(other, this);
     }
 
-    private int getMeridiemHour() {
+    public int getMeridiemHour() {
         if (isPM) {
             return hour - 12;
         } else {
