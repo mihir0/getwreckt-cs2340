@@ -83,7 +83,7 @@ public class TestSetHourMethod {
      * Tests the setHour(int hour) method
      *
      *
-     * supplements first branch coverage where the first else statement is true and
+     * supplements first branch coverage where the first if statement is true and
      * the others are false
      *
      * Here regular 06:00:00 PM time corresponds to military time of 18
@@ -103,7 +103,7 @@ public class TestSetHourMethod {
      * Tests the setHour(int hour) method
      *
      *
-     * supplements first branch coverage where the first else statement is true and
+     * supplements the third branch coverage where the else statement is true and
      * the others are false, this is just to see the edge case
      *
      * Here regular 12:00:00 PM time corresponds to military time of 12
