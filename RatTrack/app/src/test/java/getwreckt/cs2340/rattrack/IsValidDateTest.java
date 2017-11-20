@@ -41,6 +41,76 @@ public class IsValidDateTest {
      *
      */
 
+        /**
+        * null dates cannot be used. checks if right exception was thrown
+        */
+        @Test
+        public void nullMonth() {
+            boolean result = false;
+            try {
+                isValidDate(null, "12", "2012", "12", "12");
+            } catch (java.lang.IllegalArgumentException iae) {
+                result = true;
+            }
+            assertTrue(result);
+        }
+
+        /**
+        * null dates cannot be used. checks if right exception was thrown
+        */
+        @Test
+        public void nullDay() {
+            boolean result = false;
+            try {
+                isValidDate("12", null, "2012", "12", "12");
+            } catch (java.lang.IllegalArgumentException iae) {
+                result = true;
+            }
+            assertTrue(result);
+        }
+
+    /**
+     * null dates cannot be used. checks if right exception was thrown
+     */
+    @Test
+    public void nullYear() {
+        boolean result = false;
+        try {
+            isValidDate("12", "12", null, "12", "12");
+        } catch (java.lang.IllegalArgumentException iae) {
+            result = true;
+        }
+        assertTrue(result);
+    }
+
+    /**
+     * null dates cannot be used. checks if right exception was thrown
+     */
+    @Test
+    public void nullHour() {
+        boolean result = false;
+        try {
+            isValidDate("12", "12", "2017", null, "12");
+        } catch (java.lang.IllegalArgumentException iae) {
+            result = true;
+        }
+        assertTrue(result);
+    }
+
+    /**
+     * null dates cannot be used. checks if right exception was thrown
+     */
+    @Test
+    public void nullMin() {
+        boolean result = false;
+        try {
+            isValidDate("12", "12", "2017", "12", null);
+        } catch (java.lang.IllegalArgumentException iae) {
+            result = true;
+        }
+        assertTrue(result);
+    }
+
         @Test (timeout = TIMEOUT)
         public void testUnselectedDate() throws Exception {
 
@@ -183,12 +253,17 @@ public class IsValidDateTest {
                         isValidDate("March", "17", "1900", "04", "00" ));
         }
 
+
+
     //=============================================================================================================================
     /* isValidDate() Method from DateRangeActivity */
 
         private boolean isValidDate(String selMonth, String selDay,
                                     String selYear, String selHour,
                                     String selMin) {
+            if ((selMonth == null) || (selYear == null) || (selDay == null) || (selHour == null) || (selMin == null)) {
+                throw new IllegalArgumentException();
+            }
             if ("Month".equals(selMonth)) {
     //            errorMsg.setText("Select a month");
                 return false;

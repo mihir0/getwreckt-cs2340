@@ -20,7 +20,7 @@ public class DateGetMeridiemHourTest {
     @Test
     public void testAMHours() {
         for (int hour = 1; hour <= 12; hour++) {
-            Date date = new Date(2000, 10, 10, hour, 10, false);
+            Date date = new Date(10, 10, 2000, hour, 10, false);
             Assert.assertEquals(hour, date.getMeridiemHour());
         }
     }
@@ -30,7 +30,7 @@ public class DateGetMeridiemHourTest {
     @Test
     public void testPMHours() {
         for (int hour = 1; hour <= 12; hour++) {
-            Date date = new Date(2000, 10, 10, hour, 10, true);
+            Date date = new Date(10, 10, 2000, hour, 10, true);
             Assert.assertEquals(hour, date.getMeridiemHour());
         }
     }
@@ -41,7 +41,7 @@ public class DateGetMeridiemHourTest {
     public void testAMHoursWithMinutes() {
         for (int hour = 1; hour <= 12; hour++) {
             for (int minute = 0; minute <= 59; minute++) {
-                Date date = new Date(2000, 10, 10, hour, minute, false);
+                Date date = new Date(10, 10, 2000, hour, minute, false);
                 Assert.assertEquals(hour, date.getMeridiemHour());
             }
         }
@@ -53,7 +53,7 @@ public class DateGetMeridiemHourTest {
     public void testPMHoursWithMinutes() {
         for (int hour = 1; hour <= 12; hour++) {
             for (int minute = 0; minute <= 59; minute++) {
-                Date date = new Date(2000, 10, 10, hour, minute, true);
+                Date date = new Date(10, 10, 2000, hour, minute, true);
                 Assert.assertEquals(hour, date.getMeridiemHour());
             }
         }
