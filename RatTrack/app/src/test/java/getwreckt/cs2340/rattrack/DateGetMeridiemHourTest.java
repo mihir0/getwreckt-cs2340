@@ -11,7 +11,7 @@ import getwreckt.cs2340.rattrack.model.Date;
 
 public class DateGetMeridiemHourTest {
 
-    /*
+    /**
     Checks all hours from times 12:00 AM up to 11:59 AM.
     Other private data of the Date class (month, year, and day) are irrelevant to Date.getMeridiemHour()
      */
@@ -22,7 +22,7 @@ public class DateGetMeridiemHourTest {
             Assert.assertEquals(hour, date.getMeridiemHour());
         }
     }
-    /*
+    /**
     Checks all hours from times 12:00 PM up to 11:59 PM.
      */
     @Test
@@ -32,7 +32,7 @@ public class DateGetMeridiemHourTest {
             Assert.assertEquals(hour, date.getMeridiemHour());
         }
     }
-    /*
+    /**
     Checks all AM hours with all possible minutes (0 - 59 minutes)
      */
     @Test
@@ -44,7 +44,7 @@ public class DateGetMeridiemHourTest {
             }
         }
     }
-    /*
+    /**
     Checks all PM hours with all possible minutes (0 - 59 minutes)
      */
     @Test
@@ -57,7 +57,7 @@ public class DateGetMeridiemHourTest {
         }
     }
 
-    /*
+    /**
     Checks that getMeridiemHour() still works for AM hours
     after a date object has been created and setHour() has been called.
      */
@@ -72,7 +72,7 @@ public class DateGetMeridiemHourTest {
             Assert.assertEquals(i, dates.get(i - 1).getMeridiemHour());
         }
     }
-    /*
+    /**
     Checks that getMeridiemHour() still works for PM hours
     after a date object has been created and setHour() has been called.
      */
