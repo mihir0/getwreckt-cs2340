@@ -2,6 +2,7 @@ package getwreckt.cs2340.rattrack;
 
 import org.junit.Assert;
 import org.junit.Test;
+import java.lang.IllegalArgumentException;
 
 import getwreckt.cs2340.rattrack.model.Date;
 
@@ -117,6 +118,16 @@ public class DateCompareToTest {
     @Test
     public void testDateSameDate() {
         Date d1 = new Date("9/2/2017 12:01:01 PM");
+        Date d2 = new Date("9/2/2017 12:01:01 PM");
+        Assert.assertTrue(String.format("%d, should be 0", d2.compareTo(d1)), d2.compareTo(d1) == 0);
+    }
+
+    /**
+     * Tests whether a null date passed into the function returns an IllegalArgumentException
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testDateNullDate() {
+        Date d1 = null;
         Date d2 = new Date("9/2/2017 12:01:01 PM");
         Assert.assertTrue(String.format("%d, should be 0", d2.compareTo(d1)), d2.compareTo(d1) == 0);
     }
