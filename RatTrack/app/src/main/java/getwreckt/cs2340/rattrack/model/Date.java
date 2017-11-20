@@ -161,9 +161,9 @@ public class Date implements Comparable<Date>, Parcelable {
      * @param hour hour in int
      */
     public final void setHour(int hour) {
-        if (isPM) {
+        if (isPM && (hour != 12)) {
             this.hour = hour + 12;
-        } else if (hour == 12){// means AM
+        } else if (!isPM && hour == 12){
             this.hour = 0;
         } else {
             this.hour = hour;
@@ -273,8 +273,9 @@ public class Date implements Comparable<Date>, Parcelable {
         return dateChainedComparator.compare(other, this);
     }
 
-    private int getMeridiemHour() {
+    public int getMeridiemHour() {
         if (isPM) {
+            if (hour == 12) {return 12; }
             return hour - 12;
         } else {
             if (hour == 0) { return 12; }
