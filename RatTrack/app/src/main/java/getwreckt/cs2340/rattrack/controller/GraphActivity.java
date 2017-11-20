@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.github.mikephil.charting.components.XAxis;
-import com.google.android.gms.vision.text.Line;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,18 +26,14 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 import getwreckt.cs2340.rattrack.R;
-import getwreckt.cs2340.rattrack.model.Date;
 import getwreckt.cs2340.rattrack.model.Model;
 import getwreckt.cs2340.rattrack.model.RatSighting;
-import getwreckt.cs2340.rattrack.model.SightingManager;
-import getwreckt.cs2340.rattrack.model.User;
 import getwreckt.cs2340.rattrack.model.Date;
 import getwreckt.cs2340.rattrack.model.SightingManager;
 
@@ -47,14 +41,11 @@ public class GraphActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDataRef;
-    private EditText startDate;
-    private EditText endDate;
-    private Button newGraph;
     private LineChart lineChart;
     private String[] xAxisIntervals = {};
     private String sortBy = "";
-    private HashMap<Integer, Integer> dateToCountMap = new HashMap<>();
-    List<String> intervalList = new ArrayList<>();
+    private final HashMap<Integer, Integer> dateToCountMap = new HashMap<>();
+    private List<String> intervalList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +54,10 @@ public class GraphActivity extends AppCompatActivity {
         mDataRef = FirebaseDatabase.getInstance().getReference();
         lineChart = (LineChart) findViewById(R.id.chart);
 
-        startDate = (EditText) findViewById(R.id.start_date);
-        endDate = (EditText) findViewById(R.id.end_date);
+        EditText startDate = (EditText) findViewById(R.id.start_date);
+        EditText endDate = (EditText) findViewById(R.id.end_date);
 
-        newGraph = (Button) findViewById(R.id.new_graph);
+        Button newGraph = (Button) findViewById(R.id.new_graph);
 
         getGraphReady();
 
@@ -80,18 +71,7 @@ public class GraphActivity extends AppCompatActivity {
         });
     }
 
-
-    /**
-     * Calls DateRangeActivity to set startDate and endDate
-     */
-    public void getDateRange() {
-        Model.viewToGoTo = "Graph";
-        Intent toDateRange = new Intent(GraphActivity.this,
-                DateRangeActivity.class);
-        startActivity(toDateRange);
-    }
-
-    public void getGraphReady() {
+    private void getGraphReady() {
         mDataRef.child("ratsightings").addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -136,7 +116,7 @@ public class GraphActivity extends AppCompatActivity {
                     startTime += beginSecond;
 
 
-                    if (endDate - startDate >= yearPos) {
+                    if ((endDate - startDate) >= yearPos) {
                         //count back from end year by month
                         sortBy = "months";
                         Log.e("List", "got here 2");
@@ -147,7 +127,7 @@ public class GraphActivity extends AppCompatActivity {
                             int dateKey = (j * monPos) + (i * yearPos);
                             dateToCountMap.put(dateKey, 0);
                             intervalList.add("" + counter);
-                            if (i == endingYear && j == endingMonth) {
+                            if ((i == endingYear) && (j == endingMonth)) {
                                 j = 12;
                             } else if (j == 12) {
                                 i++;
@@ -155,11 +135,9 @@ public class GraphActivity extends AppCompatActivity {
                             }
                             counter++;
                         }
-                    } else if (endDate - startDate >= monPos) {
+                    } else if ((endDate - startDate) >= monPos) {
                         //count back from end month
-                        int endMonth = endingMonth;
-                        int startMonth =  beginMonth;
-                        if (startMonth - endMonth == 11) {
+                        if ((beginMonth - endingMonth) == 11) {
                             sortBy = "days";
                             int y = beginYear;
                             int m = beginMonth;
@@ -168,10 +146,10 @@ public class GraphActivity extends AppCompatActivity {
                                 int dateKey = (m * monPos) + (y * yearPos) + j;
                                 dateToCountMap.put(dateKey, 0);
                                 intervalList.add("" +  counter);
-                                if (m == endingMonth && j == endingDate
-                                        && y == endingYear) {
+                                if ((m == endingMonth) && (j == endingDate)
+                                        && (y == endingYear)) {
                                     j = 32;
-                                } else if (j == 31 && m == 12) {
+                                } else if ((j == 31) && (m == 12)) {
                                     y++;
                                     m = 1;
                                     j = 1;
@@ -192,10 +170,10 @@ public class GraphActivity extends AppCompatActivity {
                                 int dateKey = (m * monPos) + (y * yearPos);
                                 dateToCountMap.put(dateKey, 0);
                                 intervalList.add("" + counter);
-                                if (m == endingMonth && j == endingDate
-                                        && y == endingYear) {
+                                if ((m == endingMonth) && (j == endingDate)
+                                        && (y == endingYear)) {
                                     j = 32;
-                                } else if (j == 31 && m == 12) {
+                                } else if ((j == 31) && (m == 12)) {
                                     y++;
                                     m = 1;
                                     j = 1;
@@ -208,7 +186,7 @@ public class GraphActivity extends AppCompatActivity {
                                 counter++;
                             }
                         }
-                    } else if (endDate - startDate >= 1) {
+                    } else if ((endDate - startDate) >= 1) {
                         //count back from end day
                         sortBy = "days";
                         int y = beginYear;
@@ -218,10 +196,10 @@ public class GraphActivity extends AppCompatActivity {
                             int dateKey = (m * monPos) + (y * yearPos) + j;
                             dateToCountMap.put(dateKey, 0);
                             intervalList.add("" + counter);
-                            if (m == endingMonth && j == endingDate
-                                    && y == endingYear) {
+                            if ((m == endingMonth) && (j == endingDate)
+                                    && (y == endingYear)) {
                                 j = 32;
-                            } else if (j == 31 && m == 12) {
+                            } else if ((j == 31) && (m == 12)) {
                                 y++;
                                 m = 1;
                                 j = 1;
@@ -258,19 +236,18 @@ public class GraphActivity extends AppCompatActivity {
 
                         Log.e("List", "" + dateToInspect);
 
-                        if (dateToInspect >= startDate && dateToInspect <= endDate) {
+                        if ((dateToInspect >= startDate) && (dateToInspect <= endDate)) {
                             Log.e("List", "" + postSnapshot.getValue(RatSighting.class));
-                            if (sortBy.equals("years") || sortBy.equals("months")) {
+                            if ("years".equals(sortBy) || "months".equals(sortBy)) {
                                 int monthKey = (dateToInspect / monPos) * monPos;
                                 if (dateToCountMap.get(monthKey) != null) {
                                     int count = dateToCountMap.get(monthKey);
                                     dateToCountMap.put(monthKey, count + 1);
                                 }
-                            } else if (sortBy.equals("days")) {
-                                int dayKey = dateToInspect;
-                                if (dateToCountMap.get(dayKey) != null) {
-                                    int count = dateToCountMap.get(dayKey);
-                                    dateToCountMap.put(dayKey, count + 1);
+                            } else if ("days".equals(sortBy)) {
+                                if (dateToCountMap.get(dateToInspect) != null) {
+                                    int count = dateToCountMap.get(dateToInspect);
+                                    dateToCountMap.put(dateToInspect, count + 1);
                                 }
                             }
                         }
@@ -301,10 +278,10 @@ public class GraphActivity extends AppCompatActivity {
     }
 
     private int daysForMonAndYear(int mon, int year) {
-        if (mon == 1 || mon == 3 || mon == 5 || mon == 7 || mon == 8 || mon == 10 || mon == 12) {
+        if ((mon == 1) || (mon == 3) || (mon == 5) || (mon == 7) || (mon == 8) || (mon == 10) || (mon == 12)) {
             return 31;
         } else if (mon == 2) {
-            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+            if ((((year % 4) == 0) && ((year % 100) != 0)) || ((year % 400) == 0)) {
                 return 29;
             } else {
                 return 28;
@@ -340,18 +317,12 @@ public class GraphActivity extends AppCompatActivity {
 
         private String[] mValues;
 
-        public MyAxisValueFormatter(String[] values) {
-            this.mValues = values;
-        }
-
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
             // "value" represents the position of the label on the axis (x or y)
             return mValues[(int) value];
         }
 
-        /** this is only needed if numbers are returned, else return 0 */
-        public int getDecimalDigits() { return 0; }
     }
 
 

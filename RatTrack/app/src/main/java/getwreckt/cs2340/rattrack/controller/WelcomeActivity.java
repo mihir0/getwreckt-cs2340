@@ -5,32 +5,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.util.Log;
-
-import java.io.InputStream;
-import java.util.HashMap;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import getwreckt.cs2340.rattrack.R;
-import getwreckt.cs2340.rattrack.model.User;
-import getwreckt.cs2340.rattrack.model.Model;
 
 /**
- * Created by maya v on 9/21/2017.
+ * First activity user sees. Directs to welcome or registration
+ * Author: Maya Viust
  */
 
 public class WelcomeActivity extends AppCompatActivity {
-
-    private Button loginBut;
-    private Button registerBut;
-    private FirebaseAuth mAuth;
-    private DatabaseReference mDataRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +26,8 @@ public class WelcomeActivity extends AppCompatActivity {
         initLogin();
         initRegister();
 
-        mAuth = FirebaseAuth.getInstance();
-        mDataRef = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        DatabaseReference mDataRef = FirebaseDatabase.getInstance().getReference();
         if (mAuth.getCurrentUser() != null) {
             Intent toInAppScreen = new Intent(WelcomeActivity.this,
                     InAppActivity.class);
@@ -55,8 +42,8 @@ public class WelcomeActivity extends AppCompatActivity {
     /**
      * Creates the login button.
      */
-    public void initLogin() {
-        loginBut = (Button) findViewById(R.id.login);
+    private void initLogin() {
+        Button loginBut = (Button) findViewById(R.id.login);
         loginBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,8 +57,8 @@ public class WelcomeActivity extends AppCompatActivity {
     /**
      * Creates the register button.
      */
-    public void initRegister() {
-        registerBut = (Button) findViewById(R.id.register);
+    private void initRegister() {
+        Button registerBut = (Button) findViewById(R.id.register);
         registerBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -36,8 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText userField;
     private EditText fullNameField;
     private TextInputEditText passField;
-    private Button registerButn;
-    private Button cancelButn;
     private Spinner userTypeSpinner;
     private FirebaseAuth mAuth;
     private DatabaseReference mDataRef;
@@ -61,11 +59,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Set up the adapter to display the user types in the spinner
 
-        ArrayList<String> userTypes = new ArrayList<String>();
+        ArrayList<String> userTypes = new ArrayList<>();
         userTypes.add("User");
         userTypes.add("Admin");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, userTypes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, userTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userTypeSpinner.setAdapter(adapter);
 
@@ -76,10 +74,10 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * Adds a new user.
      */
-    public void onRegPressed() {
+    private void onRegPressed() {
         Log.d("Register", "Register new user");
 
-        registerButn = (Button) findViewById(R.id.register);
+        Button registerButn = (Button) findViewById(R.id.register);
         registerButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
      * @param u user who is registering
      * @param pass password of the user
      */
-    public void createUser(final User u, final String pass) {
+    private void createUser(final User u, final String pass) {
         mAuth.createUserWithEmailAndPassword(u.getUserName(), pass)
                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -122,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
      * used to change the user app to in app activity
      * @param currUser valid registered user
      */
-    public void updateUI(FirebaseUser currUser) {
+    private void updateUI(FirebaseUser currUser) {
         Intent toInAppScreen = new Intent(RegisterActivity.this,
                 InAppActivity.class);
         startActivity(toInAppScreen);
@@ -131,8 +129,8 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * Cancels registration
      */
-    public void onCancelPressed() {
-        cancelButn = (Button) findViewById(R.id.cancel);
+    private void onCancelPressed() {
+        Button cancelButn = (Button) findViewById(R.id.cancel);
         cancelButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +147,6 @@ public class RegisterActivity extends AppCompatActivity {
      * @return whether {@code user} and {@code pass} are not empty strings
      */
     public boolean isValidUserPass(String user, String pass) {
-        return !user.equals("") && !pass.equals("");
+        return !"".equals(user) && !"".equals(pass);
     }
 }

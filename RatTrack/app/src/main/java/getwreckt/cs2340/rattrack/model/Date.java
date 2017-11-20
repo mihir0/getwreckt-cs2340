@@ -163,7 +163,7 @@ public class Date implements Comparable<Date>, Parcelable {
     public final void setHour(int hour) {
         if (isPM && (hour != 12)) {
             this.hour = hour + 12;
-        } else if (!isPM && hour == 12){
+        } else if (!isPM && (hour == 12)){
             this.hour = 0;
         } else {
             this.hour = hour;
@@ -234,7 +234,7 @@ public class Date implements Comparable<Date>, Parcelable {
     /**
      * Setter method of meridiem
      */
-    private final void setMeridiem() {
+    private void setMeridiem() {
         this.meridiem = isPM ? "PM" : "AM";
         generateSystemString();
     }
@@ -343,6 +343,6 @@ public class Date implements Comparable<Date>, Parcelable {
      * @return String representation of date and time
      */
     public String toString() {
-        return toString == null ? getCalendarDate() + " " + getTime() : toString;
+        return (toString == null) ? (getCalendarDate() + " " + getTime()) : toString;
     }
 }

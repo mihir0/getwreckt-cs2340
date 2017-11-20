@@ -25,7 +25,7 @@ import getwreckt.cs2340.rattrack.model.SightingManager;
 
 public class DateRangeActivity extends AppCompatActivity {
 
-    static DateRangeActivity activity;
+    private static DateRangeActivity activity;
     private Spinner startMonth;
     private Spinner startDay;
     private EditText startYear;
@@ -38,24 +38,7 @@ public class DateRangeActivity extends AppCompatActivity {
     private Spinner endHour;
     private Spinner endMin;
     private CheckBox endisPM;
-    private Button continueButton;
     private TextView errorMsg;
-    private final Map<String, String> months = new HashMap<>();
-
-
-    private static class MonthComparator implements Comparator<String> {
-        private Map<String, String> map;
-
-        public MonthComparator(HashMap<String, String> map) {
-            this.map = map;
-        }
-        @Override
-        public int compare(String o1, String o2) {
-            Integer i = Integer.parseInt(map.get(o1));
-            Integer j = Integer.parseInt(map.get(o2));
-            return i.compareTo(j);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +118,7 @@ public class DateRangeActivity extends AppCompatActivity {
             mins.add(String.format("%02d", i));
         }
 
-        ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> monthAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, months);
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         startMonth.setAdapter(monthAdapter);
@@ -161,8 +144,8 @@ public class DateRangeActivity extends AppCompatActivity {
 
         startMin.setAdapter(minAdapter);
         endMin.setAdapter(minAdapter);
-        
-        continueButton = (Button) findViewById(R.id.continue_button);
+
+        Button continueButton = (Button) findViewById(R.id.continue_button);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,13 +176,13 @@ public class DateRangeActivity extends AppCompatActivity {
                             endisPM.isChecked());
 
                     if (isValidRange(start, end)) {
-                        if (Model.viewToGoTo.equals("Graph")) {
+                        if ("Graph".equals(Model.viewToGoTo)) {
                             SightingManager.startGraphDate = start;
                             SightingManager.endGraphDate = end;
                             Intent toGraph = new Intent(DateRangeActivity.this,
                                     GraphActivity.class);
                             startActivity(toGraph);
-                        } else if (Model.viewToGoTo.equals("Map")) {
+                        } else if ("Map".equals(Model.viewToGoTo)) {
                             SightingManager.startMapDate = start;
                             SightingManager.endMapDate = end;
                             Intent toMap = new Intent(DateRangeActivity.this,
@@ -214,25 +197,25 @@ public class DateRangeActivity extends AppCompatActivity {
 
     }
 
-    public boolean isValidDate(String selMonth, String selDay,
-                                       String selYear, String selHour,
-                                       String selMin) {
-        if (selMonth.equals("Month")) {
+    private boolean isValidDate(String selMonth, String selDay,
+                                String selYear, String selHour,
+                                String selMin) {
+        if ("Month".equals(selMonth)) {
             errorMsg.setText("Select a month");
             return false;
         }
 
-        if (selDay.equals("Day")) {
+        if ("Day".equals(selDay)) {
             errorMsg.setText("Select a day");
             return false;
         }
 
-        if (selHour.equals("Hour")) {
+        if ("Hour".equals(selHour)) {
             errorMsg.setText("Select an hour");
             return false;
         }
 
-        if (selMin.equals("Minute")) {
+        if ("Minute".equals(selMin)) {
             errorMsg.setText("Select a minute");
             return false;
         }
@@ -269,9 +252,9 @@ public class DateRangeActivity extends AppCompatActivity {
         monthDays.put("November", daysPerMonth[10]);
         monthDays.put("December", daysPerMonth[11]);
 
-        if (selMonth.equals("February")) {
+        if ("February".equals(selMonth)) {
             if (day > daysPerMonth[1]) {
-                if ((day == daysPerMonth[1] + 1) && (year % 4 == 0)) {
+                if ((day == (daysPerMonth[1] + 1)) && ((year % 4) == 0)) {
                     return true;
                 } else {
                     errorMsg.setText("Invalid day for selected month");
@@ -293,13 +276,9 @@ public class DateRangeActivity extends AppCompatActivity {
         if ((start == null) || (end == null)) {
             throw new java.lang.IllegalArgumentException("One of the inputted dates was null");
         }
-        DateChainedComparator comp = new DateChainedComparator();
-        if (comp.compare(start, end) < 0) {
-            //errorMsg.setText("End date must come after start date");
-            System.out.println(comp.compare(start, end));
-            return false;
-        }
-        return true;
+        Comparator comp = new DateChainedComparator();
+        //noinspection unchecked
+        return comp.compare(start, end) >= 0;
     }
 
     public static DateRangeActivity getInstance(){

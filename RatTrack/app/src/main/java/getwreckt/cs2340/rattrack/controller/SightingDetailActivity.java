@@ -15,17 +15,6 @@ import getwreckt.cs2340.rattrack.model.RatSighting;
  * Detail Sighting class
  */
 public class SightingDetailActivity extends AppCompatActivity {
-    //widgets for binding
-    private TextView uniqueKeyField;
-    private TextView dateField;
-    private TextView addrField;
-    private TextView cityField;
-    private TextView zipField;
-    private TextView boroughField;
-    private TextView coordinateField;
-    private Button doneBtn;
-
-    private RatSighting sighting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +22,15 @@ public class SightingDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sighting_detail);
 
         //grab dialog widgets
-        uniqueKeyField = (TextView) findViewById(R.id.unique_key);
-        dateField = (TextView) findViewById(R.id.date);
-        addrField = (TextView) findViewById(R.id.address);
-        cityField = (TextView) findViewById(R.id.city);
-        zipField = (TextView) findViewById(R.id.zip);
-        boroughField = (TextView) findViewById(R.id.borough);
-        coordinateField = (TextView) findViewById(R.id.coordinates);
+        TextView uniqueKeyField = (TextView) findViewById(R.id.unique_key);
+        TextView dateField = (TextView) findViewById(R.id.date);
+        TextView addrField = (TextView) findViewById(R.id.address);
+        TextView cityField = (TextView) findViewById(R.id.city);
+        TextView zipField = (TextView) findViewById(R.id.zip);
+        TextView boroughField = (TextView) findViewById(R.id.borough);
+        TextView coordinateField = (TextView) findViewById(R.id.coordinates);
 
-        doneBtn = (Button) findViewById(R.id.done_button);
+        Button doneBtn = (Button) findViewById(R.id.done_button);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,12 +40,12 @@ public class SightingDetailActivity extends AppCompatActivity {
             }
         });
 
-        sighting = (RatSighting) getIntent().getParcelableExtra("SIGHTING");
+        RatSighting sighting = getIntent().getParcelableExtra("SIGHTING");
 
         //set details
         uniqueKeyField.setText(sighting.getUniqueKey());
         dateField.setText("Date: " + sighting.getDate());
-        if (sighting.getLocation().getAddress().equals("")) {
+        if ("".equals(sighting.getLocation().getAddress())) {
             addrField.setText("N/A");
         } else {
             addrField.setText(sighting.getLocation().getAddress());

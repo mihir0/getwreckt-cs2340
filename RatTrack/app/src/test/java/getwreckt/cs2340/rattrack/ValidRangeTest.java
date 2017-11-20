@@ -1,5 +1,7 @@
 package getwreckt.cs2340.rattrack;
 
+import android.support.annotation.Nullable;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,12 +15,14 @@ import getwreckt.cs2340.rattrack.model.Date;
  */
 
 public class ValidRangeTest {
+    @Nullable
     private static Date null1;
+    @Nullable
     private static Date null2;
     private static Date d1;
     private static Date d2;
     private static Date d3;
-    private static DateRangeActivity dra = new DateRangeActivity();
+    private static final DateRangeActivity dra = new DateRangeActivity();
 
     /**
      * sets up all the dates used for testing

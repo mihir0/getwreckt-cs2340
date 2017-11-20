@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="getwreckt.cs2340.rattrack.controller.LoginActivity">
+    tools:context="getwreckt.cs2340.rattrack.controller.LoginActivity"
+    tools:keep="@layout/old_login">
 
     <!-- Login progress -->
     <ScrollView
@@ -67,7 +68,7 @@
             <Button
                 android:id="@+id/login_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="Login" />
 

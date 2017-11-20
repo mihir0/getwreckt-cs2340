@@ -28,7 +28,7 @@ public enum LocationType {
     UNKNOWN ("Unknown"),
     NULL ("");
 
-    private String name;
+    private final String name;
 
     /**
      * Parametrized constructor of location type
