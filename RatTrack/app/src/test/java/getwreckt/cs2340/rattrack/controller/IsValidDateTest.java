@@ -81,7 +81,7 @@ public class IsValidDateTest {
                     isValidDate("January", "01", "1899", "12", "00"));
         }
         //===============================================================================================================================
-        /* Testing for invalid dates of February (tested with leap and non-leap years).
+        /* Testing for invalid dates of February (tested with non-leap years).
            isValidDate should return false in each case. */
 
         @Test (timeout = TIMEOUT)
@@ -97,6 +97,10 @@ public class IsValidDateTest {
             assertFalse("Expected false, returned: " +
                             ((isValidDate("February", "29", "2017", "12", "59")) ? "true" : "false"),
                     isValidDate("February", "29", "2017", "12", "59"));
+
+            assertFalse("Expected false, returned: " +
+                            ((isValidDate("February", "29", "2015", "12", "59")) ? "true" : "false"),
+                    isValidDate("February", "29", "2015", "12", "59"));
         }
         //===============================================================================================================================
         /* Testing for valid dates of February (tested with leap and non-leap years).
@@ -110,6 +114,10 @@ public class IsValidDateTest {
 
             assertTrue("Expected true, returned: " +
                             ((isValidDate("February", "29", "2016", "12", "00")) ? "true" : "false"),
+                    isValidDate("February", "29", "2016", "12", "00"));
+
+            assertTrue("Expected true, returned: " +
+                            ((isValidDate("February", "29", "2012", "12", "00")) ? "true" : "false"),
                     isValidDate("February", "29", "2016", "12", "00"));
         }
         //===============================================================================================================================
