@@ -266,6 +266,7 @@ public class Date implements Comparable<Date>, Parcelable {
 
     public int getMeridiemHour() {
         if (isPM) {
+            if (hour == 12) {return 12; }
             return hour - 12;
         } else {
             if (hour == 0) { return 12; }
