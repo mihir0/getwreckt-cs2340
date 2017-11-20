@@ -1,4 +1,4 @@
-package getwreckt.cs2340.rattrack.controller;
+package getwreckt.cs2340.rattrack;
 
 import android.widget.TextView;
 
