@@ -1,11 +1,7 @@
 package getwreckt.cs2340.rattrack.model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Manages rat sightings: filters, sorts, creates, deletes.

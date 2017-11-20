@@ -1,28 +1,22 @@
 package getwreckt.cs2340.rattrack.controller;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import getwreckt.cs2340.rattrack.R;
-import getwreckt.cs2340.rattrack.model.Date;
 import getwreckt.cs2340.rattrack.model.Model;
 import getwreckt.cs2340.rattrack.model.RatSighting;
 import getwreckt.cs2340.rattrack.model.SightingManager;
-import getwreckt.cs2340.rattrack.model.User;
 
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +32,6 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
     private GoogleMap map;
     private FirebaseAuth mAuth;
     private DatabaseReference mDataRef;
-    private Button updateMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +40,7 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
 
         setContentView(R.layout.activity_rat_sighting_map);
 
-        updateMap = (Button) findViewById(R.id.update_map);
+        Button updateMap = (Button) findViewById(R.id.update_map);
         updateMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,8 +80,8 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         RatSighting ratSighting = ds.getValue(RatSighting.class);
                         if (isValidSighting(ratSighting)
-                                && ratSighting.getDate().compareTo(SightingManager.startMapDate) >= 0
-                                && ratSighting.getDate().compareTo(SightingManager.endMapDate) <= 0) {
+                                && (ratSighting.getDate().compareTo(SightingManager.startMapDate) >= 0)
+                                && (ratSighting.getDate().compareTo(SightingManager.endMapDate) <= 0)) {
                             try {
                                 LatLng latLng = new LatLng(Double.parseDouble(ratSighting.getLocation().getLatitude()),
                                         Double.parseDouble(ratSighting.getLocation().getLongitude()));
@@ -96,7 +89,7 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
                                 map.addMarker(new MarkerOptions().position(latLng).title(ratSighting.toString()).snippet(snippet));
                                 //map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             } catch (Exception e) {
-
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -112,7 +105,7 @@ public class RatSightingMapActivity extends FragmentActivity implements OnMapRea
     }
 
     private boolean isValidSighting(RatSighting ratSighting) {
-        return !(ratSighting.getLocation().getLatitude().equals("")
-                || ratSighting.getLocation().getLongitude().equals(""));
+        return !("".equals(ratSighting.getLocation().getLatitude())
+                || "".equals(ratSighting.getLocation().getLongitude()));
     }
 }

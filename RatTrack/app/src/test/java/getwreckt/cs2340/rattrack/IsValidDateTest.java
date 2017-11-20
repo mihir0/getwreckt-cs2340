@@ -1,7 +1,5 @@
 package getwreckt.cs2340.rattrack;
 
-import android.widget.TextView;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -188,25 +186,25 @@ public class IsValidDateTest {
     //=============================================================================================================================
     /* isValidDate() Method from DateRangeActivity */
 
-        public boolean isValidDate(String selMonth, String selDay,
-                String selYear, String selHour,
-                String selMin) {
-            if (selMonth.equals("Month")) {
+        private boolean isValidDate(String selMonth, String selDay,
+                                    String selYear, String selHour,
+                                    String selMin) {
+            if ("Month".equals(selMonth)) {
     //            errorMsg.setText("Select a month");
                 return false;
             }
 
-            if (selDay.equals("Day")) {
+            if ("Day".equals(selDay)) {
     //            errorMsg.setText("Select a day");
                 return false;
             }
 
-            if (selHour.equals("Hour")) {
+            if ("Hour".equals(selHour)) {
     //            errorMsg.setText("Select an hour");
                 return false;
             }
 
-            if (selMin.equals("Minute")) {
+            if ("Minute".equals(selMin)) {
     //            errorMsg.setText("Select a minute");
                 return false;
             }
@@ -243,23 +241,14 @@ public class IsValidDateTest {
             monthDays.put("November", daysPerMonth[10]);
             monthDays.put("December", daysPerMonth[11]);
 
-            if (selMonth.equals("February")) {
+            if ("February".equals(selMonth)) {
                 if (day > daysPerMonth[1]) {
-                    if ((day == daysPerMonth[1] + 1) && (year % 4 == 0)) {
-                        return true;
-                    } else {
-    //                    errorMsg.setText("Invalid day for selected month");
-                        return false;
-                    }
+                    //                    errorMsg.setText("Invalid day for selected month");
+                    return (day == (daysPerMonth[1] + 1)) && ((year % 4) == 0);
                 }
             }
 
-            if (Integer.parseInt(selDay) > monthDays.get(selMonth)) {
-    //            errorMsg.setText("Invalid day for selected month");
-                return false;
-            }
-
-            return true;
+            return Integer.parseInt(selDay) <= monthDays.get(selMonth);
         }
 
 

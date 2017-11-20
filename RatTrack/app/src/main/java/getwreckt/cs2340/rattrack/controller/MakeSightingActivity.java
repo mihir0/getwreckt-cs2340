@@ -16,7 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import getwreckt.cs2340.rattrack.R;
 import getwreckt.cs2340.rattrack.model.Model;
@@ -35,18 +34,16 @@ public class MakeSightingActivity extends AppCompatActivity {
     private EditText zipField;
     private Spinner boroughSpinner;
     private Spinner typeLocationSpinner;
-    private TextView coordinates;
     private EditText latitudeField;
-    private EditText longtudeField;
+    private EditText longitudeField;
     private Button makeBtn;
     private RatSighting _sighting;
     private DatabaseReference mDataRef;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mDataRef = FirebaseDatabase.getInstance().getReference();
 
         super.onCreate(savedInstanceState);
@@ -61,9 +58,9 @@ public class MakeSightingActivity extends AppCompatActivity {
         boroughSpinner = (Spinner) findViewById(R.id.borough_input);
         typeLocationSpinner = (Spinner) findViewById(R.id.typeLocation_input);
 
-        coordinates = (TextView) findViewById(R.id.coordinates_title);// just the "Coordinates" before tha lat/long input
+        TextView coordinates = (TextView) findViewById(R.id.coordinates_title);
         latitudeField = (EditText) findViewById(R.id.latitude_input);
-        longtudeField = (EditText) findViewById(R.id.longitude_input);
+        longitudeField = (EditText) findViewById(R.id.longitude_input);
 
         makeBtn = (Button) findViewById(R.id.make_button);
 
@@ -115,7 +112,7 @@ public class MakeSightingActivity extends AppCompatActivity {
     /**
      * Makes a new sighting
      */
-    public void onMakeButtonPressed() {
+    private void onMakeButtonPressed() {
         Log.d("Register", "Register new user");
 
         makeBtn.setOnClickListener(new View.OnClickListener() {
@@ -130,12 +127,12 @@ public class MakeSightingActivity extends AppCompatActivity {
                 String city = cityField.getText().toString();
                 String zip = zipField.getText().toString();
                 String latitude = latitudeField.getText().toString();
-                String longitude = longtudeField.getText().toString();
+                String longitude = longitudeField.getText().toString();
 
                 String borough = boroughSpinner.getSelectedItem().toString();
                 String typeLocation = typeLocationSpinner.getSelectedItem().toString();
 
-                if (!isValidSighting(date, typeLocation, zip, address, city, borough, latitude,
+                if (EmptySighting(date, typeLocation, zip, address, city, borough, latitude,
                         longitude)) {
                     dateField.setError("Must fill all fields with valid sighting details.");
                 } else {
@@ -169,13 +166,13 @@ public class MakeSightingActivity extends AppCompatActivity {
      * @param typeLocation type location of the sighting
      * @param latitude latitude of the sighting
      * @param longitude longitude of the sighting
-     * @return boolena result of the sighting if it is valid or not
+     * @return boolean result of the sighting if it is valid or not
      */
-    public boolean isValidSighting(String date, String address, String city, String zip,
+    public boolean EmptySighting(String date, String address, String city, String zip,
                                    String borough, String typeLocation, String latitude,
                                    String longitude) {
-        return !date.equals("") && !address.equals("")
-                && !address.equals("") && !borough.equals("") && !typeLocation.equals("")
-                && !latitude.equals("") && !longitude.equals("");
+        return "".equals(date) || "".equals(address)
+                || "".equals(address) || "".equals(borough) || "".equals(typeLocation)
+                || "".equals(latitude) || "".equals(longitude);
     }
 }

@@ -56,7 +56,7 @@ public class TestSetHourMethod {
         // This is the method I am currently testing: setHour(int)
         dateUsedToFilter.setHour(hour);
 
-        assertEquals(00, dateUsedToFilter.getHour());
+        assertEquals(0, dateUsedToFilter.getHour());
     }
 
     /**
@@ -76,7 +76,7 @@ public class TestSetHourMethod {
 
         dateUsedToFilter.setHour(hour);
 
-        assertEquals(07, dateUsedToFilter.getHour());
+        assertEquals(7, dateUsedToFilter.getHour());
     }
 
     /**

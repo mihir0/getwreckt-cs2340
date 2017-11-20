@@ -13,6 +13,7 @@
         android:inputType="date"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
+        android:paddingRight="1dp"
         android:paddingTop="10dp" />
 
     <EditText
@@ -24,6 +25,7 @@
         android:inputType="text"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
+        android:paddingRight="1dp"
         android:paddingTop="10dp" />
 
     <EditText
@@ -35,6 +37,7 @@
         android:inputType="text"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
+        android:paddingRight="1dp"
         android:paddingTop="10dp" />
 
     <EditText
@@ -45,6 +48,7 @@
         android:inputType="text"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
+        android:paddingRight="1dp"
         android:paddingTop="10dp"
         android:textSize="18sp" />
 
@@ -56,6 +60,7 @@
         android:inputType="number"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
+        android:paddingRight="1dp"
         android:paddingTop="10dp"
         android:textSize="18sp" />
 
@@ -77,6 +82,7 @@
         android:ems="10"
         android:paddingBottom="5dp"
         android:paddingLeft="5dp"
+        android:paddingRight="1dp"
         android:paddingTop="5dp"
         android:text="Coordinates"
         android:textColor="@android:color/black"
@@ -86,34 +92,30 @@
         android:id="@+id/latitude_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/make_button"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Latitude"
         android:inputType="numberDecimal"
         android:paddingBottom="20dp"
-        android:paddingLeft="5dp" />
+        android:paddingLeft="5dp"
+        android:paddingRight="1dp"/>
 
     <EditText
         android:id="@+id/longitude_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
         android:ems="10"
         android:hint="Longitude"
         android:inputType="numberDecimal"
-        android:paddingLeft="5dp" />
+        android:paddingLeft="5dp"
+        android:paddingRight="1dp"/>
 
     <Button
         android:id="@+id/make_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Make Sighting"
-        android:layout_above="@+id/longitude_input"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp" />
 
 </LinearLayout>

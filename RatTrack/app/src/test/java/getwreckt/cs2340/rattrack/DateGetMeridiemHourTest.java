@@ -7,6 +7,8 @@ package getwreckt.cs2340.rattrack;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.ArrayList;
+import java.util.List;
+
 import getwreckt.cs2340.rattrack.model.Date;
 
 public class DateGetMeridiemHourTest {
@@ -62,8 +64,8 @@ public class DateGetMeridiemHourTest {
     after a date object has been created and setHour() has been called.
      */
     @Test
-    public void testSetAMHourModifcation() {
-        ArrayList<Date> dates = new ArrayList<>();
+    public void testSetAMHourModification() {
+        List<Date> dates = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             dates.add(new Date("10/10/2017 12:00:00 AM"));
         }
@@ -77,8 +79,8 @@ public class DateGetMeridiemHourTest {
     after a date object has been created and setHour() has been called.
      */
     @Test
-    public void testSetPMHourModifcation() {
-        ArrayList<Date> dates = new ArrayList<>();
+    public void testSetPMHourModification() {
+        List<Date> dates = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             dates.add(new Date("10/10/2017 12:00:00 PM"));
         }

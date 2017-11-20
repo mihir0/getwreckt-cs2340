@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import getwreckt.cs2340.rattrack.model.Model;
-import getwreckt.cs2340.rattrack.model.RatSighting;
-import getwreckt.cs2340.rattrack.model.SightingManager;
 import getwreckt.cs2340.rattrack.model.User;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,14 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
-import org.xml.sax.DTDHandler;
-
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by maya v on 9/21/2017.
@@ -37,14 +29,9 @@ import java.util.Random;
 
 public class InAppActivity extends AppCompatActivity {
 
-    private Button logoutButn;
     private TextView text;
     private FirebaseAuth mAuth;
     private DatabaseReference mDataRef;
-    private Button startButn;
-    private Button makeSightingButn;
-    private Button mapViewBtn;
-    private Button startGraphBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +58,7 @@ public class InAppActivity extends AppCompatActivity {
         });
 
 
-
-        logoutButn = (Button) findViewById(R.id.logout);
+        Button logoutButn = (Button) findViewById(R.id.logout);
         logoutButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +66,7 @@ public class InAppActivity extends AppCompatActivity {
             }
         });
 
-        mapViewBtn = (Button) findViewById(R.id.map_view_button);
+        Button mapViewBtn = (Button) findViewById(R.id.map_view_button);
         mapViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +77,7 @@ public class InAppActivity extends AppCompatActivity {
             }
         });
 
-        startButn = (Button) findViewById(R.id.btn_start);
+        Button startButn = (Button) findViewById(R.id.btn_start);
         startButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +92,7 @@ public class InAppActivity extends AppCompatActivity {
         });
 
 
-        makeSightingButn = (Button) findViewById(R.id.make_sighting);
+        Button makeSightingButn = (Button) findViewById(R.id.make_sighting);
         makeSightingButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +103,7 @@ public class InAppActivity extends AppCompatActivity {
             }
         });
 
-        startGraphBtn = (Button) findViewById(R.id.start_graph);
+        Button startGraphBtn = (Button) findViewById(R.id.start_graph);
         startGraphBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +119,7 @@ public class InAppActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        Map<String, Object> mapSignedIn = new HashMap<String, Object>();
+        Map<String, Object> mapSignedIn = new HashMap<>();
         mapSignedIn.put("signedIn", false);
         mDataRef.child("users").child(mAuth.getCurrentUser().getUid()).updateChildren(mapSignedIn);
         mAuth.signOut();

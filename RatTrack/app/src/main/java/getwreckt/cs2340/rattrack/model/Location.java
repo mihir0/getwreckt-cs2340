@@ -45,7 +45,7 @@ public class Location implements Parcelable {
      * Getter method for zip
      * @return zip in string
      */
-    public String getZip() {
+    public CharSequence getZip() {
         return zip;
     }
 
@@ -77,7 +77,7 @@ public class Location implements Parcelable {
      * Getter method for address
      * @return string representation of address
      */
-    public String getAddress() {
+    public CharSequence getAddress() {
         return address;
     }
 
@@ -93,7 +93,7 @@ public class Location implements Parcelable {
      * Getter method for city
      * @return city of sighting
      */
-    public String getCity() {
+    public CharSequence getCity() {
         return city;
     }
 
@@ -115,7 +115,7 @@ public class Location implements Parcelable {
 
     /**
      * Setter method for borough
-     * @param borough boruough of sighting
+     * @param borough borough of sighting
      */
     public void setBorough(Borough borough) {
         this.borough = borough;
@@ -147,7 +147,7 @@ public class Location implements Parcelable {
 
     /**
      * Setter method for longitude
-     * @param longitude longitude longitde of sighting
+     * @param longitude longitude of sighting
      */
     public void setLongitude(String longitude) {
         this.longitude = longitude;
@@ -182,8 +182,10 @@ public class Location implements Parcelable {
      *
      */
     public static final Parcelable.Creator<Location> CREATOR = new Parcelable.Creator<Location>() {
+        @Override
         public Location createFromParcel (Parcel in) {return new Location(in);}
 
+        @Override
         public Location[] newArray(int size) {return new Location[size];}
     };
 
