@@ -33,6 +33,15 @@ public class IsValidDateTest {
         unselMin = "Minute";
 
     }
+    /**
+     * These tests are for the isValidDate() method in the DateRangeActivity. The
+     * purpose of the method is to check whether or not a given date is
+     * a valid date.
+     *
+     * isValidDate(String selMonth, String selDay, String selYear, String selHour, String selMin)
+     * takes in components of a date, and returns true if they are valid, and false if not
+     *
+     */
 
         @Test (timeout = TIMEOUT)
         public void testUnselectedDate() throws Exception {
