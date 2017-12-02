@@ -22,7 +22,7 @@
 		9C1A1BC91FD25D740055E3F9 /* InAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1A1BC81FD25D740055E3F9 /* InAppViewController.swift */; };
 		9C31AB8E1FD2698F0085ACE7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C31AB8D1FD2698F0085ACE7 /* LoginViewController.swift */; };
 		9C31AB901FD26A320085ACE7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C31AB8F1FD26A320085ACE7 /* RegisterViewController.swift */; };
-		9C31AB931FD274B40085ACE7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C31AB921FD274B40085ACE7 /* User.swift */; };
+		9C31AB931FD274B40085ACE7 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C31AB921FD274B40085ACE7 /* AppUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +64,7 @@
 		9C1A1BC81FD25D740055E3F9 /* InAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppViewController.swift; sourceTree = "<group>"; };
 		9C31AB8D1FD2698F0085ACE7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9C31AB8F1FD26A320085ACE7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		9C31AB921FD274B40085ACE7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9C31AB921FD274B40085ACE7 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		A40759610E5C897C4BFED321 /* Pods_RatTrackiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RatTrackiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABA03D15ADBA1926AC1121A /* Pods-RatTrackiOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatTrackiOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RatTrackiOSTests/Pods-RatTrackiOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B5954710392FE06CF602CDFE /* Pods-RatTrackiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatTrackiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RatTrackiOS/Pods-RatTrackiOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		9C31AB911FD274A70085ACE7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9C31AB921FD274B40085ACE7 /* User.swift */,
+				9C31AB921FD274B40085ACE7 /* AppUser.swift */,
 				9C0F243A1FD291E80043F8AF /* Model.swift */,
 			);
 			path = Model;
@@ -502,7 +502,7 @@
 				9C0F243B1FD291E80043F8AF /* Model.swift in Sources */,
 				9C31AB8E1FD2698F0085ACE7 /* LoginViewController.swift in Sources */,
 				9C31AB901FD26A320085ACE7 /* RegisterViewController.swift in Sources */,
-				9C31AB931FD274B40085ACE7 /* User.swift in Sources */,
+				9C31AB931FD274B40085ACE7 /* AppUser.swift in Sources */,
 				9C1468121FB506CE00B63D46 /* ViewController.swift in Sources */,
 				9C1468101FB506CE00B63D46 /* AppDelegate.swift in Sources */,
 				9C1A1BC91FD25D740055E3F9 /* InAppViewController.swift in Sources */,

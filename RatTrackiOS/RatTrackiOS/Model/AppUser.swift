@@ -8,7 +8,7 @@
 
 import Foundation
 
-class User {
+class AppUser {
     
     init(fullName:String, email:String, userType:String) {
         

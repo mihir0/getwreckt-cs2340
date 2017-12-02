@@ -9,7 +9,11 @@
 import Foundation
 
 class Model {
-    static func setCurrentUser(u:User) {
+    static func setCurrentUser(u:AppUser) {
         
+    }
+    
+    static func getCurrentUser() -> AppUser {
+        return AppUser(fullName: "", email: "", userType: "")
     }
 }

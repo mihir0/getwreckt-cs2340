@@ -8,16 +8,29 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class InAppViewController: UIViewController {
     
     var screenHeight:CGFloat!
     var screenWidth:CGFloat!
     
+    var txt:UITextView!
+    var ref:DatabaseReference!
+    var auth:Auth!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        screenWidth = UIScreen.main.bounds.size.width
-        screenHeight = UIScreen.main.bounds.size.height
+        self.auth = Auth.auth()
+        self.ref = Database.database().reference()
+        
+        self.ref.child("users").observe(.value, with: {(snapshot) in
+            //let value = snapshot.childSnapshot(forPath: auth.currentUser!.uid).value as! AppUser
+        })
+    }
+    
+    func updateUI(fbu:User) {
+        
     }
     
 }
