@@ -1,6 +1,9 @@
+'use strict';
 
-angular.module("myApp", [
-    'ngRoute', 'myApp.home'
+angular.module('ratTrack', [
+    'ngRoute',
+    'ratTrack.home' //home module
+    'ratTrack.register' //register module
 ]).
 config(['$routeProvider', function($routeProvider) {
     //Routes will be here
@@ -11,4 +14,4 @@ config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({
         redirectTo: '/home'
     });
-}])
+}]);
