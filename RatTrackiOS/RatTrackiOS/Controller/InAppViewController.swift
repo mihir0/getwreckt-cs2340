@@ -25,7 +25,7 @@ class InAppViewController: UIViewController {
         self.ref = Database.database().reference()
         
         self.ref.child("users").observe(.value, with: {(snapshot) in
-            //let value = snapshot.childSnapshot(forPath: auth.currentUser!.uid).value as! AppUser
+            let value = snapshot.childSnapshot(forPath: self.auth.currentUser!.uid).value as! AppUser
         })
     }
     

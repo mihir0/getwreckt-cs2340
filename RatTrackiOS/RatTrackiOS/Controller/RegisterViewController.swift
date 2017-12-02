@@ -49,12 +49,12 @@ class RegisterViewController: UIViewController {
         let email:String = emailField.text!
         let pass:String = passField.text!
         let userType:String = adminCheck.text == nil ? "User" : "Admin"
-        let u:AppUser = AppUser(fullName: fullName, email: email, userType: userType)
+        let u:AppUser = AppUser(fullName: fullName, userName: email, userType: userType)
         createUser(u: u, pass: pass)
     }
     
     func createUser(u:AppUser, pass:String) {
-        Auth.auth().createUser(withEmail: u.getEmail(), password: pass, completion: {(user, error) in
+        Auth.auth().createUser(withEmail: u.getUserName(), password: pass, completion: {(user, error) in
             if (error == nil) {
                 Model.setCurrentUser(u: u)
                 self.ref.child("users").child(Auth.auth().currentUser!.uid).setValue(u)

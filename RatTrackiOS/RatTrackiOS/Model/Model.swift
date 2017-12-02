@@ -14,6 +14,6 @@ class Model {
     }
     
     static func getCurrentUser() -> AppUser {
-        return AppUser(fullName: "", email: "", userType: "")
+        return AppUser(fullName: "", userName: "", userType: "")
     }
 }
