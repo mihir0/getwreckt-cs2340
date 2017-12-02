@@ -11,6 +11,9 @@
 		59E38D123A427E69694B6195 /* Pods_RatTrackiOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40759610E5C897C4BFED321 /* Pods_RatTrackiOSTests.framework */; };
 		7677ABAD9592E08B199434BD /* Pods_RatTrackiOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927797FFD8E0A821C826DD58 /* Pods_RatTrackiOSUITests.framework */; };
 		9C0F243B1FD291E80043F8AF /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F243A1FD291E80043F8AF /* Model.swift */; };
+		9C0F24471FD370F70043F8AF /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F24461FD370F70043F8AF /* Admin.swift */; };
+		9C0F24491FD370FA0043F8AF /* Borough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F24481FD370FA0043F8AF /* Borough.swift */; };
+		9C0F244B1FD370FD0043F8AF /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F244A1FD370FD0043F8AF /* Date.swift */; };
 		9C1468101FB506CE00B63D46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C14680F1FB506CE00B63D46 /* AppDelegate.swift */; };
 		9C1468121FB506CE00B63D46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1468111FB506CE00B63D46 /* ViewController.swift */; };
 		9C1468151FB506CE00B63D46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C1468131FB506CE00B63D46 /* Main.storyboard */; };
@@ -47,6 +50,9 @@
 		7C944B5CB105768E4D364FB4 /* Pods-RatTrackiOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatTrackiOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RatTrackiOSUITests/Pods-RatTrackiOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		927797FFD8E0A821C826DD58 /* Pods_RatTrackiOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RatTrackiOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C0F243A1FD291E80043F8AF /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		9C0F24461FD370F70043F8AF /* Admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Admin.swift; path = "/Users/aguy/Other/getwreckt-cs2340/RatTrackiOS/RatTrackiOS/Model/Admin.swift"; sourceTree = "<absolute>"; };
+		9C0F24481FD370FA0043F8AF /* Borough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Borough.swift; path = "/Users/aguy/Other/getwreckt-cs2340/RatTrackiOS/RatTrackiOS/Model/Borough.swift"; sourceTree = "<absolute>"; };
+		9C0F244A1FD370FD0043F8AF /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Date.swift; path = "/Users/aguy/Other/getwreckt-cs2340/RatTrackiOS/RatTrackiOS/Model/Date.swift"; sourceTree = "<absolute>"; };
 		9C14680C1FB506CE00B63D46 /* RatTrackiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RatTrackiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C14680F1FB506CE00B63D46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C1468111FB506CE00B63D46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +186,9 @@
 		9C31AB911FD274A70085ACE7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9C0F244A1FD370FD0043F8AF /* Date.swift */,
+				9C0F24481FD370FA0043F8AF /* Borough.swift */,
+				9C0F24461FD370F70043F8AF /* Admin.swift */,
 				9C31AB921FD274B40085ACE7 /* AppUser.swift */,
 				9C0F243A1FD291E80043F8AF /* Model.swift */,
 			);
@@ -500,12 +509,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C0F243B1FD291E80043F8AF /* Model.swift in Sources */,
+				9C0F244B1FD370FD0043F8AF /* Date.swift in Sources */,
 				9C31AB8E1FD2698F0085ACE7 /* LoginViewController.swift in Sources */,
 				9C31AB901FD26A320085ACE7 /* RegisterViewController.swift in Sources */,
 				9C31AB931FD274B40085ACE7 /* AppUser.swift in Sources */,
 				9C1468121FB506CE00B63D46 /* ViewController.swift in Sources */,
+				9C0F24491FD370FA0043F8AF /* Borough.swift in Sources */,
 				9C1468101FB506CE00B63D46 /* AppDelegate.swift in Sources */,
 				9C1A1BC91FD25D740055E3F9 /* InAppViewController.swift in Sources */,
+				9C0F24471FD370F70043F8AF /* Admin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,9 +7,9 @@
 //
 
 import Foundation
-class Admin : User {
+class Admin : AppUser {
     init(username: String) {
-        super.init(userName: username)
+        super.init(userName: userName)
     }
     init(fullName: String, username: String) {
         super.init(fullName: fullName, userName: username)

@@ -1,0 +1,6 @@
+framework module Pods_RatTrackiOSTests {
+  umbrella header "Pods-RatTrackiOSTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

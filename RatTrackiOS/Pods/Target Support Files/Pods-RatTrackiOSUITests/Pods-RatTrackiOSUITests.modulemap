@@ -1,0 +1,6 @@
+framework module Pods_RatTrackiOSUITests {
+  umbrella header "Pods-RatTrackiOSUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

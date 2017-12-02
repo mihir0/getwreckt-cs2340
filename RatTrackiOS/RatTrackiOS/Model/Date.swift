@@ -15,35 +15,39 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     var hour: Int
     var minute: Int
     var second: Int
-    var isPM: bool
+    var isPM: Bool
     var meridiem: String
     var systemString: String
-    var toString: String
+    var tostring: String?
     
-    init(month: Int, day: Int, year: Int, hour: Int, minute: Int, isPM: bool) {
+    init(month: Int, day: Int, year: Int, hour: Int, minute: Int, isPM: Bool) {
         self.date = day
         self.month = month
         self.year = year
         self.hour = hour
         self.minute = minute
+        self.second = 0
+        self.isPM = false
+        self.systemString = ""
+        self.tostring
         
         if (isPM) {
             self.meridiem = "PM"
         } else {
             self.meridiem = "AM"
         }
-        generateSystemString()
+        self.generateSystemString()
     }
     
     init(data: String) {
         //example: "9/5/2012 12:00:00 AM"
-        self.toString = data
+        self.tostring = data
         
         let arr = data.split(separator: " ")
         let arr_dates = arr[0].split(separator: "/")
         let arr_times = arr[1].split(separator: ":")
     
-        self.isPM = arr[2]
+        self.isPM = arr[2] == "PM" ? true : false
         self.month = (arr_dates[0] as NSString).integerValue
         self.date = (arr_dates[1] as NSString).integerValue
         self.year = (arr_dates[2] as NSString).integerValue
@@ -51,8 +55,8 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
         self.minute = (arr_times[1] as NSString).integerValue
         self.second = (arr_times[2] as NSString).integerValue
         
-        setMeridiem()
-        generateSystemString()
+        self.setMeridiem()
+        self.generateSystemString()
     }
     
     func getMonth() -> Int {
@@ -61,7 +65,7 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     
     func setMonth(month: Int) {
         self.month = month
-        generateSystemString()
+        self.generateSystemString()
     }
     
     func getDate() -> Int {
@@ -70,7 +74,7 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     
     func setDate(date: Int) {
         self.date = date
-        generateSystemString()
+        self.generateSystemString()
     }
     
     func getYear() -> Int {
@@ -79,14 +83,14 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     
     func setYear(year: Int) {
         self.year = year
-        generateSystemString()
+        self.generateSystemString()
     }
     
     func getHour() -> Int {
         return self.hour
     }
     //sets hour in military time
-    func setHour(hour: int) {
+    func setHour(hour: Int) {
         if (isPM && (hour != 12)) {
             self.hour = hour + 12
         } else if (!isPM && (hour == 12)){
@@ -94,7 +98,7 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
         } else {
             self.hour = hour
         }
-        generateSystemString();
+        self.generateSystemString();
     }
     
     func getMinute() -> Int {
@@ -103,7 +107,7 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     
     func setMinute(minute: Int) {
         self.minute = minute
-        generateSystemString()
+        self.generateSystemString()
     }
     
     func getSecond() -> Int {
@@ -112,16 +116,16 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     
     func setSecond(second: Int) {
         self.second = second
-        generateSystemString()
+        self.generateSystemString()
     }
     
-    func getIsPM() -> bool {
+    func getIsPM() -> Bool {
         return self.isPM
     }
     
-    func setIsPM(value: bool) {
+    func setIsPM(value: Bool) {
         self.isPM = value
-        generateSystemString()
+        self.generateSystemString()
     }
     
     func getMeridiem() -> String {
@@ -130,11 +134,11 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     
     func setMeridiem() {
         self.meridiem = isPM ? "PM" : "AM"
-        generateSystemString()
+        self.generateSystemString()
     }
     
-    func digitToString(digit: int) -> String {
-        return ((digit < 10 ? "0" : "") + digit)
+    func digitToString(digit: Int) -> String {
+        return ("\(digit < 10 ? "0" : "")\(digit)")
     }
     
     func getSystemString() -> String {
@@ -142,7 +146,7 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     }
     
     func generateSystemString() {
-        self.systemString = "" + self.year + "-" + digitToString(self.month) + "-" + digitToString(self.date) + " " + digitToString(self.hour) + ":" + digitToString(self.minute) + ":" + digitToString(self.second)
+        self.systemString = "\(self.year)-\(digitToString(digit: self.month))-\(digitToString(digit: self.date)) \(digitToString(digit: self.hour)):\(digitToString(digit: self.minute)):\(digitToString(digit: self.second))"
     }
     
     //TODO: add a compareTo method
@@ -167,17 +171,15 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     }
     
     func getTime() -> String {
-        return "" + digitToString(getMeridiemHour()) + ":" + digitToString(self.minute) + ":"
-            + digitToString(self.second) + " " + self.meridiem
+        return "\(digitToString(digit: getMeridiemHour())):\(digitToString(digit: self.minute)):\(digitToString(digit: self.second)) \(self.meridiem)"
     }
     
     func getCalendarDate() -> String {
-        return "" + digitToString(self.month) + "-" + digitToString(self.date)
-            + digitToString(self.year)
+        return "\(digitToString(digit: self.month))-\(digitToString(digit: self.date))\(digitToString(digit: self.year))"
     }
     
     func toString() -> String { //does this need to override?
-        return (toString == null) ? (getCalendarDate() + " " + getTime()) : toString
+        return (tostring == nil) ? ("\(getCalendarDate()) \(getTime())") : tostring!
     }
     
     //Other java code
