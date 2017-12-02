@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.home', ['ngRoute'])
+angular.module('ratTrack.home', ['ngRoute', 'firebase'])
 
 // Declared route
 .config(['$routeProvider', function($routeProvider) {
@@ -34,6 +34,5 @@ angular.module('myApp.home', ['ngRoute'])
                 console.log('Authentication failure');
             });
     }
-
 
 }]);
