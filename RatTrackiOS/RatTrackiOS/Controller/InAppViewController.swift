@@ -16,6 +16,8 @@ class InAppViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        screenWidth = UIScreen.main.bounds.size.width
+        screenHeight = UIScreen.main.bounds.size.height
     }
     
 }

@@ -10,6 +10,7 @@
 		51B353417546C4404218ACEF /* Pods_RatTrackiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD71A4121115D0EF7CF166D /* Pods_RatTrackiOS.framework */; };
 		59E38D123A427E69694B6195 /* Pods_RatTrackiOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40759610E5C897C4BFED321 /* Pods_RatTrackiOSTests.framework */; };
 		7677ABAD9592E08B199434BD /* Pods_RatTrackiOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927797FFD8E0A821C826DD58 /* Pods_RatTrackiOSUITests.framework */; };
+		9C0F243B1FD291E80043F8AF /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F243A1FD291E80043F8AF /* Model.swift */; };
 		9C1468101FB506CE00B63D46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C14680F1FB506CE00B63D46 /* AppDelegate.swift */; };
 		9C1468121FB506CE00B63D46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1468111FB506CE00B63D46 /* ViewController.swift */; };
 		9C1468151FB506CE00B63D46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C1468131FB506CE00B63D46 /* Main.storyboard */; };
@@ -19,6 +20,9 @@
 		9C1468301FB506CE00B63D46 /* RatTrackiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C14682F1FB506CE00B63D46 /* RatTrackiOSUITests.swift */; };
 		9C1A1BC51FD2570C0055E3F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C1A1BC41FD2570C0055E3F9 /* GoogleService-Info.plist */; };
 		9C1A1BC91FD25D740055E3F9 /* InAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1A1BC81FD25D740055E3F9 /* InAppViewController.swift */; };
+		9C31AB8E1FD2698F0085ACE7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C31AB8D1FD2698F0085ACE7 /* LoginViewController.swift */; };
+		9C31AB901FD26A320085ACE7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C31AB8F1FD26A320085ACE7 /* RegisterViewController.swift */; };
+		9C31AB931FD274B40085ACE7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C31AB921FD274B40085ACE7 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,7 @@
 		68D5894C2EA3CFFFD99C1D73 /* Pods-RatTrackiOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatTrackiOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RatTrackiOSTests/Pods-RatTrackiOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C944B5CB105768E4D364FB4 /* Pods-RatTrackiOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatTrackiOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RatTrackiOSUITests/Pods-RatTrackiOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		927797FFD8E0A821C826DD58 /* Pods_RatTrackiOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RatTrackiOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C0F243A1FD291E80043F8AF /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		9C14680C1FB506CE00B63D46 /* RatTrackiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RatTrackiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C14680F1FB506CE00B63D46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C1468111FB506CE00B63D46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +62,9 @@
 		9C1468311FB506CE00B63D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C1A1BC41FD2570C0055E3F9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9C1A1BC81FD25D740055E3F9 /* InAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppViewController.swift; sourceTree = "<group>"; };
+		9C31AB8D1FD2698F0085ACE7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9C31AB8F1FD26A320085ACE7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		9C31AB921FD274B40085ACE7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A40759610E5C897C4BFED321 /* Pods_RatTrackiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RatTrackiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABA03D15ADBA1926AC1121A /* Pods-RatTrackiOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatTrackiOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RatTrackiOSTests/Pods-RatTrackiOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B5954710392FE06CF602CDFE /* Pods-RatTrackiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatTrackiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RatTrackiOS/Pods-RatTrackiOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +136,7 @@
 		9C14680E1FB506CE00B63D46 /* RatTrackiOS */ = {
 			isa = PBXGroup;
 			children = (
+				9C31AB911FD274A70085ACE7 /* Model */,
 				9C1A1BC71FD25D130055E3F9 /* Controller */,
 				9C1A1BC41FD2570C0055E3F9 /* GoogleService-Info.plist */,
 				9C14680F1FB506CE00B63D46 /* AppDelegate.swift */,
@@ -162,8 +171,19 @@
 			children = (
 				9C1468111FB506CE00B63D46 /* ViewController.swift */,
 				9C1A1BC81FD25D740055E3F9 /* InAppViewController.swift */,
+				9C31AB8D1FD2698F0085ACE7 /* LoginViewController.swift */,
+				9C31AB8F1FD26A320085ACE7 /* RegisterViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		9C31AB911FD274A70085ACE7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9C31AB921FD274B40085ACE7 /* User.swift */,
+				9C0F243A1FD291E80043F8AF /* Model.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AD70BD503DCA8B00B210D77E /* Pods */ = {
@@ -439,12 +459,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-RatTrackiOS/Pods-RatTrackiOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,6 +499,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C0F243B1FD291E80043F8AF /* Model.swift in Sources */,
+				9C31AB8E1FD2698F0085ACE7 /* LoginViewController.swift in Sources */,
+				9C31AB901FD26A320085ACE7 /* RegisterViewController.swift in Sources */,
+				9C31AB931FD274B40085ACE7 /* User.swift in Sources */,
 				9C1468121FB506CE00B63D46 /* ViewController.swift in Sources */,
 				9C1468101FB506CE00B63D46 /* AppDelegate.swift in Sources */,
 				9C1A1BC91FD25D740055E3F9 /* InAppViewController.swift in Sources */,

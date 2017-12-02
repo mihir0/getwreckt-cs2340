@@ -34,6 +34,10 @@ class ViewController: UIViewController {
         loginButton.backgroundColor = UIColor.init(red: 39/255, green: 174/255, blue: 96/255, alpha: 1)
         loginButton.setTitleColor(UIColor.black, for: .normal)
         loginButton.setTitle("Login", for: .normal)
+        func loginPressed(sender:UIButton) {
+            self.navigationController!.pushViewController(LoginViewController(), animated: true)
+        }
+        loginButton.addTarget(self, action: Selector(("loginPressed")), for: .touchUpInside)
         self.view.addSubview(loginButton)
     }
     
@@ -42,6 +46,10 @@ class ViewController: UIViewController {
         registerButton.backgroundColor = UIColor.init(red: 39/255, green: 174/255, blue: 96/255, alpha: 1)
         registerButton.setTitleColor(UIColor.black, for: .normal)
         registerButton.setTitle("Register", for: .normal)
+        func registerPressed(sender:UIButton) {
+            self.navigationController!.pushViewController(RegisterViewController(), animated: true)
+        }
+        registerButton.addTarget(self, action: Selector(("registerPressed")), for: .touchUpInside)
         self.view.addSubview(registerButton)
     }
 
