@@ -9,9 +9,9 @@
 import Foundation
 class Admin : AppUser {
     init(username: String) {
-        super.init(userName: userName)
+        super.init(fullName: "Default Name", userName: username, userType: "Admin")
     }
     init(fullName: String, username: String) {
-        super.init(fullName: fullName, userName: username)
+        super.init(fullName: fullName, userName: username, userType: "Admin")
     }
 }
