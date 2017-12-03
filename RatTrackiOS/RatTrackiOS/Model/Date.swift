@@ -29,7 +29,7 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
         self.second = 0
         self.isPM = false
         self.systemString = ""
-        self.tostring
+        self.tostring = nil
         
         if (isPM) {
             self.meridiem = "PM"
@@ -54,6 +54,10 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
         self.hour = (arr_times[0] as NSString).integerValue
         self.minute = (arr_times[1] as NSString).integerValue
         self.second = (arr_times[2] as NSString).integerValue
+        
+        self.meridiem = ""
+        self.systemString = ""
+        self.tostring = nil
         
         self.setMeridiem()
         self.generateSystemString()

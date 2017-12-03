@@ -13,7 +13,7 @@ class AppUser { //(JAVA) implements Parcelable
     var userName: String
     var userType: String
     var signedIn: Bool
-    var isLocked: Bool
+    //var isLocked: Bool
     var sightings: Int = 0
     
     convenience init() {
@@ -33,7 +33,7 @@ class AppUser { //(JAVA) implements Parcelable
         self.userName = userName
         self.userType = userType
         self.signedIn = true
-        self.isLocked = false
+        //self.isLocked = false
         self.sightings = 0
     }
     
@@ -73,7 +73,7 @@ class AppUser { //(JAVA) implements Parcelable
         self.sightings = sightings
     }
     
-    
+    /*
     func getIsLocked() -> Bool {
         return self.isLocked
     }
@@ -81,7 +81,7 @@ class AppUser { //(JAVA) implements Parcelable
     func setLocked(locked: Bool) {
         self.isLocked = locked
     }
-    
+    */
     
     func sightingMade() {
         self.sightings += 1

@@ -57,7 +57,13 @@ class RegisterViewController: UIViewController {
         Auth.auth().createUser(withEmail: u.getUserName(), password: pass, completion: {(user, error) in
             if (error == nil) {
                 Model.setCurrentUser(u: u)
-                self.ref.child("users").child(Auth.auth().currentUser!.uid).setValue(u)
+                var newU:[String:Any] = [:]
+                newU["fullName"] = u.getFullName()
+                newU["userName"] = u.getUserName()
+                newU["userType"] = u.getUserType()
+                newU["sightings"] = u.getSightings()
+                newU["signedIn"] = u.getSignedIn()
+                self.ref.child("users").child(Auth.auth().currentUser!.uid).setValue(newU)
                 self.present(InAppViewController(), animated: true, completion: nil)
             }
         })
