@@ -35,10 +35,16 @@ class InAppViewController: UIViewController {
             self.updateUI(fbu: u)
         })
         
+        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, title: "Make Sighting", s: #selector(btnMakeSighting), vc: self)
         Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 8, title: "Logout", s: #selector(btnLogout), vc: self)
     }
     
     func updateUI(fbu:AppUser) {
+        
+    }
+    
+    @objc
+    func btnMakeSighting() {
         
     }
     

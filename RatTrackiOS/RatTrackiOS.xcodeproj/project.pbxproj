@@ -14,6 +14,11 @@
 		9C0F24471FD370F70043F8AF /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F24461FD370F70043F8AF /* Admin.swift */; };
 		9C0F24491FD370FA0043F8AF /* Borough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F24481FD370FA0043F8AF /* Borough.swift */; };
 		9C0F244B1FD370FD0043F8AF /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F244A1FD370FD0043F8AF /* Date.swift */; };
+		9C0F244D1FD3B98B0043F8AF /* MakeSightingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F244C1FD3B98B0043F8AF /* MakeSightingViewController.swift */; };
+		9C0F244F1FD3BA660043F8AF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F244E1FD3BA660043F8AF /* MapViewController.swift */; };
+		9C0F24511FD3BA9E0043F8AF /* SightingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F24501FD3BA9E0043F8AF /* SightingDetailViewController.swift */; };
+		9C0F24531FD3BAC10043F8AF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F24521FD3BAC10043F8AF /* ListViewController.swift */; };
+		9C0F24551FD3BAD80043F8AF /* DateRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F24541FD3BAD80043F8AF /* DateRangeViewController.swift */; };
 		9C1468101FB506CE00B63D46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C14680F1FB506CE00B63D46 /* AppDelegate.swift */; };
 		9C1468121FB506CE00B63D46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1468111FB506CE00B63D46 /* ViewController.swift */; };
 		9C1468151FB506CE00B63D46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C1468131FB506CE00B63D46 /* Main.storyboard */; };
@@ -53,6 +58,11 @@
 		9C0F24461FD370F70043F8AF /* Admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Admin.swift; path = "/Users/aguy/Other/getwreckt-cs2340/RatTrackiOS/RatTrackiOS/Model/Admin.swift"; sourceTree = "<absolute>"; };
 		9C0F24481FD370FA0043F8AF /* Borough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Borough.swift; path = "/Users/aguy/Other/getwreckt-cs2340/RatTrackiOS/RatTrackiOS/Model/Borough.swift"; sourceTree = "<absolute>"; };
 		9C0F244A1FD370FD0043F8AF /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Date.swift; path = "/Users/aguy/Other/getwreckt-cs2340/RatTrackiOS/RatTrackiOS/Model/Date.swift"; sourceTree = "<absolute>"; };
+		9C0F244C1FD3B98B0043F8AF /* MakeSightingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeSightingViewController.swift; sourceTree = "<group>"; };
+		9C0F244E1FD3BA660043F8AF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		9C0F24501FD3BA9E0043F8AF /* SightingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SightingDetailViewController.swift; sourceTree = "<group>"; };
+		9C0F24521FD3BAC10043F8AF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		9C0F24541FD3BAD80043F8AF /* DateRangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeViewController.swift; sourceTree = "<group>"; };
 		9C14680C1FB506CE00B63D46 /* RatTrackiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RatTrackiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C14680F1FB506CE00B63D46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C1468111FB506CE00B63D46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +189,11 @@
 				9C1A1BC81FD25D740055E3F9 /* InAppViewController.swift */,
 				9C31AB8D1FD2698F0085ACE7 /* LoginViewController.swift */,
 				9C31AB8F1FD26A320085ACE7 /* RegisterViewController.swift */,
+				9C0F244C1FD3B98B0043F8AF /* MakeSightingViewController.swift */,
+				9C0F244E1FD3BA660043F8AF /* MapViewController.swift */,
+				9C0F24501FD3BA9E0043F8AF /* SightingDetailViewController.swift */,
+				9C0F24521FD3BAC10043F8AF /* ListViewController.swift */,
+				9C0F24541FD3BAD80043F8AF /* DateRangeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -514,10 +529,15 @@
 				9C31AB901FD26A320085ACE7 /* RegisterViewController.swift in Sources */,
 				9C31AB931FD274B40085ACE7 /* AppUser.swift in Sources */,
 				9C1468121FB506CE00B63D46 /* ViewController.swift in Sources */,
+				9C0F24531FD3BAC10043F8AF /* ListViewController.swift in Sources */,
 				9C0F24491FD370FA0043F8AF /* Borough.swift in Sources */,
+				9C0F244F1FD3BA660043F8AF /* MapViewController.swift in Sources */,
+				9C0F24511FD3BA9E0043F8AF /* SightingDetailViewController.swift in Sources */,
 				9C1468101FB506CE00B63D46 /* AppDelegate.swift in Sources */,
 				9C1A1BC91FD25D740055E3F9 /* InAppViewController.swift in Sources */,
 				9C0F24471FD370F70043F8AF /* Admin.swift in Sources */,
+				9C0F244D1FD3B98B0043F8AF /* MakeSightingViewController.swift in Sources */,
+				9C0F24551FD3BAD80043F8AF /* DateRangeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
