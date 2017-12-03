@@ -35,12 +35,14 @@ class InAppViewController: UIViewController {
             self.updateUI(fbu: self.auth.currentUser)
         })
         
+        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 0, title: "List", s: #selector(btnList), vc: self)
+        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 2, title: "Map", s: #selector(btnMap), vc: self)
         Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 4, title: "Graph", s: #selector(btnGraph), vc: self)
         Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, title: "Make Sighting", s: #selector(btnMakeSighting), vc: self)
         Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 8, title: "Logout", s: #selector(btnLogout), vc: self)
     }
     
-    func updateUI(fbu:User) {
+    func updateUI(fbu:User?) {
         if Model.getCurrentUser() == nil {
             logout()
         } else {
@@ -54,9 +56,20 @@ class InAppViewController: UIViewController {
     }
     
     @objc
+    func btnMap() {
+        Model.viewToGoTo = "Map"
+        self.present(DateRangeViewController(), animated: true, completion: nil)
+    }
+    
+    @objc
+    func btnList() {
+        self.present(ListViewController(), animated: true, completion: nil)
+    }
+    
+    @objc
     func btnGraph() {
         Model.viewToGoTo = "Graph"
-        self.present(GraphViewController(), animated: true, completion: nil)
+        self.present(DateRangeViewController(), animated: true, completion: nil)
     }
     
     @objc
