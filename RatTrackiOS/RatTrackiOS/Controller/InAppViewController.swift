@@ -32,20 +32,31 @@ class InAppViewController: UIViewController {
             let valueGet:[String:Any] = snapshot.childSnapshot(forPath: self.auth.currentUser!.uid).value as! [String:Any]
             let u = AppUser(fullName: valueGet["fullName"] as! String, userName: valueGet["userName"] as! String, userType: valueGet["userType"] as! String)
             Model.setCurrentUser(user: u)
-            self.updateUI(fbu: u)
+            self.updateUI(fbu: self.auth.currentUser)
         })
         
+        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 4, title: "Graph", s: #selector(btnGraph), vc: self)
         Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, title: "Make Sighting", s: #selector(btnMakeSighting), vc: self)
         Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 8, title: "Logout", s: #selector(btnLogout), vc: self)
     }
     
-    func updateUI(fbu:AppUser) {
-        
+    func updateUI(fbu:User) {
+        if Model.getCurrentUser() == nil {
+            logout()
+        } else {
+            txt.text = "Hello, \(Model.getCurrentUser().getFullName())!"
+        }
     }
     
     @objc
     func btnMakeSighting() {
-        
+        self.present(MakeSightingViewController(), animated: true, completion: nil)
+    }
+    
+    @objc
+    func btnGraph() {
+        Model.viewToGoTo = "Graph"
+        self.present(GraphViewController(), animated: true, completion: nil)
     }
     
     @objc
@@ -54,7 +65,11 @@ class InAppViewController: UIViewController {
     }
     
     func logout() {
-        
+        var map:[String:Any] = ["signedIn":false]
+        ref.child("users").child(Auth.auth().currentUser!.uid).updateChildValues(map)
+        Auth.auth().signOut()
+        Model.setCurrentUser(user: nil)
+        self.present(ViewController(), animated: true, completion: nil)
     }
     
 }
