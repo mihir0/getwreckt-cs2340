@@ -35,12 +35,7 @@ class ViewController: UIViewController {
     }
     
     func initLogin() {
-        let loginButton = UIButton(frame: CGRect(x: 0, y: screenHeight / 2 - screenHeight / 10, width: screenWidth, height: screenHeight / 20))
-        loginButton.backgroundColor = UIColor.init(red: 39/255, green: 174/255, blue: 96/255, alpha: 1)
-        loginButton.setTitleColor(UIColor.black, for: .normal)
-        loginButton.setTitle("Login", for: .normal)
-        loginButton.addTarget(self, action: #selector(loginPressed), for: .touchUpInside)
-        self.view.addSubview(loginButton)
+        Model.addButton(y: screenHeight / 2 - screenHeight / 10, title: "Login", s: #selector(loginPressed), vc: self)
     }
     
     @objc
@@ -49,12 +44,7 @@ class ViewController: UIViewController {
     }
     
     func initRegister() {
-        let registerButton = UIButton(frame: CGRect(x: 0, y: screenHeight / 2, width: screenWidth, height: screenHeight / 20))
-        registerButton.backgroundColor = UIColor.init(red: 39/255, green: 174/255, blue: 96/255, alpha: 1)
-        registerButton.setTitleColor(UIColor.black, for: .normal)
-        registerButton.setTitle("Register", for: .normal)
-        registerButton.addTarget(self, action: #selector(registerPressed), for: .touchUpInside)
-        self.view.addSubview(registerButton)
+        Model.addButton(y: screenHeight / 2, title: "Register", s: #selector(registerPressed), vc: self)
     }
 
     override func didReceiveMemoryWarning() {

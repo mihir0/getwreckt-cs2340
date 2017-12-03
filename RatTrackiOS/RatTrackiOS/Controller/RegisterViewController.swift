@@ -38,9 +38,7 @@ class RegisterViewController: UIViewController {
         self.view.addSubview(passField)
         adminCheck = UITextField(frame: CGRect(x: 0, y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, width: screenWidth, height: screenHeight / 20))
         self.view.addSubview(adminCheck)
-        regBtn = UIButton(frame: CGRect(x: 0, y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 8, width: screenWidth, height: screenHeight / 20))
-        regBtn.addTarget(self, action: #selector(onRegPressed), for: .touchUpInside)
-        self.view.addSubview(regBtn)
+        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 8, title: "Register", s: #selector(onRegPressed), vc: self)
     }
     
     @objc
@@ -56,7 +54,7 @@ class RegisterViewController: UIViewController {
     func createUser(u:AppUser, pass:String) {
         Auth.auth().createUser(withEmail: u.getUserName(), password: pass, completion: {(user, error) in
             if (error == nil) {
-                Model.setCurrentUser(u: u)
+                Model.setCurrentUser(user: u)
                 var newU:[String:Any] = [:]
                 newU["fullName"] = u.getFullName()
                 newU["userName"] = u.getUserName()

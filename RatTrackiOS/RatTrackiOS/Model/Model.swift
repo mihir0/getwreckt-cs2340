@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Model {
     //NOTE: code pertaining to the firebase has not been added in yet
@@ -31,5 +32,19 @@ class Model {
     
     static func getCurrentUser() -> AppUser {
         return currentUser
+    }
+    
+    static func addButton(y:CGFloat, title:String, s:Selector, vc:UIViewController) {
+        let screenWidth = UIScreen.main.bounds.size.width
+        let screenHeight = UIScreen.main.bounds.size.height
+        var btn:UIButton = UIButton()
+        btn = UIButton(frame: CGRect(x: 0, y: y, width: screenWidth, height: screenHeight / 20))
+        btn.backgroundColor = UIColor.init(red: 39/255, green: 174/255, blue: 96/255, alpha: 1)
+        btn.setTitleColor(UIColor.black, for: .normal)
+        btn.setTitle(title, for: .normal)
+        btn.layer.borderColor = UIColor.black.cgColor
+        btn.layer.borderWidth = 1.0
+        btn.addTarget(self, action: s, for: .touchUpInside)
+        vc.view.addSubview(btn)
     }
 }

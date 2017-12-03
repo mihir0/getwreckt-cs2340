@@ -37,18 +37,8 @@ class LoginViewController: UIViewController {
         passField = UITextField(frame: CGRect(x: 0, y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 2, width: screenWidth, height: screenHeight / 20))
         passField.text = "Password"
         self.view.addSubview(passField)
-        loginBtn = UIButton(frame: CGRect(x: 0, y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 4, width: screenWidth, height: screenHeight / 20))
-        loginBtn.backgroundColor = UIColor.init(red: 39/255, green: 174/255, blue: 96/255, alpha: 1)
-        loginBtn.setTitleColor(UIColor.black, for: .normal)
-        loginBtn.setTitle("Login", for: .normal)
-        loginBtn.addTarget(self, action: #selector(onLoginPressed), for: .touchUpInside)
-        self.view.addSubview(loginBtn)
-        cancelBtn = UIButton(frame: CGRect(x: 0, y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, width: screenWidth, height: screenHeight / 20))
-        cancelBtn.backgroundColor = UIColor.init(red: 39/255, green: 174/255, blue: 96/255, alpha: 1)
-        cancelBtn.setTitleColor(UIColor.black, for: .normal)
-        cancelBtn.setTitle("Cancel", for: .normal)
-        cancelBtn.addTarget(self, action: #selector(onCancelPressed), for: .touchUpInside)
-        self.view.addSubview(cancelBtn)
+        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 4, title: "Login", s: #selector(onLoginPressed), vc: self)
+        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, title: "Cancel", s: #selector(onCancelPressed), vc: self)
     }
     
     @objc
