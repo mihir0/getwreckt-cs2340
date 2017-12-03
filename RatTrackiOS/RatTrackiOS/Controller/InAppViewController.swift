@@ -46,7 +46,7 @@ class InAppViewController: UIViewController {
         if Model.getCurrentUser() == nil {
             logout()
         } else {
-            txt.text = "Hello, \(Model.getCurrentUser().getFullName())!"
+            txt.text = "Hello, \(Model.getCurrentUser()!.getFullName())!"
         }
     }
     
@@ -78,9 +78,13 @@ class InAppViewController: UIViewController {
     }
     
     func logout() {
-        var map:[String:Any] = ["signedIn":false]
+        let map:[String:Any] = ["signedIn":false]
         ref.child("users").child(Auth.auth().currentUser!.uid).updateChildValues(map)
-        Auth.auth().signOut()
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            return
+        }
         Model.setCurrentUser(user: nil)
         self.present(ViewController(), animated: true, completion: nil)
     }

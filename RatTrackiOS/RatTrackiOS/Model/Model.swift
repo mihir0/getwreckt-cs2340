@@ -12,7 +12,7 @@ import UIKit
 class Model {
     //NOTE: code pertaining to the firebase has not been added in yet
     
-    static var currentUser = AppUser()
+    static var currentUser:AppUser? = nil
     static var persistenceEnabled = true
     static var viewToGoTo = ""
     
@@ -26,11 +26,11 @@ class Model {
         //mAuth = FirebaseAuth.getInstance();
     }
     
-    static func setCurrentUser(user: AppUser) {
+    static func setCurrentUser(user: AppUser?) {
         self.currentUser = user
     }
     
-    static func getCurrentUser() -> AppUser {
+    static func getCurrentUser() -> AppUser? {
         return currentUser
     }
     
