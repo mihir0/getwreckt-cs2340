@@ -11,7 +11,7 @@ class RatSighting {
     var uniqueKey: String
     var date: Date
     var location: Location
-    var owner: AppUser
+    var owner: AppUser?
     var isFlagged: Bool
     
     convenience init(date: String, typeLocation: String, zip: String, address: String, city: String, borough: String, latitude: String, longitude: String) {
@@ -43,11 +43,11 @@ class RatSighting {
         self.date = date
     }
     
-    func getOwner() -> AppUser {
+    func getOwner() -> AppUser? {
         return owner
     }
     
-    func setOwner(owner: AppUser) {
+    func setOwner(owner: AppUser?) {
         self.owner = owner
     }
     
@@ -68,11 +68,14 @@ class RatSighting {
     }
     
     func generateUniqueKey() -> String {
-        self.setOwner(owner: Model.getCurrentUser())
-        owner.sightingMade()
-        let userName = owner.getUserName()
-        let user = userName.split(separator: ".")[0] + userName.split(separator: ".")[1].prefix(1)
-        return String(user) + date.toString() + String(owner.getSightings())
+        self.owner = Model.getCurrentUser()
+        if self.owner != nil {
+            self.owner!.sightingMade()
+            let userName = self.owner!.getUserName()
+            let user = userName.split(separator: ".")[0] + userName.split(separator: ".")[1].prefix(1)
+            return String(user) + date.toString() + String(owner!.getSightings())
+        }
+        return ""
     }
     
     func toString() -> String {
