@@ -15,6 +15,7 @@ class Model {
     static var currentUser:AppUser? = nil
     static var persistenceEnabled = true
     static var viewToGoTo = ""
+    static var sighting:RatSighting? = nil
     
     //TODO: add java firebase code
     //private static DatabaseReference mDataRef;
@@ -46,5 +47,15 @@ class Model {
         btn.layer.borderWidth = 1.0
         btn.addTarget(self, action: s, for: .touchUpInside)
         vc.view.addSubview(btn)
+    }
+    
+    static func addTextView(y:CGFloat, vc:UIViewController) -> UITextView {
+        let screenWidth = UIScreen.main.bounds.size.width
+        let screenHeight = UIScreen.main.bounds.size.height
+        var txtvw:UITextView = UITextView()
+        txtvw = UITextView(frame: CGRect(x: 0, y: y, width: screenWidth, height: screenHeight / 20))
+        txtvw.backgroundColor = UIColor.init(red: 39/255, green: 174/255, blue: 96/255, alpha: 1)
+        vc.view.addSubview(txtvw)
+        return txtvw
     }
 }

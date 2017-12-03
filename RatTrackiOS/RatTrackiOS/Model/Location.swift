@@ -35,6 +35,10 @@ class Location {
         self.zip = zip
     }
     
+    func getZip() -> String {
+        return self.zip
+    }
+    
     func getTypeLocation() -> LocationType {
         return typeLocation
     }

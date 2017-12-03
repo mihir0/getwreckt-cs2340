@@ -23,7 +23,9 @@ enum BoroughEnum {
 //An object that holds the enum
 class Borough {
     var bor : BoroughEnum
+    var name:String
     init(name: String) {
+        self.name = name
         if (name == "Bronx") {
             bor = BoroughEnum.BRONX
         } else if (name == "Brooklyn") {
@@ -45,5 +47,9 @@ class Borough {
     
     func get() -> BoroughEnum {
         return bor
+    }
+    
+    func getName() -> String {
+        return self.name
     }
 }
