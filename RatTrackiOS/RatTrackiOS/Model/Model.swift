@@ -9,11 +9,27 @@
 import Foundation
 
 class Model {
-    static func setCurrentUser(u:AppUser) {
-        
+    //NOTE: code pertaining to the firebase has not been added in yet
+    
+    static var currentUser = AppUser()
+    static var persistenceEnabled = true
+    static var viewToGoTo = ""
+    
+    //TODO: add java firebase code
+    //private static DatabaseReference mDataRef;
+    //private static FirebaseAuth mAuth;
+    
+    init() {
+        //more firebase stuff (Java)
+        //mDataRef = FirebaseDatabase.getInstance().getReference();
+        //mAuth = FirebaseAuth.getInstance();
+    }
+    
+    static func setCurrentUser(user: AppUser) {
+        self.currentUser = user
     }
     
     static func getCurrentUser() -> AppUser {
-        return AppUser(fullName: "", userName: "", userType: "")
+        return currentUser
     }
 }
