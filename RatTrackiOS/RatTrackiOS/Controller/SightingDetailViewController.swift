@@ -37,7 +37,8 @@ class SightingDetailViewController: UIViewController {
         zipField = Model.addTextView(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 4, vc: self)
         boroughField = Model.addTextView(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 5, vc: self)
         coordinateField = Model.addTextView(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, vc: self)
-        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 7, title: "Done", s: #selector(btnDone), vc: self)
+        doneBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 7, title: "Done", vc: self)
+        doneBtn.addTarget(self, action: #selector(btnDone), for: .touchUpInside)
         
         uniqueKeyField.text = Model.sighting!.getUniqueKey()
         dateField.text = "Date: \(Model.sighting!.getDate())"

@@ -37,8 +37,10 @@ class LoginViewController: UIViewController {
         passField = UITextField(frame: CGRect(x: 0, y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 2, width: screenWidth, height: screenHeight / 20))
         passField.text = "Password"
         self.view.addSubview(passField)
-        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 4, title: "Login", s: #selector(onLoginPressed), vc: self)
-        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, title: "Cancel", s: #selector(onCancelPressed), vc: self)
+        loginBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 4, title: "Login", vc: self)
+        loginBtn.addTarget(self, action: #selector(onLoginPressed), for: .touchUpInside)
+        cancelBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, title: "Cancel", vc: self)
+        cancelBtn.addTarget(self, action: #selector(onCancelPressed), for: .touchUpInside)
     }
     
     @objc

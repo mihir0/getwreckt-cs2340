@@ -20,6 +20,10 @@ class InAppViewController: UIViewController {
     var auth:Auth!
     
     var logoutBtn:UIButton!
+    var listBtn:UIButton!
+    var mapBtn:UIButton!
+    var graphBtn:UIButton!
+    var makeSightingBtn:UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +39,16 @@ class InAppViewController: UIViewController {
             self.updateUI(fbu: self.auth.currentUser)
         })
         
-        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 0, title: "List", s: #selector(btnList), vc: self)
-        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 2, title: "Map", s: #selector(btnMap), vc: self)
-        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 4, title: "Graph", s: #selector(btnGraph), vc: self)
-        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, title: "Make Sighting", s: #selector(btnMakeSighting), vc: self)
-        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 8, title: "Logout", s: #selector(btnLogout), vc: self)
+        listBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 0, title: "List", vc: self)
+        listBtn.addTarget(self, action: #selector(btnList), for: .touchUpInside)
+        mapBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 2, title: "Map", vc: self)
+        mapBtn.addTarget(self, action: #selector(btnMap), for: .touchUpInside)
+        graphBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 4, title: "Graph", vc: self)
+        graphBtn.addTarget(self, action: #selector(btnGraph), for: .touchUpInside)
+        makeSightingBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, title: "Make Sighting", vc: self)
+        makeSightingBtn.addTarget(self, action: #selector(btnMakeSighting), for: .touchUpInside)
+        logoutBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 8, title: "Logout", vc: self)
+        logoutBtn.addTarget(self, action: #selector(btnLogout), for: .touchUpInside)
     }
     
     func updateUI(fbu:User?) {

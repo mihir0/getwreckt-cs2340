@@ -35,7 +35,7 @@ class Model {
         return currentUser
     }
     
-    static func addButton(y:CGFloat, title:String, s:Selector, vc:UIViewController) {
+    static func addButton(y:CGFloat, title:String, vc:UIViewController) -> UIButton {
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
         var btn:UIButton = UIButton()
@@ -45,8 +45,8 @@ class Model {
         btn.setTitle(title, for: .normal)
         btn.layer.borderColor = UIColor.black.cgColor
         btn.layer.borderWidth = 1.0
-        btn.addTarget(self, action: s, for: .touchUpInside)
         vc.view.addSubview(btn)
+        return btn
     }
     
     static func addTextView(y:CGFloat, vc:UIViewController) -> UITextView {

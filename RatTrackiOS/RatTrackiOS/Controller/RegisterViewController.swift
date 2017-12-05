@@ -38,7 +38,8 @@ class RegisterViewController: UIViewController {
         self.view.addSubview(passField)
         adminCheck = UITextField(frame: CGRect(x: 0, y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 6, width: screenWidth, height: screenHeight / 20))
         self.view.addSubview(adminCheck)
-        Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 8, title: "Register", s: #selector(onRegPressed), vc: self)
+        regBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 8, title: "Register", vc: self)
+        regBtn.addTarget(self, action: #selector(onRegPressed), for: .touchUpInside)
     }
     
     @objc

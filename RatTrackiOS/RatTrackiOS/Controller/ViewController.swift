@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     
     var screenHeight:CGFloat!
     var screenWidth:CGFloat!
+    var loginBtn:UIButton!
+    var regBtn:UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +37,8 @@ class ViewController: UIViewController {
     }
     
     func initLogin() {
-        Model.addButton(y: screenHeight / 2 - screenHeight / 10, title: "Login", s: #selector(loginPressed), vc: self)
+        loginBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 10, title: "Login", vc: self)
+        loginBtn.addTarget(self, action: #selector(loginPressed), for: .touchUpInside)
     }
     
     @objc
@@ -44,7 +47,8 @@ class ViewController: UIViewController {
     }
     
     func initRegister() {
-        Model.addButton(y: screenHeight / 2, title: "Register", s: #selector(registerPressed), vc: self)
+        regBtn = Model.addButton(y: screenHeight / 2, title: "Register", vc: self)
+        regBtn.addTarget(self, action: #selector(registerPressed), for: .touchUpInside)
     }
 
     override func didReceiveMemoryWarning() {
