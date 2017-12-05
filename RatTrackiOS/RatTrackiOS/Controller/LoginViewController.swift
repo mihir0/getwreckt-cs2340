@@ -36,6 +36,7 @@ class LoginViewController: UIViewController {
         emailField.text = "Email"
         passField = UITextField(frame: CGRect(x: 0, y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 2, width: screenWidth, height: screenHeight / 20))
         passField.text = "Password"
+        passField.isSecureTextEntry = true
         self.view.addSubview(passField)
         loginBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 4, title: "Login", vc: self)
         loginBtn.addTarget(self, action: #selector(onLoginPressed), for: .touchUpInside)

@@ -29,6 +29,8 @@ class InAppViewController: UIViewController {
         super.viewDidLoad()
         self.auth = Auth.auth()
         self.ref = Database.database().reference()
+        screenWidth = UIScreen.main.bounds.size.width
+        screenHeight = UIScreen.main.bounds.size.height
         
         self.view.backgroundColor = UIColor.white
         
@@ -49,6 +51,7 @@ class InAppViewController: UIViewController {
         makeSightingBtn.addTarget(self, action: #selector(btnMakeSighting), for: .touchUpInside)
         logoutBtn = Model.addButton(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 8, title: "Logout", vc: self)
         logoutBtn.addTarget(self, action: #selector(btnLogout), for: .touchUpInside)
+        txt = Model.addTextView(y: screenHeight / 2 - screenHeight / 5 + screenHeight / 20 * 10, vc: self)
     }
     
     func updateUI(fbu:User?) {

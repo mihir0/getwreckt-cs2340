@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0427E2751FD3CCD8002928C8 /* Borough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427E2721FD3CCD8002928C8 /* Borough.swift */; };
 		0427E2761FD3CCD8002928C8 /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427E2731FD3CCD8002928C8 /* Admin.swift */; };
-		0427E2771FD3CCD8002928C8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427E2741FD3CCD8002928C8 /* Date.swift */; };
+		0427E2771FD3CCD8002928C8 /* AppDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427E2741FD3CCD8002928C8 /* AppDate.swift */; };
 		51B353417546C4404218ACEF /* Pods_RatTrackiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD71A4121115D0EF7CF166D /* Pods_RatTrackiOS.framework */; };
 		59E38D123A427E69694B6195 /* Pods_RatTrackiOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40759610E5C897C4BFED321 /* Pods_RatTrackiOSTests.framework */; };
 		7677ABAD9592E08B199434BD /* Pods_RatTrackiOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927797FFD8E0A821C826DD58 /* Pods_RatTrackiOSUITests.framework */; };
@@ -58,7 +58,7 @@
 /* Begin PBXFileReference section */
 		0427E2721FD3CCD8002928C8 /* Borough.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Borough.swift; sourceTree = "<group>"; };
 		0427E2731FD3CCD8002928C8 /* Admin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
-		0427E2741FD3CCD8002928C8 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		0427E2741FD3CCD8002928C8 /* AppDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDate.swift; sourceTree = "<group>"; };
 		68D5894C2EA3CFFFD99C1D73 /* Pods-RatTrackiOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatTrackiOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RatTrackiOSTests/Pods-RatTrackiOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C944B5CB105768E4D364FB4 /* Pods-RatTrackiOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatTrackiOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RatTrackiOSUITests/Pods-RatTrackiOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		927797FFD8E0A821C826DD58 /* Pods_RatTrackiOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RatTrackiOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,7 +214,7 @@
 			children = (
 				0427E2731FD3CCD8002928C8 /* Admin.swift */,
 				0427E2721FD3CCD8002928C8 /* Borough.swift */,
-				0427E2741FD3CCD8002928C8 /* Date.swift */,
+				0427E2741FD3CCD8002928C8 /* AppDate.swift */,
 				9C0F24581FD3CBC00043F8AF /* Location.swift */,
 				9C0F245A1FD3CBC00043F8AF /* LocationType.swift */,
 				9C0F24591FD3CBC00043F8AF /* RatSighting.swift */,
@@ -542,7 +542,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0427E2771FD3CCD8002928C8 /* Date.swift in Sources */,
+				0427E2771FD3CCD8002928C8 /* AppDate.swift in Sources */,
 				9C0F243B1FD291E80043F8AF /* Model.swift in Sources */,
 				9C31AB8E1FD2698F0085ACE7 /* LoginViewController.swift in Sources */,
 				9C31AB901FD26A320085ACE7 /* RegisterViewController.swift in Sources */,

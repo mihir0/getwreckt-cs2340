@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         initLogin()
         initRegister()
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
         
         if Auth.auth().currentUser != nil {
             self.present(InAppViewController(), animated: true, completion: nil)

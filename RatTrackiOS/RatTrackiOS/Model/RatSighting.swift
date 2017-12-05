@@ -9,8 +9,8 @@
 import Foundation
 class RatSighting {
     var uniqueKey: String
-    var date: Date
-    var location: Location
+    var date: AppDate?
+    var location: Location?
     var owner: AppUser?
     var isFlagged: Bool
     
@@ -21,7 +21,7 @@ class RatSighting {
     
     init(_ uniqueKey: String, _ date: String, _ typeLocation: String, _ zip: String, _ address: String, _ city: String, _ borough: String, _ latitude: String, _ longitude: String) {
         self.uniqueKey = uniqueKey
-        self.date = Date(data: date)
+        self.date = AppDate(data: date)
         self.location = Location(typeLocation: LocationType(name: typeLocation), address: address, city: city, zip: zip, borough: Borough(name: borough), latitude: latitude, longitude: longitude)
         self.owner = Model.getCurrentUser()
         self.isFlagged = false // is this variable even doing anything?
@@ -35,11 +35,11 @@ class RatSighting {
         self.uniqueKey = uniqueKey
     }
     
-    func getDate() -> Date {
+    func getDate() -> AppDate? {
         return self.date
     }
     
-    func setDate(date: Date) {
+    func setDate(date: AppDate?) {
         self.date = date
     }
     
@@ -51,11 +51,11 @@ class RatSighting {
         self.owner = owner
     }
     
-    func getLocation() -> Location {
+    func getLocation() -> Location? {
         return location
     }
     
-    func setLocation(location: Location) {
+    func setLocation(location: Location?) {
         self.location = location
     }
     
@@ -73,12 +73,12 @@ class RatSighting {
             self.owner!.sightingMade()
             let userName = self.owner!.getUserName()
             let user = userName.split(separator: ".")[0] + userName.split(separator: ".")[1].prefix(1)
-            return String(user) + date.toString() + String(owner!.getSightings())
+            return String(user) + (date != nil ? date!.toString() : "") + String((owner == nil ? 0 : owner!.getSightings()))
         }
         return ""
     }
     
     func toString() -> String {
-        return date.toString() + " " + uniqueKey
+        return (date != nil ? date!.toString() : "") + " " + uniqueKey
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Date { //TODO: Write a compareTo method that allows Date objects to be compared (not quite sure how to "implement comparable" in Swift).
+class AppDate : Comparable { //TODO: Write a compareTo method that allows Date objects to be compared (not quite sure how to "implement comparable" in Swift).
     
     var month: Int
     var date: Int
@@ -40,10 +40,14 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     }
     
     init(data: String) {
+        var newData = data
+        if newData == "" {
+            newData = "1/1/2000 12:00:00 AM"
+        }
         //example: "9/5/2012 12:00:00 AM"
-        self.tostring = data
+        self.tostring = newData
         
-        let arr = data.split(separator: " ")
+        let arr = newData.split(separator: " ")
         let arr_dates = arr[0].split(separator: "/")
         let arr_times = arr[1].split(separator: ":")
     
@@ -57,7 +61,6 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
         
         self.meridiem = ""
         self.systemString = ""
-        self.tostring = nil
         
         self.setMeridiem()
         self.generateSystemString()
@@ -184,6 +187,44 @@ class Date { //TODO: Write a compareTo method that allows Date objects to be com
     
     func toString() -> String { //does this need to override?
         return (tostring == nil) ? ("\(getCalendarDate()) \(getTime())") : tostring!
+    }
+    
+    static func < (lhs:AppDate, rhs:AppDate) -> Bool {
+        if (lhs.year != rhs.year) {
+            return lhs.year < rhs.year
+        } else if lhs.month != rhs.month {
+            return lhs.month < rhs.month
+        } else if lhs.date != rhs.date {
+            return lhs.date < rhs.date
+        } else if lhs.hour != rhs.hour {
+            return lhs.hour < rhs.hour
+        } else if lhs.minute != rhs.minute {
+            return lhs.minute < rhs.minute
+        } else if lhs.second != rhs.second {
+            return lhs.second < rhs.second
+        }
+        return false
+    }
+    
+    static func > (lhs:AppDate, rhs:AppDate) -> Bool {
+        if (lhs.year != rhs.year) {
+            return lhs.year < rhs.year
+        } else if lhs.month != rhs.month {
+            return lhs.month < rhs.month
+        } else if lhs.date != rhs.date {
+            return lhs.date < rhs.date
+        } else if lhs.hour != rhs.hour {
+            return lhs.hour < rhs.hour
+        } else if lhs.minute != rhs.minute {
+            return lhs.minute < rhs.minute
+        } else if lhs.second != rhs.second {
+            return lhs.second < rhs.second
+        }
+        return false
+    }
+    
+    static func == (lhs:AppDate, rhs:AppDate) -> Bool {
+        return lhs.year == rhs.year && lhs.month == rhs.month && lhs.date == rhs.date && lhs.hour == rhs.hour && lhs.minute == rhs.minute && lhs.second == rhs.second
     }
     
     //Other java code

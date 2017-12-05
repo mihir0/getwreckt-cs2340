@@ -41,16 +41,16 @@ class SightingDetailViewController: UIViewController {
         doneBtn.addTarget(self, action: #selector(btnDone), for: .touchUpInside)
         
         uniqueKeyField.text = Model.sighting!.getUniqueKey()
-        dateField.text = "Date: \(Model.sighting!.getDate())"
-        if Model.sighting!.getLocation().getAddress() == "" {
+        dateField.text = "Date: \(Model.sighting!.getDate()!)"
+        if Model.sighting!.getLocation()!.getAddress() == "" {
             addrField.text = "N/A"
         } else {
-            addrField.text = Model.sighting!.getLocation().getAddress()
+            addrField.text = Model.sighting!.getLocation()!.getAddress()
         }
-        cityField.text = Model.sighting!.getLocation().getCity()
-        zipField.text = Model.sighting!.getLocation().getZip()
-        boroughField.text = Model.sighting!.getLocation().getBorough().getName()
-        coordinateField.text = "Coordinates: (\(String(Model.sighting!.getLocation().getLatitude())), \(String(Model.sighting!.getLocation().getLongitude()))"
+        cityField.text = Model.sighting!.getLocation()!.getCity()
+        zipField.text = Model.sighting!.getLocation()!.getZip()
+        boroughField.text = Model.sighting!.getLocation()!.getBorough().getName()
+        coordinateField.text = "Coordinates: (\(String(Model.sighting!.getLocation()!.getLatitude())), \(String(Model.sighting!.getLocation()!.getLongitude()))"
     }
     
     @objc
