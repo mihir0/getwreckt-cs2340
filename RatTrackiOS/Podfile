@@ -22,4 +22,8 @@ target 'RatTrackiOS' do
     # Pods for testing
   end
 
+
+  # source 'https://github.com/CocoaPods/Specs.git'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 end
