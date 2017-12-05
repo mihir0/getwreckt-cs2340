@@ -47,9 +47,12 @@ class MapViewController: UIViewController {
                 
                 if (rats.getDate()! > SightingManager.startMapDate || rats.getDate()! == SightingManager.startMapDate) &&
                     (rats.getDate()! < SightingManager.endMapDate || rats.getDate()! == SightingManager.endMapDate) {
-                    let marker = GMSMarker()
-                    marker.title = rats.toString()
+                    if Double(rats.getLocation()!.getLatitude()) != nil && Double(rats.getLocation()!.getLongitude()) != nil {
+                        let marker = GMSMarker()
+                        marker.title = rats.toString()
                     marker.position = CLLocationCoordinate2D(latitude: Double(rats.getLocation()!.getLatitude())!, longitude: Double(rats.getLocation()!.getLongitude())!)
+                        marker.map = mapView
+                    }
                 }
             }
         })
