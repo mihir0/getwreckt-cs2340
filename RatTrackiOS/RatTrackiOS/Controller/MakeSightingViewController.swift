@@ -11,6 +11,9 @@ import UIKit
 import Firebase
 
 class MakeSightingViewController: UIViewController {
+    
+    var dateField:UITextField!
+    
     override func viewDidLoad() {
         
     }
