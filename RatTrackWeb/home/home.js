@@ -12,7 +12,7 @@ angular.module('ratTrack.home', ['ngRoute', 'firebase'])
 
 // Home controller
 .controller('HomeCtrl', ['$scope', '$firebaseSimpleLogin', function($scope, $firebaseSimpleLogin) {
-    var firebaseObj = new Firebase("https://cs2340getwreckt.firebaseio.com/ratsightings/");
+    var firebaseObj = new Firebase("https://cs2340getwreckt.firebaseio.com");
     var loginObj = $firebaseSimpleLogin(firebaseObj);
 
     //  On successful authentication, we get a success callback and

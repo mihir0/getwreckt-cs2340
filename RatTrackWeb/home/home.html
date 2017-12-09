@@ -2,6 +2,8 @@
 <html lang="en" ng-app"ratTrack">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
         <title>Rat Track</title>
 
         <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,8 +23,8 @@
                 <h2>RAT TRACK: AngularJS & Firebase App!</h2>
             </div>
             <form class="form-signin" role="form">
-                <input type="email" class="form-control" placeholder="Email address" required="" autofocus="">
-                <input type="password" class="form-control" placeholder="Password" required="">
+                <input ng-model ="user.email" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
+                <input ng-model="user.passord" type="password" class="form-control" placeholder="Password" required="">
                 <label class="checkbox">
                     <a href="#/register"> Sign Up</>
                 </label>

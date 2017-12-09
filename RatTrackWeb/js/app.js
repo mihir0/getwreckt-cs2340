@@ -2,7 +2,7 @@
 
 angular.module('ratTrack', [
     'ngRoute',
-    'ratTrack.home' //home module
+    'ratTrack.home', //home module
     'ratTrack.register' //register module
 ]).
 config(['$routeProvider', function($routeProvider) {
