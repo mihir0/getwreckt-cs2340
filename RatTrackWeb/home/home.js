@@ -11,18 +11,20 @@ angular.module('ratTrack.home', ['ngRoute', 'firebase'])
 }])
 
 // Home controller
-.controller('HomeCtrl', ['$scope', '$firebaseSimpleLogin', function($scope, $firebaseSimpleLogin) {
+.controller('HomeCtrl', ['$scope', '$firebaseAuth', function($scope, $firebaseAuth) {
     var firebaseObj = new Firebase("https://cs2340getwreckt.firebaseio.com");
-    var loginObj = $firebaseSimpleLogin(firebaseObj);
+    var loginObj = $firebaseAuth(firebaseObj);
 
     //  On successful authentication, we get a success callback and
     //  on an unsuccessful authentication, we get an error callback.
+
+    $scope.user = {};
     $scope.SignIn = function(event) {
         event.preventDefault();  // To prevent form refresh
         var username = $scope.user.email;
         var password = $scope.user.password;
 
-        loginObj.$login('password', {
+        loginObj.$authWithPassword('password', {
                 email: username,
                 password: password
             })

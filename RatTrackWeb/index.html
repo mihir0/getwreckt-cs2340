@@ -12,30 +12,20 @@
         <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
 
         <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://getbootstrap.com/docs/4.0/examples/signin/?" rel="stylesheet">
-<!--         <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet"> -->
+        <link href="http://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/register.css">
+
         <link href="css/main.css" rel="stylesheet" />
         <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+<!--         <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script> -->
 
     </head>
-    <body ng-controller="HomeCtrl">
-        <div class="container">
-            <div class="jumbotron" style="padding-bottom:0px;">
-                <h2>RAT TRACK: AngularJS & Firebase App!</h2>
-            </div>
-            <form class="form-signin" role="form">
-                <input type="email" class="form-control" placeholder="Email address" required="" autofocus="">
-                <input type="password" class="form-control" placeholder="Password" required="">
-                <label class="checkbox">
-                    <a href="#"> Sign Up</>
-                </label>
-                <button type="button" ng-click="SignIn($event)" class="btn btn-lg btn-primary btn-block">SignIn</button>
-            </form>
-        </div>
+    <body>
+        <div ng-view></div>
 
         <!-- Firebase Initialization Boiler Plate -->
-<!--         <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
-        <script>
+<!--         <script>
           // Initialize Firebase
           var config = {
             apiKey: "AIzaSyC5-y-FvxjxmBpYYYzLDMcgENbPyuDOsJI",
@@ -47,7 +37,6 @@
           };
           firebase.initializeApp(config);
         </script> -->
-        <div ng-view></div>
 
         <!-- added in from github -->
         <script src="bower_components/angular/angular.js"></script>
@@ -57,7 +46,7 @@
         <script src="components/version/version-directive.js"></script>
         <script src="components/version/interpolate-filter.js"></script>
 
-        <!-- our own files-->
+        <!-- our own js files-->
         <script src="js/app.js"></script>
         <script src="home/home.js"></script>
         <script src="register/register.js"></script>
@@ -66,23 +55,20 @@
 
 
         <!--firebase-->
-        <script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
-        <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
-        <script src="https://cdn.firebase.com/js/simple-login/1.6.2/firebase-simple-login.js"></script>
+        <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+        <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+
 
     </body>
-  <title>Rat Track</title>
+<!--   <title>Rat Track</title>
 
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/register.css">
-</head>
 
-<body>
+<!-- </head>
+ -->
+<!-- <body>
   <div ng-view></div>
 
   <script src="js/app.js"></script>
@@ -94,5 +80,5 @@
   <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
   <script src="https://cdn.firebase.com/js/simple-login/1.6.2/firebase-simple-login.js"></script>
 </body>
-
+ -->
 </html>
