@@ -3,7 +3,9 @@
 angular.module('ratTrack', [
     'ngRoute',
     'ratTrack.home', //home module
-    'ratTrack.register' //register module
+    'ratTrack.register', //register module
+    'ratTrack.welcome',
+    'ratTrack.repSight'
 ]).
 config(['$routeProvider', function($routeProvider) {
     //Routes will be here

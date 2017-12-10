@@ -11,7 +11,7 @@ angular.module('ratTrack.home', ['ngRoute', 'firebase'])
 }])
 
 // Home controller
-.controller('HomeCtrl', ['$scope', '$firebaseAuth', function($scope, $firebaseAuth) {
+.controller('HomeCtrl', ['$scope', '$location','$firebaseAuth', function($scope, $firebaseAuth) {
     var firebaseObj = new Firebase("https://cs2340getwreckt.firebaseio.com");
     var loginObj = $firebaseAuth(firebaseObj);
 
@@ -31,6 +31,7 @@ angular.module('ratTrack.home', ['ngRoute', 'firebase'])
             .then(function(user) {
                 // Success callback
                 console.log('Authentication successful');
+                $location.path('/welcome');
             }, function(error) {
                 // Failure callback
                 console.log('Authentication failure');
